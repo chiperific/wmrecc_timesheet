@@ -1,5 +1,38 @@
 @import "bootstrap";
 
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 2em;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  line-height: 1;
+}
+
+.center {
+  text-align: center;
+}
+
 .logo {
   height: inherit;
+}
+
+#top-level-container {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+#top-level-well {
+  padding: 0px;
 }
