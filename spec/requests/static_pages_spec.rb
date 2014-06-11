@@ -1,17 +1,18 @@
 require 'spec_helper'
 
 describe "Static pages" do
+  subject { page }
 
   describe "Home page" do
-    it "should have the content 'Timesheet Home'" do
-      visit '/'
-      expect(page).to have_title('Home')
-      expect(page).to have_content('WMRECC Timesheet')
-    end
+    before { visit root_path }
+
+    it { should have_title('Home')}
+    it { should have_content('WMRECC Timesheet')}
+    it { should_not have_link('Home')}
+
     it "should allow you to login" do
-      visit '/'
-      within("static_pages#home") do
-      fill_in 'Login', with: 'it@westmirefugee.org'
+      within(root_path) do
+      fill_in 'Username', with: 'it@westmirefugee.org'
       fill_in 'Password', with: 'wmrecc09'
     end
     click_link 'Sign in'
@@ -20,14 +21,10 @@ describe "Static pages" do
   end
 
   describe "Help page" do
-    it "should have the content 'Timesheet Help'" do
-      visit '/help'
-      expect(page).to have_title ('Help')
-    end
-    it "should have a link to email the IT email" do
-      visit '/help'
-      expect(page).to have_link ('Mail the IT Department')
-    end
+    before { visit help_path}
+
+    it { should have_title('Help')}
+    it { should have_link('Email the IT Department')}
   end
 
 end

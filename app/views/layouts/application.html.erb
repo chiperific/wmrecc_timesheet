@@ -14,7 +14,7 @@
   <div class="container-fluid" id="top-level-container">
     <div class="row well" id="top-level-well">
       <i class="col-xs-4 col-md-2"><%= image_tag('/assets/WMRECC_Logo.png', { id: "logo"}) %></i>
-      <h2 class="col-xs-8 col-md10">WMRECC Timesheet</h2>
+      <h2 class="col-xs-8 col-md-8">WMRECC Timesheet</h2>
     </div>
     <%= yield %>
   <footer>
@@ -24,8 +24,10 @@
         <%= link_to 'Home', root_path %> |
       <% end %>
       <%= link_to 'Help', help_path %>
-      | (Logout link)
+      | (Logout)
+      <span class="pull-right small">Created by <%= link_to 'Chiperific', "http://www.chiperific.com", target: 'blank' %></span>
     </p>
+
   </footer>
   </div>
 </body>

@@ -1,1 +1,11 @@
-<p>if :logged_in, show menu. Else show login screen.</p>
+<p>if :logged_in, show menu (User or User+Admin). Else show login screen.</p>
+<ul>User menu:
+  <li>Submit a timecard</li>
+  <li>View past timecards</li>
+</ul>
+<ul>Admin menu:
+  <li>Approve timecards</li>
+  <li>Run reports</li>
+  <li><%= link_to "Edit work categories", categories_path %></li>
+  <li><%= link_to "Manage Users", users_path %></li>
+</ul>
