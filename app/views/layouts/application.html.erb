@@ -5,10 +5,28 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
-<%= yield %>
-
+  <div class="container-fluid">
+    <div class="center row well">
+      <i class="span2"><%= image_tag('WMRECC_Logo.png', { id: "logo"}) %></i>
+      <h2 class="span10">WMRECC Timesheet</h2>
+    </div>
+    <%= yield %>
+  <footer>
+    <hr />
+    <p>
+      <% if @title != "Home"  %>
+        <%= link_to 'Home', root_path %> |
+      <% end %>
+      <%= link_to 'Help', help_path %>
+    </p>
+  </footer>
+  </div>
 </body>
 </html>

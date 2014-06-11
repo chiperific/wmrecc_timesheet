@@ -1,3 +1,13 @@
 This app is a Time tracking application for West Michigan Refugee Education and Cultural Center.
 
 (c) 2014 Chiperific
+
+To do:
+1. Static pages
+  a. Home - login if not logged in / sitemap if logged in
+  a. Application - if not logged in, link to login.
+2. Authentication and sign-in
+3. Map out database structure
+4. Timesheet (CRU)
+5. Timesheet approval (RU)
+6. Reports
