@@ -17,5 +17,12 @@ describe "User Pages" do
     it { should have_content('Current users')}
     it { should have_link('Add new user')}
   end
+
+  describe "Edit" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { visit edit_user_path(user)}
+
+    it { should have_content(user.fname+"\'s profile")}
+  end
   
 end

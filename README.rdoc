@@ -1,25 +1,24 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* Created User index view with edit and new links (not setup)
-* JQuery for show/hide inactive users
+* Started build-out for edit page - needs to be a partial
 
 ==Next step:
-* User/Index --> show who the user supervises in a hidden TR
 * Build out edit and new partials for users
-* User schema needs admin:boolean
-* Identify if user is supervisor
 
 ==To do:
-1. Static pages
+1. Create partials for edit/new for User, Department, 
+
+1.1 Login system
+
+1.2 Static pages
   a. Home - login if not logged in / sitemap if logged in
   b. Application - if not logged in, link to login.
-1.1 User schema needs admin:boolean
 
 2. Authentication and sign-in
 2.1 Page-by-page permissions. Check out CanCan
 
-3. Map out database structure
+3. Map out database relations for Timesheet processing
 
 4. Timesheet (CRU)
 
@@ -37,3 +36,9 @@ This product is a Time tracking application for explicit use by West Michigan Re
     <span class="sr-only">40% Complete (success)</span>
   </div>
 </div>
+
+
+=== Time spent:
+6/10/14 - 2
+6/11/14 - 5
+6/12/14 - 3

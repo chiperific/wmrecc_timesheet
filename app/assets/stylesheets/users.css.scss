@@ -8,6 +8,13 @@ tr[class*='super-list-'] > td {
   background-color: #eeeeee;
 }
 
+
+// suppress hyperlink blue on carets
 i[class*='fa-caret'] {
   color: #333333;
+}
+
+div.input-group {
+  width: 90%;
+  padding-bottom: 1em;
 }
