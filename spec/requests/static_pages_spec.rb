@@ -3,14 +3,14 @@ require 'spec_helper'
 describe "Static pages" do
   subject { page }
 
-  describe "Home page" do
+  describe "Home" do
     before { visit root_path }
 
     it { should have_title('Home')}
     it { should have_content('WMRECC Timesheet')}
     it { should_not have_link('Home')}
 
-    it "should allow you to login" do
+    pending "should allow you to login" do
       within(root_path) do
       fill_in 'Username', with: 'it@westmirefugee.org'
       fill_in 'Password', with: 'wmrecc09'

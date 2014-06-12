@@ -1,17 +1,17 @@
 require 'spec_helper'
 
-describe "UserPages" do
+describe "User Pages" do
   subject { page }
 
-  describe "New User page" do
+  describe "New" do
     before { visit new_user_path }
 
     it { should have_content('Add new user')}
-    it { should have_button('Add user')}
+    pending { should have_button('Add user')}
     it { should have_link('Cancel')}
   end
 
-  describe "User index page" do
+  describe "Index" do
     before { visit users_path }
 
     it { should have_content('Current users')}
