@@ -1,13 +1,37 @@
-This app is a Time tracking application for West Michigan Refugee Education and Cultural Center.
+This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
-(c) 2014 Chiperific
+==Last completed step:
+* Created User index view with edit and new links (not setup)
+* JQuery for show/hide inactive users
 
-To do:
+==Next step:
+* Build out edit and new partials
+* User schema needs admin:boolean
+
+==To do:
 1. Static pages
   a. Home - login if not logged in / sitemap if logged in
-  a. Application - if not logged in, link to login.
+  b. Application - if not logged in, link to login.
+1.1 User schema needs admin:boolean
+
 2. Authentication and sign-in
+2.1 Page-by-page permissions. Check out CanCan
+
 3. Map out database structure
+
 4. Timesheet (CRU)
+
 5. Timesheet approval (RU)
+  a. Supervisors approve their directs.
+  b. Admins can approve over supervisors or edit approvals
+
 6. Reports
+
+==Add-ons:
+1. Progress bars:
+    a. # of total hours you worked --> (categorize hours) --> updates progress bar 
+<div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+    <span class="sr-only">40% Complete (success)</span>
+  </div>
+</div>

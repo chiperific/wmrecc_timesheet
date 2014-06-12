@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def index
     @title = "Users"
+    @active_users = User.where(active: true)
+    @inactive_users = User.where(active: false)
   end
 
   def create
