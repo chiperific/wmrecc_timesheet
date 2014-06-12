@@ -5,8 +5,10 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * JQuery for show/hide inactive users
 
 ==Next step:
-* Build out edit and new partials
+* User/Index --> show who the user supervises in a hidden TR
+* Build out edit and new partials for users
 * User schema needs admin:boolean
+* Identify if user is supervisor
 
 ==To do:
 1. Static pages

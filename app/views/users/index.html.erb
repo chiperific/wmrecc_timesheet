@@ -4,8 +4,9 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Department</th>
+        <th>Dept</th>
         <th>Supervisor</th>
+        <th>More</th>
         <th></th>
       </tr>
     </thead>
@@ -14,14 +15,21 @@
         <tr>
           <td><%= u.fname + " " + u.lname %></td>
           <td><%= u.department_id %></td>
-          <td><%= u.supervisor_id %></td>
+          <td><%= @super = u.supervisor_id %></td>
+          <td><%= link_to "+", "#", {id: "super-view-switch", class: "center"} %></td>
           <td><%= link_to "Edit", edit_user_path(u.id) %></td>
+        </tr>
+        <tr class="super-list" >
+          <td></td>
+          <td>Hidden?</td>
+          <td></td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<a href="#" id="user-view-switch" class="pull-right">View inactive users</a>
+<%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right"} %>
 <div class="hidden" id="inactive-users">
   <table class="table table-striped">
     <thead>
