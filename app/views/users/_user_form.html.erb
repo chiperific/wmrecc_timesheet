@@ -20,7 +20,7 @@
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
       <span class="input-group-addon addon-selector"><i class="fa fa-level-up"></i></span>
-      <%= select_tag  @user.supervisor_id, options_for_select(@super_array, @user.supervisor_id), {class: "form-control selector", id: "user_supervisor_id", name: "user[supervisor_id]"}  %>
+      <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id), {}, { class: "form-control" } %>
     </div>
   </div>
   <div class="row  col-xs-12 col-md-6">

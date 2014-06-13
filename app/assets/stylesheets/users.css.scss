@@ -27,24 +27,12 @@ div.input-group {
 }
 
 
-// fix border-radius issue with select_tag
-.selector {
-  margin-left: -4px;
-  z-index: -1 !important;
-}
 
-.addon-selector {
-  border: 1px solid #cccccc !important;
-}
 
 
 
 @media (max-width: 991px) {
   #user-email-input { width: 98% }
-
-  .input-selector {
-    width: 100% !important;
-  }
 }
 
 @media (min-width: 992px) {

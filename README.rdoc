@@ -1,13 +1,12 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* Finish build-out for user form partial
+* Fixed select fields
 
 ==Next step:
 * Edit / new form submission
 * Error handling
-* User form selection fields not editable?!??!
-* view inactive users not working in Firefox or Safari?!??!
+* view inactive users buggy on first load. Issue with rails cache / therubyracer?
 
 ==To do:
 1. Create partials for edit/new for Department, Categories

@@ -21,4 +21,5 @@ jQuery ->
     else
       $(this).children('i').removeClass(open)
       $(this).children('i').addClass(closed)
-    event.preventDefault()  
+    event.preventDefault()
+    false

@@ -12,12 +12,12 @@
 </head>
 <body>
   <div class="container-fluid" id="top-level-container">
-    <a href="/" id="logo-home-link">
-      <div class="row page-header" id="app-header">
+    <div class="row page-header" id="app-header">
+      <a href="/" id="logo-home-link">
         <i class="col-xs-4 col-md-2"><%= image_tag('/assets/WMRECC_Logo.png', { id: "logo"}) %></i>
         <h2 class="col-xs-8 col-md-8">WMRECC Timesheet</h2>
-      </div>
-    </a>
+      </a>
+    </div>
     <%= yield %>
   <footer>
   <!--  <%= debug(params) if Rails.env.development? %> -->

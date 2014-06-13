@@ -36,21 +36,22 @@
 </div>
 <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right"} %>
 <div class="hidden" id="inactive-users">
-  <table class="table table-striped">
+  <table class="table">
     <thead>
       <tr>
-        <th>Inactive Users</th>
-        <th>Department</th>
+        <th>Inactive</th>
+        <th>Dept.</th>
         <th>Supervisor</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <% @inactive_users.each do |u| %>
+        <% @inactive_super = @active_users.find_by(:id, u.supervisor_id) %>
         <tr>
           <td><%= u.fname + " " + u.lname %></td>
-          <td><%= u.department_id %></td>
-          <td><%= u.supervisor_id %></td>
+          <td><%= @departments.find_by(id: u.department_id).name unless @departments.find_by(id: u.department_id).blank? %></td>
+          <td><%= @inactive_super.fname + " " + @inactive_super.lname unless @inactive_super.blank? %></td>
           <td><%= link_to "Edit", edit_user_path(u.id) %></td>
         </tr>
       <% end %>
