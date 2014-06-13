@@ -1,22 +1,5 @@
-<h4>Edit <%= @user.fname+"\'s profile" %></h4>
+<h4 class="center">Edit <%= @user.fname+"\'s profile" %></h4>
 
-<%= form_for @user do |f| %>
-  <div class="row user-form col-xs-12 col-md-6">
-    <div class="input-group">
-      <%= f.text_field :fname, {class: "form-control", placeholder: "First Name"} %>
-    </div>
-  </div>
-  <div class="row user-form col-xs-12 col-md-6">
-    <div class="input-group">
-      <%= f.text_field :lname, {class: "form-control", placeholder: "Last Name"} %>
-    </div>
-  </div>
-  <div class="row user-form col-xs-12 col-md-6">
-    <div class="input-group">
-      <span class="input-group-addon">@</span>
-      <%= f.text_field :email, {class: "form-control", placeholder: "Email"} %>
-    </div>
-  </div>
-<% end %>
-
-<%= link_to "Cancel", users_path %>
+<div class="row">
+  <%= render 'user_form' %>
+</div>

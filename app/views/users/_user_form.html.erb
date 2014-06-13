@@ -1,0 +1,65 @@
+<%= form_for @user do |f| %>
+  <div class="row  col-xs-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
+      <%= f.text_field :fname, {class: "form-control", placeholder: "First Name"} %>
+    </div>
+  </div>
+  <div class="row col-xs-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
+      <%= f.text_field :lname, {class: "form-control", placeholder: "Last Name"} %>
+    </div>
+  </div>
+  <div class="row  col-xs-12 col-md-12">
+    <div class="input-group" id="user-email-input">
+      <span class="input-group-addon">@</span>
+      <%= f.text_field :email, {class: "form-control", placeholder: "Email"} %>
+    </div>
+  </div>
+  <div class="row  col-xs-12 col-md-6">
+    <div class="input-group input-selector">
+      <span class="input-group-addon addon-selector"><i class="fa fa-level-up"></i></span>
+      <%= select_tag  @user.supervisor_id, options_for_select(@super_array, @user.supervisor_id), {class: "form-control selector", id: "user_supervisor_id", name: "user[supervisor_id]"}  %>
+    </div>
+  </div>
+  <div class="row  col-xs-12 col-md-6">
+    <div class="input-group input-selector">
+      <span class="input-group-addon addon-selector"><i class="fa fa-sitemap"></i></span>
+      <%= select_tag @user.department_id, options_for_select(@dept_array, @user.department_id), {class: "form-control selector", id: "user_department_id", name: "user[department_id]" } %>
+    </div>
+  </div>
+  <div class="row  col-xs-12 col-md-6">
+    <div class="input-group input-selector">
+      <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
+      <%= select_tag @user.active, options_for_select([["Active", true], ["Inactive", false]]), {class: "form-control selector", id: "user_active", name: "user[active]"} %>
+    </div>
+  </div>
+  <div class="row  col-xs-12 col-md-6">
+    <div class="input-group input-selector">
+      <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
+      <%= select_tag @user.admin, options_for_select([["User", false], ["Admin", true]]), {class: "form-control selector", id: "user_admin", name: "user[admin]"} %>
+    </div>
+  </div>
+  <div class="row  col-xs-12 col-md-12">
+    <hr class="hr-thin">
+  </div>
+  <div class="row  col-xs-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-key"></i></span>
+      <%= f.text_field :password, {class: "form-control", placeholder: "Change Password"} %>
+    </div>
+  </div>
+  <div class="row  col-xs-12 col-md-6">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-key"></i></span>
+      <%= f.text_field :password_confirmation, {class: "form-control", placeholder: "Re-Enter Password"} %>
+    </div>
+  </div>
+  <div class="row center col-xs-6 col-md-6">
+    <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
+  </div>
+  <div class="row center col-xs-6 col-md-6">
+    <%= link_to "Cancel", users_path, { class: "btn btn-primary btn-large"}  %>
+  </div>
+<% end %>

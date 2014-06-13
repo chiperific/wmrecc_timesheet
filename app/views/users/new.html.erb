@@ -1,13 +1,6 @@
 <h3 class='center'>Add new user</h3>
-<ul>New user fields go here.</ul>
-  <li>FName</li>
-  <li>LName</li>
-  <li>Active? (Y/N)</li>
-  <li>Email (for username)</li>
-  <li>Password (encrypted, but Admin can reset)</li>
-  <li>Department (for default category)</li>
-  <li>Supervisor (list of other users)</li>
-  <br>
+
+<%= render 'user_form' %>
     
 <p><%= link_to "Cancel", users_path %></p>
 
