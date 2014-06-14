@@ -28,12 +28,14 @@ en:
         suppervisor_id: "Supervisor"
         department_id: "Department"
         admin: "Admin User"
+      category:
+        department_id: "Department"
+        dept_default: "Default for Department"
     errors:
       models:
         user:
           attributes:
-            fname: "cannot be blank"
-            lname: "cannot be blank"
-            suppervisor_id: "must be selected"
-            department_id: "must be selected"
-            admin: "must be selected"
+            # customize error message by field
+        category:
+          attributes:
+            # customize error message by field

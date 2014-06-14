@@ -46,6 +46,20 @@ h1, h2, h3, h4, h5, h6, p {
   display: none;
 }
 
+
+// universal form styling
+div.input-group {
+  width: 98%;
+  padding-bottom: 1em;
+
+  select { width: 100% }
+}
+
+.hr-thin {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
 // Error handling
 #error_explanation {
   color: #a94442;

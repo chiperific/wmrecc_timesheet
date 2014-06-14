@@ -24,7 +24,6 @@ describe "User Pages" do
         fill_in "user_fname",   with: "noob"
         fill_in "user_lname",   with: "face"
         fill_in "user_email",   with: "user@example.com"
-        select "IT",            from: "user_department_id"
         fill_in "user_password",              with: "foobar"
         fill_in "user_password_confirmation", with: "foobar"
       end
@@ -49,6 +48,22 @@ describe "User Pages" do
     it { should have_button('Submit')}
     it { should have_link('Cancel')}
     it { should have_content(user.fname+"\'s profile")}
+
+    describe "when submitting with valid info" do
+      describe "should update the user" do
+        let(:new_fname) {"New"}
+        let(:new_lname) {"Name"}
+        before do
+          fill_in "user_fname", with: new_fname
+          fill_in "user_lname", with: new_lname
+          click_button "Submit"
+        end
+
+        specify { expect(user.reload.fname).to  eq new_fname }
+        specify { expect(user.reload.lname).to eq new_lname }
+
+      end
+    end
   end
   
 end

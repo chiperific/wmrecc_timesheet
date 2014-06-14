@@ -1,4 +1,22 @@
-<h4>Current departments</h4>
-<p>List of Departments goes here. (edit)</p>
-<p>View inactive departments.</p>
+<h3>Departments</h3>
+<div id="depts">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Active</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @depts.sort_by { |d| d.name }.sort_by { |d| d.active }.each do |d| %>
+        <tr>
+          <td><%= d.name %></td>
+          <td><%= d.active %></td>
+          <td><%= link_to "Edit", edit_department_path(d.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <p><%= link_to "Add new department", new_department_path %></p>

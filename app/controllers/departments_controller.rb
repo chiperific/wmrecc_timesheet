@@ -1,6 +1,8 @@
 class DepartmentsController < ApplicationController
     def index
     @title = "Departments"
+
+    @depts = Department.all
   end
 
   def create
@@ -12,6 +14,7 @@ class DepartmentsController < ApplicationController
 
   def edit
     @title = "Edit Departments"
+    @dept = Department.find(params[:id])
   end
 
   def update
