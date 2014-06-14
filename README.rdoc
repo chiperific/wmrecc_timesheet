@@ -2,11 +2,12 @@ This product is a Time tracking application for explicit use by West Michigan Re
 
 ==Last completed step:
 * Fixed select fields
+* Fixed turbolinks / jQuery issue
 
 ==Next step:
 * Edit / new form submission
 * Error handling
-* view inactive users buggy on first load. Issue with rails cache / therubyracer?
+
 
 ==To do:
 1. Create partials for edit/new for Department, Categories
@@ -44,3 +45,4 @@ This product is a Time tracking application for explicit use by West Michigan Re
 6/10/14 - 2
 6/11/14 - 5
 6/12/14 - 3
+6/13/15 - 4

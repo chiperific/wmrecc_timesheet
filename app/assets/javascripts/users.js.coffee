@@ -9,6 +9,7 @@ jQuery ->
     else
       $(this).html("View inactive users")
     event.preventDefault()
+    false
 
   $('.super-view-switch').click ->
     closed = "fa fa-caret-right"

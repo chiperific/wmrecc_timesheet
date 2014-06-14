@@ -9,6 +9,7 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'font-awesome-less'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
