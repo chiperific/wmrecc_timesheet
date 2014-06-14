@@ -21,25 +21,25 @@
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
       <span class="input-group-addon addon-selector"><i class="fa fa-level-up"></i></span>
-      <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id), {}, { class: "form-control" } %>
+      <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id ), {}, { class: "form-control" } %>
     </div>
   </div>
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
       <span class="input-group-addon addon-selector"><i class="fa fa-sitemap"></i></span>
-      <%= select_tag @user.department_id, options_for_select(@dept_array, @user.department_id), {class: "form-control selector", id: "user_department_id", name: "user[department_id]" } %>
+      <%= f.select :department_id, options_for_select(@dept_array, @user.department_id), {}, {class: "form-control " } %>
     </div>
   </div>
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
       <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
-      <%= select_tag @user.active, options_for_select([["Active", true], ["Inactive", false]]), {class: "form-control selector", id: "user_active", name: "user[active]"} %>
+      <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], true), {}, {class: "form-control selector"} %>
     </div>
   </div>
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
       <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
-      <%= select_tag @user.admin, options_for_select([["User", false], ["Admin", true]]), {class: "form-control selector", id: "user_admin", name: "user[admin]"} %>
+      <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], ), {}, {class: "form-control selector"} %>
     </div>
   </div>
   <div class="row  col-xs-12 col-md-12">
@@ -48,7 +48,7 @@
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group">
       <span class="input-group-addon"><i class="fa fa-key"></i></span>
-      <%= f.text_field :password, {class: "form-control", placeholder: "Change Password"} %>
+      <%= f.text_field :password, {class: "form-control", placeholder: @pw_lang} %>
     </div>
   </div>
   <div class="row  col-xs-12 col-md-6">

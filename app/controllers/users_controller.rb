@@ -10,11 +10,24 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user = User.new(user_params)
+
+    if @user.save
+      flash[:success] = "User created"
+      redirect_to users_path
+    else
+      @dept_array = dept_array
+      @super_array = super_array
+      render 'new'
+    end
   end
 
   def new
     @title = "Add User"
     @user = User.new
+    @super_array = super_array
+    @dept_array = dept_array
+    @pw_lang = "Create password"
   end
 
   def edit
@@ -22,6 +35,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @super_array = super_array
     @dept_array = dept_array
+    @pw_lang = "Change password"
   end #edit
 
   def update

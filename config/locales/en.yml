@@ -20,4 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        fname: "First Name"
+        lname: "Last Name"
+        suppervisor_id: "Supervisor"
+        department_id: "Department"
+        admin: "Admin User"
+    errors:
+      models:
+        user:
+          attributes:
+            fname: "cannot be blank"
+            lname: "cannot be blank"
+            suppervisor_id: "must be selected"
+            department_id: "must be selected"
+            admin: "must be selected"

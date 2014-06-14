@@ -45,3 +45,53 @@ h1, h2, h3, h4, h5, h6, p {
 .hidden {
   display: none;
 }
+
+// Error handling
+#error_explanation {
+  color: #a94442;
+  .alert-error {
+    text-align: center;
+    font-size: 1em;
+    color: white;
+    text-shadow: 2px 2px #a88f8f;
+    border: 1px solid #a94442;
+    border-radius: 4px;
+    background-color: #c77270;
+    margin: 0;
+    padding: 6px;
+  }
+  ul {
+    margin: 0 0 6px 0;
+  }
+}
+
+.field_with_errors {
+  select {
+    border: 1px solid #a94442;
+    border-radius: 4px;
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+  }
+  input {
+    border: 1px solid #a94442;
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+  }
+  // form input placeholder styling -- browser specific
+  ::-webkit-input-placeholder {
+     color: #b8817f;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+     color: #b8817f;  
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+     color: #b8817f;  
+  }
+
+  :-ms-input-placeholder {  
+     color: #b8817f;  
+  }
+
+}
