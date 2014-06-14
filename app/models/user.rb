@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
+  #has_one :department
   belongs_to :department
+  has_many :categories, through: :department
   before_save { email.downcase! }
 
   validates :fname, :lname, presence: true

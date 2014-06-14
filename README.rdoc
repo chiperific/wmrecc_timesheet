@@ -5,9 +5,9 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * Category index / edit / new
 * Remove def option from Category
 * hide "view inactive" if no inactives - Dept, Cat, User
+* relationship defs for Dept > Cat
 
 ==Next step:
-* relationship defs for Dept > Cat
 * map instead of arry each
 
 

@@ -4,10 +4,13 @@
   <%= render 'user_form' %>
 </div>
 
-<% if @user.department.categories.any? %>
-  <div class"row">
+<% if @user_cat %>
+  <div class="row">
+    <h4><%= @user.fname+"\'s categories:" %></h4>
+  </div>
+  <div class="row">
     <ul>
-      <% @user.department.categories.each do |c| %>
+      <% @user_cat.each do |c| %>
         <li><%= c.name %></li>
       <% end %>
     </ul>

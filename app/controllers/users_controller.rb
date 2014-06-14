@@ -38,6 +38,8 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Change password"
+
+    @user_cat = @user.department.categories
   end #edit
 
   def update
