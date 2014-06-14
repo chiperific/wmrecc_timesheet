@@ -46,6 +46,11 @@ h1, h2, h3, h4, h5, h6, p {
   display: none;
 }
 
+.hr-thin {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
 
 // universal form styling
 div.input-group {
@@ -55,10 +60,17 @@ div.input-group {
   select { width: 100% }
 }
 
-.hr-thin {
-  margin-top: 0px;
-  margin-bottom: 10px;
+// new color def for sub-table rows
+tr[class*='-list-'] > td {
+  background-color: #eeeeee;
 }
+
+
+// suppress hyperlink blue on carets
+i[class*='fa-caret'] {
+  color: #333333;
+}
+
 
 // Error handling
 #error_explanation {

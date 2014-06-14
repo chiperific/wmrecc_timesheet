@@ -31,6 +31,9 @@ en:
       category:
         department_id: "Department"
         dept_default: "Default for Department"
+        active: "Status"
+      department:
+        active: "Status"
     errors:
       models:
         user:
@@ -38,4 +41,7 @@ en:
             # customize error message by field
         category:
           attributes:
-            # customize error message by field
+            active: "Must be selected (active or inactive)"
+        department:
+          attributes:
+            active: "Must be selected (active or inactive)"

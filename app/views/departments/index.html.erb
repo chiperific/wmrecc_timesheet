@@ -1,18 +1,47 @@
-<h3>Departments</h3>
-<div id="depts">
-  <table class="table table-striped">
+<div class="row">
+  <h3 class="col-xs-6 col-md-6 col-lg-6">Departments</h3>
+  <div class="col-xs-6 col-md-6 col-lg-6">
+    <%= link_to "go to categories", categories_path, {class: "pull-right"} %>
+  </div>
+</div>
+  
+<div id="active-depts">
+  <table class="table">
+    <tbody>
+      <% @depts_active.sort_by { |d| d.name }.each do |d| %>
+        <% @cats_by_dep = Category.where(department_id: d.id).sort_by {|c| c.name } %>
+        <tr>
+          <td>
+            <% if @cats_by_dep.count > 0 %>
+              <%= link_to "<i class='fa fa-caret-right'></i>".html_safe, "#", {class: "center cat-view-switch", id: "cat-list-#{d.id}"} %>
+            <% end %>
+            <%= d.name %>
+          </td>
+          <td><%= link_to "Edit", edit_department_path(d.id) %></td>
+        </tr>
+        <% @cats_by_dep.each do |c| %>
+          <tr class=<%= "cat-list-#{d.id.to_s}" %>>
+            <td class="hidden">&nbsp &nbsp <%= c.name %></td>
+            <td class="hidden"><%= link_to "Edit", edit_category_path(c.id) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to "View inactive departments", "#", {id: "dept-view-switch", class: "pull-right"} %>
+<div class="hidden" id="inactive-depts">
+  <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Active</th>
+        <th>Inactive Departments</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <% @depts.sort_by { |d| d.name }.sort_by { |d| d.active }.each do |d| %>
+      <% @depts_inactive.each do |d| %>
         <tr>
           <td><%= d.name %></td>
-          <td><%= d.active %></td>
           <td><%= link_to "Edit", edit_department_path(d.id) %></td>
         </tr>
       <% end %>

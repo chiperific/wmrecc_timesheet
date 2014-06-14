@@ -1,12 +1,11 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* User edit / new form submission
-* Error handling
+* Department index / edit / new
 
 ==Next step:
-* Department edit / new
-* Category edit / new
+* Category index / edit / new
+* flash[:success] needed
 
 
 ==To do:

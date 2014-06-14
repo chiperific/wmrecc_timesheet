@@ -2,23 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-// new color def for super-list table rows
-tr[class*='super-list-'] > td {
-  background-color: #eeeeee;
-}
-
-
-// suppress hyperlink blue on carets
-i[class*='fa-caret'] {
-  color: #333333;
-}
-
-
-
-
-
-
 @media (max-width: 991px) {
   #user-email-input { width: 98% }
 }
