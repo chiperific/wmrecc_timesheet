@@ -1,8 +1,5 @@
-<h3 class="center">Add new category</h3>
-<ul>New category fields go here.</ul>
-  <li>Name</li>
-  <li>Department (ddl)</li>
-  <li>Active? (Y/N)</li>
-  <li>Default for department? (Y/N)</li>
-  <br>
-<p><%= link_to "Cancel", categories_path %></p>
+<h3>Add Category</h3>
+
+<div class="row">
+  <%= render 'cat_form' %>
+</div>

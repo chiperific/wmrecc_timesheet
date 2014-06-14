@@ -34,7 +34,9 @@
     </tbody>
   </table>
 </div>
-<%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right"} %>
+<% if @inactive_users.count > 0 %>
+  <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right"} %>
+<% end %>
 <div class="hidden" id="inactive-users">
   <table class="table">
     <thead>

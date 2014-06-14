@@ -1,3 +1,12 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+jQuery ->
+  $('#cat-view-switch').click ->
+    $('#inactive-cats').toggleClass('hidden')
+    if $(this).html() == "View inactive categories"
+      $(this).html("Hide inactive categories")
+    else
+      $(this).html("View inactive categories")
+    event.preventDefault()
+    false

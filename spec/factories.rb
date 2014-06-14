@@ -12,14 +12,13 @@ FactoryGirl.define do
   end
 
   factory :category do
-    name          "Website"
+    name          "factory category"
     department_id 1
     active        true
-    dept_default  false
   end
 
   factory :department do
-    name          "IT"
+    name          "factory department"
     active        true
   end   
 end

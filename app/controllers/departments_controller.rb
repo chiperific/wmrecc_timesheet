@@ -13,8 +13,6 @@ class DepartmentsController < ApplicationController
       flash[:success] = "Department created"
       redirect_to departments_path
     else
-      @depts_active = Department.where(active: true)
-      @depts_inactive = Department.where(active: false)
       render 'new'
     end
 

@@ -7,9 +7,31 @@ describe "Departments Pages" do
     before { visit new_department_path }
 
     it { should have_content('Add new department')}
-    it { should have_button('Add department')}
+    it { should have_button('Submit')}
     it { should have_link('Cancel')}
-  end
+
+    describe "when submitting" do
+      describe "with invalid info" do
+        before { visit new_department_path }
+
+        it "should not add a department" do
+          expect { click_button "Submit"}.not_to change(Department, :count)
+        end
+      end
+
+      describe "with valid info" do
+        before do 
+          visit new_department_path
+          fill_in "department[name]", with: "new dept"
+          select "Active",                from: "department[active]"
+        end
+
+        it "should add a new department" do
+          expect { click_button "Submit" }.to change(Department, :count).by(1)
+        end
+      end
+    end #when submitting
+  end #New
 
   describe "Edit" do
     let(:department) { FactoryGirl.create(:department)}
@@ -22,7 +44,7 @@ describe "Departments Pages" do
       describe "should update the department" do
         let(:new_name) {"New Name"}
         before do
-          fill_in "department_name", with: new_name
+          fill_in "department[name]", with: new_name
           click_button "Submit"
         end
 

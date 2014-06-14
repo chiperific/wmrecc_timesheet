@@ -29,7 +29,9 @@
     </tbody>
   </table>
 </div>
-<%= link_to "View inactive departments", "#", {id: "dept-view-switch", class: "pull-right"} %>
+<% if @depts_inactive.count > 0 %>
+  <%= link_to "View inactive departments", "#", {id: "dept-view-switch", class: "pull-right"} %>
+<% end %>
 <div class="hidden" id="inactive-depts">
   <table class="table">
     <thead>

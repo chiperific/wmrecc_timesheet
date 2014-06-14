@@ -5,12 +5,13 @@ This product is a Time tracking application for explicit use by West Michigan Re
 
 ==Next step:
 * Category index / edit / new
+* hide "view inactive" if no inactives - Dept, Cat, User
+* Depts: make default_cat an attribute of department, not category, update schema
 * flash[:success] needed
+* relationship defs for Dept > Cat
 
 
 ==To do:
-1. Create partials for edit/new for Department, Categories
-
 1.1 Login system
 
 1.2 Static pages
@@ -20,15 +21,18 @@ This product is a Time tracking application for explicit use by West Michigan Re
 2. Authentication and sign-in
 2.1 Page-by-page permissions. Check out CanCan
 
-3. Map out database relations for Timesheet processing
+3. Database relationships for Depts / Cats / Users
+3.1 Default category change 
 
-4. Timesheet (CRU)
+4. Map out database relations for Timesheet processing
 
-5. Timesheet approval (RU)
+5. Timesheet (CRU)
+
+6. Timesheet approval (RU)
   a. Supervisors approve their directs.
   b. Admins can approve over supervisors or edit approvals
 
-6. Reports
+7. Reports
 
 ==Add-ons:
 1. Progress bars:

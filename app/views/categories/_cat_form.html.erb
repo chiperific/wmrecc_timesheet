@@ -1,21 +1,27 @@
-<%= form_for @dept do |f| %>
+<%= form_for @cat do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="row col-xs-12 col-md-6">
+  <div class="row  col-xs-12 col-md-6">
     <div class="input-group">
       <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
       <%= f.text_field :name, {class: "form-control", placeholder: "Name"} %>
     </div>
   </div>
-  <div class="row col-xs-12 col-md-6">
+  <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
       <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
       <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_status ), {}, {class: "form-control selector"} %>
+    </div>
+  </div>
+  <div class="row  col-xs-12 col-md-6">
+    <div class="input-group input-selector">
+      <span class="input-group-addon addon-selector"><i class="fa fa-sitemap"></i></span>
+      <%= f.select :department_id, options_for_select(@dept_array, @cat.department_id), {}, {class: "form-control selector" } %>
     </div>
   </div>
   <div class="row center col-xs-6 col-md-6">
     <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
   </div>
   <div class="row center col-xs-6 col-md-6">
-    <%= link_to "Cancel", departments_path, { class: "btn btn-primary btn-large"}  %>
+    <%= link_to "Cancel", categories_path, { class: "btn btn-primary btn-large"}  %>
   </div>
 <% end %>
