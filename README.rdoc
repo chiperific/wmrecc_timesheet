@@ -2,13 +2,13 @@ This product is a Time tracking application for explicit use by West Michigan Re
 
 ==Last completed step:
 * Department index / edit / new
+* Category index / edit / new
+* Remove def option from Category
+* hide "view inactive" if no inactives - Dept, Cat, User
 
 ==Next step:
-* Category index / edit / new
-* hide "view inactive" if no inactives - Dept, Cat, User
-* Depts: make default_cat an attribute of department, not category, update schema
-* flash[:success] needed
 * relationship defs for Dept > Cat
+* map instead of arry each
 
 
 ==To do:

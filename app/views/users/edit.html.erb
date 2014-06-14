@@ -3,3 +3,13 @@
 <div class="row">
   <%= render 'user_form' %>
 </div>
+
+<% if @user.department.categories.any? %>
+  <div class"row">
+    <ul>
+      <% @user.department.categories.each do |c| %>
+        <li><%= c.name %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

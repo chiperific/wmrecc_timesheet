@@ -1,5 +1,7 @@
 class Department < ActiveRecord::Base
+  has_many :categories, dependent: :destroy
+  has_many :users
 
-  validates :name, :active, presence: true
+  validates :name, presence: true
 
 end

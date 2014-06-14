@@ -9,17 +9,16 @@
   <table class="table">
     <tbody>
       <% @depts_active.sort_by { |d| d.name }.each do |d| %>
-        <% @cats_by_dep = Category.where(department_id: d.id).sort_by {|c| c.name } %>
         <tr>
           <td>
-            <% if @cats_by_dep.count > 0 %>
+            <% if d.categories.count > 0 %>
               <%= link_to "<i class='fa fa-caret-right'></i>".html_safe, "#", {class: "center cat-view-switch", id: "cat-list-#{d.id}"} %>
             <% end %>
             <%= d.name %>
           </td>
           <td><%= link_to "Edit", edit_department_path(d.id) %></td>
         </tr>
-        <% @cats_by_dep.each do |c| %>
+        <% d.categories.sort_by {|c| c.name }.each do |c| %>
           <tr class=<%= "cat-list-#{d.id.to_s}" %>>
             <td class="hidden">&nbsp &nbsp <%= c.name %></td>
             <td class="hidden"><%= link_to "Edit", edit_category_path(c.id) %></td>
@@ -50,4 +49,4 @@
     </tbody>
   </table>
 </div>
-<p><%= link_to "Add new department", new_department_path %></p>
+<p><%= link_to "Add New", new_department_path %></p>

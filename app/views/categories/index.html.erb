@@ -16,10 +16,9 @@
     </thead>
     <tbody>
       <% @cats_active.sort_by { |c| c.name }.each do |c| %>
-        <% @dept_for_cat = Department.find(c.department_id) %>
         <tr>
           <td><%= c.name %></td>
-          <td><%= @dept_for_cat.name %></td>
+          <td><%= c.department.name %></td>
           <td><%= link_to "Edit", edit_category_path(c.id) %></td>
         </tr>
       <% end %>
@@ -50,4 +49,4 @@
     </tbody>
   </table>
 </div>
-<p><%= link_to "Add new category", new_category_path %></p>
+<p><%= link_to "Add New", new_category_path %></p>
