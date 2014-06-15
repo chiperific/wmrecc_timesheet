@@ -57,7 +57,7 @@ describe "Departments Pages" do
     before { visit departments_path }
 
     it { should have_content('Departments')}
-    it { should have_link('Add new department')}
+    it { should have_link('Add New')}
   end
   
 end
