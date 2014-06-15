@@ -8,7 +8,9 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * relationship defs for Dept > Cat
 
 ==Next step:
-* map instead of arry each
+* Spec out Destroy actions for: user, Dept, Cat
+* Destroy actions for: user, Dept, Cat
+* Login - Logout
 
 
 ==To do:
@@ -49,3 +51,4 @@ This product is a Time tracking application for explicit use by West Michigan Re
 6/11/14 - 5
 6/12/14 - 3
 6/13/15 - 4
+6/14/15 - 4

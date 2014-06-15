@@ -49,14 +49,8 @@ class CategoriesController < ApplicationController
   end
 
   def dept_array
-    @dept_arry = Array.new
-    @dept_arry << ["(no department)", nil]
-    Department.where(active: true).sort_by { |d| d.name }.each do |d|
-      ddl_arry = Array.new
-      ddl_arry << d.name
-      ddl_arry << d.id
-      @dept_arry << ddl_arry
-    end
+    @dept_arry = Array.new([["(no department)", nil]])
+    @dept_arry += Department.all.sort_by { |d| d.name }.map { |d| [d.name, d.id]}
     @dept_arry
   end
 
