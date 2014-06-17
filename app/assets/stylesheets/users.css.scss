@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.wide {
+  width: 100%;
+}
+
 @media (max-width: 991px) {
   #user-email-input { width: 98% }
 }

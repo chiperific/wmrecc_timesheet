@@ -52,7 +52,7 @@ describe "Categories Pages" do
 
     describe "when submitting with valid info" do
       describe "should update the category" do
-        let(:new_name) {"New Cat Name"}
+        let(:new_name) {"new category name"}
         before do
           fill_in "category[name]", with: new_name
           click_button "Submit"

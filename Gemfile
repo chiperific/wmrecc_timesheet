@@ -10,6 +10,7 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'font-awesome-less'
 gem 'jquery-turbolinks'
+gem 'seed_dump'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

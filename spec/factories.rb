@@ -1,14 +1,14 @@
 FactoryGirl.define do
   factory :user do
-    fname                 "Chip"
-    lname                 "Kragt"
-    email                 "chiperific@gmail.com"
+    fname                 "Factory"
+    lname                 "User"
+    email                 "test@user.com"
     admin                 true
     active                true
     department_id         1
     supervisor_id         2
-    password              "ghalecrow"
-    password_confirmation "ghalecrow"
+    password              "foobar"
+    password_confirmation "foobar"
   end
 
   factory :category do

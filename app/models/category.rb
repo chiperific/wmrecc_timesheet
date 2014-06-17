@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
   belongs_to :department
 
-  validates :name, :department_id, :active, presence: true
+  validates :name, :department_id, presence: true
 end

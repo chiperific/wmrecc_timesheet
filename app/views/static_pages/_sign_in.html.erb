@@ -1,0 +1,23 @@
+<h3>Sign in to continue</h3>
+<div class="row">
+  <%= form_for(:session, url: sessions_path) do |f| %>
+    <div class="row  col-xs-12 col-md-12">
+      <div class="input-group" id="user-email-input">
+        <span class="input-group-addon">@</span>
+        <%= f.text_field :email, {class: "form-control", placeholder: "Email"} %>
+      </div>
+    </div>
+    <div class="row  col-xs-12 col-md-6">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+        <%= f.text_field :password, {class: "form-control", placeholder: "Password"} %>
+      </div>
+    </div>
+    <div class="row center col-xs-6 col-md-6">
+      <%= f.submit "Sign in", { class: "btn btn-primary btn-large"} %>
+    </div>
+    <div class="row center col-xs-6 col-md-6">
+      <%= link_to "Cancel", users_path, { class: "btn btn-primary btn-large"}  %>
+    </div>
+  <% end %>
+</div>

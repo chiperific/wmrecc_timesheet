@@ -1,7 +1,15 @@
 require 'spec_helper'
 
 describe User do
-  before { @user = User.new(fname: "Example", lname: "User", active: 1, department_id: 1, supervisor_id: 1, email: "user@example.com", password: "foobar", password_confirmation: "foobar") }
+  before { @user = User.new(
+    fname: "Example", 
+    lname: "User", 
+    active: 1, 
+    department_id: 1, 
+    supervisor_id: 1, 
+    email: "user@example.com", 
+    password: "foobar", 
+    password_confirmation: "foobar") }
 
   subject { @user }
 

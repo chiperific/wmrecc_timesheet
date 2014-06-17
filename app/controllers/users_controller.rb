@@ -38,16 +38,22 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Change password"
-
-    #@user_cat = @user.department.categories
-  end #edit
+    
+    @path_switch = path_switch
+    
+    if current_user.id == @user.id 
+      @admin_disabled = true
+    else
+      @admin_disabled = false
+    end
+  end
 
   def update
     @user = User.find(params[:id])
 
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
-      redirect_to users_path
+      redirect_to path_switch
     else
       @dept_array = dept_array
       @super_array = super_array
@@ -69,6 +75,14 @@ class UsersController < ApplicationController
     sorted_arry = User.all.sort_by { |u| u.fname }.sort_by { |u| u.lname}
     @super_arry += sorted_arry.map { |u| [u.fname+" "+u.lname, u.id]}
     @super_arry
+  end
+
+  def path_switch
+    if current_user.admin?
+      users_path
+    else
+      root_path
+    end
   end
 
   private

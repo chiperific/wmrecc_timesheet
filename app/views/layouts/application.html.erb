@@ -34,7 +34,9 @@
         <span class="pull-right small">Created by <%= link_to 'Chiperific', "http://www.chiperific.com", target: 'blank' %></span>
       <% end %>
       <%= link_to 'Help', help_path %>
-      | (Signout / Signin)
+      <% if signed_in? %>
+        | <%= link_to "Sign out", signout_path, method: "delete" %>
+      <% end %>
     </p>
 
   </footer>

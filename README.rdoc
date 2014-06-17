@@ -1,16 +1,12 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* Department index / edit / new
-* Category index / edit / new
-* Remove def option from Category
-* hide "view inactive" if no inactives - Dept, Cat, User
-* relationship defs for Dept > Cat
+* Set login / logout through homepage
+* Scope login-variable views on homepage
 
 ==Next step:
 * Spec out Destroy actions for: user, Dept, Cat
 * Destroy actions for: user, Dept, Cat
-* Login - Logout
 
 
 ==To do:

@@ -3,4 +3,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+require 'seed_dump'
+
 WmreccTimesheet::Application.load_tasks

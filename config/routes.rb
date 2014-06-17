@@ -6,9 +6,6 @@ WmreccTimesheet::Application.routes.draw do
   resources :categories
   resources :departments
   
-  resources :sessions, only: [:new, :create, :destroy]
-
-  # I'd rather use the homepage instead of a separate controller...
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
+  resources :sessions, only: [:create, :destroy]
+  match '/signout', to: 'static_pages#destroy',     via: 'delete'
 end

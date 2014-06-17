@@ -30,18 +30,25 @@
       <%= f.select :department_id, options_for_select(@dept_array, @user.department_id), {}, {class: "form-control " } %>
     </div>
   </div>
-  <div class="row  col-xs-12 col-md-6">
-    <div class="input-group input-selector">
-      <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
-      <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector"} %>
+  <% if current_user.admin? %>
+    <div class="row  col-xs-12 col-md-6">
+      <div class="input-group input-selector">
+        <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
+        <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector"} %>
+      </div>
     </div>
-  </div>
-  <div class="row  col-xs-12 col-md-6">
-    <div class="input-group input-selector">
-      <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
-      <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], ), {}, {class: "form-control selector"} %>
-    </div>
-  </div>
+    <span class="admin-selector wide">
+      <div class="row  col-xs-12 col-md-6 ">
+        <div class="input-group input-selector">
+          <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
+          <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin ), {}, {class: "form-control selector", disabled: @admin_disabled } %>
+        </div>
+        <% if @admin_disabled %>
+          <p class="small hidden center" id="admin-selector-warning">(You can't disabled your own admin account.)</p>
+        <% end %>
+      </div>
+    </span>
+  <% end %>
   <div class="row  col-xs-12 col-md-12">
     <hr class="hr-thin">
   </div>
@@ -61,6 +68,6 @@
     <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
   </div>
   <div class="row center col-xs-6 col-md-6">
-    <%= link_to "Cancel", users_path, { class: "btn btn-primary btn-large"}  %>
+    <%= link_to "Cancel", @path_switch, { class: "btn btn-primary btn-large"}  %>
   </div>
 <% end %>
