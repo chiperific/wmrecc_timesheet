@@ -10,13 +10,6 @@ This product is a Time tracking application for explicit use by West Michigan Re
 
 
 ==To do:
-1.1 Login system
-
-1.2 Static pages
-  a. Home - login if not logged in / sitemap if logged in
-  b. Application - if not logged in, link to login.
-
-2. Authentication and sign-in
 2.1 Page-by-page permissions. Check out CanCan
 
 3. Database relationships for Depts / Cats / Users
@@ -48,3 +41,4 @@ This product is a Time tracking application for explicit use by West Michigan Re
 6/12/14 - 3
 6/13/15 - 4
 6/14/15 - 4
+6/16/15 - 3
