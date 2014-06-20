@@ -27,6 +27,8 @@ describe User do
   it { should respond_to(:updated_at)}
   it { should respond_to(:remember_token)}
   it { should respond_to(:authenticate)}
+  it { should respond_to(:annual_time_off)}
+  it { should respond_to(:standard_hours)}
 
   it { should be_valid }
 

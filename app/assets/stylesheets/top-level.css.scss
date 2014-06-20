@@ -5,7 +5,12 @@ html {
 }
 
 body {
-  padding-top: 2em;
+  padding-top: 1em;
+}
+
+.form-controller > .row {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 section {
@@ -55,9 +60,11 @@ h1, h2, h3, h4, h5, h6, p {
 // universal form styling
 div.input-group {
   width: 98%;
-  padding-bottom: 1em;
+  padding-bottom: .5em;
+}
 
-  select { width: 100% }
+.form-matcher {
+  border-radius: 4px !important;
 }
 
 // new color def for sub-table rows
@@ -75,20 +82,21 @@ i[class*='fa-caret'] {
 // Error handling
 #error_explanation {
   color: #a94442;
-  .alert-error {
-    text-align: center;
-    font-size: 1em;
-    color: white;
-    text-shadow: 2px 2px #a88f8f;
-    border: 1px solid #a94442;
-    border-radius: 4px;
-    background-color: #c77270;
-    margin: 0;
-    padding: 6px;
-  }
-  ul {
-    margin: 0 0 6px 0;
-  }
+}
+
+.alert-error {
+  text-align: center;
+  font-size: 1em;
+  color: white;
+  text-shadow: 2px 2px #a88f8f;
+  border: 1px solid #a94442;
+  border-radius: 4px;
+  background-color: #c77270;
+  margin: 0;
+  padding: 6px;
+}
+ul {
+  margin: 0 0 6px 0;
 }
 
 .field_with_errors {

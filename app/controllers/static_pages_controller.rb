@@ -16,6 +16,8 @@ class StaticPagesController < ApplicationController
     end
     
 
+    @col_width = "col-xs-4 col-sm-2 col-md-2 col-lg-1"
+
     @col_class = "well col-xs-#{@col} col-md-#{@col}"
   end
 

@@ -9,6 +9,10 @@ class UsersController < ApplicationController
     @departments = Department.where(active: true)
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def create
     @user = User.new(user_params)
 
@@ -46,6 +50,12 @@ class UsersController < ApplicationController
     else
       @admin_disabled = false
     end
+
+    @sv_or_admin = false
+    if current_supervisor? || (current_user.admin && current_user != @user)
+      @sv_or_admin = true
+    end
+
   end
 
   def update
@@ -62,6 +72,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
+  end
+
+  def sv
+    @title = "Users"
+    @active_users = User.where(active: true)
+    @inactive_users = User.where(active: false)
+    @supervised_active_users = @active_users.where("supervisor_id IS NOT NULL")
+
+    @departments = Department.where(active: true)
   end
 
   def dept_array
@@ -88,7 +107,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:fname, :lname, :active, :department_id, :supervisor_id, :email, :password, :password_confirmation, :admin)
+    params.require(:user).permit(:fname, :lname, :active, :department_id, :supervisor_id, :email, :password, :password_confirmation, :admin, :annual_time_off, :standard_hours)
   end
 
 end

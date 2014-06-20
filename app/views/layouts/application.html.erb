@@ -25,20 +25,10 @@
     </div>
     <%= yield %>
   <footer>
-  <%= debug(params) if Rails.env.development? %>
     <hr />
-    <p>
-      <% if @title != "Home"  %>
-        <%= link_to 'Home', root_path %> |
-      <% else %>
-        <span class="pull-right small">Created by <%= link_to 'Chiperific', "http://www.chiperific.com", target: 'blank' %></span>
-      <% end %>
-      <%= link_to 'Help', help_path %>
-      <% if signed_in? %>
-        | <%= link_to "Sign out", signout_path, method: "delete" %>
-      <% end %>
-    </p>
-
+      <%= debug(params) if Rails.env.development? %>
+    <hr />
+    <span class="pull-right small">Created by <%= link_to 'Chiperific', "http://www.chiperific.com", target: 'blank' %></span>
   </footer>
   </div>
 </body>

@@ -1,29 +1,95 @@
 <h4>Welcome <%= current_user.fname %><small>&nbspWhat would you like to do today?</small></h4>
-<div class="row">
-  <% if @supervisor == true %>
-    <div class="<%= @col_class %>">
-      <ul>Supervisor menu:
-        <li>Approve timecards</li>
-        <li>Run reports</li>
-      </ul>
+<div class="row" id="time_off_msg_box">
+  <h5>Message box - time off!</h5>
+</div>
+
+<div class="row app-style">
+  <a href="#" class="<%= @col_width %>">
+    <div class="box-btn">
+      <i class="fa fa-clock-o fa-3x"></i>
+      <p>Submit timecard</p>
     </div>
+  </a>
+  
+  <a href="#" class="<%= @col_width %>">
+    <div class="box-btn">
+      <i class="fa fa-clock-o fa-3x"></i>
+      <p>View past timecards</p>
+    </div>
+  </a>
+
+  <a href="#" class="<%= @col_width %>">
+    <div class="box-btn">
+      <i class="fa fa-check-square-o fa-3x"></i>
+      <p>Request time off</p>
+    </div>
+  </a>
+
+  <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>">
+    <div class="box-btn">
+      <i class="fa fa-user fa-3x"></i>
+      <p>Edit my profile</p>
+    </div>
+  </a>
+
+  <% if @supervisor %>
+    <a href="#" class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-thumbs-o-up fa-3x"></i>
+        <p>Approve timecards</p>
+      </div>
+    </a>
+
+    <a href="#" class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-table fa-3x"></i>
+        <p>Run reports</p>
+      </div>
+    </a>
+
+    <a href="<%= user_path(current_user) %>" class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-users fa-3x"></i>
+        <p>Manage your staff</p>
+      </div>
+    </a>
+  <% end %> 
+
+  <% if current_user.admin %> 
+    <a href="<%= users_path %>" class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-users fa-3x"></i>
+        <p>Manage all users</p>
+      </div>
+    </a>
+
+    <a href="<%= departments_path %>" class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-sitemap fa-3x"></i>
+        <p class="small">Manage Departments</p>
+      </div>
+    </a>
+
+    <a href="<%= categories_path %>" class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-list fa-3x"></i>
+        <p class="small">Manage Categories</p>
+      </div>
+    </a>
   <% end %>
 
-  <div class="<%= @col_class %>">
-    <ul>User menu:
-      <li>Submit a timecard</li>
-      <li>View past timecards</li>
-      <li><%= link_to "Edit my profile", edit_user_path(current_user) %></li>
-    </ul>
-  </div>
-
-  <% if current_user.admin? %>
-    <div class="<%= @col_class %>">
-      <ul>Admin menu:
-        <li><%= link_to "Manage Categories", categories_path %></li>
-        <li><%= link_to "Manage Users", users_path %></li>
-        <li><%= link_to "Manage Departments", departments_path %></li>
-      </ul>
+  <a href="#" class="<%= @col_width %>">
+    <div class="box-btn">
+      <i class="fa fa-question fa-3x"></i>
+      <p>Get help</p>
     </div>
-  <% end %>
+  </a>
+
+  <a href="<%= signout_path %>" data-method="delete" rel="nofollow" class="<%= @col_width %>">
+    <div class="box-btn">
+      <i class="fa fa-sign-out fa-3x"></i>
+      <p>Sign out</p>
+    </div>
+  </a>
+
 </div>

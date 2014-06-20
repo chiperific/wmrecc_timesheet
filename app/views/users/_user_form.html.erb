@@ -1,73 +1,99 @@
 <%= form_for @user do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="row  col-xs-12 col-md-6">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
-      <%= f.text_field :fname, {class: "form-control", placeholder: "First Name"} %>
+  <span class="form-controller">
+    <div class="row col-xs-12 col-md-6">
+      <div class="input-group" title="First Name">
+        <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
+        <%= f.text_field :fname, {class: "form-control", placeholder: "First Name"} %>
+      </div>
     </div>
-  </div>
-  <div class="row col-xs-12 col-md-6">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
-      <%= f.text_field :lname, {class: "form-control", placeholder: "Last Name"} %>
+    <div class="row col-xs-12 col-md-6">
+      <div class="input-group" title="Last Name">
+        <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
+        <%= f.text_field :lname, {class: "form-control", placeholder: "Last Name"} %>
+      </div>
     </div>
-  </div>
-  <div class="row  col-xs-12 col-md-12">
-    <div class="input-group" id="user-email-input">
-      <span class="input-group-addon">@</span>
-      <%= f.text_field :email, {class: "form-control", placeholder: "Email"} %>
+    <div class="row col-xs-12 col-sm-6 col-md-6">
+      <div class="input-group" title="Email (for Username)"> <!-- id="user-email-input" -->
+        <span class="input-group-addon">@</span>
+        <%= f.text_field :email, {class: "form-control", placeholder: "Email"} %>
+      </div>
     </div>
-  </div>
-  <div class="row  col-xs-12 col-md-6">
-    <div class="input-group input-selector">
-      <span class="input-group-addon addon-selector"><i class="fa fa-level-up"></i></span>
-      <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id ), {}, { class: "form-control" } %>
+    
+    <div class="row col-xs-12 col-sm-6 col-md-6">
+      <div class="input-group">
+        <div class="form-control form-matcher"><small><%= @user.created_at.strftime("Added: %m/%d/%Y") %>&nbsp <%= @user.updated_at.strftime("Last updated: %m/%d/%Y") %></small></div>
+      </div>
     </div>
-  </div>
-  <div class="row  col-xs-12 col-md-6">
-    <div class="input-group input-selector">
-      <span class="input-group-addon addon-selector"><i class="fa fa-sitemap"></i></span>
-      <%= f.select :department_id, options_for_select(@dept_array, @user.department_id), {}, {class: "form-control " } %>
+
+    <div class="row col-xs-12 col-md-6">
+      <div class="input-group input-selector" title="Supervisor">
+        <span class="input-group-addon addon-selector"><i class="fa fa-level-up"></i></span>
+        <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id ), {}, { class: "form-control" } %>
+      </div>
     </div>
-  </div>
-  <% if current_user.admin? %>
     <div class="row  col-xs-12 col-md-6">
-      <div class="input-group input-selector">
-        <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
-        <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector"} %>
+      <div class="input-group input-selector" title="Department">
+        <span class="input-group-addon addon-selector"><i class="fa fa-sitemap"></i></span>
+        <%= f.select :department_id, options_for_select(@dept_array, @user.department_id), {}, {class: "form-control " } %>
       </div>
     </div>
-    <span class="admin-selector wide">
-      <div class="row  col-xs-12 col-md-6 ">
-        <div class="input-group input-selector">
-          <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
-          <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin ), {}, {class: "form-control selector", disabled: @admin_disabled } %>
+
+    <% if @sv_or_admin %>
+      <div class="row col-xs-6 col-sm-6 col-md-3">
+        <div class="input-group" title="Default hours per week">
+          <span class="input-group-addon"><i class="fa fa-bullseye"></i></span>
+          <%= f.number_field :standard_hours, {class: "form-control", placeholder: "Hrs Per Week"} %>
         </div>
-        <% if @admin_disabled %>
-          <p class="small hidden center" id="admin-selector-warning">(You can't disabled your own admin account.)</p>
-        <% end %>
       </div>
-    </span>
-  <% end %>
-  <div class="row  col-xs-12 col-md-12">
-    <hr class="hr-thin">
-  </div>
-  <div class="row  col-xs-12 col-md-6">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-key"></i></span>
-      <%= f.text_field :password, {class: "form-control", placeholder: @pw_lang} %>
+      <div class="row col-xs-6 col-md-3">
+        <div class="input-group" title="Time off (in hours) per year">
+          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+          <%= f.number_field :annual_time_off, {class: "form-control", placeholder: "Time Off"} %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if current_user.admin %>
+      <div class="row  col-xs-6 col-sm-6 col-md-3">
+        <div class="input-group input-selector">
+          <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
+          <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector"} %>
+        </div>
+      </div>
+      <span class="admin-selector wide">
+        <div class="row  col-xs-6 col-md-3 ">
+          <div class="input-group input-selector">
+            <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
+            <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin ), {}, {class: "form-control selector", disabled: @admin_disabled } %>
+          </div>
+          <% if @admin_disabled %>
+            <p class="small hidden center" id="admin-selector-warning">(You can't disabled your own admin account.)</p>
+          <% end %>
+        </div>
+      </span>
+    <% end %>
+
+    <div class="row  col-xs-12 col-md-12">
+      <hr class="hr-thin">
     </div>
-  </div>
-  <div class="row  col-xs-12 col-md-6">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-key"></i></span>
-      <%= f.text_field :password_confirmation, {class: "form-control", placeholder: "Re-Enter Password"} %>
+    <div class="row  col-xs-12 col-md-6">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+        <%= f.text_field :password, {class: "form-control", placeholder: @pw_lang} %>
+      </div>
     </div>
-  </div>
-  <div class="row center col-xs-6 col-md-6">
-    <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
-  </div>
-  <div class="row center col-xs-6 col-md-6">
-    <%= link_to "Cancel", @path_switch, { class: "btn btn-primary btn-large"}  %>
-  </div>
+    <div class="row  col-xs-12 col-md-6">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+        <%= f.text_field :password_confirmation, {class: "form-control", placeholder: "Re-Enter Password"} %>
+      </div>
+    </div>
+    <div class="row center col-xs-6 col-md-6">
+      <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
+    </div>
+    <div class="row center col-xs-6 col-md-6">
+      <%= link_to "Cancel", @path_switch, { class: "btn btn-primary btn-large"}  %>
+    </div>
+  </span>
 <% end %>
