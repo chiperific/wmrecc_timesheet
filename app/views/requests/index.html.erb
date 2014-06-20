@@ -1,0 +1,27 @@
+<h1>Listing requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Date</th>
+      <th>Hours</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requests.each do |r| %>
+      <tr>
+        <td><%= r.user_id %></td>
+        <td><%= r.date %></td>
+        <td><%= r.hours %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   #has_one :department
   belongs_to :department
   has_many :categories, through: :department
+  has_many :requests
+
   before_save { self.email = email.downcase }
   before_create :create_remember_token
 
