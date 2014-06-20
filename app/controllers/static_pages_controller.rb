@@ -2,8 +2,11 @@ class StaticPagesController < ApplicationController
   def home
     @title = "Home"
     @supervisor = false
-    if User.where(active: true).where(supervisor_id: current_user.id).count > 0
-      @supervisor = true
+    
+    if current_user
+      if User.where(active: true).where(supervisor_id: current_user.id).count > 0
+        @supervisor = true
+      end
     end
 
     @col = 12
