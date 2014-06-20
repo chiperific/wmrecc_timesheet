@@ -20,7 +20,7 @@
           <% end %>
             <%= u.fname + " " + u.lname %>
           </td>
-          <td><%= @departments.find_by(id: u.department_id).name unless @departments.find_by(id: u.department_id).blank? %></td>
+          <td><%= u.department.name %></td>
           <td><%= @supervisor.fname + " " + @supervisor.lname unless @supervisor == nil %></td>
           <td><%= link_to "Edit", edit_user_path(u.id) %></td>
         </tr>

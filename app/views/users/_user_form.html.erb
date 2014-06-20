@@ -22,20 +22,28 @@
     
     <div class="row col-xs-12 col-sm-6 col-md-6">
       <div class="input-group">
-        <div class="form-control form-matcher"><small><%= @user.created_at.strftime("Added: %m/%d/%Y") %>&nbsp <%= @user.updated_at.strftime("Last updated: %m/%d/%Y") %></small></div>
+        <div class="form-control form-matcher" title="Timestamps">
+          <% if @user.new_record? %>
+            <p style="color: #ababab; text-align: center">(Timestaps)</p>
+          <% else %>
+            <small>
+              <%= @user.created_at.strftime("Added: %m/%d/%Y") %>&nbsp <%= @user.updated_at.strftime("Last updated: %m/%d/%Y") %>
+            </small>
+          <% end %>
+        </div>
       </div>
     </div>
 
     <div class="row col-xs-12 col-md-6">
       <div class="input-group input-selector" title="Supervisor">
         <span class="input-group-addon addon-selector"><i class="fa fa-level-up"></i></span>
-        <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id ), {}, { class: "form-control" } %>
+        <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id ), {}, { class: "form-control", disabled: @disabled } %>
       </div>
     </div>
     <div class="row  col-xs-12 col-md-6">
       <div class="input-group input-selector" title="Department">
         <span class="input-group-addon addon-selector"><i class="fa fa-sitemap"></i></span>
-        <%= f.select :department_id, options_for_select(@dept_array, @user.department_id), {}, {class: "form-control " } %>
+        <%= f.select :department_id, options_for_select(@dept_array, @user.department_id), {}, {class: "form-control", disabled: @disabled } %>
       </div>
     </div>
 

@@ -1,1 +1,61 @@
 <h4><%= @user.fname %>'s Staff</h4>
+
+<div id="active-users">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Dept.</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_users.sort_by { |u| u.fname }.sort_by { |u| u.lname}.each do |u| %>
+        <% @direct_reports = @supervised_active_users.where(supervisor_id: u.id) %>
+        <tr>
+          <td>
+          <% if @direct_reports.count > 0 %>
+            <%= link_to "<i class='fa fa-caret-right'></i>".html_safe, "#", {class: "center super-view-switch", id: "super-list-#{u.id}"} %>
+          <% end %>
+            <%= u.fname + " " + u.lname %>
+          </td>
+          <td><%= u.department.name %></td>
+          <td><%= link_to "Edit", edit_user_path(u.id) %></td>
+        </tr>
+        <% @direct_reports.each do |s| %>
+          <tr class=<%= "super-list-#{u.id.to_s}".to_s %> >
+            <td class="hidden" colspan="2">&nbsp<%= s.fname + " " + s.lname %></td>
+            <td class="hidden"><%= link_to "Edit", edit_user_path(s.id) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% if @inactive_users.count > 0 %>
+  <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right"} %>
+<% end %>
+<div class="hidden" id="inactive-users">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Inactive</th>
+        <th>Dept.</th>
+        <th>Supervisor</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inactive_users.each do |u| %>
+        <% @inactive_super = @active_users.find_by(:id, u.supervisor_id) %>
+        <tr>
+          <td><%= u.fname + " " + u.lname %></td>
+          <td><%= @departments.find_by(id: u.department_id).name unless @departments.find_by(id: u.department_id).blank? %></td>
+          <td><%= @inactive_super.fname + " " + @inactive_super.lname unless @inactive_super.blank? %></td>
+          <td><%= link_to "Edit", edit_user_path(u.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<p><%= link_to "Add new user", new_user_path %></p>

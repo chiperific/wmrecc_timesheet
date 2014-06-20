@@ -10,7 +10,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    @title = "Staff"
     @user = User.find(params[:id])
+    @user_staff = User.where(supervisor_id: @user.id)
+    @active_users = @user_staff.where(active: true)
+    @inactive_users = @user_staff.where(active: false)
+    @supervised_active_users = User.where("supervisor_id IS NOT NULL")
+    @departments = Department.where(active: true)
   end
 
   def create
@@ -42,6 +48,7 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Change password"
+
     
     @path_switch = path_switch
     
@@ -54,6 +61,12 @@ class UsersController < ApplicationController
     @sv_or_admin = false
     if current_supervisor? || (current_user.admin && current_user != @user)
       @sv_or_admin = true
+    end
+
+    if @sv_or_admin == false
+      @disabled = true
+    else
+      @disabled = false
     end
 
   end
@@ -72,15 +85,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-  end
-
-  def sv
-    @title = "Users"
-    @active_users = User.where(active: true)
-    @inactive_users = User.where(active: false)
-    @supervised_active_users = @active_users.where("supervisor_id IS NOT NULL")
-
-    @departments = Department.where(active: true)
   end
 
   def dept_array

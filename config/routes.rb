@@ -3,7 +3,6 @@ WmreccTimesheet::Application.routes.draw do
   get 'help', to: 'static_pages#help'
 
   resources :users
-  get 'users/sv', to: 'users#sv'
 
   resources :categories
   resources :departments

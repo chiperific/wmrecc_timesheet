@@ -10,11 +10,17 @@
   p, a, i {
     padding: .1em;
   }
+
 }
 
 .app-style {
   margin-left: -2em !important;
   a:hover {
     text-decoration: none;
+  }
+  :hover {
+    .box-btn {
+      background-color: rgba(97,130,71,.3);
+    }
   }
 }

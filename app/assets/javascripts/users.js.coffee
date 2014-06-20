@@ -27,6 +27,4 @@ jQuery ->
 
   $('.admin-selector').children().mouseover ->
     $('#admin-selector-warning').toggleClass('hidden')
-
-  $('#hours').mouseover ->
     
