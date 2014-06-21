@@ -9,11 +9,13 @@ describe "Request Pages" do
   describe "New" do
     before { visit new_user_requests(user) }
 
-    it { should have_content(user.fname)}
+    pending { should have_content(user.fname)}
   end
 
   describe "Show" do
     before { visit user_requests(user)}
+
+    it { should have_content(user.fname)}
 
   end
 

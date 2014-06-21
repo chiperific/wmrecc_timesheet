@@ -25,6 +25,10 @@ h1, h2, h3, h4, h5, h6, p {
   line-height: 1;
 }
 
+a:hover {
+  background-color: transparent;
+}
+
 .center {
   text-align: center;
 }

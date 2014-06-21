@@ -2,11 +2,13 @@ This product is a Time tracking application for explicit use by West Michigan Re
 
 ==Last completed step:
 * home page - "you have time off requests to approve"
+* request#show - show the @direct_reports that need to be approved
+* request#show - approve/deny workflow
 
 ==Next step:
-* request#show - show the @direct_reports that need to be approved
-* Spec out Destroy actions for: user, Dept, Cat, request
-* Destroy actions for: user, Dept, Cat, request
+*
+* Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
+* Destroy actions for: user, Dept, Cat, request - maybe not??
 
 
 ==To do:
