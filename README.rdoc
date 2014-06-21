@@ -1,14 +1,16 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
+* home page - "you have time off requests to approve"
 
 ==Next step:
-* Spec out Destroy actions for: user, Dept, Cat
-* Destroy actions for: user, Dept, Cat
+* request#show - show the @direct_reports that need to be approved
+* Spec out Destroy actions for: user, Dept, Cat, request
+* Destroy actions for: user, Dept, Cat, request
 
 
 ==To do:
-1. Destroy actions for: user, Dept, Cat
+1. Destroy actions for: user, Dept, Cat, request
 
 2. Time Off Request system
 2.1 Spec out request_pages and request_spec

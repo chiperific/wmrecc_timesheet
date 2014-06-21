@@ -12,7 +12,7 @@ describe "Request Pages" do
     it { should have_content(user.fname)}
   end
 
-  describe "Index" do
+  describe "Show" do
     before { visit user_requests(user)}
 
   end

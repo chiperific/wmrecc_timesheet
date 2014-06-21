@@ -17,6 +17,10 @@
   margin-left: -2em !important;
   a:hover {
     text-decoration: none;
+    background-color: white !important;
+  }
+  a:visited {
+    color: #428bca;
   }
   :hover {
     .box-btn {

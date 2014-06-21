@@ -1,5 +1,7 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_requests, only: :show
+  before_action :set_user
 
   def show
     @requests = set_requests
