@@ -1,0 +1,25 @@
+<h4><%= @user.fname %>'s Time Off Requests</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Hours</th>
+      <th>Submitted</th>
+      <th class="small">Reviewed?</th>
+      <th class="small">Approved?</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requests.each do |r| %>
+      <tr>
+        <td><%= r.date.strftime("%m/%d/%y") %></td>
+        <td><%= r.hours %></td>
+        <td><%= r.updated_at.strftime("%m/%d/%y") %></td>
+        <td><%= if r.sv_reviewed == true then "Yes" else "No" end %></td>
+        <td><%= if r.sv_approval == true then "Yes" else "No" end %></td>
+        <td class="small"><%= link_to "Cancel", "#", { } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

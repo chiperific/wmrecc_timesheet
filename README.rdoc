@@ -1,12 +1,12 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* home page - "you have time off requests to approve"
-* request#show - show the @direct_reports that need to be approved
-* request#show - approve/deny workflow
+* request#show - show reviewed / unreviewed tor's
 
 ==Next step:
-*
+* request#show - if sv, "View your staff's timesheets"
+* Create "you have rejected timesheets"
+* Use request info to create a record in Timesheet
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
 * Destroy actions for: user, Dept, Cat, request - maybe not??
 

@@ -9,7 +9,12 @@ class RequestsController < ApplicationController
     @requests = set_requests
     @user = set_user
     @direct_reports_ary = set_active_direct_reports.map { |u| u.id }
-    @dr_requests = Request.where( user_id: @direct_reports_ary).sort_by { |r| r.user.lname }.sort_by &:date
+    @dr_requests = Request.where( user_id: @direct_reports_ary ).sort_by { |r| r.user.lname }.sort_by &:date
+    @dr_requests_unreviewed = Request.where( user_id: @direct_reports_ary ).where( sv_reviewed: false ).sort_by { |r| r.user.lname }.sort_by &:date
+    @dr_requests_reviewed = Request.where( user_id: @direct_reports_ary ).where( sv_reviewed: true ).sort_by { |r| r.user.lname }.sort_by &:date
+
+    @dr_review_switch = params[:reviewed]
+    @dr_self_switch = params[:self]
   end
 
   def new

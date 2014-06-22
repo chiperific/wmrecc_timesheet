@@ -5,7 +5,7 @@
 <% if @tors_need_approval > 0 %>
   <div class="row center well" id="time_off_msg_box">
     <h5>
-      <%= link_to "You have Time Off Requests that need your approval", user_requests_path(current_user)  %>
+      <%= link_to "You have Time Off Requests that need your approval", "/users/#{current_user.id}/requests?self=false&reviewed=false"  %>
     </h5>
   </div>
 <% end %>
@@ -25,10 +25,10 @@
     </div>
   </a>
 
-  <a href="#" class="<%= @col_width %>">
+  <a href='<%= "/users/#{current_user.id}/requests?self=true" %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-check-square-o fa-3x"></i>
-      <p>Request time off</p>
+      <p>Manage time off</p>
     </div>
   </a>
 
