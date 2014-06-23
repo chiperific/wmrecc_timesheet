@@ -22,7 +22,7 @@
           <tr>
             <td colspan="3"></td>
             <td><%= link_to "Approve", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=true&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary"} %></td> 
-            <td><%= link_to "Reject", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary" } %></td>
+            <td><%= link_to "Deny", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary" } %></td>
         <% else %>
           <td>
             <%= link_to "Deny", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary" } %></td>
