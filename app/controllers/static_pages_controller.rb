@@ -14,6 +14,8 @@ class StaticPagesController < ApplicationController
       @direct_reports.each do |d|
         @tors_need_approval +=1 if d.requests.where(sv_approval: false).any?
       end #direct_reports loop
+
+      @tors_denied = Request.where(user_id: current_user.id).where(sv_reviewed: true).where(sv_approval: false)
     end #current_user
   end #home
 

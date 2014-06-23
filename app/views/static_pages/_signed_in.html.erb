@@ -5,7 +5,15 @@
 <% if @tors_need_approval > 0 %>
   <div class="row center well" id="time_off_msg_box">
     <h5>
-      <%= link_to "You have Time Off Requests that need your approval", "/users/#{current_user.id}/requests?self=false&reviewed=false"  %>
+      <%= link_to "You have Time Off Requests that need your approval", "/users/#{current_user.id}/requests?cur_usr=false&review=false"  %>
+    </h5>
+  </div>
+<% end %>
+
+<% if @tors_denied.any? %>
+  <div class="row center well" id="time_off_msg_box">
+    <h5>
+      <%= link_to "You have Time Off Requests that were denied", "/users/#{current_user.id}/requests?cur_usr=true"  %>
     </h5>
   </div>
 <% end %>
@@ -25,7 +33,7 @@
     </div>
   </a>
 
-  <a href='<%= "/users/#{current_user.id}/requests?self=true" %>' class="<%= @col_width %>">
+  <a href='<%= "/users/#{current_user.id}/requests?cur_usr=true" %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-check-square-o fa-3x"></i>
       <p>Manage time off</p>

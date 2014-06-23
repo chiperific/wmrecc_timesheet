@@ -29,6 +29,14 @@ a:hover {
   background-color: transparent;
 }
 
+a:visited {
+  color: #428bca;
+}
+
+a.btn-primary:visited {
+  color: white;
+}
+
 .center {
   text-align: center;
 }
@@ -74,6 +82,11 @@ div.input-group {
 // new color def for sub-table rows
 tr[class*='-list-'] > td {
   background-color: #eeeeee;
+}
+
+// even smaller than small
+.small2 {
+  font-size: .75em;
 }
 
 

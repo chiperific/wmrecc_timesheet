@@ -1,26 +1,38 @@
-<% if @dr_requests.any? && @dr_self_switch == "false" %>
-  <h4><%= @user.fname %>'s Staff's Time Off Requests</h4>
-
+<% if @dr_requests.any? %>
   <% if @dr_review_switch == "false" %>
-    <%= link_to "View Reviewed requests", "?self=false&reviewed=true", { class: "pull-right"} %>
-    <%= render 'review_table', dr_to: @dr_requests_unreviewed %>
+    <h4>Unreviewed Time Off Requests</h4>
+    <% if @dr_requests_unreviewed.any? %>
+      <%= render 'review_table', dr_to: @dr_requests_unreviewed %>
+    <% else %>
+      <p>There are no unreviewed time off requests from your staff.</p>
+    <% end %>
+    <%= link_to "View Reviewed", "?cur_usr=false&review=true" %>
   <% end %>
 
   <% if @dr_review_switch == "true" %>
-    <%= link_to "View Unreviewed requests", "?self=false&reviewed=false", { class: "pull-right"} %>
-    <%= render 'review_table', dr_to: @dr_requests_reviewed %>
+    <h4>Reviewed Time Off Requests</h4>
+    <% if @dr_requests_reviewed.any? %>
+      <%= render 'review_table', dr_to: @dr_requests_reviewed %>
+    <% else %>
+      <p>There are no reviewed time off requests from your staff.</p>
+    <% end %>
+    <%= link_to "View Unreviewed", "?cur_usr=false&review=false" %>
   <% end %>
-
-  <div class='row'>
-    <%= link_to "View Your requests", "?self=true", { class: "pull-right"} %>
-  </div>
-
 <% end %>
 
-<% if @dr_self_switch == "true" %>
+<% if @dr_cur_usr_switch == "false" %>
+    <%= link_to "View Your requests", "?cur_usr=true", { class: "pull-right" } %>
+    <br>
+<% end %>
+
+<% if @dr_cur_usr_switch == "true" %>
   <% if current_user.requests.any? %>
     <%= render 'self_table' %>
   <% else %>
-    <p>No requests on file</p>
+    <p>You have no requests on file</p>
+    <p>Create one here</p>
+    <% if  @dr_requests.any? %>
+      <%= link_to "View your staff's requests", "?cur_usr=false&review=true", { class: "pull-right"} %><br>
+    <% end %>
   <% end %>
 <% end %>

@@ -3,26 +3,29 @@
     <tr>
       <th>Name</th>
       <th>Date</th>
-      <th>Hours</th>
+      <th >Hrs</th>
       <th>Submitted</th>
-      <th class="small">Reviewed?</th>
-      <th class="small">Approved?</th>
+      <th class="small2">Approved?</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% dr_to.each do |r| %>
       <tr>
-        <td><%= r.user.fname+" "+r.user.lname %></td>
-        <td><%= r.date.strftime("%m/%d/%y") %></td>
+        <td class='small2'><%= r.user.fname+" "+r.user.lname %></td>
+        <td class='small2'><%= r.date.strftime("%m/%d/%y") %></td>
         <td><%= r.hours %></td>
-        <td><%= r.updated_at.strftime("%m/%d/%y") %></td>
-        <td><%= if r.sv_reviewed == true then "Yes" else "No" end %></td>
+        <td class='small2'><%= r.updated_at.strftime("%m/%d/%y") %></td>
         <td><%= if r.sv_approval == true then "Yes" else "No" end %></td>
         <% if r.sv_approval == false %>
-          <td><%= link_to "Approve", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=true&reviewed=true", { class: "small"} %> / <%= link_to "Reject", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true", { class: "small" } %></td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+            <td><%= link_to "Approve", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=true&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary"} %></td> 
+            <td><%= link_to "Reject", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary" } %></td>
         <% else %>
-          <td><%= link_to "Deny", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true", { class: "small" } %></td>
+          <td>
+            <%= link_to "Deny", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary" } %></td>
         <% end %>
       </tr>
     <% end %>

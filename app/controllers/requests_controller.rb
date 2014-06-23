@@ -11,10 +11,10 @@ class RequestsController < ApplicationController
     @direct_reports_ary = set_active_direct_reports.map { |u| u.id }
     @dr_requests = Request.where( user_id: @direct_reports_ary ).sort_by { |r| r.user.lname }.sort_by &:date
     @dr_requests_unreviewed = Request.where( user_id: @direct_reports_ary ).where( sv_reviewed: false ).sort_by { |r| r.user.lname }.sort_by &:date
-    @dr_requests_reviewed = Request.where( user_id: @direct_reports_ary ).where( sv_reviewed: true ).sort_by { |r| r.user.lname }.sort_by &:date
+    @dr_requests_reviewed = Request.where( user_id: @direct_reports_ary ).where( sv_reviewed: true ).where(sv_approval: true).sort_by { |r| r.user.lname }.sort_by &:date
 
-    @dr_review_switch = params[:reviewed]
-    @dr_self_switch = params[:self]
+    @dr_review_switch = params[:review]
+    @dr_cur_usr_switch = params[:cur_usr]
   end
 
   def new
@@ -39,14 +39,11 @@ class RequestsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @request.update(request_params)
-        format.html { redirect_to @request, notice: 'Request was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
+    if @request.update(request_params)
+      flash[:success] = 'Request updated'
+      redirect_to user_requests_path(params[:user_id])
+    else
+      render action: 'edit'
     end
   end
 
@@ -57,22 +54,19 @@ class RequestsController < ApplicationController
 
     if @request.update_attribute(:sv_approval, @approve)
       @request.update_attribute(:sv_reviewed, @reviewed)
+      # need a push to timecards
       flash[:success] = "Request updated"
-      redirect_to user_requests_path(params[:user_id])
+      redirect_to user_requests_url(params[:user_id], cur_usr: params[:cur_usr], review: params[:review])
     else
       flash[:error] = "Something went wrong :("
-      redirect_to user_requests_path(params[:user_id])
+      redirect_to user_requests_path(params[:user_id], cur_usr: params[:cur_usr], review: params[:review])
     end
   end
 
-  # DELETE /requests/1
-  # DELETE /requests/1.json
   def destroy
+    @request = Request.find(params[:id])
     @request.destroy
-    respond_to do |format|
-      format.html { redirect_to requests_url }
-      format.json { head :no_content }
-    end
+    #need to delete associated timecard record
   end
 
   private

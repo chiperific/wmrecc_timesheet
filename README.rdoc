@@ -2,10 +2,12 @@ This product is a Time tracking application for explicit use by West Michigan Re
 
 ==Last completed step:
 * request#show - show reviewed / unreviewed tor's
+* request#show - if sv, "View your staff's timesheets"
+* Create "you have denied timesheets"
 
 ==Next step:
-* request#show - if sv, "View your staff's timesheets"
-* Create "you have rejected timesheets"
+* Buttons for 'cur_user=true': Edit / Cancel (destroy)
+* Create Time Off request
 * Use request info to create a record in Timesheet
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
 * Destroy actions for: user, Dept, Cat, request - maybe not??
