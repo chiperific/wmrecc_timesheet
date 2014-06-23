@@ -6,6 +6,7 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * Create "you have denied timesheets"
 
 ==Next step:
+* If cur_user is not SV, need error msg on request#show view
 * Buttons for 'cur_user=true': Edit / Cancel (destroy)
 * Create Time Off request
 * Use request info to create a record in Timesheet
