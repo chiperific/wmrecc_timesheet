@@ -4,20 +4,17 @@
     <tr>
       <th>Date</th>
       <th>Hrs</th>
-      <th class="small2">Reviewed?</th>
-      <th class="small2">Approved?</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @requests.each do |r| %>
-      <% if (r.sv_reviewed == true && r.sv_approval == false) then @notice_class = "bg-danger text-danger" elsif (r.sv_reviewed == true && r.sv_approval == true) then @notice_class = "bg-success text-success" else @notice_class = " " end %>
       <tr>
-        <td class="small2 <%= @notice_class %>"><%= r.date.strftime("%m/%d/%y") %></td>
-        <td class="<%= @notice_class %>"><%= r.hours %></td>
-        <td class="<%= @notice_class %>"><%= if r.sv_reviewed == true then "Yes" else "No" end %></td>
-        <td class="<%= @notice_class %>"><%= if r.sv_approval == true then "Yes" else "No" end %></td>
-        <td class="small <%= @notice_class %>"><%= link_to "Cancel", "#", { } %></td>
+        <td class="small2"><%= r.date.strftime("%m/%d/%y") %></td>
+        <td><%= r.hours %></td>
+        <td class="<%= r.notice_class(r) %>"><%= r.status(r) %></td>
+        <td class="small"><%= link_to "Cancel", "#", { } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -3,7 +3,7 @@
 </h4>
 
 <% if @tors_need_approval > 0 %>
-  <div class="row center well" id="time_off_msg_box">
+  <div class="row center bg-success text-success" id="time_off_msg_box">
     <h5>
       <%= link_to "You have Time Off Requests that need your approval", "/users/#{current_user.id}/requests?cur_usr=false&review=false"  %>
     </h5>
@@ -11,7 +11,7 @@
 <% end %>
 
 <% if @tors_denied.any? %>
-  <div class="row center well" id="time_off_msg_box">
+  <div class="row center bg-danger text-danger" id="time_off_msg_box">
     <h5>
       <%= link_to "You have Time Off Requests that were denied", "/users/#{current_user.id}/requests?cur_usr=true"  %>
     </h5>

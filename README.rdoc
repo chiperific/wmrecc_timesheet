@@ -1,18 +1,19 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* request#show - show reviewed / unreviewed tor's
-* request#show - if sv, "View your staff's timesheets"
 * Create "you have denied timesheets"
+* If cur_user is not SV, need error msg on request#show view
 
 ==Next step:
-* If cur_user is not SV, need error msg on request#show view
 * Buttons for 'cur_user=true': Edit / Cancel (destroy)
-* Create Time Off request
+* Create Time Off request model
 * Use request info to create a record in Timesheet
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
 * Destroy actions for: user, Dept, Cat, request - maybe not??
 
+
+==Keep in mind:
+* http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
 
 ==To do:
 1. Destroy actions for: user, Dept, Cat, request
@@ -38,6 +39,7 @@ This product is a Time tracking application for explicit use by West Michigan Re
   b. Admins can approve over supervisors or edit approvals
 
 8. Reports
+8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
 
 ==Add-ons:
 1. Progress bars:

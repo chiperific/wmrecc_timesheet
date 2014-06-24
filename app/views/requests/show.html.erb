@@ -31,8 +31,8 @@
   <% else %>
     <p>You have no requests on file</p>
     <p>Create one here</p>
-    <% if  @dr_requests.any? %>
-      <%= link_to "View your staff's requests", "?cur_usr=false&review=true", { class: "pull-right"} %><br>
-    <% end %>
+  <% end %>
+  <% if  @dr_requests.any? %>
+    <%= link_to "View your staff's requests", "?cur_usr=false&review=true", { class: "pull-right"} %><br>
   <% end %>
 <% end %>
