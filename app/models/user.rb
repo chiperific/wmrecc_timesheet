@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   belongs_to :department
   has_many :categories, through: :department
   has_many :requests
+  accepts_nested_attributes_for :requests, reject_if: lambda { |a| a[:date].blank? || a[:hours].blank? }, allow_destroy: true
 
   before_save { self.email = email.downcase }
   before_create :create_remember_token

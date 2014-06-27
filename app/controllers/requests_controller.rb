@@ -1,11 +1,14 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy]
-  before_action :set_requests, only: :show
+  before_action :set_request, only: [:index, :edit, :update, :destroy]
+  before_action :set_requests, only: :index
   before_action :set_active_direct_reports, only: :show
   before_action :set_user
   
 
   def show
+  end
+
+  def index
     @requests = set_requests
     @user = set_user
     @direct_reports_ary = set_active_direct_reports.map { |u| u.id }
@@ -18,24 +21,16 @@ class RequestsController < ApplicationController
   end
 
   def new
+    @requests = User.find(set_user.id).requests.build
+    @days_off = if params[:numdays] then params[:numdays] else 1 end
   end
 
   def edit
-    @request = set_request
+    @requests = User.find(set_user.id).requests.build
   end
 
   def create
     @request = Request.new(request_params)
-
-    respond_to do |format|
-      if @request.save
-        format.html { redirect_to @request, notice: 'Request was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @request }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def update
@@ -45,6 +40,11 @@ class RequestsController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def update_all_requests
+    flash[:success] = "you came through update_all_requests"
+    redirect_to user_requests_path(params[:user_id])
   end
 
   def approval_flow
@@ -77,7 +77,8 @@ class RequestsController < ApplicationController
 
     def set_request
       if params[:id]
-        User.find(params[:user_id]).requests.find(params[:id])
+        Request.find(params[:id])
+        #User.find(params[:user_id]).requests.find(params[:id])
       end
     end
 

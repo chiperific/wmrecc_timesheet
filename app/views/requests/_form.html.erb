@@ -1,29 +1,33 @@
-<%= form_for(@request) do |f| %>
-  <% if @request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+<%= form_for @requests, url: user_requests_update_all_path do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="row form-controller">
+      <%= f.number_field :user_id, { class: "hidden"} %>
+      <div class="row col-xs-6 col-sm-3 col-md-3">
+        <div class="input-group date date-picker" title="Date" >
+          <%= f.text_field :date, { class: "form-control", placeholder: "mm/dd/yyyy" } %>
+          <span class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </span>
+        </div>
+      </div>
 
-      <ul>
-      <% @request.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+      <div class="row col-xs-4 col-sm-3 col-md-3">
+        <div class="input-group" title="Hours" >
+          <span class="input-group-addon">
+            <i class="fa fa-clock-o"></i>
+          </span>
+          <%= f.number_field :hours, { in: 1..8, class: "form-control", placeholder: "0" } %>
+        </div>
+      </div>
+
+
+      <div class="row col-xs-2 col-sm-3 col-md-3">
+        <div class="checkbox pull-right" title="Delete" >
+          <%= f.check_box :_destroy, { class: "hidden"} %>
+          <%= f.label :_destroy, "Ignore", {class: " text-info destroyer"} %>
+        </div>
+      </div>
+
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_select :date %>
-  </div>
-  <div class="field">
-    <%= f.label :hours %><br>
-    <%= f.number_field :hours %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

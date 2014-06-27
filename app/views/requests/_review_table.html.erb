@@ -5,7 +5,7 @@
       <th>Date</th>
       <th >Hrs</th>
       <th>Submitted</th>
-      <th class="small2">Approved?</th>
+      <th class="small2">Status</th>
       <th></th>
     </tr>
   </thead>
@@ -16,16 +16,15 @@
         <td class='small2'><%= r.date.strftime("%m/%d/%y") %></td>
         <td><%= r.hours %></td>
         <td class='small2'><%= r.updated_at.strftime("%m/%d/%y") %></td>
-        <td><%= if r.sv_approval == true then "Yes" else "No" end %></td>
+        <td class='small2'><%= r.status(r) %></td>
         <% if r.sv_approval == false %>
           </tr>
           <tr>
             <td colspan="3"></td>
-            <td><%= link_to "Approve", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=true&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary"} %></td> 
-            <td><%= link_to "Deny", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary" } %></td>
+            <td><%= link_to "Approve", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=true&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "pull-right btn btn-success"} %></td> 
+            <td><%= link_to "Deny", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "btn btn-danger" } %></td>
         <% else %>
-          <td>
-            <%= link_to "Deny", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "small btn btn-primary" } %></td>
+          <td><%= link_to "Deny", "/users/#{r.user.supervisor_id}/requests/#{r.id}/approval_flow?approve=false&reviewed=true&review=#{params[:review]}&cur_usr=#{params[:cur_usr]}", { class: "btn btn-danger" } %></td>
         <% end %>
       </tr>
     <% end %>

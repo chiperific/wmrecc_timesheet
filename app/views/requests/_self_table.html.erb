@@ -5,7 +5,6 @@
       <th>Date</th>
       <th>Hrs</th>
       <th>Status</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,7 +13,11 @@
         <td class="small2"><%= r.date.strftime("%m/%d/%y") %></td>
         <td><%= r.hours %></td>
         <td class="<%= r.notice_class(r) %>"><%= r.status(r) %></td>
-        <td class="small"><%= link_to "Cancel", "#", { } %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><%= link_to "Edit", "#", { class: "btn btn-primary" } %>&nbsp<%= link_to "Cancel", "#", { class: "btn btn-danger" } %></td>
       </tr>
     <% end %>
   </tbody>

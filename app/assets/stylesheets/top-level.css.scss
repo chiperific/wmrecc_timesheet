@@ -33,7 +33,8 @@ a:visited {
   color: #428bca;
 }
 
-a.btn-primary:visited {
+// Keep white text in visited buttons with a bootstrap color (primary, success, info, danger, warning)
+a[class*="btn-"]:visited {
   color: white;
 }
 
@@ -55,8 +56,8 @@ a.btn-primary:visited {
 }
 
 #top-level-container {
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .hidden {

@@ -5,7 +5,10 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * If cur_user is not SV, need error msg on request#show view
 
 ==Next step:
-* Buttons for 'cur_user=true': Edit / Cancel (destroy)
+* Buttons for 'cur_user=true': Edit / Cancel (destroy) => request#index#_self_table
+* Submit all new requests - http://stackoverflow.com/questions/21533518/rails-submit-multiple-forms-on-same-page
+** Currently new.html.erb submits to requests#show -- why?
+
 * Create Time Off request model
 * Use request info to create a record in Timesheet
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
