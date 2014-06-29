@@ -1,27 +1,11 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* Create "you have denied timesheets"
-* If cur_user is not SV, need error msg on request#show view
 
 ==Next step:
+* requests#new -- date is not saving: http://stackoverflow.com/questions/23096517/jquery-datepicker-with-rails-4
+
 * Buttons for 'cur_user=true': Edit / Cancel (destroy) => request#index#_self_table
-* Submit all new requests - http://stackoverflow.com/questions/21533518/rails-submit-multiple-forms-on-same-page
-** Currently new.html.erb submits to requests#show -- why?
-
-** What about:               ******** THIS IS WORKING. Continue w/ create_all_request
-form_for @requests do |f|
-  #.times do
-   render partial f: f
-    # inside partial:
-      f.text_field id="#{}" request[0][user_id]
-      #Create my own array of hashes for submission?
-  end
-  f.submit
-end
-
-** Else save through User model...http://stackoverflow.com/questions/14622545/update-and-create-multiple-records-in-a-single-form-in-rails-3
-
 * Create Time Off request model
 * Use request info to create a record in Timesheet
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
@@ -30,6 +14,7 @@ end
 
 ==Keep in mind:
 * http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
+* You have a datepicker: http://bootstrap-datepicker.readthedocs.org/en/release/index.html
 
 ==To do:
 1. Destroy actions for: user, Dept, Cat, request
@@ -65,6 +50,8 @@ end
     <span class="sr-only">40% Complete (success)</span>
   </div>
 </div>
+
+2. Submit all new requests - http://stackoverflow.com/questions/21533518/rails-submit-multiple-forms-on-same-page -- search for  '# Future'
 
 
 === Time spent:

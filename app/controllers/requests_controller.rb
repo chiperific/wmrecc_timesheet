@@ -22,8 +22,10 @@ class RequestsController < ApplicationController
   end
 
   def new
-    @requests = User.find(set_user.id).requests.build
-    @days_off = if params[:numdays] then params[:numdays] else 1 end
+    @request = User.find(set_user.id).requests.build
+
+    # Future -- submit multiple day off requests at once
+    #@days_off = if params[:numdays] then params[:numdays] else 1 end
   end
 
   def edit
@@ -32,6 +34,13 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
+
+    if @request.save!
+      flash[:success] = "Request submitted"
+      redirect_to user_requests_path(params[:user_id], cur_usr: true)
+    else
+      render 'new'
+    end
   end
 
   def update
@@ -43,15 +52,29 @@ class RequestsController < ApplicationController
     end
   end
 
-  def create_all_requests
-    @requests = params[:request]
-    @user = set_user
 
-    @requests.each do |r|
-    end
-    flash[:success] = "you came through update_all_requests"
-    #redirect_to user_requests_path(params[:user_id])
-  end
+#  Future -- submit multple day off requests at once
+#  def create_all_requests
+#    @requests = params[:request]
+#    @user = set_user
+#
+#    @pre_req_count = Request.count
+#
+#    @requests.each do |r|
+#      @request = r.find { |r| r["hours"].to_i > 0 && r["date"].present? }
+#      if @request.any?
+#        #Request.create!(user_id: , date: , hours: )
+#      end
+#    end
+#
+#    @post_req_count = Request.count
+#
+#    if @pre_req_count < @post_req_count
+#      flash[:success] = "Requests saved"
+#    end
+#    
+#    #redirect_to user_requests_path(params[:user_id])
+#  end
 
   def approval_flow
     @request = Request.find(params[:id])

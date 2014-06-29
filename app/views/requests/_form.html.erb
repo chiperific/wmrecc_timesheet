@@ -1,32 +1,26 @@
-
-    <%= render 'shared/error_messages', object: f.object %>
-    <div class="row form-controller">
-      <div class="row col-xs-6 col-sm-3 col-md-3">
-        <div class="input-group date date-picker" title="Date" >
-          <%= f.text_field :date, { class: "form-control", placeholder: "mm/dd/yyyy", id: "request_#{@count}_date", name: "request[#{@count}][date]" } %>
-          <span class="input-group-addon">
-            <i class="fa fa-calendar"></i>
-          </span>
-        </div>
+<%= form_for @request, url: user_requests_path do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.hidden_field :user_id %>
+  <div class="row form-controller">
+    <div class="row col-xs-6 col-sm-3 col-md-3">
+      <div class="input-group date date-picker" title="Date" >
+        <% date_display = :date %>
+        <%= f.text_field date_display, { class: "form-control", placeholder: "mm/dd/yyyy", :'data-date-format' => "mm/dd/yyyy" } %>
+        <%= f.text_field :date, {id: 'save_date'} %>
+        <span class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </span>
       </div>
-
-      <div class="row col-xs-4 col-sm-3 col-md-3">
-        <div class="input-group" title="Hours" >
-          <span class="input-group-addon">
-            <i class="fa fa-clock-o"></i>
-          </span>
-          <%= f.number_field :hours, { in: 1..8, class: "form-control", placeholder: "0", id: "request_#{@count}_hours", name: "request[#{@count}][hours]" } %>
-        </div>
-      </div>
-
-
-      <div class="row col-xs-2 col-sm-3 col-md-3">
-        <div class="row checkbox pull-right" title="Delete" >
-          <%= f.check_box :_destroy, { class: "", id: "request_#{@count}__destroy", name: "request[#{@count}][_destroy]"} %>
-          <%= f.label "#{@count}__destroy", "Ignore", {class: "destroyer text-info"} %>
-        </div>
-      </div>
-
     </div>
-    <%= f.hidden_field :user_id, { id: "request_#{@count}_user_id", name: "request[#{@count}][user_id]" } %>
 
+    <div class="row col-xs-4 col-sm-3 col-md-3">
+      <div class="input-group" title="Hours" >
+        <span class="input-group-addon">
+          <i class="fa fa-clock-o"></i>
+        </span>
+        <%= f.number_field :hours, { in: 1..8, class: "form-control", placeholder: "0" } %>
+      </div>
+    </div>
+  </div>
+  <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
+<% end %>

@@ -1,8 +1,8 @@
 class Request < ActiveRecord::Base
   belongs_to :user
 
-  validates :user_id, :date, :hours, presence: true
-  validates :hours, numericality: { only_integer: true, greater_than: 0 }
+  validates :user_id, :hours, presence: true
+  validates :hours, numericality: { greater_than: 0 }
 
   def notice_class(r) #highlighting table rows in _self_table.html.erb
     if r.sv_reviewed && r.sv_approval

@@ -1,0 +1,8 @@
+<p>create all requests</p>
+<%= @requests %>
+<%= @requests.count %>
+<hr />
+<% @requests.each do |r| %>
+  <%= @request = r.find { |r| r["hours"].to_i > 0 && r["date"].present? } %><br />
+  <%= @request %><br />
+<% end %>

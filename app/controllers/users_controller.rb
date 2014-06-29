@@ -82,6 +82,8 @@ class UsersController < ApplicationController
       @super_array = super_array
       render 'edit'
     end
+
+    #how to distinguish when updating user vs updating request??
   end
 
   def destroy
@@ -111,7 +113,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:fname, :lname, :active, :department_id, :supervisor_id, :email, :password, :password_confirmation, :admin, :annual_time_off, :standard_hours)
+    params.require(:user).permit(:fname, :lname, :active, :department_id, :supervisor_id, :email, :password, :password_confirmation, :admin, :annual_time_off, :standard_hours, request_attributes:[:user_id, :date, :hours])
   end
 
 end

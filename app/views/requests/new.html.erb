@@ -1,29 +1,9 @@
-<div class="row col-xs-12">
-  <h3 class="col-xs-12 col-sm-6 col-md-3">New Time Off Request</h3>
-  <h5 class="col-xs-6 col-sm-3 col-md-2">How many days off?</h5>
-  <div class="col-xs-4 col-sm-2 col-md-1 col-lg-1">
-    <%= number_field_tag :numdays, @days_off, { in: 1...22, class: "form-control", id: "numdays_field", } %>
-  </div>
-  <div class="col-xs-2 col-sm-1 col-md-1">
-    <%= link_to 'Populate', "#", { class: "btn btn-success", id: "numdays_btn" } %>
-  </div>
-</div>
-<div class="row col-xs-12 col-md-12 col-lg-12">
-  <hr >
-</div>
+<h3>Submit time off request</h3>
 
-<%= form_for @requests, url: user_requests_create_all_path do |f| %>
-  <% @count = 0 %>
-  <% @days_off.to_i.times do  %>
-      <%= render 'form', f: f, count: @count %>
-      <% @count += 1 %>
-  <% end %>
-  <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
-<% end %>
+<%= render 'form' %>
 
 <div class="row">
   <div class="col-xs-12 col-md-12 col-lg-12">
-    <p>link_to "Submit", { controller: "requests", action: "update_all_requests" }, { class: "btn btn-primary btn-large" }</p>
     <%= link_to 'Back', "/users/#{params[:user_id]}/requests?cur_usr=true", { class: "btn btn-info pull-right" } %>
   </div>
 </div>
