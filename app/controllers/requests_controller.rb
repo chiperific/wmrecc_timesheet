@@ -3,6 +3,7 @@ class RequestsController < ApplicationController
   before_action :set_requests, only: :index
   before_action :set_active_direct_reports, only: :show
   before_action :set_user
+
   
 
   def show
@@ -42,9 +43,14 @@ class RequestsController < ApplicationController
     end
   end
 
-  def update_all_requests
+  def create_all_requests
+    @requests = params[:request]
+    @user = set_user
+
+    @requests.each do |r|
+    end
     flash[:success] = "you came through update_all_requests"
-    redirect_to user_requests_path(params[:user_id])
+    #redirect_to user_requests_path(params[:user_id])
   end
 
   def approval_flow

@@ -1,0 +1,8 @@
+<p>create all requests</p>
+<%= @requests %>
+<%= @requests.count %>
+<hr />
+<% @requests.each do |r| %>
+  <%= r.select { |r| r["date"] } %><br />
+
+<% end %>

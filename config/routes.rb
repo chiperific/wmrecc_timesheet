@@ -8,7 +8,7 @@ WmreccTimesheet::Application.routes.draw do
     
     resources :requests
     get '/requests/:request_id/approval_flow', to: 'requests#approval_flow'
-    get '/requests/update_all', to: 'requests#update_all_requests'
+    post '/requests/create_all', to: 'requests#create_all_requests'
   end
 
   resources :categories

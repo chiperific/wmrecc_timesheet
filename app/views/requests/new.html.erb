@@ -12,13 +12,18 @@
   <hr >
 </div>
 
-<% @days_off.to_i.times do  %>
-    <%= render 'form' %>
+<%= form_for @requests, url: user_requests_create_all_path do |f| %>
+  <% @count = 0 %>
+  <% @days_off.to_i.times do  %>
+      <%= render 'form', f: f, count: @count %>
+      <% @count += 1 %>
+  <% end %>
+  <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
 <% end %>
 
 <div class="row">
   <div class="col-xs-12 col-md-12 col-lg-12">
-    <%= link_to "Submit", { controller: "requests", action: "update_all_requests" }, { class: "btn btn-primary btn-large" } %>
+    <p>link_to "Submit", { controller: "requests", action: "update_all_requests" }, { class: "btn btn-primary btn-large" }</p>
     <%= link_to 'Back', "/users/#{params[:user_id]}/requests?cur_usr=true", { class: "btn btn-info pull-right" } %>
   </div>
 </div>

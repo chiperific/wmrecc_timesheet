@@ -9,6 +9,19 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * Submit all new requests - http://stackoverflow.com/questions/21533518/rails-submit-multiple-forms-on-same-page
 ** Currently new.html.erb submits to requests#show -- why?
 
+** What about:               ******** THIS IS WORKING. Continue w/ create_all_request
+form_for @requests do |f|
+  #.times do
+   render partial f: f
+    # inside partial:
+      f.text_field id="#{}" request[0][user_id]
+      #Create my own array of hashes for submission?
+  end
+  f.submit
+end
+
+** Else save through User model...http://stackoverflow.com/questions/14622545/update-and-create-multiple-records-in-a-single-form-in-rails-3
+
 * Create Time Off request model
 * Use request info to create a record in Timesheet
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??

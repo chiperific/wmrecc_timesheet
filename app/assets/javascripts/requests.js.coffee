@@ -4,6 +4,7 @@ jQuery ->
     });
 
   $('#numdays_btn').click ->
+    #populate button - to load multiple days off forms
     numdays = $('#numdays_field').val()
     if numdays != ""
       url = window.location.href
@@ -14,8 +15,6 @@ jQuery ->
     false
 
   $('.destroyer').click ->
-    if this.hasClass('text-info')
-      this.toggleClass('text-danger')
-    if this.hasClass('text-danger')
-      this.toggleClass('text-info')
+      $(this).toggleClass('text-danger')
+      $(this).toggleClass('text-info')
     
