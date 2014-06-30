@@ -4,7 +4,6 @@
       <th>Name</th>
       <th>Date</th>
       <th >Hrs</th>
-      <th>Submitted</th>
       <th class="small2">Status</th>
       <th></th>
     </tr>
@@ -15,7 +14,6 @@
         <td class='small2'><%= r.user.fname+" "+r.user.lname %></td>
         <td class='small2'><%= r.date.strftime("%m/%d/%y") %></td>
         <td><%= r.hours %></td>
-        <td class='small2'><%= r.updated_at.strftime("%m/%d/%y") %></td>
         <td class='small2'><%= r.status(r) %></td>
         <% if r.sv_approval == false %>
           </tr>

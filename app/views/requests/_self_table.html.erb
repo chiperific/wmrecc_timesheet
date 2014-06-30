@@ -17,7 +17,10 @@
       <tr>
         <td></td>
         <td></td>
-        <td><%= link_to "Edit", "#", { class: "btn btn-primary" } %>&nbsp<%= link_to "Cancel", "#", { class: "btn btn-danger" } %></td>
+        <td>
+          <%= link_to "Edit", edit_user_request_path(@user.id, r.id) , { class: "btn btn-primary" } %>
+          &nbsp
+          <%= link_to "Cancel", user_request_path(@user.id, r.id), { method: :delete, class: "btn btn-danger" } %></td>
       </tr>
     <% end %>
   </tbody>

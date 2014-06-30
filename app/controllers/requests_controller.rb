@@ -24,12 +24,15 @@ class RequestsController < ApplicationController
   def new
     @request = User.find(set_user.id).requests.build
 
+    @form_url = user_requests_path
     # Future -- submit multiple day off requests at once
     #@days_off = if params[:numdays] then params[:numdays] else 1 end
   end
 
   def edit
-    @requests = User.find(set_user.id).requests.build
+    @request = set_request
+
+    @form_url = user_request_path
   end
 
   def create
@@ -44,9 +47,12 @@ class RequestsController < ApplicationController
   end
 
   def update
+    @request = set_request
+    @request.sv_approval = false
+    @request.sv_reviewed = false
     if @request.update(request_params)
       flash[:success] = 'Request updated'
-      redirect_to user_requests_path(params[:user_id])
+      redirect_to user_requests_path(params[:user_id], cur_usr: true)
     else
       render action: 'edit'
     end
@@ -77,7 +83,7 @@ class RequestsController < ApplicationController
 #  end
 
   def approval_flow
-    @request = Request.find(params[:id])
+    @request = Request.find(params[:request_id])
     @approve = params[:approve]
     @reviewed = params[:reviewed]
 
@@ -93,9 +99,15 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    @request = Request.find(params[:id])
-    @request.destroy
-    #need to delete associated timecard record
+    @request = set_request
+    if @request.destroy
+      flash[:success] = "Request cancelled"
+      #need to delete associated timecard record
+      redirect_to user_requests_path(params[:user_id], cur_usr: true)
+    else
+      flash[:error] = "Something went wrong :("
+      redirect_to user_requests_path(params[:user_id], cur_usr: true)
+    end
   end
 
   private

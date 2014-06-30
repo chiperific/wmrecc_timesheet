@@ -9,6 +9,3 @@ jQuery ->
     arr = userDate.split('/')
     rubyDate = arr[2]+"-"+arr[0]+"-"+arr[1]
     $('#request_date').val(rubyDate)
-
-  $('#request_date').change ->
-    alert "should be changed"
