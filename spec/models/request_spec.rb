@@ -1,10 +1,10 @@
-require 'spec-helper'
+require 'spec_helper'
 
 describe Request do
   before { @request = Request.new(
-    user_id:    2
-    date:       "01/01/2014"
-    hours:      8) }
+    user_id: 2,
+    date: "2014/01/01",
+    hours: 8) }
 
   subject { @request }
 
@@ -15,6 +15,7 @@ describe Request do
   it { should respond_to(:created_at) }
   it { should respond_to(:updated_at) }
   it { should respond_to(:sv_approval) }
+  it { should respond_to(:sv_reviewed) }
 
   it { should be_valid }
 
@@ -37,3 +38,4 @@ describe Request do
     before { @request.user_id = nil }
     it { should_not be_valid }
   end
+end

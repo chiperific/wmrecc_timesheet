@@ -3,23 +3,35 @@ require 'spec_helper'
 describe "Request Pages" do
   subject { page }
   let(:user) { FactoryGirl.create(:user) }
-  let(:request) { FactoryGirl.create(:request, user_id: user.id, date: "01/01/14", hours: 8, sv_approval: false)}
+  let(:request) { FactoryGirl.create(:request)}
 
 
   describe "New" do
-    before { visit new_user_requests(user) }
+    before { visit new_user_request_path(user) }
 
-    pending { should have_content(user.fname)}
+    it { should have_content("Submit time off requests")}
+    it { should have_button("Submit")}
+
+    ## with invalid info
+
+    ## with valid info
   end
 
-  describe "Show" do
-    before { visit user_requests(user)}
+  describe "Index" do
+    before { visit user_requests_path(user)}
 
-    it { should have_content(user.fname)}
+    it { should have_content("WMRECC Timesheet")}
 
   end
 
   describe "Edit" do
+    before { visit edit_user_request_path(user, request) }
 
+    it { should have_content("Submit time off requests")}
+    it { should have_button("Submit")}
+
+    ## with invalid info
+
+    ## with valid info
   end
 end

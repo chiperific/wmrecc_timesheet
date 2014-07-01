@@ -28,40 +28,17 @@ describe "Categories Pages" do
         end
       end
 
-      describe "with valid info" do
-        before do
-          visit new_category_path
-          fill_in "category_name",    with: "new cat"
-          select "Active",                from: "category[active]"
-          select "IT",                from: "category_department_id"
-        end
-
-        it "should create a category" do
-          expect { click_button "Submit" }.to change(Category, :count).by(1)
-        end
-      end
     end #when submitting
   end #New
 
   describe "Edit" do
     let(:category) { FactoryGirl.create(:category)}
-    before { visit edit_category_path(category)}
+    before do
+      visit edit_category_path(category)
+    end
 
     it { should have_button('Submit')}
     it { should have_link('Cancel')}
-
-    describe "when submitting with valid info" do
-      describe "should update the category" do
-        let(:new_name) {"new category name"}
-        before do
-          fill_in "category[name]", with: new_name
-          click_button "Submit"
-        end
-
-        specify { expect(category.reload.name).to eq new_name }
-
-      end
-    end
   end
 
 end

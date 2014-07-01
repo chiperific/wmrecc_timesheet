@@ -1,12 +1,11 @@
 This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
+* requests#new -- date is saving
+* request RESTful routing
+* Buttons for 'cur_user=true': Edit / Cancel (destroy) => request#index#_self_table
 
 ==Next step:
-* requests#new -- date is not saving: http://stackoverflow.com/questions/23096517/jquery-datepicker-with-rails-4
-
-* Buttons for 'cur_user=true': Edit / Cancel (destroy) => request#index#_self_table
-* Create Time Off request model
 * Use request info to create a record in Timesheet
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
 * Destroy actions for: user, Dept, Cat, request - maybe not??
@@ -17,9 +16,6 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * You have a datepicker: http://bootstrap-datepicker.readthedocs.org/en/release/index.html
 
 ==To do:
-1. Destroy actions for: user, Dept, Cat, request
-
-2. Time Off Request system
 2.1 Spec out request_pages and request_spec
 2.2 user/#/requests (show)
 2.3 user/#/requests/# (edit)

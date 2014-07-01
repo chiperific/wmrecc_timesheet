@@ -1,6 +1,8 @@
+chiperificpro:wmrecc_timesheet chiperific$ rake routes
            Prefix Verb   URI Pattern                                                  Controller#Action
              root GET    /                                                            static_pages#home
              help GET    /help(.:format)                                              static_pages#help
+           signin GET    /signin(.:format)                                            static_pages#create
           signout GET    /signout(.:format)                                           static_pages#destroy
     user_requests GET    /users/:user_id/requests(.:format)                           requests#index
                   POST   /users/:user_id/requests(.:format)                           requests#create
