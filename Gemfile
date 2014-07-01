@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.2'
 #ruby-gemset=railstutorial_rails_4_0
 
 gem 'rails', '4.0.5'
-gem 'bootstrap-sass', '3.1.1.1'
+gem 'bootstrap-sass'
+gem 'sass-rails'
+gem 'autoprefixer-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
@@ -11,11 +13,12 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'font-awesome-less'
 gem 'jquery-turbolinks'
-gem 'seed_dump'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
+  gem 'seed_dump'
   #gem 'better_errors'
   #gem 'binding_of_caller'
 end
@@ -26,7 +29,6 @@ group :test do
   gem 'factory_girl_rails', '4.2.1'
 end
 
-gem 'sass-rails', '4.0.1'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.1'
 gem 'jquery-rails', '3.1.1'

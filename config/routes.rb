@@ -16,6 +16,5 @@ WmreccTimesheet::Application.routes.draw do
 
   resources :categories
   resources :departments
-  resources :sessions, only: [:create, :destroy]
   
 end

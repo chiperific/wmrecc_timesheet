@@ -2,8 +2,8 @@ chiperificpro:wmrecc_timesheet chiperific$ rake routes
            Prefix Verb   URI Pattern                                                  Controller#Action
              root GET    /                                                            static_pages#home
              help GET    /help(.:format)                                              static_pages#help
-           signin GET    /signin(.:format)                                            static_pages#create
-          signout GET    /signout(.:format)                                           static_pages#destroy
+           signin POST   /signin(.:format)                                            static_pages#create
+          signout DELETE /signout(.:format)                                           static_pages#destroy
     user_requests GET    /users/:user_id/requests(.:format)                           requests#index
                   POST   /users/:user_id/requests(.:format)                           requests#create
  new_user_request GET    /users/:user_id/requests/new(.:format)                       requests#new
@@ -37,5 +37,3 @@ edit_user_request GET    /users/:user_id/requests/:id/edit(.:format)            
                   PATCH  /departments/:id(.:format)                                   departments#update
                   PUT    /departments/:id(.:format)                                   departments#update
                   DELETE /departments/:id(.:format)                                   departments#destroy
-         sessions POST   /sessions(.:format)                                          sessions#create
-          session DELETE /sessions/:id(.:format)                                      sessions#destroy
