@@ -11,11 +11,15 @@ describe "Static pages" do
     it { should_not have_link('Home')}
 
     describe "should allow you to login" do
-      fill_in 'Username', with: 'chip@kragt.com'
-      fill_in 'Password', with: 'foobar'
-      click_link 'Sign in'
-      expect(page).to have_content 'Success'
+      before do
+        visit root_path
+        fill_in 'Username', with: 'chip@kragt.com'
+        fill_in 'Password', with: 'foobar'
+        click_link 'Sign in'
+      end
     end
+
+    it { should have_content 'Success' }
 
     describe "should allow you to logout"
   end

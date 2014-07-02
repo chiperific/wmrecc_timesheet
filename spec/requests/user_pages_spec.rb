@@ -43,7 +43,10 @@ describe "User Pages" do
 
   describe "Edit" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user)}
+    before do
+      sign_in user
+      visit edit_user_path(user) 
+    end
 
     it { should have_button('Submit')}
     it { should have_link('Cancel')}
