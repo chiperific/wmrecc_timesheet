@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     @pw_lang = "Change password"
 
     
-    @path_switch = path_switch
+    @path_switch ||= path_switch
     
     if current_user.id == @user.id 
       @admin_disabled = true

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "User Pages" do
+  let(:controller) { UsersController.new }
+  let(:user) { FactoryGirl.create(:user) }
+
+
   subject { page }
 
   describe "New" do
@@ -44,7 +48,9 @@ describe "User Pages" do
   describe "Edit" do
     let(:user) { FactoryGirl.create(:user) }
     before do
-      sign_in user
+      controller.stub(:current_user) {user}
+    end
+    before do
       visit edit_user_path(user) 
     end
 

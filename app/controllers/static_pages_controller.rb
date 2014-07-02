@@ -8,6 +8,7 @@ class StaticPagesController < ApplicationController
       if User.where(active: true).where(supervisor_id: current_user.id).count > 0
         @supervisor = true
       end
+      @current_user = current_user
       # Time off Request message calls
       @tors_need_approval = 0
       @direct_reports = User.where(supervisor_id: current_user.id)
