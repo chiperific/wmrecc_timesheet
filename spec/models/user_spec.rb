@@ -15,7 +15,6 @@ describe User do
   subject { @user }
 
   it 'has all the fields' do
-    should respond_to(:id)
     should respond_to(:fname)
     should respond_to(:lname)
     should respond_to(:active)
@@ -23,8 +22,6 @@ describe User do
     should respond_to(:supervisor_id)
     should respond_to(:email)
     should respond_to(:password_digest)
-    should respond_to(:password)
-    should respond_to(:password_confirmation)
     should respond_to(:created_at)
     should respond_to(:updated_at)
     should respond_to(:remember_token)
