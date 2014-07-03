@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
-#ruby-gemset=railstutorial_rails_4_0
+#ruby-gemset=wmrecc
 
 gem 'rails', '4.0.5'
 gem 'bootstrap-sass'
@@ -22,19 +22,23 @@ gem 'jbuilder', '1.0.2'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
+
   gem 'rspec-rails', '2.13.1'                       ##
   gem 'guard-rspec', '2.5.0'
-  gem 'seed_dump'
   gem 'spork-rails', '4.0.0'
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.3.6'
+
+  gem 'seed_dump'
 end
 
 group :test do
   gem 'selenium-webdriver', '2.35.1'
+  
+  gem 'factory_girl_rails',  '4.2.0'
+
+  gem 'cucumber-rails', '1.3.0', require: false  
   gem 'capybara', '2.1.0'                           ##
-  gem 'factory_girl_rails', '4.2.0'
-  gem 'cucumber-rails', '1.3.0', :require => false
   #gem 'growl', '1.0.3' #a system notifier?
 end
 

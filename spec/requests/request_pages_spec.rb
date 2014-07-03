@@ -1,21 +1,40 @@
 require 'spec_helper'
 
 describe "Request Pages" do
-  subject { page }
   let(:user) { FactoryGirl.create(:user) }
   let(:request) { FactoryGirl.create(:request)}
 
+  subject { page }
 
-  describe "New" do
+  pending "New" do
     before { visit new_user_request_path(user) }
 
-    it { should have_content("Submit time off requests")}
-    it { should have_button("Submit")}
+    it "has content" do
+      should have_content("Submit time off request")
+      should have_button("Submit")
+    end
 
-    ## with invalid info
+    describe "when submitting" do
+      describe "with invalid info" do
+        before { @request.hours = 0 }
+        expect( click_button "Submit"  ).not_to change(Request, :count)
+      end
 
-    ## with valid info
-  end
+      describe "with missing info" do
+        before { @request.date = nil }
+        expect( click_button("Submit") ).not_to change(Request, :count)
+      end
+
+      describe "with valid info" do
+        before do
+          fill_in "fake_date",     with: "2014/01/01"
+          fill_in "request_date",  with: "2014/01/01"
+          fill_in "request_hours", with: "8"
+        end
+        expect( click_button("Submit") ).to change(Request, :count)
+      end
+    end
+  end #New
 
   describe "Index" do
     before { visit user_requests_path(user)}
@@ -24,14 +43,41 @@ describe "Request Pages" do
 
   end
 
-  describe "Edit" do
+  pending "Edit" do
     before { visit edit_user_request_path(user, request) }
 
-    it { should have_content("Submit time off requests")}
+    it { should have_content("Edit time off request")}
     it { should have_button("Submit")}
 
-    ## with invalid info
+    describe "when submitting" do
+      describe "with invalid info" do
+        let(:invalid_hours) {"0"}
+        before do 
+          fill_in "request_hours", with: invalid_hours
+          click_button "Submit"
+        end
+        specify { expect(request.reload.hours).not_to eq invalid_hours }
+      end
 
-    ## with valid info
+      describe "with missing info" do
+        let(:invalid_date) {""}
+        before do 
+          fill_in "request_date", with: invalid_date
+          click_button "Submit"
+        end
+        specify { expect(request.reload.date).not_to eq invalid_date }
+      end
+
+      describe "with valid info" do
+        let(:valid_date) {"1990/01/01"}
+        before do
+          visit new_user_request_path(user)
+          fill_in "fake_date",     with: valid_date
+          fill_in "request_date",  with: valid_date
+          click_button "Submit"
+        end
+        specify { expect(request.reload.date).to eq valid_date }
+      end
+    end
   end
 end

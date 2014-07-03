@@ -8,6 +8,8 @@ Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
+  require 'capybara/rails'
+  require 'capybara/rspec'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -51,4 +53,9 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
+  def sign_in(user)
+    #post signin_path, email: 'chip@kragt.com', password: 'foobar'
+    post signin_path, 'static_page[email]' => user.email, 'static_page[password]' => 'foobar'
+    #post_via_redirect signin_path, 'static_page[email]' => user.email, 'static_page[password]' => 'foobar'
+  end
 end

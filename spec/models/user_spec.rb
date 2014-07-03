@@ -1,34 +1,37 @@
 require 'spec_helper'
 
 describe User do
-  before { @user = User.new(
-    fname: "Example", 
-    lname: "User", 
-    active: 1, 
-    department_id: 1, 
-    supervisor_id: 1, 
-    email: "user@example.com", 
-    password: "foobar", 
-    password_confirmation: "foobar") }
+  let(:user) { FactoryGirl.create(:user) }
+#  before { @user = User.new(
+#    fname: "Example", 
+#    lname: "User", 
+#    active: 1, 
+#    department_id: 1, 
+#    supervisor_id: 1, 
+#    email: "user@example.com", 
+#    password: "foobar", 
+#    password_confirmation: "foobar") }
 
   subject { @user }
 
-  it { should respond_to(:id)}
-  it { should respond_to(:fname)}
-  it { should respond_to(:lname)}
-  it { should respond_to(:active)}
-  it { should respond_to(:department_id)}
-  it { should respond_to(:supervisor_id)}
-  it { should respond_to(:email)}
-  it { should respond_to(:password_digest)}
-  it { should respond_to(:password)}
-  it { should respond_to(:password_confirmation)}
-  it { should respond_to(:created_at)}
-  it { should respond_to(:updated_at)}
-  it { should respond_to(:remember_token)}
-  it { should respond_to(:authenticate)}
-  it { should respond_to(:annual_time_off)}
-  it { should respond_to(:standard_hours)}
+  it 'has all the fields' do
+    should respond_to(:id)
+    should respond_to(:fname)
+    should respond_to(:lname)
+    should respond_to(:active)
+    should respond_to(:department_id)
+    should respond_to(:supervisor_id)
+    should respond_to(:email)
+    should respond_to(:password_digest)
+    should respond_to(:password)
+    should respond_to(:password_confirmation)
+    should respond_to(:created_at)
+    should respond_to(:updated_at)
+    should respond_to(:remember_token)
+    should respond_to(:authenticate)
+    should respond_to(:annual_time_off)
+    should respond_to(:standard_hours)
+  end
 
   it { should be_valid }
 

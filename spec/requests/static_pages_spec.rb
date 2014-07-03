@@ -6,20 +6,25 @@ describe "Static pages" do
   describe "Home" do
     before { visit root_path }
 
-    it { should have_title('Home')}
-    it { should have_content('WMRECC Timesheet')}
-    it { should_not have_link('Home')}
-
-    describe "should allow you to login" do
-      before do
-        visit root_path
-        fill_in 'Username', with: 'chip@kragt.com'
-        fill_in 'Password', with: 'foobar'
-        click_link 'Sign in'
-      end
+    it 'has page elements' do
+      should have_title('Home')
+      should have_content('WMRECC Timesheet')
+      should_not have_link('Home')
     end
 
-    it { should have_content 'Success' }
+    describe "should allow you to login" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        visit root_path
+        fill_in 'static_page_email', with: user.email
+        fill_in 'static_page_password', with: 'foobar'
+        click_button 'Sign in'
+      end
+
+      it { should have_content 'Welcome' }
+    end
+
+    
 
     describe "should allow you to logout"
   end
