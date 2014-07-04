@@ -16,11 +16,9 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * You have a datepicker: http://bootstrap-datepicker.readthedocs.org/en/release/index.html
 
 ==To do:
-2.1 Spec out request_pages and request_spec
-2.2 user/#/requests (show)
-2.3 user/#/requests/# (edit)
-2.4 user/#/requests/new (new)
-2.5 user/#/requests/#/destroy
+1. Spec out request_pages and request_spec
+
+2. Add fields to User form (admin or sv view:: annual_time_off, standard_hours, salary_rate, hourly_rate, pay_type{true = salary})
 
 3. Page-by-page permissions. Check out CanCan
 
@@ -34,6 +32,9 @@ This product is a Time tracking application for explicit use by West Michigan Re
 7. Timesheet approval (RU)
   a. Supervisors approve their directs.
   b. Admins can approve over supervisors or edit approvals
+  c. salary needs to be portrayed into $/payperiod
+  d. some sort of global variable for cotrolling weekly/biweekly payperiod (26 vs 52).
+  e. user variable for cotrolling salary vs. hourly: pay_type: true = salary, false = hourly
 
 8. Reports
 8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140703223042) do
+ActiveRecord::Schema.define(version: 20140617004130) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20140703223042) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "categories", ["department_id"], name: "index_categories_on_department_id"
 
   create_table "departments", force: true do |t|
     t.string   "name"
@@ -48,11 +50,13 @@ ActiveRecord::Schema.define(version: 20140703223042) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",                                    default: false
     t.string   "remember_token"
-    t.integer  "annual_time_off"
-    t.integer  "standard_hours"
-    t.decimal  "salary",          precision: 10, scale: 2
+    t.decimal  "annual_time_off", precision: 6,  scale: 2
+    t.decimal  "standard_hours",  precision: 6,  scale: 2
+    t.decimal  "salary_rate",     precision: 10, scale: 2
+    t.decimal  "hourly_rate",     precision: 6,  scale: 2
+    t.boolean  "pay_type",                                 default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

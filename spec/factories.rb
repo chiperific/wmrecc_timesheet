@@ -9,6 +9,8 @@ FactoryGirl.define do
     supervisor_id         2
     password              "foobar"
     password_confirmation "foobar"
+    annual_time_off       158.5
+    standard_hours        80
   end
 
   factory :category do
