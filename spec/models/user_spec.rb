@@ -21,7 +21,9 @@ describe User do
     should respond_to(:authenticate)
     should respond_to(:annual_time_off)
     should respond_to(:standard_hours)
-    should respond_to(:salary)
+    should respond_to(:salary_rate)
+    should respond_to(:hourly_rate)
+    should respond_to(:pay_type)
   end
 
   it { should be_valid }
@@ -63,17 +65,18 @@ describe User do
   end
 
   describe "when email address is already taken" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:user_dup) {User.new(fname: "Duplicate", lname: "User", email: "chip@kragt.com", password: "foobar", password_confirmation: "foobar")}
     before do
-      user_with_same_email = user.dup
-      user_with_same_email.save
+      user.save
+      user_dup.save
     end
+    subject {user_dup}
     it { should_not be_valid }
   end
 
   describe "when password is not present" do
-    before do
-      user = User.new(fname: "Example", lname: "User", email: "user@example.com", password: " ", password_confirmation: " ")
-    end
+    let(:user) {User.new(fname: "Example", lname: "User", email: "user@example.com", password: " ", password_confirmation: " ")}
     it { should_not be_valid }
   end
 

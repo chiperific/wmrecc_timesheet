@@ -51,11 +51,13 @@ Spork.prefork do
   end
 end
 
-Spork.each_run do
-  # This code will be run each time you run your specs.
-  def sign_in(user)
-    #post signin_path, email: 'chip@kragt.com', password: 'foobar'
-    post signin_path, 'static_page[email]' => user.email, 'static_page[password]' => 'foobar'
-    #post_via_redirect signin_path, 'static_page[email]' => user.email, 'static_page[password]' => 'foobar'
-  end
-end
+    Spork.each_run do
+      # This code will be run each time you run your specs.
+      def sign_in(user)
+        post signin_path, 'static_page[email]' => user.email, 'static_page[password]' => 'foobar'
+      end
+
+      def current_user
+        current_user.admin = true
+      end
+    end
