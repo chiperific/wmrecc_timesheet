@@ -1,12 +1,66 @@
 require 'spec_helper'
 
 describe "User Pages" do
+  let(:controller) { UsersController.new }
   let(:user) { FactoryGirl.create(:user) }
+
+  #before do
+  #  controller.stub(:path_switch) { path_switch }
+  #end
 
   subject { page }
 
   # new and edit tests are failing because of inerited methods:
   # http://stackoverflow.com/questions/24522294/rspec-how-to-stub-inherited-method-current-user-w-o-devise
+  # http://leeourand.com/2014/02/09/stub-that-object/
+
+  pending "Edit" do
+    let(:current_user) {user}
+    let(:path_switch) { users_path }
+    before do
+      current_user.stub(:admin) { true }
+      sign_in(user)
+      visit edit_user_path(user) 
+    end
+
+    it '(check links and content)' do
+      should have_button('Submit')
+      should have_link('Cancel')
+      should have_content(user.fname+"\'s profile")
+    end
+
+    describe "when submitting with valid info" do
+      describe "should update the user" do
+        let(:new_fname) {"New"}
+        let(:new_lname) {"Name"}
+        before do
+          fill_in "user_fname", with: new_fname
+          fill_in "user_lname", with: new_lname
+          click_button "Submit"
+        end
+
+        specify { expect(user.reload.fname).to  eq new_fname }
+        specify { expect(user.reload.lname).to eq new_lname }
+
+      end
+    end
+
+    describe "when submitting with invalid info" do
+      describe "should not update the user" do
+        let(:new_fname) {""}
+        let(:new_lname) {"Name"}
+        before do
+          fill_in "user_fname", with: new_fname
+          fill_in "user_lname", with: new_lname
+          click_button "Submit"
+        end
+
+        specify { expect(user.reload.fname).to eq new_fname }
+        specify { expect(user.reload.lname).to eq new_lname }
+
+      end
+    end
+  end
 
   pending "New" do
     let(:current_user) {user}
@@ -52,53 +106,6 @@ describe "User Pages" do
     it 'check links and content' do
       should have_content('Current users')
       should have_link('Add new user')
-    end
-  end
-
-  pending "Edit" do
-    let(:current_user) {user}
-    before do
-      current_user.stub(:admin) { throw true }
-      sign_in(user)
-      visit edit_user_path(user) 
-    end
-
-    it '(check links and content)' do
-      should have_button('Submit')
-      should have_link('Cancel')
-      should have_content(user.fname+"\'s profile")
-    end
-
-    describe "when submitting with valid info" do
-      describe "should update the user" do
-        let(:new_fname) {"New"}
-        let(:new_lname) {"Name"}
-        before do
-          fill_in "user_fname", with: new_fname
-          fill_in "user_lname", with: new_lname
-          click_button "Submit"
-        end
-
-        specify { expect(user.reload.fname).to  eq new_fname }
-        specify { expect(user.reload.lname).to eq new_lname }
-
-      end
-    end
-
-    describe "when submitting with invalid info" do
-      describe "should not update the user" do
-        let(:new_fname) {""}
-        let(:new_lname) {"Name"}
-        before do
-          fill_in "user_fname", with: new_fname
-          fill_in "user_lname", with: new_lname
-          click_button "Submit"
-        end
-
-        specify { expect(user.reload.fname).to eq new_fname }
-        specify { expect(user.reload.lname).to eq new_lname }
-
-      end
     end
   end
   
