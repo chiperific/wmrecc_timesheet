@@ -1,8 +1,13 @@
 require 'spec_helper'
+require 'support/utilities'
 
 describe "User Pages" do
-  let(:controller) { UsersController.new }
+  #include SessionsHelper
+
+  #let(:permanent) { stub_model Permanent, 20_years_from_now }
+  #let(:controller) { UsersController.new }
   let(:user) { FactoryGirl.create(:user) }
+  let(:current_user) {user}
 
   #before do
   #  controller.stub(:path_switch) { path_switch }
@@ -13,12 +18,10 @@ describe "User Pages" do
   # new and edit tests are failing because of inerited methods:
   # http://stackoverflow.com/questions/24522294/rspec-how-to-stub-inherited-method-current-user-w-o-devise
   # http://leeourand.com/2014/02/09/stub-that-object/
+  # https://www.relishapp.com/rspec/rspec-rails/v/2-13/docs/mocks/stub-model
 
   pending "Edit" do
-    let(:current_user) {user}
-    let(:path_switch) { users_path }
     before do
-      current_user.stub(:admin) { true }
       sign_in(user)
       visit edit_user_path(user) 
     end
@@ -55,17 +58,16 @@ describe "User Pages" do
           click_button "Submit"
         end
 
-        specify { expect(user.reload.fname).to eq new_fname }
-        specify { expect(user.reload.lname).to eq new_lname }
+        specify { expect(user.reload.fname).not_to eq new_fname }
+        specify { expect(user.reload.lname).not_to eq new_lname }
 
       end
     end
   end
 
   pending "New" do
-    let(:current_user) {user}
+    
     before do
-      current_user.stub(:admin) { true }
       sign_in(user)
       visit new_user_path
     end

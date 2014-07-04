@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'support/utilities'
 
 describe "Request Pages" do
   let(:user) { FactoryGirl.create(:user) }
@@ -6,7 +7,7 @@ describe "Request Pages" do
 
   subject { page }
 
-  pending "New" do
+  describe "New" do
     before { visit new_user_request_path(user) }
 
     it "has content" do
@@ -15,23 +16,27 @@ describe "Request Pages" do
     end
 
     describe "when submitting" do
-      describe "with invalid info" do
-        before { @request.hours = 0 }
-        expect( click_button "Submit"  ).not_to change(Request, :count)
-      end
-
       describe "with missing info" do
-        before { @request.date = nil }
-        expect( click_button("Submit") ).not_to change(Request, :count)
+        before do
+          find(:xpath, "//input[@id='request_date']").set ""
+          fill_in "request_hours", with: ""
+        end
+        
+        it "should raise a validation error" do
+          expect { click_button "Submit" }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Hours can't be blank, Hours is not a number, Date can't be blank")
+        end
       end
 
       describe "with valid info" do
         before do
-          fill_in "fake_date",     with: "2014/01/01"
-          fill_in "request_date",  with: "2014/01/01"
+          find(:xpath, "//input[@id='request_date']").set "2001/09/11"
           fill_in "request_hours", with: "8"
         end
-        expect( click_button("Submit") ).to change(Request, :count)
+        it "should save the record" do
+          expect do
+            click_button "Submit" 
+          end.to change(Request, :count)
+        end
       end
     end
   end #New
