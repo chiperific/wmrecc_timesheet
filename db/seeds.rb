@@ -5,11 +5,13 @@ Category.create!([
   {id: 4, name: "Peer Support", department_id: 1, active: true},
   {id: 5, name: "Parent Engagement", department_id: 1, active: true},
   {id: 6, name: "School Engagement", department_id: 1, active: true}
+  {id: 7, name: "Time Off", department_id: 1, active: true},
 ])
+
 Department.create!([
   {id: 1, name: "All", active: true},
-
 ])
+
 User.create!([
   {id: 1, fname: "Susan",    lname: "Kragt", email: "susan@kragt.com",    active: true,  admin: true,  department_id: 1, supervisor_id: nil, password: "foobar", password_confirmation: "foobar", annual_time_off: 186.5, standard_hours: 80, salary_rate: 12345.67, hourly_rate: 9.65 },
   {id: 2, fname: "Chip",     lname: "Kragt", email: "chip@kragt.com",     active: true,  admin: true,  department_id: 1, supervisor_id: 1,   password: "foobar", password_confirmation: "foobar", annual_time_off: 186.5, standard_hours: 6,  salary_rate: 0,        hourly_rate: 0 },

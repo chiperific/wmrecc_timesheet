@@ -1,14 +1,20 @@
-This product is a Time tracking application for explicit use by West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
+This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* requests#new -- date is saving
-* request RESTful routing
-* Buttons for 'cur_user=true': Edit / Cancel (destroy) => request#index#_self_table
-* Add fields to User form (admin or sv view:: annual_time_off, standard_hours, salary_rate, hourly_rate, pay_type{true = salary})
+* requests.hours :: integer to decimal
+* Timesheet model & spec
+* Timesheet_hours model & spec
+* Timesheet_categories model & spec
+* create associations: timesheet:ts_hours | timesheet:ts_cats | user:ts_hours | user:ts_cats
 
 ==Next step:
-* Create Timesheet model
-* Use request info to create a record in Timesheet
+* Create Timesheet controller / specs
+* create timesheet_hours controller / specs
+* create timesheet_categories controller / specs
+* Timesheet accepts_nested_attributes_for :timesheet_hours && :timesheet_categories
+
+* Use request info to create a record in TimesheetHours
+
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
 * Destroy actions for: user, Dept, Cat, request - maybe not??
 
@@ -16,6 +22,7 @@ This product is a Time tracking application for explicit use by West Michigan Re
 ==Keep in mind:
 * http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
 * You have a datepicker: http://bootstrap-datepicker.readthedocs.org/en/release/index.html
+* Rails knows week numbers: http://stackoverflow.com/questions/4389395/how-do-i-get-a-date-from-a-week-number && http://ruby-doc.org/stdlib-2.1.2/libdoc/date/rdoc/Date.html#method-c-commercial
 
 ==To do:
 3. Page-by-page permissions. Check out CanCan

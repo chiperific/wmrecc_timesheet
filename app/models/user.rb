@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   belongs_to :department
   has_many :categories, through: :department
   has_many :requests
+  has_many :timesheet_hours
+  has_many :timesheet_categories
+
   accepts_nested_attributes_for :requests, reject_if: lambda { |a| a[:date].blank? || a[:hours].blank? }
 
   before_save { self.email = email.downcase }

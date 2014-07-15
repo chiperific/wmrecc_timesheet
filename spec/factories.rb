@@ -31,4 +31,23 @@ FactoryGirl.define do
     sv_approval   false
     sv_reviewed   false 
   end
+
+  factory :timesheet do
+    week_num      42
+    year          2014
+  end
+
+  factory :timesheet_hour do
+    timesheet_id  1
+    user_id       1
+    weekday       2
+    hours         7
+  end
+
+  factory :timesheet_category do
+    timesheet_id  1
+    user_id       1
+    category_id   1
+    hours         7
+  end
 end

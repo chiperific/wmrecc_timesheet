@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617004130) do
+ActiveRecord::Schema.define(version: 20140715021134) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -33,11 +33,43 @@ ActiveRecord::Schema.define(version: 20140617004130) do
   create_table "requests", force: true do |t|
     t.integer  "user_id"
     t.date     "date"
-    t.integer  "hours"
+    t.decimal  "hours",       precision: 4, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "sv_approval", default: false
-    t.boolean  "sv_reviewed", default: false
+    t.boolean  "sv_approval",                         default: false
+    t.boolean  "sv_reviewed",                         default: false
+  end
+
+  create_table "timesheet_categories", force: true do |t|
+    t.integer  "timesheet_id"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.boolean  "approved",                             default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "hours",        precision: 4, scale: 2
+  end
+
+  add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category"
+  add_index "timesheet_categories", ["timesheet_id"], name: "index_timesheet_categories_on_timesheet"
+  add_index "timesheet_categories", ["user_id"], name: "index_timesheet_categories_on_user"
+
+  create_table "timesheet_hours", force: true do |t|
+    t.integer  "timesheet_id"
+    t.integer  "user_id"
+    t.integer  "weekday"
+    t.decimal  "hours",        precision: 4, scale: 2
+    t.boolean  "approved",                             default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet"
+  add_index "timesheet_hours", ["user_id"], name: "index_timesheet_hours_on_user"
+
+  create_table "timesheets", force: true do |t|
+    t.integer "week_num"
+    t.integer "year"
   end
 
   create_table "users", force: true do |t|

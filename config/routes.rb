@@ -9,6 +9,8 @@ WmreccTimesheet::Application.routes.draw do
     
     resources :requests
     get '/requests/:request_id/approval_flow', to: 'requests#approval_flow'
+
+    resources :timesheets
     
     # Future -- submit multiple day off requests at once
     #post '/requests/create_all', to: 'requests#create_all_requests'
