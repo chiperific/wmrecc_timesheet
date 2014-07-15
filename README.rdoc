@@ -1,14 +1,16 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* requests.hours :: integer to decimal
-* Timesheet model & spec
-* Timesheet_hours model & spec
-* Timesheet_categories model & spec
 * create associations: timesheet:ts_hours | timesheet:ts_cats | user:ts_hours | user:ts_cats
+* create timesheet controller / pages_spec
 
 ==Next step:
-* Create Timesheet controller / specs
+* Working on Timesheet::index
+** How to get a list of Timesheet records through TimesheetHours through UserID ??
+
+** TS_Hours::Approved && TS_Cats::Approved should be date/time not boolean (blank == false)
+** How do sv_or_admin manage Timesheets?
+
 * create timesheet_hours controller / specs
 * create timesheet_categories controller / specs
 * Timesheet accepts_nested_attributes_for :timesheet_hours && :timesheet_categories

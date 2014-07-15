@@ -31,10 +31,10 @@ class UpdateToSchema < ActiveRecord::Migration
       t.integer  "timesheet_id"
       t.integer  "user_id"
       t.integer  "category_id"
-      t.decimal  "hours",        precision: 4, scale: 2
-      t.boolean  "approved",     default: false
+      t.datetime "approved"
       t.datetime "created_at"
       t.datetime "updated_at"
+      t.decimal  "hours",        precision: 4, scale: 2
     end
 
     add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category"
@@ -46,7 +46,7 @@ class UpdateToSchema < ActiveRecord::Migration
       t.integer  "user_id"
       t.integer  "weekday"
       t.decimal  "hours",        precision: 4, scale: 2
-      t.boolean  "approved",                             default: false
+      t.datetime "approved"
       t.datetime "created_at"
       t.datetime "updated_at"
     end
@@ -80,5 +80,6 @@ class UpdateToSchema < ActiveRecord::Migration
 
     add_index "users", ["email"], name: "index_users_on_email", unique: true
     add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
   end
 end
