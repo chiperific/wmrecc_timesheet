@@ -36,6 +36,7 @@ class UsersController < ApplicationController
     @title = "Add User"
     @user = User.new
     @active_def = true
+    @salary_def = true
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Create password"
@@ -45,6 +46,7 @@ class UsersController < ApplicationController
     @title = "Edit User"
     @user = User.find(params[:id])
     @active_def = @user.active
+    @salary_def = @user.pay_type
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Change password"

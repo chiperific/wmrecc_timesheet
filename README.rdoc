@@ -4,8 +4,10 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * requests#new -- date is saving
 * request RESTful routing
 * Buttons for 'cur_user=true': Edit / Cancel (destroy) => request#index#_self_table
+* Add fields to User form (admin or sv view:: annual_time_off, standard_hours, salary_rate, hourly_rate, pay_type{true = salary})
 
 ==Next step:
+* Create Timesheet model
 * Use request info to create a record in Timesheet
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
 * Destroy actions for: user, Dept, Cat, request - maybe not??
@@ -16,10 +18,6 @@ This product is a Time tracking application for explicit use by West Michigan Re
 * You have a datepicker: http://bootstrap-datepicker.readthedocs.org/en/release/index.html
 
 ==To do:
-1. Spec out request_pages and request_spec
-
-2. Add fields to User form (admin or sv view:: annual_time_off, standard_hours, salary_rate, hourly_rate, pay_type{true = salary})
-
 3. Page-by-page permissions. Check out CanCan
 
 4. Database relationships for Depts / Cats / Users

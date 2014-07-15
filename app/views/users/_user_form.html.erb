@@ -48,38 +48,68 @@
     </div>
 
     <% if @sv_or_admin %>
+      <div class="row  col-xs-12 col-md-6">
+        <hr class="hr-thin">
+      </div>
+
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Default hours per week">
-          <span class="input-group-addon"><i class="fa fa-bullseye"></i></span>
+          <span class="input-group-addon rate"><i class="fa fa-clock-o">/wk</i></span>
           <%= f.number_field :standard_hours, {class: "form-control", placeholder: "Hrs Per Week"} %>
         </div>
       </div>
-      <div class="row col-xs-6 col-md-3">
+      <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Time off (in hours) per year">
-          <span class="input-group-addon"><i class="fa fa-circle-o"></i></span>
+          <span class="input-group-addon rate"><i class="fa fa-ban">/yr</i></span>
           <%= f.number_field :annual_time_off, {class: "form-control", placeholder: "Time Off"} %>
         </div>
       </div>
+
+      <div class="row  col-xs-12 col-md-6">
+        <hr class="hr-thin">
+      </div>
+
+      <div class="row col-xs-12 col-sm-12 col-md-12">
+        <div class="input-group" title="Pay Type">
+          <span class="input-group-addon">$</span>
+          <%= f.select :pay_type, options_for_select([["Salary", true], ["Hourly", false]], @active_def), {}, {class: "form-control selector"} %>
+        </div>
+      </div>
+
+      <div class="row col-xs-6 col-sm-6 col-md-3">
+        <div class="input-group" title="Annual Salary">
+          <span class="input-group-addon rate">$/<i class="fa fa-calendar"></i></span>
+          <%= f.number_field :salary_rate, {class: "form-control", placeholder: "Salary"} %>
+        </div>
+      </div>
+      <div class="row col-xs-6 col-sm-6 col-md-3">
+        <div class="input-group" title="Hourly Rate">
+          <span class="input-group-addon rate">$/<i class="fa fa-clock-o"></i></span>
+          <%= f.number_field :hourly_rate, {class: "form-control", placeholder: "Hourly Rate"} %>
+        </div>
+      </div>
+
     <% end %>
 
     <% if current_user.admin? %>
-      <div class="row  col-xs-6 col-sm-6 col-md-3">
+      <div class="row  col-xs-12 col-md-6">
+        <hr class="hr-thin">
+      </div>
+      <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group input-selector">
           <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
           <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector"} %>
         </div>
       </div>
-      <span class="admin-selector wide">
-        <div class="row  col-xs-6 col-md-3 ">
-          <div class="input-group input-selector">
-            <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
-            <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin? ), {}, {class: "form-control selector", disabled: @admin_disabled } %>
-          </div>
-          <% if @admin_disabled %>
-            <p class="small hidden center" id="admin-selector-warning">(You can't disabled your own admin account.)</p>
-          <% end %>
+      <div class="row col-xs-6 col-sm-6 col-md-3">
+        <div class="input-group input-selector">
+          <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
+          <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin? ), {}, {class: "form-control selector", disabled: @admin_disabled } %>
         </div>
-      </span>
+        <% if @admin_disabled %>
+          <p class="small hidden center" id="admin-selector-warning">(You can't disabled your own admin account.)</p>
+        <% end %>
+      </div>
     <% end %>
 
     <div class="row  col-xs-12 col-md-12">
