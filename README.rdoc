@@ -3,10 +3,12 @@ This product is a Time tracking application for the explicit use of West Michiga
 ==Last completed step:
 * create associations: timesheet:ts_hours | timesheet:ts_cats | user:ts_hours | user:ts_cats
 * create timesheet controller / pages_spec
+* Timesheet::index table view
 
 ==Next step:
 * Working on Timesheet::index
-** How to get a list of Timesheet records through TimesheetHours through UserID ??
+** Needs recent filter
+** Needs link to load older
 
 ** TS_Hours::Approved && TS_Cats::Approved should be date/time not boolean (blank == false)
 ** How do sv_or_admin manage Timesheets?

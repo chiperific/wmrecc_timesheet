@@ -1,4 +1,6 @@
 class Timesheet < ActiveRecord::Base
+  has_many :timesheet_hours
+  has_many :timesheet_categories
 
   #accepts_nested_attributes_for :timesheet_hours
   #accepts_nested_attributes_for :timesheet_categories
@@ -10,4 +12,5 @@ class Timesheet < ActiveRecord::Base
   def week_num_to_date(week_num, year)
     Date.commercial(year, week_num, 1).strftime("%m/%d/%Y")
   end
+
 end
