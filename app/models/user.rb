@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include SessionsHelper
+
   belongs_to :department
   has_many :categories, through: :department
   has_many :requests
@@ -23,10 +25,6 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
-  end
-
-  def full_name
-    "#{fname} #{lname}"
   end
 
   private

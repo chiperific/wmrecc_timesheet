@@ -24,7 +24,4 @@ jQuery ->
       $(this).children('i').addClass(closed)
     event.preventDefault()
     false
-
-  $('.admin-selector').children().mouseover ->
-    $('#admin-selector-warning').toggleClass('hidden')
     

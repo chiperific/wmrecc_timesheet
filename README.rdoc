@@ -1,23 +1,31 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* create associations: timesheet:ts_hours | timesheet:ts_cats | user:ts_hours | user:ts_cats
-* create timesheet controller / pages_spec
-* Timesheet::index table view
+** TS_Hours::Approved && TS_Cats::Approved became date/time
+* Timesheet::index
 
 ==Next step:
-* Working on Timesheet::index
-** Needs recent filter
-** Needs link to load older
+* StaticPages#Home::_signed_in Needs button for authority_over to manage timesheets for other users.
 
-** TS_Hours::Approved && TS_Cats::Approved should be date/time not boolean (blank == false)
-** How do sv_or_admin manage Timesheets?
+* application.rb -> class User def self.has_authority_over
+
+* add more to timesheet_pages_spec
+
+==Minor tweaks:
+* change date size on review::index page
+* _user_form : User can supervise themselves...
+* _user_form : requires password on edit?!?
+* _user_form : cancel goes to Users#show always -- with is_current_user == false, should go to Users#index.
+
+
 
 * create timesheet_hours controller / specs
 * create timesheet_categories controller / specs
 * Timesheet accepts_nested_attributes_for :timesheet_hours && :timesheet_categories
 
 * Use request info to create a record in TimesheetHours
+
+* sv_or_admin structure
 
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
 * Destroy actions for: user, Dept, Cat, request - maybe not??
@@ -30,11 +38,6 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 ==To do:
 3. Page-by-page permissions. Check out CanCan
-
-4. Database relationships for Depts / Cats / Users
-4.1 Default category change 
-
-5. Map out database relations for Timesheet processing
 
 6. Timesheet (CRU)
 
@@ -58,12 +61,9 @@ This product is a Time tracking application for the explicit use of West Michiga
 </div>
 
 2. Submit all new requests - http://stackoverflow.com/questions/21533518/rails-submit-multiple-forms-on-same-page -- search for  '# Future'
+2.1 may need to make a parent model for requests to do a nested form... RequestBatch?
 
-
-=== Time spent:
-6/10/14 - 2
-6/11/14 - 5
-6/12/14 - 3
-6/13/15 - 4
-6/14/15 - 4
-6/16/15 - 3
+==Ongoing issues:
+* Controllers are fat and messy...
+* Would be nice if User class had some custom methods available to view...
+** User.has_authority_over

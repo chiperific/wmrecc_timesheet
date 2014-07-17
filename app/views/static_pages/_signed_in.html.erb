@@ -20,14 +20,14 @@
   <a href="#" class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
-      <p>Submit timecard</p>
+      <p>Submit timesheet</p>
     </div>
   </a>
   
   <a href='<%= "/users/#{current_user.id}/timesheets" %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
-      <p>View past timecards</p>
+      <p>View past timesheets</p>
     </div>
   </a>
 
@@ -45,6 +45,7 @@
     </div>
   </a>
 
+<!-- Supervisor buttons -->
   <% if @supervisor %>
     <a href="#" class="<%= @col_width %>">
       <div class="box-btn">
@@ -68,6 +69,7 @@
     </a>
   <% end %> 
 
+<!-- Supervisor buttons -->
   <% if current_user.admin %> 
     <a href="<%= users_path %>" class="<%= @col_width %>">
       <div class="box-btn">

@@ -44,7 +44,7 @@ describe "Request Pages" do
   describe "Index" do
     before { visit user_requests_path(user)}
 
-    it { should have_content("WMRECC Timesheet")}
+    it { should have_content("Timekeeper")}
 
   end
 

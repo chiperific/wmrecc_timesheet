@@ -1,15 +1,14 @@
 class StaticPagesController < ApplicationController
   def home
     @title = "Home"
-    @supervisor = false
     @col_width = "col-xs-4 col-sm-2 col-md-2 col-lg-1"
 
     if current_user
+      @supervisor = false
       if User.where(active: true).where(supervisor_id: current_user.id).count > 0
         @supervisor = true
       end
       
-      @current_user = current_user
       # Time off Request message calls
       @tors_need_approval = 0
       @direct_reports = User.where(supervisor_id: current_user.id)

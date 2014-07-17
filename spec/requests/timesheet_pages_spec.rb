@@ -10,11 +10,13 @@ describe "Timesheet Pages" do
   subject { page }
 
   describe "Index" do
-    before { visit user_timesheets_path(user) }
+    before do
+      visit user_timesheets_path(user)
+      let(:timesheets) { 7.times { FactoryGirl.generate(:timesheet)}}
+    end
 
     it "has content" do
-      should have_content "Recent Timesheets"
-      should have_link "View Past"
+      should have_content "Timesheets"
       should have_link "Edit"
       should have_button "New"
     end

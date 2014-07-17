@@ -33,15 +33,15 @@ FactoryGirl.define do
   end
 
   factory :timesheet do
-    week_num      42
-    year          2014
+    sequence(:week_num)
+    sequence(:year, 2007)
   end
 
   factory :timesheet_hour do
-    timesheet_id  1
-    user_id       1
-    weekday       2
-    hours         7
+    sequence(:timesheet_id)
+    user_id                 1
+    sequence(:weekday)
+    hours                   7
   end
 
   factory :timesheet_category do

@@ -107,7 +107,7 @@
           <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin? ), {}, {class: "form-control selector", disabled: @admin_disabled } %>
         </div>
         <% if @admin_disabled %>
-          <p class="small hidden center" id="admin-selector-warning">(You can't disabled your own admin account.)</p>
+          <p class="small center" id="admin-selector-warning">(You can't disabled your own admin account.)</p>
         <% end %>
       </div>
     <% end %>
