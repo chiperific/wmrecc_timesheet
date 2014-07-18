@@ -1,0 +1,35 @@
+<h4 class="center"><%= @title %></h4>
+<div id="recent-timesheets">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Date</th>
+        <th class="hidden-xs">Hrs</th>
+        <th class="hidden-xs">Submitted</th>
+        <th>Approved</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @timesheets.each do |th| %>
+        <% t = th.timesheet %>
+        <tr>
+          <th><%= th.user.full_name %></th>
+          <td><%= t.week_num_to_date(t.week_num, t.year) %></td>
+          <td class="hidden-xs"><%= t.timesheet_hours.pluck(:hours).inject(0) {|sum, i| sum + i} %></td>
+          <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
+          <td>
+            <%= if th.approved then th.approved.strftime("%m/%d/%Y") else "No" end %>
+          </td>
+          <td><%= link_to "Go", user_timesheet_path( @user.id, t.id), class: "btn btn-success" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="center">
+    <%= will_paginate @timesheets, renderer: BootstrapPagination::Rails %>
+  </div>
+
+</div>

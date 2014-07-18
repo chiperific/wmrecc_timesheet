@@ -27,6 +27,31 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def has_authority_over
+    if self.admin
+      User.all
+    elsif User.where(supervisor_id: self.id).count > 0
+      User.where(supervisor_id: self.id)
+    else
+      []
+    end
+  end
+
+  def self.has_authority_over
+    if self.admin
+      User.all
+    elsif User.where(supervisor_id: self.id).count > 0
+      User.where(supervisor_id: self.id)
+    else
+      []
+    end
+  end
+
+
+  def full_name
+    "#{self.fname} #{self.lname}"
+  end
+
   private
 
     def create_remember_token

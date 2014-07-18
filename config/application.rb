@@ -31,27 +31,27 @@ module WmreccTimesheet
 
   end
 
-class User
-  def has_authority_over
-    if self.admin
-      User.all
-    elsif User.where(supervisor_id: self.id).count > 0
-      User.where(supervisor_id: self.id)
-    else
-      []
-    end
-  end
+#class User
+#  def has_authority_over
+#    if self.admin
+#      User.all
+#    elsif User.where(supervisor_id: self.id).count > 0
+#      User.where(supervisor_id: self.id)
+#    else
+#      []
+#    end
+#  end
 
-  def self.has_authority_over
-    if self.admin
-      User.all
-    elsif User.where(supervisor_id: self.id).count > 0
-      User.where(supervisor_id: self.id)
-    else
-      []
-    end
-  end
-end
+#  def self.has_authority_over
+#    if self.admin
+#      User.all
+#    elsif User.where(supervisor_id: self.id).count > 0
+#      User.where(supervisor_id: self.id)
+#    else
+#      []
+#    end
+#  end
+#end
 
 
 end

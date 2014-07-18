@@ -1,20 +1,20 @@
-<table class="table table-striped">
+<table class="table table-striped small-when-small">
   <thead>
     <tr>
       <th>Name</th>
       <th>Date</th>
       <th >Hrs</th>
-      <th class="small2">Status</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% dr_to.each do |r| %>
       <tr>
-        <td class='small2'><%= r.user.fname+" "+r.user.lname %></td>
-        <td class='small2'><%= r.date.strftime("%m/%d/%y") %></td>
+        <td><%= r.user.fname+" "+r.user.lname %></td>
+        <td><%= r.date.strftime("%m/%d/%y") %></td>
         <td><%= r.hours %></td>
-        <td class='small2'><%= r.status(r) %></td>
+        <td><%= r.status(r) %></td>
         <% if r.sv_approval == false %>
           </tr>
           <tr>
