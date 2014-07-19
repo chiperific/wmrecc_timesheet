@@ -8,7 +8,7 @@ describe "Static pages" do
 
     it 'has page elements' do
       should have_title('Home')
-      should have_content('WMRECC Timesheet')
+      should have_content('Timekeeper')
       should_not have_link('Home')
     end
 

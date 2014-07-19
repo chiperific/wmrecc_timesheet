@@ -15,11 +15,8 @@ describe "Timesheet Pages" do
       let(:timesheets) { 7.times { FactoryGirl.generate(:timesheet)}}
     end
 
-    it "has content" do
-      should have_content "Timesheets"
-      should have_link "Edit"
-      should have_button "New"
-    end
+    it { should have_content("Timesheets") }
+
   end
 
   describe "New" do
