@@ -88,7 +88,6 @@ describe User do
 
   pending "with a password that's too short" do
     #the let(:user) passes @user.already_has_password? since the short password becomes a password_digest
-    #but, form won't submit and throws correct validation errors...
     let(:user) {User.new(fname: "Short", lname: "Password", email: "short@password.com", password: "aaaa", password_confirmation: "aaaa")}
     it { should_not be_valid }
   end

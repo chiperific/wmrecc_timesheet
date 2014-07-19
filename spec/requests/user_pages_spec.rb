@@ -3,8 +3,6 @@ require 'support/utilities'
 
 describe "User Pages" do
   #include SessionsHelper
-
-  #let(:permanent) { stub_model Permanent, 20_years_from_now }
   #let(:controller) { UsersController.new }
   let(:user) { FactoryGirl.create(:user) }
   let(:current_user) {user}

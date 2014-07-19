@@ -7,6 +7,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 * application.rb -> class User def self.has_authority_over
 
 ==Next step:
+* New User page cancel takes to User's staff page (Users#Show)
 * TimesheetHours are sorted by 'created_at DESC' (timesheets_controller), but this could be wrong in theory. Should be sorted by parent timesheet commercial date.
 * add more to timesheet_pages_spec
 * Timesheet accepts_nested_attributes_for :timesheet_hours && :timesheet_categories

@@ -18,9 +18,9 @@
           <% if @direct_reports.count > 0 %>
             <%= link_to "<i class='fa fa-caret-right'></i>".html_safe, "#", {class: "center super-view-switch", id: "super-list-#{u.id}"} %>
           <% end %>
-            <%= u.fname + " " + u.lname %>
+            <%= u.full_name %>
           </td>
-          <td><%= u.department.name %></td>
+          <td><%= u.department.name unless u.department_id.blank? %></td>
           <td><%= @supervisor.full_name unless @supervisor == nil %></td>
           <td><%= link_to "Edit", edit_user_path(u.id) %></td>
         </tr>
