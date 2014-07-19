@@ -8,11 +8,13 @@ class TimesheetsController < ApplicationController
 
     if params[:auth] == "over"
       @title = "Your Team's Timesheets"
-      @timesheets = TimesheetHour.where(user_id: @user_auth_id_ary).order("created_at DESC").group(:timesheet_id).page(params[:page])
+      @timesheet_hours = TimesheetHour.where(user_id: @user_auth_id_ary).order("created_at DESC").group(:timesheet_id).page(params[:page])
     else
       @title = "Your Timesheets"
-      @timesheets = TimesheetHour.where(user_id: @user.id).order("created_at DESC").group(:timesheet_id).page(params[:page])
+      @timesheet_hours = TimesheetHour.where(user_id: @user.id).order("created_at DESC").group(:timesheet_id).page(params[:page])
     end
+
+    #@timesheets = @timesheets.order(year: :desc).order(week_num: :desc)
 
   end
 
@@ -31,5 +33,7 @@ class TimesheetsController < ApplicationController
 
   def update
   end
+
+  private
 
 end

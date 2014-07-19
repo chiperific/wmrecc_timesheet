@@ -3,27 +3,17 @@ This product is a Time tracking application for the explicit use of West Michiga
 ==Last completed step:
 ** TS_Hours::Approved && TS_Cats::Approved became date/time
 * Timesheet::index
-
-==Next step:
-* StaticPages#Home::_signed_in Needs button for authority_over to manage timesheets for other users.
-
+* table text size controlled by CSS .small-when-small
 * application.rb -> class User def self.has_authority_over
 
+==Next step:
 * add more to timesheet_pages_spec
-
-==Minor tweaks:
-* change date size on review::index page
-* _user_form : User can supervise themselves...
-* _user_form : cancel goes to Users#show always -- with is_current_user == false, should go to Users#index.
-
-
-* create timesheet_hours controller / specs
-* create timesheet_categories controller / specs
 * Timesheet accepts_nested_attributes_for :timesheet_hours && :timesheet_categories
 
 * Use request info to create a record in TimesheetHours
 
-* sv_or_admin structure
+* create timesheet_hours controller / specs
+* create timesheet_categories controller / specs
 
 * Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
 * Destroy actions for: user, Dept, Cat, request - maybe not??
@@ -31,6 +21,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 ==Keep in mind:
 * http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
+* .hidden-xs - to hide data on small screens
 * You have a datepicker: http://bootstrap-datepicker.readthedocs.org/en/release/index.html
 * Rails knows week numbers: http://stackoverflow.com/questions/4389395/how-do-i-get-a-date-from-a-week-number && http://ruby-doc.org/stdlib-2.1.2/libdoc/date/rdoc/Date.html#method-c-commercial
 
@@ -48,6 +39,12 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 8. Reports
 8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+
+
+==Minor tweaks:
+* _user_form : User can supervise themselves...
+* _user_form : cancel goes to Users#show always -- with is_current_user == false, should go to Users#index.
+
 
 ==Add-ons:
 1. Progress bars:
