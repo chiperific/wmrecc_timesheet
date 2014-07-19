@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include SessionsHelper
 
-  belongs_to :department
+  belongs_to :department 
   has_many :categories, through: :department
   has_many :requests
   has_many :timesheet_hours

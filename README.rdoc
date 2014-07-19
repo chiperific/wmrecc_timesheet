@@ -1,15 +1,13 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-** TS_Hours::Approved && TS_Cats::Approved became date/time
-* Timesheet::index
-* table text size controlled by CSS .small-when-small
-* application.rb -> class User def self.has_authority_over
+* application.rb -> class User def has_authority_over
+* New User page 'cancel' takes to User's staff page (Users#Show)
+* Timesheet#Index::_auth_over_timesheet_table: "create for" button and select_tag
 
 ==Next step:
-* New User page cancel takes to User's staff page (Users#Show)
-* TimesheetHours are sorted by 'created_at DESC' (timesheets_controller), but this could be wrong in theory. Should be sorted by parent timesheet commercial date.
-* add more to timesheet_pages_spec
+* create timesheet on behalf of direct_report
+* Timesheet#Index::_auth_over_timesheet_table: select_tag really should have "fname lname". May need to abandon options_from_collection_for_select method.
 * Timesheet accepts_nested_attributes_for :timesheet_hours && :timesheet_categories
 
 * Use request info to create a record in TimesheetHours

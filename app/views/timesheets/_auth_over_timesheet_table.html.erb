@@ -22,14 +22,31 @@
           <td>
             <%= if th.approved then th.approved.strftime("%m/%d/%Y") else "No" end %>
           </td>
-          <td><%= link_to "Go", user_timesheet_path( @user.id, t.id), class: "btn btn-success" %></td>
+          <td><%= link_to "Go", edit_user_timesheet_path( @user.id, th.id), class: "btn btn-success" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
-  <div class="center">
+  <div class="row center">
     <%= will_paginate @timesheet_hours, renderer: BootstrapPagination::Rails %>
+  </div>
+
+  <div class="row">
+    <hr />
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4">
+      <%= link_to "Create for:", "#", { class: "btn btn-primary", id: "direct_report_chooser"} %>
+    </div>
+    <div class="col-xs-8">
+      <%= select_tag "direct_reports", options_from_collection_for_select(@user_auth, :id, :fname), { include_blank: true, class: "expand form-control", id: "direct_report_select" } %>
+    </div>
+  </div>
+
+  <div class="hidden pull-right" id="direct_report_error">
+    <code>Please select a name.</code>
   </div>
 
 </div>

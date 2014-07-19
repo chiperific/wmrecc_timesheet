@@ -41,6 +41,8 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Create password"
+
+    @path_switch = path_switch
   end
 
   def edit
@@ -53,7 +55,7 @@ class UsersController < ApplicationController
     @pw_lang = "Change password"
 
     
-    @path_switch ||= path_switch
+    @path_switch = path_switch
     
     if current_user.id == @user.id 
       @admin_disabled = true
