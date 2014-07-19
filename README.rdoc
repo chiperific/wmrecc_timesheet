@@ -12,10 +12,8 @@ This product is a Time tracking application for the explicit use of West Michiga
 * add more to timesheet_pages_spec
 
 ==Minor tweaks:
-* Instead of .each = use partial '', collection: @var, as: :var
 * change date size on review::index page
 * _user_form : User can supervise themselves...
-* _user_form : requires password on edit?!?
 * _user_form : cancel goes to Users#show always -- with is_current_user == false, should go to Users#index.
 
 
@@ -65,5 +63,8 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 ==Ongoing issues:
 * Controllers are fat and messy...
-* Would be nice if User class had some custom methods available to view...
-** User.has_authority_over
+* Instead of .each = use partial '', collection: @var, as: :var
+
+
+== Setup configurations
+* TimeZone => application.rb::WmreccTimesheet::config.time_zone

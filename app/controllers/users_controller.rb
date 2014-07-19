@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def index
     @title = "Users"
+    @users = User.all
     @active_users = User.where(active: true)
     @inactive_users = User.where(active: false)
     @supervised_active_users = @active_users.where("supervisor_id IS NOT NULL")

@@ -38,19 +38,12 @@
     </div>
   </a>
 
-  <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>">
-    <div class="box-btn">
-      <i class="fa fa-user fa-3x"></i>
-      <p>Edit your profile</p>
-    </div>
-  </a>
-
 <!-- Supervisor buttons -->
   <% if @supervisor %>
-    <a href="#" class="<%= @col_width %>">
+    <a href="/users/<%= current_user.id %>/timesheets?auth=over" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-thumbs-o-up fa-3x"></i>
-        <p>Approve timecards</p>
+        <p>Approve timesheets</p>
       </div>
     </a>
 
@@ -92,6 +85,13 @@
       </div>
     </a>
   <% end %>
+
+  <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>">
+    <div class="box-btn">
+      <i class="fa fa-user fa-3x"></i>
+      <p>Edit your profile</p>
+    </div>
+  </a>
 
   <a href="<%= help_path %>" class="<%= @col_width %>">
     <div class="box-btn">

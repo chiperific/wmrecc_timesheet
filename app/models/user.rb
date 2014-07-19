@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
 
   has_secure_password
-  validates :password, length: {minimum: 6}
+  validates :password, length: {minimum: 6}, :unless => :already_has_password?
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
@@ -28,19 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def has_authority_over
-    if self.admin
-      User.all
-    elsif User.where(supervisor_id: self.id).count > 0
-      User.where(supervisor_id: self.id)
-    else
-      []
-    end
-  end
-
-  def self.has_authority_over
-    if self.admin
-      User.all
-    elsif User.where(supervisor_id: self.id).count > 0
+    if User.where(supervisor_id: self.id).count > 0
       User.where(supervisor_id: self.id)
     else
       []
@@ -56,5 +44,9 @@ class User < ActiveRecord::Base
 
     def create_remember_token
       self.remember_token = User.digest(User.new_remember_token)
+    end
+
+    def already_has_password?
+      !self.password_digest.blank?
     end
 end
