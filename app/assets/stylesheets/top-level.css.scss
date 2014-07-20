@@ -96,9 +96,12 @@ tr[class*='-list-'] > td {
 
 // Shrink text on mobile views only
 @media (max-width: 768px) {
-  .small-when-small { font-size: .9em !important; }
+  .small-when-small { font-size: .8em !important; }
 }
 
+.span-no-padding-l > span {
+  padding-left: 0 !important;
+}
 
 // suppress hyperlink blue on carets
 i[class*='fa-caret'] {

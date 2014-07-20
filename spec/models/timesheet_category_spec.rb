@@ -42,7 +42,7 @@ describe TimesheetCategory do
     end
 
     context "is too large" do
-      before { timesheet_category.hours = 25 }
+      before { timesheet_category.hours = 85 }
       it { should_not be_valid }
     end
   end  
