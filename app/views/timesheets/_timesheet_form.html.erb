@@ -1,0 +1,44 @@
+<%= form_for [@user, @timesheet] do |t_form| %>
+  <%= render 'shared/error_messages', object: t_form.object %>
+  <%= t_form.number_field :week_num  %>
+  <%= t_form.number_field :year %>
+  <div class="row">
+
+    <fieldset class="col-xs-6" id="hours_fieldset">
+      <legend>Hours:</legend>
+      <% #this probably needs to be its own variable that creates all 7 weekdays... %>
+      <% @timesheet.timesheet_hours.where(user_id: @user.id).order(:weekday).each do |th| %>
+        <%= t_form.fields_for th do |th_form| %>
+          <span class="hidden">
+            <%= th_form.number_field :timesheet_id %>
+            <%= th_form.number_field :user_id %>
+          </span>
+          <p class="col-xs-6"><%= th.day_name(th.weekday) %></p>
+          <%= th_form.number_field :weekday, {class: "hidden"} %>
+          <%= th_form.number_field :hours, {class: "col-xs-6"} %>
+        <% end %>
+      <% end %>
+    </fieldset>
+    
+    <fieldset class="col-xs-6" id="categories_fieldset">
+      <legend>Categories:</legend>
+      <% #this probably needs to be its own variable that creates all categories %>
+      <% @timesheet.timesheet_categories.where(user_id: @user.id).each do |tc| %>
+        <%= t_form.fields_for tc do |tc_form| %>
+          <span class="hidden">
+            <%= tc_form.number_field :timesheet_id %>
+            <%= tc_form.number_field :user_id %>
+          </span>
+          <p class="col-xs-6"><%= tc.category.name %></p>
+          <%= tc_form.number_field :category_id, { class: "hidden"} %>
+          <%= tc_form.number_field :hours, { class: "col-xs-6"} %>
+        <% end %>
+      <% end %>
+    </fieldset>
+  
+  </div>
+  <div class="row center">
+    <%= t_form.submit "Submit", class: "btn btn-success" %>
+  </div>
+
+<% end %>

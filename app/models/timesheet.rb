@@ -2,8 +2,7 @@ class Timesheet < ActiveRecord::Base
   has_many :timesheet_hours
   has_many :timesheet_categories
 
-  #accepts_nested_attributes_for :timesheet_hours
-  #accepts_nested_attributes_for :timesheet_categories
+  accepts_nested_attributes_for :timesheet_hours, :timesheet_categories
 
   validates :week_num, :year, presence: true
   validates :week_num, numericality: { greater_than: 0, less_than_or_equal_to: 52 }
