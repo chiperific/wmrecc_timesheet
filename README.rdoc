@@ -1,34 +1,18 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* application.rb -> class User def has_authority_over
-* New User page 'cancel' takes to User's staff page (Users#Show)
 * Timesheet#Index::_auth_over_timesheet_table: "create for" button and select_tag
+* Timesheet#New and #Edit form partial drafted
+* Bootstrap the Timesheet#New and #Edit form partial
+* Bootstrap datepicker the forms
 
 ==Next step:
-* create timesheet on behalf of direct_report
+* Timesheet nested form only getting final nested record, not all records.
 * Timesheet#Index::_auth_over_timesheet_table: select_tag really should have "fname lname". May need to abandon options_from_collection_for_select method.
-* Timesheet accepts_nested_attributes_for :timesheet_hours && :timesheet_categories
-
 * Use request info to create a record in TimesheetHours
 
-* create timesheet_hours controller / specs
-* create timesheet_categories controller / specs
-
-* Spec out Destroy actions for: user, Dept, Cat, request  - maybe not??
-* Destroy actions for: user, Dept, Cat, request - maybe not??
-
-
-==Keep in mind:
-* http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
-* .hidden-xs - to hide data on small screens
-* You have a datepicker: http://bootstrap-datepicker.readthedocs.org/en/release/index.html
-* Rails knows week numbers: http://stackoverflow.com/questions/4389395/how-do-i-get-a-date-from-a-week-number && http://ruby-doc.org/stdlib-2.1.2/libdoc/date/rdoc/Date.html#method-c-commercial
-
-==To do:
+==Left To do:
 3. Page-by-page permissions. Check out CanCan
-
-6. Timesheet (CRU)
 
 7. Timesheet approval (RU)
   a. Supervisors approve their directs.
@@ -40,10 +24,15 @@ This product is a Time tracking application for the explicit use of West Michiga
 8. Reports
 8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
 
-
 ==Minor tweaks:
 * _user_form : User can supervise themselves...
 * _user_form : cancel goes to Users#show always -- with is_current_user == false, should go to Users#index.
+
+==Keep in mind:
+* http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
+* .hidden-xs - to hide data on small screens
+* You have a datepicker: http://bootstrap-datepicker.readthedocs.org/en/release/index.html
+* Rails knows week numbers: http://stackoverflow.com/questions/4389395/how-do-i-get-a-date-from-a-week-number && http://ruby-doc.org/stdlib-2.1.2/libdoc/date/rdoc/Date.html#method-c-commercial
 
 
 ==Add-ons:

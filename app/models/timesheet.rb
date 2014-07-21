@@ -12,4 +12,8 @@ class Timesheet < ActiveRecord::Base
     Date.commercial(year, week_num, 1).strftime("%m/%d/%Y")
   end
 
+  def week_num_to_date_obj(week_num, year)
+    Date.commercial(year, week_num, 1).strftime("%Y/%m/%d")
+  end
+
 end

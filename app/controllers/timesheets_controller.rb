@@ -23,6 +23,8 @@ class TimesheetsController < ApplicationController
     @title = "New Timesheet"
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.new
+    @timesheet_date = Date.today
+
     @url = user_timesheets_path(@user.id)
 
     @timesheet_hours = Array.new
@@ -45,7 +47,8 @@ class TimesheetsController < ApplicationController
     @title = "Edit Timesheet"
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
-    @title = "Timesheet for #{@user.fname}"
+    @timesheet_date = Date.parse @timesheet.week_num_to_date_obj(@timesheet.week_num, @timesheet.year)
+    
     @url = user_timesheet_path(@user.id, @timesheet.id)
 
     @timesheet_hours = Array.new

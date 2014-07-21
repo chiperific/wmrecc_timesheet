@@ -13,11 +13,6 @@ body {
   padding-top: 1em;
 }
 
-.form-controller > .row {
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
 section {
   overflow: auto;
 }
@@ -78,11 +73,26 @@ a[class*="btn-"]:visited {
   width: 100%;
 }
 
+legend {
+  font-size: 1.25em;
+}
+
 
 // universal form styling
+
+// Center the rows in forms
+.form-controller > .row {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 div.input-group {
   width: 98%;
   padding-bottom: .5em;
+}
+
+input {
+  padding: 4px !important;
 }
 
 .form-matcher {
@@ -99,9 +109,29 @@ tr[class*='-list-'] > td {
   .small-when-small { font-size: .8em !important; }
 }
 
+// Remove padding applied by Bootstrap 'col-' class
 .span-no-padding-l > span {
   padding-left: 0 !important;
 }
+
+.span-no-padding-r > span {
+  padding-right: 0 !important;
+}
+
+.span-no-padding-both > span {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.plus-r-padding {
+  padding-right: 10px;
+}
+
+.readonly-disguiser {
+  background-color: white !important;
+}
+
+
 
 // suppress hyperlink blue on carets
 i[class*='fa-caret'] {
