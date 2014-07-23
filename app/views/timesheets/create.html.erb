@@ -1,2 +1,8 @@
 <h1>Timesheets#create</h1>
-<p>Find me in app/views/timesheets/create.html.erb</p>
+<%= @user.full_name %><br />
+<%= params[:timesheet][:week_num] %> | <%= params[:timesheet][:year] %><br />
+<% if @timesheet  %>
+  <%= if !@timesheet.new_record? then @timesheet.id else "Unsaved" end %> | <%= @timesheet.week_num %> | <%= @timesheet.year %>
+<% else %>
+  No timesheet
+<% end %>

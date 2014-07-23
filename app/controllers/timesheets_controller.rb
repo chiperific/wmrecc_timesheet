@@ -44,7 +44,7 @@ class TimesheetsController < ApplicationController
     @title = "Edit Timesheet"
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
-    @timesheet_date = Date.parse @timesheet.week_num_to_date_obj(@timesheet.week_num, @timesheet.year)
+    @timesheet_date = Date.parse @timesheet.week_num_to_date_obj
     
     @url = user_timesheet_path(@user.id, @timesheet.id)
 
@@ -62,14 +62,31 @@ class TimesheetsController < ApplicationController
   end
 
   def create
-    @timesheet = Timesheet.new(timesheet_params)
+    @user = User.find(params[:user_id])
 
-    if @timesheet.save
-      flash[:success] = "Timesheet submitted"
-      redirect_to root_path
+    # If the timesheet already exists, update it
+    if Timesheet.where( week_num: params[:timesheet][:week_num], year: params[:timesheet][:year]).count > 0
+
+      @timesheet = Timesheet.where( week_num: params[:timesheet][:week_num], year: params[:timesheet][:year]).first
+      if @timesheet.update_attributes(timesheet_params)
+        flash[:success] = "Timesheet updated"
+        redirect_to user_timesheets_path(@user)
+      else
+        render 'edit'
+      end
+
     else
-      render 'new'
+
+      @timesheet = Timesheet.new(timesheet_params)
+      if @timesheet.save
+        flash[:success] = "Timesheet submitted"
+        redirect_to user_timesheets_path(@user)
+      else
+        render 'edit'
+      end
+
     end
+
   end
 
   def update
@@ -78,7 +95,9 @@ class TimesheetsController < ApplicationController
 
     if @timesheet.update_attributes(timesheet_params)
       flash[:success] = "Timesheet updated"
-      redirect_to user_timesheets(@user)
+      redirect_to user_timesheets_path(@user)
+    else
+      render 'edit'
     end
   end
 
@@ -86,8 +105,8 @@ class TimesheetsController < ApplicationController
 
   def timesheet_params
     params.require(:timesheet).permit(:week_num, :year,
-      :timesheet_hours => [:id, :timesheet_id, :user_id, :weekday, :hours, :approved],
-      :timesheet_categories => [:id, :timesheet_id, :user_id, :category_id, :approved]
+      :timesheet_hours_attributes => [:id, :timesheet_id, :user_id, :weekday, :hours, :approved],
+      :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :category_id, :approved]
     )
   end
 

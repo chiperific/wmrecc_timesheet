@@ -6,6 +6,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Timesheet nested form gets all nested records!
 
 ==Next step:
+* Timesheet#new and Timesheet#create saves Timesheet, but not nested attributes. Argh.
 * Timesheet#Index::_auth_over_timesheet_table: select_tag really should have "fname lname". May need to abandon options_from_collection_for_select method.
 * Use request info to create a record in TimesheetHours
 

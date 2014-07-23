@@ -15,14 +15,14 @@ jQuery ->
   $('#direct_report_select').change ->
     $('#direct_report_error').addClass('hidden')
 
-  $('#week_num_to_date').datepicker
+  $('#week_num_to_date_field').datepicker
     todayBtn: "linked"
     format: 'mm/dd'
     calendarWeeks: true
     weekStart: 1
     autoclose: true
 
-  $('#week_num_to_date').change ->
+  $('#week_num_to_date_field').change ->
     new_mm_dd = $(this).val()
     new_yy = $('#timesheet_year').val()
     new_date = new_mm_dd + "/" + new_yy

@@ -16,7 +16,7 @@
         <% t = th.timesheet %>
         <tr>
           <th><%= th.user.full_name %></th>
-          <td><%= t.week_num_to_date(t.week_num, t.year) %></td>
+          <td><%= t.week_num_to_date %></td>
           <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).pluck(:hours).inject(0) {|sum, i| sum + i} %></td>
           <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
           <td>
