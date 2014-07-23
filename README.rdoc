@@ -1,13 +1,11 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* Timesheet#Index::_auth_over_timesheet_table: "create for" button and select_tag
-* Timesheet#New and #Edit form partial drafted
 * Bootstrap the Timesheet#New and #Edit form partial
 * Bootstrap datepicker the forms
+* Timesheet nested form gets all nested records!
 
 ==Next step:
-* Timesheet nested form only getting final nested record, not all records.
 * Timesheet#Index::_auth_over_timesheet_table: select_tag really should have "fname lname". May need to abandon options_from_collection_for_select method.
 * Use request info to create a record in TimesheetHours
 
@@ -21,12 +19,11 @@ This product is a Time tracking application for the explicit use of West Michiga
   d. some sort of global variable for cotrolling weekly/biweekly payperiod (26 vs 52).
   e. user variable for cotrolling salary vs. hourly: pay_type: true = salary, false = hourly
 
+== Minor tweaks:
+* Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
+
 8. Reports
 8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
-
-==Minor tweaks:
-* _user_form : User can supervise themselves...
-* _user_form : cancel goes to Users#show always -- with is_current_user == false, should go to Users#index.
 
 ==Keep in mind:
 * http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model

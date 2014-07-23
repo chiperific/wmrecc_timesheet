@@ -27,17 +27,14 @@ class TimesheetsController < ApplicationController
 
     @url = user_timesheets_path(@user.id)
 
-    @timesheet_hours = Array.new
-
-    7.times do |day_num|
-      timesheet_hour = @timesheet.timesheet_hours.build(user_id: @user.id, weekday: day_num+1)
-      @timesheet_hours << timesheet_hour
-    end
+    @timesheet_hours = Array.new(7) { 
+      @timesheet.timesheet_hours.build(user_id: @user.id)
+    }
 
     @timesheet_categories = Array.new
 
     Category.where(department_id: @user.department_id).each do |cat|
-      timesheet_category = @timesheet.timesheet_categories.build(user_id: @user.id, category_id: cat.id)
+      timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
       @timesheet_categories << timesheet_category
     end
 
@@ -51,12 +48,9 @@ class TimesheetsController < ApplicationController
     
     @url = user_timesheet_path(@user.id, @timesheet.id)
 
-    @timesheet_hours = Array.new
-
-    7.times do |day_num|
-      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: day_num+1)
-      @timesheet_hours << timesheet_hour
-    end
+    @timesheet_hours = Array.new(7) { 
+      @timesheet.timesheet_hours.build(user_id: @user.id)
+    }
 
     @timesheet_categories = Array.new
 
@@ -68,11 +62,33 @@ class TimesheetsController < ApplicationController
   end
 
   def create
+    @timesheet = Timesheet.new(timesheet_params)
+
+    if @timesheet.save
+      flash[:success] = "Timesheet submitted"
+      redirect_to root_path
+    else
+      render 'new'
+    end
   end
 
   def update
+    @user = User.find(params[:user_id])
+    @timesheet = Timesheet.find(params[:id])
+
+    if @timesheet.update_attributes(timesheet_params)
+      flash[:success] = "Timesheet updated"
+      redirect_to user_timesheets(@user)
+    end
   end
 
   private
+
+  def timesheet_params
+    params.require(:timesheet).permit(:week_num, :year,
+      :timesheet_hours => [:id, :timesheet_id, :user_id, :weekday, :hours, :approved],
+      :timesheet_categories => [:id, :timesheet_id, :user_id, :category_id, :approved]
+    )
+  end
 
 end

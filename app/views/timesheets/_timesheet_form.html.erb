@@ -20,40 +20,33 @@
 
     <fieldset class="col-xs-6 span-no-padding-both" id="hours_fieldset">
       <legend>Hours:</legend>
-      <% @timesheet_hours.each do |th| %>
-        <%= t_form.fields_for th do |th_form| %>
-          <span class="hidden">
-            <%= th_form.number_field :user_id %>
-          </span>
-          <span class="col-xs-6">
-            <span class="pull-right plus-r-padding">
-              <%= th.day_name(th.weekday) %>
+        <% @timesheet_hours.each_with_index do |timesheet_hour, index| %>
+          <%= t_form.fields_for "timesheet_hours[#{index}]", timesheet_hour do |th_form| %>
+            <span class="col-xs-6">
+              <span class="pull-right plus-r-padding">
+                <%= timesheet_hour.day_name(index+1) %>
+              </span>
             </span>
-          </span>
-          <%= th_form.number_field :weekday, {class: "hidden"} %>
-          <span class="col-xs-6">
-            <%= th_form.number_field :hours, {class: "form-control"} %>
-          </span>
+            <%= th_form.number_field :weekday, {class: "hidden", value: index+1 } %>
+            <span class="col-xs-6">
+              <%= th_form.number_field :hours, {class: "form-control" } %>
+            </span>
+          <% end %>
         <% end %>
-      <% end %>
     </fieldset>
     
     <fieldset class="col-xs-6 span-no-padding-both" id="categories_fieldset">
       <legend>Categories:</legend>
-      <% @timesheet_categories.each do |tc| %>
-        <%= t_form.fields_for tc do |tc_form| %>
-          <span class="hidden">
-            <%= tc_form.number_field :user_id %>
-          </span>
+      <% @timesheet_categories.each_with_index do |timesheet_category, index| %>
+        <%= t_form.fields_for "timesheet_categories[#{index}]", timesheet_category do |tc_form| %>
           <span class="col-xs-7">
             <span class="pull-right plus-r-padding wrapped-and-right">
-              <%= tc.category.name %>
+              <%= timesheet_category.category.name %>
             </span>
-            
           </span>
-          <%= tc_form.number_field :category_id, { class: "hidden"} %>
+          <%= tc_form.number_field :category_id, { class: "hidden" } %>
           <span class="col-xs-5">
-            <%= tc_form.number_field :hours, { class: "form-control"} %>
+            <%= tc_form.number_field :hours, { class: "form-control" } %>
           </span>
         <% end %>
       <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715204731) do
+ActiveRecord::Schema.define(version: 20140723000956) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140715204731) do
   create_table "requests", force: true do |t|
     t.integer  "user_id"
     t.date     "date"
-    t.decimal  "hours",       precision: 4, scale: 2
+    t.decimal  "hours",       precision: 4, scale: 2, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "sv_approval",                         default: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20140715204731) do
     t.datetime "approved"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "hours",        precision: 4, scale: 2
+    t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
   end
 
   add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140715204731) do
     t.integer  "timesheet_id"
     t.integer  "user_id"
     t.integer  "weekday"
-    t.decimal  "hours",        precision: 4, scale: 2
+    t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
     t.datetime "approved"
     t.datetime "created_at"
     t.datetime "updated_at"

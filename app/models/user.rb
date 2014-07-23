@@ -19,15 +19,6 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
 
-
-  def User.new_remember_token
-    SecureRandom.urlsafe_base64
-  end
-
-  def User.digest(token)
-    Digest::SHA1.hexdigest(token.to_s)
-  end
-
   def has_authority_over
     if User.where(supervisor_id: self.id).count > 0
       User.where(supervisor_id: self.id)
@@ -35,7 +26,6 @@ class User < ActiveRecord::Base
       []
     end
   end
-
 
   def full_name
     "#{self.fname} #{self.lname}"
@@ -45,5 +35,13 @@ class User < ActiveRecord::Base
 
     def create_remember_token
       self.remember_token = User.digest(User.new_remember_token)
+    end
+
+    def User.new_remember_token
+      SecureRandom.urlsafe_base64
+    end
+
+    def User.digest(token)
+      Digest::SHA1.hexdigest(token.to_s)
     end
 end

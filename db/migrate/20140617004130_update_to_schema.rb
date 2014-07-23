@@ -20,7 +20,7 @@ class UpdateToSchema < ActiveRecord::Migration
     create_table "requests", force: true do |t|
       t.integer  "user_id"
       t.date     "date"
-      t.decimal  "hours",       precision: 4, scale: 2
+      t.decimal  "hours",       precision: 4, scale: 2, default: 0.0
       t.datetime "created_at"
       t.datetime "updated_at"
       t.boolean  "sv_approval",                         default: false
@@ -34,7 +34,7 @@ class UpdateToSchema < ActiveRecord::Migration
       t.datetime "approved"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.decimal  "hours",        precision: 4, scale: 2
+      t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
     end
 
     add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category"
@@ -45,7 +45,7 @@ class UpdateToSchema < ActiveRecord::Migration
       t.integer  "timesheet_id"
       t.integer  "user_id"
       t.integer  "weekday"
-      t.decimal  "hours",        precision: 4, scale: 2
+      t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
       t.datetime "approved"
       t.datetime "created_at"
       t.datetime "updated_at"

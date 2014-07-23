@@ -14,23 +14,11 @@ class UsersController < ApplicationController
     @title = "Staff"
     @user = User.find(params[:id])
     @user_staff = User.where(supervisor_id: @user.id)
+    @users = User.all
     @active_users = @user_staff.where(active: true)
     @inactive_users = @user_staff.where(active: false)
     @supervised_active_users = User.where("supervisor_id IS NOT NULL")
     @departments = Department.where(active: true)
-  end
-
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      flash[:success] = "User created"
-      redirect_to users_path
-    else
-      @dept_array = dept_array
-      @super_array = super_array
-      render 'new'
-    end
   end
 
   def new
@@ -76,6 +64,19 @@ class UsersController < ApplicationController
 
   end
 
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      flash[:success] = "User created"
+      redirect_to users_path
+    else
+      @dept_array = dept_array
+      @super_array = super_array
+      render 'new'
+    end
+  end
+
   def update
     @user = User.find(params[:id])
 
@@ -110,6 +111,7 @@ class UsersController < ApplicationController
     def super_array
       @super_arry = Array.new([["(no supervisor)", nil]])
       sorted_arry = User.all.sort_by { |u| u.fname }.sort_by { |u| u.lname}
+      sorted_arry.delete(@user)
       @super_arry += sorted_arry.map { |u| [u.fname+" "+u.lname, u.id]}
       @super_arry
     end
@@ -117,6 +119,8 @@ class UsersController < ApplicationController
     def path_switch
       if current_user.admin?
         users_path
+      elsif current_user.has_authority_over.count > 0
+        user_path(current_user)
       else
         root_path
       end
