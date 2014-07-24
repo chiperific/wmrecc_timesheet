@@ -8,9 +8,9 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Timesheet#index - Date column ordered through inner join
 * Timesheet#Index::_auth_over_timesheet_table: select_tag has "fname lname".
 
-==Next step:
-* Use request info to create a record in TimesheetHours
-* Page-by-page permissions. Check out CanCan
+==Next steps:
+5. Use request info to create a record in TimesheetHours
+6. Page-by-page permissions. Check out CanCan
 
 7. Timesheet approval (RU)
   a. Supervisors approve their directs.
@@ -19,11 +19,11 @@ This product is a Time tracking application for the explicit use of West Michiga
   d. some sort of global variable for cotrolling weekly/biweekly payperiod (26 vs 52).
   e. user variable for cotrolling salary vs. hourly: pay_type: true = salary, false = hourly
 
-== Minor tweaks:
-* Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
-
 8. Reports
 8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+
+== Minor tweaks:
+* Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
 
 ==Keep in mind:
 * http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
@@ -42,7 +42,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 </div>
 
 2. Submit all new requests - http://stackoverflow.com/questions/21533518/rails-submit-multiple-forms-on-same-page -- search for  '# Future'
-2.1 may need to make a parent model for requests to do a nested form... RequestBatch?
+2.1 may need to make a parent model for requests to do a nested form... RequestBatch?, or can Timesheet be parent??
 
 ==Ongoing issues:
 * Controllers are fat and messy...
@@ -51,3 +51,4 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 == Setup configurations
 * TimeZone => application.rb::WmreccTimesheet::config.time_zone
+* Start of week => TimsheetHour::day_name && self.day_name
