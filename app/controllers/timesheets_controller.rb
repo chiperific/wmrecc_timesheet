@@ -49,8 +49,9 @@ class TimesheetsController < ApplicationController
     @url = user_timesheet_path(@user.id, @timesheet.id)
 
     @timesheet_hours = Array.new(7) { 
-      @timesheet.timesheet_hours.build(user_id: @user.id)
+      @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id)
     }
+
 
     @timesheet_categories = Array.new
 
@@ -63,16 +64,18 @@ class TimesheetsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+    @timesheet_date = Date.today
 
     # If the timesheet already exists, update it
     if Timesheet.where( week_num: params[:timesheet][:week_num], year: params[:timesheet][:year]).count > 0
 
       @timesheet = Timesheet.where( week_num: params[:timesheet][:week_num], year: params[:timesheet][:year]).first
+
       if @timesheet.update_attributes(timesheet_params)
         flash[:success] = "Timesheet updated"
         redirect_to user_timesheets_path(@user)
       else
-        render 'edit'
+        render 'new'
       end
 
     else
@@ -82,7 +85,7 @@ class TimesheetsController < ApplicationController
         flash[:success] = "Timesheet submitted"
         redirect_to user_timesheets_path(@user)
       else
-        render 'edit'
+        render 'new'
       end
 
     end
@@ -99,6 +102,7 @@ class TimesheetsController < ApplicationController
     else
       render 'edit'
     end
+
   end
 
   private
@@ -106,7 +110,7 @@ class TimesheetsController < ApplicationController
   def timesheet_params
     params.require(:timesheet).permit(:week_num, :year,
       :timesheet_hours_attributes => [:id, :timesheet_id, :user_id, :weekday, :hours, :approved],
-      :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :category_id, :approved]
+      :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :category_id, :hours, :approved]
     )
   end
 

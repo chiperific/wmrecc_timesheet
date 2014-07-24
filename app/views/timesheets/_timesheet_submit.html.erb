@@ -1,0 +1,24 @@
+<h3>If you're here...</h3>
+<h4>It's because something went terribly, terribly, wrong.</h4>
+<i>Or I've become sentient...hmm</i>
+
+Timesheet:<br>
+<%= params[:timesheet][:id] || "New Record" %> | <%= params[:timesheet][:week_num] %> | <%= params[:timesheet][:year] %><br />
+
+<div class="row">
+  <hr />
+</div>
+Hours:<br>
+<% params[:timesheet][:timesheet_hours_attributes].each do |th| %>
+  <%= th %><br>
+
+<% end %>
+
+<div class="row">
+  <hr />
+</div>
+Categories:<br>
+<% params[:timesheet][:timesheet_categories_attributes].each do |tc| %>
+  <%= tc %><br>
+
+<% end %>

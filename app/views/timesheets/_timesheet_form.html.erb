@@ -20,13 +20,14 @@
 
     <fieldset class="col-xs-6 span-no-padding-both" id="hours_fieldset">
       <legend>Hours:</legend>
-        <% @timesheet_hours.each_with_index do |timesheet_hour, index| %>
-          <%= t_form.fields_for "timesheet_hours[#{index}]", timesheet_hour do |th_form| %>
+
+          <%= t_form.fields_for :timesheet_hours, @timesheet.timesheet_hours do |th_form| %>
+            <%= th_form.hidden_field :timesheet_id %>
             <%= th_form.hidden_field :user_id, { value: @user.id } %>
-            <%= th_form.hidden_field :weekday, { value: index+1 } %>
+            <%= th_form.hidden_field :weekday, { value: th_form.index+1 } %>
             <span class="col-xs-6">
               <span class="pull-right plus-r-padding">
-                <%= timesheet_hour.day_name(index+1) %>
+                <%= TimesheetHour.day_name(th_form.index+1) %>
               </span>
             </span>
 
@@ -34,13 +35,14 @@
               <%= th_form.number_field :hours, {class: "form-control", step: 'any' } %>
             </span>
           <% end %>
-        <% end %>
+
     </fieldset>
     
     <fieldset class="col-xs-6 span-no-padding-both" id="categories_fieldset">
       <legend>Categories:</legend>
       <% @timesheet_categories.each_with_index do |timesheet_category, index| %>
-        <%= t_form.fields_for "timesheet_categories[#{index}]", timesheet_category do |tc_form| %>
+        <%= t_form.fields_for :timesheet_categories, timesheet_category do |tc_form| %>
+          <%= tc_form.hidden_field :timesheet_id %>
           <%= tc_form.hidden_field :user_id, { value: @user.id } %>
           <%= tc_form.hidden_field :category_id %>
           <span class="col-xs-7">
@@ -56,7 +58,8 @@
     </fieldset>
   
   </div>
-  <div class="row center">
+  <div class="row buffered-row">
+    <%= link_to "Cancel", user_timesheets_path(@user), class: "btn btn-warning pull-right" %>
     <%= t_form.submit "Submit", class: "btn btn-success" %>
   </div>
 

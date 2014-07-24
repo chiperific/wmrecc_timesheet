@@ -18,4 +18,16 @@ class TimesheetHour < ActiveRecord::Base
     day_ary_hash[weekday]
   end
 
+  def self.day_name(weekday)
+    day_ary_hash = {
+      1 => "Monday", 
+      2 => "Tuesday", 
+      3 => "Wednesday", 
+      4 => "Thursday", 
+      5 => "Friday", 
+      6 => "Saturday", 
+      7 => "Sunday"}
+    day_ary_hash[weekday]
+  end
+
 end
