@@ -28,7 +28,7 @@
     <%= will_paginate @timesheet_hours, renderer: BootstrapPagination::Rails %>
   </div>
 
-  <div>
+  <div class="buffered-row">
     <%= link_to "New", new_user_timesheet_path(@user.id), { class: "btn btn-success"} %>
   </div>
 
