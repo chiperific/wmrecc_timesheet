@@ -59,7 +59,11 @@
   
   </div>
   <div class="row buffered-row">
-    <%= link_to "Cancel", user_timesheets_path(@user), class: "btn btn-warning" %>
+    <% if params[:auth] == "over" %>
+      <%= link_to "Cancel", user_timesheets_path(current_user, auth: "over"), class: "btn btn-warning" %>
+    <% else %>
+      <%= link_to "Cancel", user_timesheets_path(@user), class: "btn btn-warning" %>
+    <% end %>
     <%= t_form.submit "Submit", class: "btn btn-success pull-right" %>
   </div>
 

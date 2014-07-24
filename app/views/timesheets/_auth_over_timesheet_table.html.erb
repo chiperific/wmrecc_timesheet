@@ -1,4 +1,3 @@
-<h4 class="center"><%= @title %></h4>
 <div id="recent-timesheets">
   <table class="table table-striped">
     <thead>
@@ -41,7 +40,7 @@
       <%= link_to "Create for:", "#", { class: "btn btn-primary", id: "direct_report_chooser"} %>
     </div>
     <div class="col-xs-8">
-      <%= select_tag "direct_reports", options_from_collection_for_select(@user_auth, :id, :fname), { include_blank: true, class: "expand form-control", id: "direct_report_select" } %>
+      <%= select_tag "direct_reports", options_for_select(@direct_reports_select), { include_blank: true, class: "expand form-control", id: "direct_report_select" } %>
     </div>
   </div>
 

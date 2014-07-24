@@ -1,16 +1,23 @@
 class TimesheetsController < ApplicationController
 
   def index
+    @title = "Timesheet"
     @user = User.find(params[:user_id])
 
     if params[:auth] == "over"
+      @page_title = "Your Team's Timesheets"
+
       @user_auth = @user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @title = "Your Team's Timesheets"
-      @timesheet_hours = TimesheetHour.where(user_id: @user_auth_id_ary).order(approved: :desc).order(created_at: :desc).group(:timesheet_id).page(params[:page])
+      @timesheet_hours = TimesheetHour.where(user_id: @user_auth_id_ary).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
+
+      @direct_reports_select = Hash.new
+      @user_auth.each do |usr|
+        @direct_reports_select[usr.full_name] = usr.id
+      end
     else
-      @title = "Your Timesheets"
-      @timesheet_hours = TimesheetHour.where(user_id: @user.id).order(created_at: :desc).group(:timesheet_id).page(params[:page])
+      @page_title = "Your Timesheets"
+      @timesheet_hours = TimesheetHour.where(user_id: @user.id).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
     end
 
   end

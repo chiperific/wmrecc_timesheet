@@ -15,7 +15,7 @@ describe TimesheetHour do
 
   describe "when timesheet_id is not present" do
     before { timesheet_hour.timesheet_id = nil }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe "when user_id is not present" do

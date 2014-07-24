@@ -5,14 +5,12 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Bootstrap datepicker the forms
 * Timesheet nested form saves all nested records!
 * Timesheet#edit and Timesheet#new(with existing TS) builds all weekdays
+* Timesheet#index - Date column ordered through inner join
+* Timesheet#Index::_auth_over_timesheet_table: select_tag has "fname lname".
 
 ==Next step:
-* Timesheet#index - Date column is not ordered
-* Timesheet#Index::_auth_over_timesheet_table: select_tag really should have "fname lname". May need to abandon options_from_collection_for_select method.
 * Use request info to create a record in TimesheetHours
-
-==Left To do:
-3. Page-by-page permissions. Check out CanCan
+* Page-by-page permissions. Check out CanCan
 
 7. Timesheet approval (RU)
   a. Supervisors approve their directs.
