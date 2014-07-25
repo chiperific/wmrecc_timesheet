@@ -101,7 +101,7 @@ class TimesheetsController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:user_id])
+  @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
 
     if @timesheet.update_attributes(timesheet_params)
@@ -117,8 +117,8 @@ class TimesheetsController < ApplicationController
 
   def timesheet_params
     params.require(:timesheet).permit(:week_num, :year,
-      :timesheet_hours_attributes =>      [:id, :timesheet_id, :user_id, :hours, :weekday, :approved],
-      :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :hours, :category_id, :approved]
+      :timesheet_hours_attributes =>      [:id, :timesheet_id, :user_id, :hours, :approved, :timeoff, :weekday],
+      :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :hours, :approved, :category_id]
     )
   end
 

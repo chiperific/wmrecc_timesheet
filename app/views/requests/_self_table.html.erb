@@ -1,5 +1,5 @@
 <h4><%= @user.fname %>'s Time Off Requests</h4>
-<table class="table small-when-small">
+<table class="table">
   <thead>
     <tr>
       <th>Date</th>
@@ -10,7 +10,7 @@
   <tbody>
     <% @requests.each do |r| %>
       <tr>
-        <td class="small2"><%= r.date.strftime("%m/%d/%y") %></td>
+        <td><%= r.date.strftime("%m/%d/%y") %></td>
         <td><%= r.hours %></td>
         <td class="<%= r.notice_class(r) %>"><%= r.status(r) %></td>
       </tr>

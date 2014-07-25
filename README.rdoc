@@ -9,7 +9,10 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Timesheet#Index::_auth_over_timesheet_table: select_tag has "fname lname".
 
 ==Next steps:
-5. Use request info to create a record in TimesheetHours
+5. Dismantle the Request archetecture
+5.1 Replace with a field on the Timesheet page
+5.2 Update TimesheetHour Schema with :timeoff boolean
+5.3 But what to do about 4 hrs on, 4 hrs off?
 6. Page-by-page permissions. Check out CanCan
 
 7. Timesheet approval (RU)

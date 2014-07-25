@@ -132,7 +132,9 @@ tr[class*='-list-'] > td {
   background-color: white !important;
 }
 
-
+input[type="checkbox"] {
+  margin-left: 0px !important;
+}
 
 // suppress hyperlink blue on carets
 i[class*='fa-caret'] {
