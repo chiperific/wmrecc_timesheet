@@ -117,7 +117,7 @@ class TimesheetsController < ApplicationController
 
   def timesheet_params
     params.require(:timesheet).permit(:week_num, :year,
-      :timesheet_hours_attributes =>      [:id, :timesheet_id, :user_id, :hours, :approved, :timeoff, :weekday],
+      :timesheet_hours_attributes =>      [:id, :timesheet_id, :user_id, :hours, :approved, :weekday, :timeoff_hours, :timeoff_reviewed, :timeoff_approved],
       :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :hours, :approved, :category_id]
     )
   end

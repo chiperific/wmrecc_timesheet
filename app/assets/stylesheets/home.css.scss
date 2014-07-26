@@ -5,6 +5,8 @@
   height: 6em;
   margin-top: .5em;
   margin-bottom: .5em;
+  margin-left: auto;
+  margin-right: auto;
   border: 1px solid #888888;
   border-radius: 8px;
   box-shadow: 2px 2px 1px #888888;
@@ -15,7 +17,6 @@
 }
 
 .app-style {
-  margin-left: -2em !important;
   a:hover {
     text-decoration: none;
     background-color: white !important;

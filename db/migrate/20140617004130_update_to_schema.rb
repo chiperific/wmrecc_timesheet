@@ -17,24 +17,14 @@ class UpdateToSchema < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
-    create_table "requests", force: true do |t|
-      t.integer  "user_id"
-      t.date     "date"
-      t.decimal  "hours",       precision: 4, scale: 2, default: 0.0
-      t.datetime "created_at"
-      t.datetime "updated_at"
-      t.boolean  "sv_approval",                         default: false
-      t.boolean  "sv_reviewed",                         default: false
-    end
-
     create_table "timesheet_categories", force: true do |t|
       t.integer  "timesheet_id"
       t.integer  "user_id"
       t.integer  "category_id"
+      t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
       t.datetime "approved"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
     end
 
     add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category"
@@ -47,10 +37,11 @@ class UpdateToSchema < ActiveRecord::Migration
       t.integer  "weekday"
       t.decimal  "hours",            precision: 4, scale: 2, default: 0.0
       t.datetime "approved"
+      t.decimal  "timeoff_hours",    precision: 4, scale: 2, default: 0.0
+      t.datetime "timeoff_reviewed"
+      t.datetime "timeoff_approved"
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.datetime "timeoff_approved"
-      t.decimal  "timeoff_hours",    precision: 4, scale: 2, default: 0.0
     end
 
     add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet"
@@ -68,16 +59,16 @@ class UpdateToSchema < ActiveRecord::Migration
       t.integer  "department_id"
       t.integer  "supervisor_id"
       t.string   "email"
-      t.datetime "created_at"
-      t.datetime "updated_at"
       t.string   "password_digest"
       t.boolean  "admin",                                    default: false
-      t.string   "remember_token"
       t.decimal  "annual_time_off", precision: 6,  scale: 2
       t.decimal  "standard_hours",  precision: 6,  scale: 2
       t.decimal  "salary_rate",     precision: 10, scale: 2
       t.decimal  "hourly_rate",     precision: 6,  scale: 2
       t.boolean  "pay_type",                                 default: true
+      t.string   "remember_token"
+      t.datetime "created_at"
+      t.datetime "updated_at"
     end
 
     add_index "users", ["email"], name: "index_users_on_email", unique: true

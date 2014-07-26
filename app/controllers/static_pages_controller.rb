@@ -4,21 +4,14 @@ class StaticPagesController < ApplicationController
     @col_width = "col-xs-4 col-sm-2 col-md-2 col-lg-1"
 
     if current_user
-      @supervisor = false
+      # FUTURE need to add unreviewed timeoff using has_authority_over
       if User.where(active: true).where(supervisor_id: current_user.id).count > 0
         @supervisor = true
+      else
+        @supervisor = false
       end
-      
-      # Time off Request message calls
-      @tors_need_approval = 0
-      @direct_reports = User.where(supervisor_id: current_user.id)
-      @direct_reports.each do |d|
-        @tors_need_approval +=1 if d.requests.where(sv_approval: false).any?
-      end #direct_reports loop
-
-      @tors_denied = Request.where(user_id: current_user.id).where(sv_reviewed: true).where(sv_approval: false)
-    end #current_user
-  end #home
+    end
+  end
 
   def help
     @title = "Help"

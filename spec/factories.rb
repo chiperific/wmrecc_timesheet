@@ -25,13 +25,6 @@ FactoryGirl.define do
     active        true
   end   
 
-  factory :request do
-    user_id       1
-    date          "2014/01/01"
-    hours         8
-    sv_approval   false
-    sv_reviewed   false 
-  end
 
   factory :timesheet do
     id              1

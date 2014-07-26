@@ -1,18 +1,18 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* Bootstrap the Timesheet#New and #Edit form partial
-* Bootstrap datepicker the forms
-* Timesheet nested form saves all nested records!
-* Timesheet#edit and Timesheet#new(with existing TS) builds all weekdays
 * Timesheet#index - Date column ordered through inner join
 * Timesheet#Index::_auth_over_timesheet_table: select_tag has "fname lname".
+* Center the app-style btn-boxes
 
 ==Next steps:
 5. Dismantle the Request archetecture
-5.1 Replace with a field on the Timesheet page
-5.2 Update TimesheetHour Schema with :timeoff boolean
-5.3 But what to do about 4 hrs on, 4 hrs off?
+5.1 Add new attributes to timesheets_controller
+5.2 Replace with a field on the Timesheet page: timeoff_hours / timeoff_reviewed / timeoff_approval
+5.3 Split timesheet index between view=timesheet and view=timeoff
+5.4 Add new timeoff fields to timesheet form
+5.5 Add a hyperlink to hide/unhide
+5.6 Need a way to deny timoff?
 6. Page-by-page permissions. Check out CanCan
 
 7. Timesheet approval (RU)
@@ -43,9 +43,6 @@ This product is a Time tracking application for the explicit use of West Michiga
     <span class="sr-only">40% Complete (success)</span>
   </div>
 </div>
-
-2. Submit all new requests - http://stackoverflow.com/questions/21533518/rails-submit-multiple-forms-on-same-page -- search for  '# Future'
-2.1 may need to make a parent model for requests to do a nested form... RequestBatch?, or can Timesheet be parent??
 
 ==Ongoing issues:
 * Controllers are fat and messy...

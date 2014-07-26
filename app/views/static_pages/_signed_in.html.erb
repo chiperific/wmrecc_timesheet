@@ -1,20 +1,6 @@
 <h4>Welcome <%= current_user.fname %></h4>
 
-<% if @tors_need_approval > 0 %>
-  <div class="row center bg-success text-success" id="time_off_msg_box">
-    <h5>
-      <%= link_to "You have Time Off Requests that need your approval", "/users/#{current_user.id}/requests?cur_usr=false&review=false"  %>
-    </h5>
-  </div>
-<% end %>
-
-<% if @tors_denied.any? %>
-  <div class="row center bg-danger text-danger" id="time_off_msg_box">
-    <h5>
-      <%= link_to "You have Time Off Requests that were denied", "/users/#{current_user.id}/requests?cur_usr=true"  %>
-    </h5>
-  </div>
-<% end %>
+<!-- need to add unreviewed timeoff notices using has_authority_over -->
 
 <div class="row app-style">
   <a href="<%= "/users/#{current_user.id}/timesheets/new" %>" class="<%= @col_width %>">
@@ -24,14 +10,14 @@
     </div>
   </a>
   
-  <a href='<%= "/users/#{current_user.id}/timesheets" %>' class="<%= @col_width %>">
+  <a href='<%= "/users/#{current_user.id}/timesheets?view=timesheet" %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
       <p>View past timesheets</p>
     </div>
   </a>
 
-  <a href='<%= "/users/#{current_user.id}/requests?cur_usr=true" %>' class="<%= @col_width %>">
+  <a href='<%= "/users/#{current_user.id}/timesheets?view=timeoff" %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-check-square-o fa-3x"></i>
       <p>Manage time off</p>
