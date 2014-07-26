@@ -45,12 +45,12 @@ class UpdateToSchema < ActiveRecord::Migration
       t.integer  "timesheet_id"
       t.integer  "user_id"
       t.integer  "weekday"
-      t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
-      t.boolean  "timeoff",                              default: false
-      t.datetime "timeoff_approved"
+      t.decimal  "hours",            precision: 4, scale: 2, default: 0.0
       t.datetime "approved"
       t.datetime "created_at"
       t.datetime "updated_at"
+      t.datetime "timeoff_approved"
+      t.decimal  "timeoff_hours",    precision: 4, scale: 2, default: 0.0
     end
 
     add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet"
@@ -82,6 +82,5 @@ class UpdateToSchema < ActiveRecord::Migration
 
     add_index "users", ["email"], name: "index_users_on_email", unique: true
     add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-
   end
 end
