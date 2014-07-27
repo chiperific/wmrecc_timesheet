@@ -6,6 +6,7 @@
         <th>Date</th>
         <th class="hidden-xs">Hrs</th>
         <th class="hidden-xs">Submitted</th>
+        <th class="hidden-xs">Reviewed</th>
         <th>Approved</th>
         <th></th>
       </tr>
@@ -18,6 +19,9 @@
           <td><%= t.week_num_to_date %></td>
           <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).pluck(:hours).inject(0) {|sum, i| sum + i} %></td>
           <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
+          <td class="hidden-xs">
+            <%= if th.reviewed then th.reviewed.strftime("%m/%d/%Y") else "No" end %>
+          </td>
           <td>
             <%= if th.approved then th.approved.strftime("%m/%d/%Y") else "No" end %>
           </td>

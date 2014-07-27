@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727181659) do
+ActiveRecord::Schema.define(version: 20140727212606) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20140727181659) do
     t.integer  "timesheet_id"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.datetime "approved"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "hours",        precision: 4, scale: 2, default: 0.0

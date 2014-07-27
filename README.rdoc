@@ -2,32 +2,29 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 ==Last completed step:
 5.6 Denied timoff = reviewed but not approved
-* Add Weekday model for less assumptive building of _timesheet_form
-* Timesheet#edit or #new - pressing cancel redirects to correct index view.
 * If current_user.admin? => @timesheets_needing_review added to User#index && Timesheet#index::_auth_over_timesheet_table
 * If current_user.has_authority_over.any? => @timesheets_from_user_auth_needing_review added to User#show
+* Remove approved column from TimesheetCategories
+5.7 Implement ?auth=over or ?auth=admin triggers timesheet approval div
+5.7.1 add reviewed and approved hidden fields
+* Add approval well styling
+5.7.2 create hidden div with "now submit" msg
 
 ==Next steps:
-5.7 Need views and routes for managing timeoff review and approval - [auth: over, auth: admin]
-5.7.1 - from _auth_over_timesheet_table
-5.7.2 - from users#index
-5.7.3 
+5.7.3 create form select tags for un/reviewed and un/approved (needs to be outside form_for?)
+5.7.4 selecting approve automatically selects reviewed (if not selected)
+5.7.5 select form tags triggers jquery which adds Time.now to aproval hidden field
 
-5.8 Implement ?auth=over triggers timesheet approval div
-5.8.1 add reviewed and approved hidden fields
-5.8.2 create hidden div with "now submit" msg
-5.8.3 create form select tags for un/reviewed and un/approved (needs to be outside form_for?)
-5.8.4 selecting approve automatically selects reviewed (if not selected)
-5.8.5 select form tags triggers jquery which adds Time.now to aproval hidden field 
+5.8 Flesh out params[:auth] == "admin" => _auth_admin_timesheet_table #to view 
 
-6. Page-by-page permissions. Check out CanCan
+5.9 Need views and routes for managing timeoff review and approval - [auth: over, auth: admin]
 
-7. Timesheet approval (RU)
-  a. Supervisors approve their directs.
-  b. Admins can approve over supervisors or edit approvals
-  c. salary needs to be portrayed into $/payperiod
-  d. some sort of global variable for cotrolling weekly/biweekly payperiod (26 vs 52).
-  e. user variable for cotrolling salary vs. hourly: pay_type: true = salary, false = hourly
+6. UX validation of hours and cats
+6.1 Progress bars:
+6.1.1 TH.hrs vs. user.standard_hours
+6.1.2 TC.hrs vs. TH.hrs
+
+7. Page-by-page permissions. Check out CanCan
 
 8. Reports
 8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects

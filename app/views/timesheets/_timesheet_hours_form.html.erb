@@ -3,6 +3,10 @@
   <%= th_form.hidden_field :timesheet_id %>
   <%= th_form.hidden_field :user_id, { value: @user.id } %>
   <%= th_form.hidden_field :weekday, { value: th_form.index+1 } %>
+  <%= th_form.hidden_field :reviewed, { class: "reviewed-field"} %>
+  <%= th_form.hidden_field :approved, { class: "approved-field"} %>
+  <%= th_form.hidden_field :timeoff_reviewed, { class: "timeoff-reviewed-field"} %>
+  <%= th_form.hidden_field :timeoff_approved, { class: "timeoff-approved-field"} %>
   <span class="row span-no-padding-both form-group no-margin">
     <span class="col-xs-2 expand-2-to-5">
       <span class="pull-right plus-r-padding timeoff-shower" id="day_name_full">

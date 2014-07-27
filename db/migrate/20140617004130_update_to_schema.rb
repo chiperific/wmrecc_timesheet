@@ -22,7 +22,6 @@ class UpdateToSchema < ActiveRecord::Migration
       t.integer  "user_id"
       t.integer  "category_id"
       t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
-      t.datetime "approved"
       t.datetime "created_at"
       t.datetime "updated_at"
     end

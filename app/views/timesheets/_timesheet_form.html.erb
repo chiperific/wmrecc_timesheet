@@ -56,10 +56,18 @@
     </fieldset>
   
   </div>
-  <% if params[:auth] = "over" && ( current_user.has_authority_over.any? || current_user.admin)  %>
-    <div class="row buffered-row center">
-      <p>This is where the approval goes!</p>
-    </div>    
+  <% if (params[:auth] = "over" || params[:auth] == "admin") && ( current_user.has_authority_over.any? || current_user.admin)  %>
+    <div class="row buffered-row">
+      <hr />
+    </div>
+    <div class="row well">
+      <h5 class="center thin">Approvals:</h5>
+      <%= render 'timesheet_approval_form' %>
+      <span class="pull-right hidden" id="approval-msg">
+        <br>
+        <p>Now hit the submit button.</p>
+      </span>
+    </div>  
   <% end %>
 
 
