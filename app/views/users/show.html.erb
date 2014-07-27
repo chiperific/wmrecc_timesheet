@@ -56,3 +56,11 @@
   </table>
 </div>
 <br />
+
+<div class="row center">
+  <% if @timesheets_from_user_auth_needing_review %>
+    <hr />
+    <%= "Your staff have "+ @timesheets_from_user_auth_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_from_user_auth_needing_review.count) + " for reviewed." %>
+    <%= link_to "Review now", user_timesheets_path(current_user, auth: "over"), { class: "btn btn-success"} %>
+  <% end %>
+</div>

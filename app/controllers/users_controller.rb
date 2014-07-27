@@ -8,6 +8,17 @@ class UsersController < ApplicationController
     @supervised_active_users = @active_users.where("supervisor_id IS NOT NULL")
 
     @departments = Department.where(active: true)
+
+    if current_user.admin?
+      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).all
+    end
+
+    if current_user.has_authority_over.any?
+      @user_auth = current_user.has_authority_over
+      @user_auth_id_ary = @user_auth.pluck(:id)
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+    end
+
   end
 
   def show
@@ -19,6 +30,12 @@ class UsersController < ApplicationController
     @inactive_users = @user_staff.where(active: false)
     @supervised_active_users = User.where("supervisor_id IS NOT NULL")
     @departments = Department.where(active: true)
+
+    if current_user.has_authority_over.any?
+      @user_auth = current_user.has_authority_over
+      @user_auth_id_ary = @user_auth.pluck(:id)
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+    end
   end
 
   def new

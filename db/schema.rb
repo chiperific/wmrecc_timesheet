@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727142128) do
+ActiveRecord::Schema.define(version: 20140727181659) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140727142128) do
     t.datetime "timeoff_approved"
     t.decimal  "timeoff_hours",    precision: 4, scale: 2, default: 0.0
     t.datetime "timeoff_reviewed"
+    t.datetime "reviewed"
   end
 
   add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet"

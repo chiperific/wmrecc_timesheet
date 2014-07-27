@@ -1,6 +1,8 @@
 <h4 class="center"><%= @page_title %></h4>
 <% if params[:auth] == "over" %>
   <%= render 'auth_over_timesheet_table' %>
+<% elsif params[:auth] == "admin" %>
+  <%= render 'auth_admin_timesheet_table' %>
 <% else %>
   <%= render 'single_timesheet_table' %>
 <% end %>

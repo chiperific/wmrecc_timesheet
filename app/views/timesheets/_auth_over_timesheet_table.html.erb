@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @timesheet_hours.each do |th| %>
+      <% @timesheets_for_user_auth.each do |th| %>
         <% t = th.timesheet %>
         <tr>
           <th><%= th.user.full_name %></th>
@@ -21,17 +21,17 @@
           <td>
             <%= if th.approved then th.approved.strftime("%m/%d/%Y") else "No" end %>
           </td>
-          <td><%= link_to "Go", edit_user_timesheet_path( th.user_id, t.id), class: "btn btn-success" %></td>
+          <td><%= link_to "Go", edit_user_timesheet_path( th.user_id, t.id, auth: "over"), class: "btn btn-success" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
   <div class="row center">
-    <%= will_paginate @timesheet_hours, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @timesheets_for_user_auth, renderer: BootstrapPagination::Rails %>
   </div>
 
-  <div class="row">
+  <div class="row center">
     <hr />
   </div>
 
@@ -49,3 +49,13 @@
   </div>
 
 </div>
+
+<% if @timesheets_needing_review %>
+  <div class="row center">
+    <hr />
+    <%= "There are " + @timesheets_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_needing_review.count) + " for review." %>
+    <%= link_to "Review as Admin", user_timesheets_path(current_user, auth: "admin"), { class: "btn btn-success"} %>
+    <hr />
+  </div>
+<% end %>
+

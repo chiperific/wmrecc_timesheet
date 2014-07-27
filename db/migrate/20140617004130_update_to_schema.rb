@@ -36,6 +36,7 @@ class UpdateToSchema < ActiveRecord::Migration
       t.integer  "user_id"
       t.integer  "weekday"
       t.decimal  "hours",            precision: 4, scale: 2, default: 0.0
+      t.datetime "reviewed"
       t.datetime "approved"
       t.decimal  "timeoff_hours",    precision: 4, scale: 2, default: 0.0
       t.datetime "timeoff_reviewed"

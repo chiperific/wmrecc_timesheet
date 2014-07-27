@@ -6,10 +6,11 @@ jQuery ->
   $('#direct_report_chooser').click ->
     direct_report = $('#direct_report_select option:selected').val()
     if direct_report == ""
+      # Shows the 'Please select a name.' hidden div
       $('#direct_report_error').toggleClass('hidden')
     else
-      url = "/users/"+direct_report+"/timesheets/new"
-      window.location.pathname = url
+      urlString = "/users/"+direct_report+"/timesheets/new"
+      location.pathname = urlString
     event.preventDefault()
     false
 

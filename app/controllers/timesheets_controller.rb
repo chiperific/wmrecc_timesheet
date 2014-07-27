@@ -9,7 +9,18 @@ class TimesheetsController < ApplicationController
 
       @user_auth = @user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheet_hours = TimesheetHour.where(user_id: @user_auth_id_ary).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
+      @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
+
+      if current_user.admin?
+        #@timesheets_for_other_users = TimesheetHour.where.not(user_id: @user_auth_id_ary).group(:timesheet_id)
+        @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).all
+      end
+
+      if current_user.has_authority_over.any?
+        @user_auth = current_user.has_authority_over
+        @user_auth_id_ary = @user_auth.pluck(:id)
+        @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+      end
 
       @direct_reports_select = Hash.new
       @user_auth.each do |usr|
@@ -18,6 +29,10 @@ class TimesheetsController < ApplicationController
     else
       @page_title = "Your Timesheets"
       @timesheet_hours = TimesheetHour.where(user_id: @user.id).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
+    end # if params[:auth] == 'over'
+
+    if params[:auth] == "admin"
+      @page_title = "All Unreviewed Timesheets"
     end
 
   end

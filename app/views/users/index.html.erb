@@ -61,3 +61,11 @@
   </table>
 </div>
 <p><%= link_to "Add new user", new_user_path, { class: "btn btn-success"} %></p>
+
+<div class="row center">
+  <% if @timesheets_needing_review %>
+    <hr />
+    <%= "There are " + @timesheets_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_needing_review.count) + " for review." %>
+    <%= link_to "Review as Admin", user_timesheets_path(current_user, auth: "admin"), { class: "btn btn-success"} %>
+  <% end %>
+</div>
