@@ -2,6 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
+
   $('#direct_report_chooser').click ->
     direct_report = $('#direct_report_select option:selected').val()
     if direct_report == ""
@@ -32,3 +33,24 @@ jQuery ->
     format: "yyyy"
     minViewMode: 2
     autoclose: true
+
+  $('.timeoff-hider').hide()
+  $('.timeoff-shower').show()
+  $('.expand-5-to-7').removeClass('col-xs-5').addClass('col-xs-7')
+  $('.expand-2-to-5').removeClass('col-xs-2').addClass('col-xs-5')
+
+  $('#show_timeoff_switch').click ->
+    if $(this).html() == "(add timeoff)"
+      htmlString = "(hide timeoff)"
+      $('.expand-5-to-7').removeClass('col-xs-7').addClass('col-xs-5')
+      $('.expand-2-to-5').removeClass('col-xs-5').addClass('col-xs-2')
+      $('.timeoff-hider').show()
+      $('.timeoff-shower').hide()
+    else
+      htmlString = "(add timeoff)"
+      $('.expand-5-to-7').removeClass('col-xs-5').addClass('col-xs-7')
+      $('.expand-2-to-5').removeClass('col-xs-2').addClass('col-xs-5')
+      $('.timeoff-hider').hide()
+      $('.timeoff-shower').show()
+    $(this).text( htmlString )
+    event.preventDefault()

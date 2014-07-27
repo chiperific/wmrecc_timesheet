@@ -1,0 +1,23 @@
+<%= t_form.fields_for :timesheet_hours, @timesheet.timesheet_hours do |th_form| %>
+  <%= render 'shared/error_messages', object: th_form.object %>
+  <%= th_form.hidden_field :timesheet_id %>
+  <%= th_form.hidden_field :user_id, { value: @user.id } %>
+  <%= th_form.hidden_field :weekday, { value: th_form.index+1 } %>
+  <span class="row span-no-padding-both form-group no-margin">
+    <span class="col-xs-2 expand-2-to-5">
+      <span class="pull-right plus-r-padding timeoff-shower" id="day_name_full">
+        <%= TimesheetHour.day_name(th_form.index+1) %>
+      </span>
+      <span class="pull-right plus-r-padding timeoff-hider" id="day_name_abbr">
+        <%= TimesheetHour.day_name_abbr(th_form.index+1) %>
+      </span>
+    </span>
+
+    <span class="col-xs-5 expand-5-to-7">
+      <%= th_form.number_field :hours, { class: "form-control width-limiter", step: 'any' } %>
+    </span>
+    <span class="col-xs-5 timeoff-hider">
+      <%= th_form.number_field :timeoff_hours, { class: "form-control width-limiter", step: 'any' } %>
+    </span>
+  </span>
+<% end %>

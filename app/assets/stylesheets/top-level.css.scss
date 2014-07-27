@@ -25,7 +25,12 @@ h1, h2, h3, h4, h5, h6, p {
   line-height: 1;
 }
 
+.small {
+  font-size: .75em;
+}
+
 .buffered-row {
+  margin-top: 2em;
   margin-right: 2em;
   margin-left: 2em;
 }
@@ -82,6 +87,11 @@ legend {
   font-size: 1.25em;
 }
 
+.no-margin {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 
 // universal form styling
 
@@ -89,6 +99,12 @@ legend {
 .form-controller > .row {
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+.width-limiter {
+  max-width: 10em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 div.input-group {
@@ -130,6 +146,11 @@ tr[class*='-list-'] > td {
 
 .readonly-disguiser {
   background-color: white !important;
+}
+
+.min-padding-both {
+  padding-left: 6px !important;
+  padding-right: 6px !important;
 }
 
 input[type="checkbox"] {
