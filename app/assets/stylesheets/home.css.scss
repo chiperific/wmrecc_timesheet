@@ -9,11 +9,18 @@
   margin-right: auto;
   border: 1px solid #888888;
   border-radius: 8px;
-  box-shadow: 2px 2px 1px #888888;
+  box-shadow: 4px 4px 1px #888888;
   p, a, i {
     padding: .1em;
   }
+}
 
+.noticeable-red {
+  background-color: rgba(176,89,89,.2);
+}
+
+.noticeable-green {
+  background-color: #dff0d8;
 }
 
 .app-style {

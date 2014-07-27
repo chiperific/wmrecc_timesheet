@@ -168,17 +168,18 @@ i[class*='fa-caret'] {
   color: #a94442;
 }
 
-.alert-error {
+[class*='alert-'] {
   text-align: center;
-  font-size: 1em;
-  color: white;
-  text-shadow: 2px 2px #a88f8f;
-  border: 1px solid #a94442;
+  font-size: 1.05em;
   border-radius: 4px;
-  background-color: #c77270;
   margin: 0;
   padding: 6px;
 }
+
+.alert-error {
+  background-color: #c77270;
+}
+
 ul {
   margin: 0 0 6px 0;
 }

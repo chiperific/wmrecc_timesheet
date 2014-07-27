@@ -8,8 +8,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 ==Next steps:
 5. Dismantle the Request archetecture
 5.1 Add new attributes to timesheets_controller
-5.2 Replace with a field on the Timesheet page: timeoff_hours / timeoff_reviewed / timeoff_approval
-5.3 Split timesheet index between view=timesheet and view=timeoff
+5.2 Replace with a field on the Timesheet page: timeoff_hours
 5.4 Add new timeoff fields to timesheet form
 5.5 Add a hyperlink to hide/unhide
 5.6 Need a way to deny timoff?

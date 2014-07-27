@@ -11,6 +11,23 @@ class StaticPagesController < ApplicationController
         @supervisor = false
       end
     end
+
+    @denied_timesheet_hours = TimesheetHour.where(user_id: current_user.id, timeoff_approved: nil).where.not(timeoff_reviewed: nil)
+
+    if @denied_timesheet_hours.any?
+      flash.now[:error] = 'You have ' + @denied_timesheet_hours.count.to_s + ' denied timeoff ' + 'request'.pluralize(@denied_timesheet_hours.count) + '.'
+    end
+
+
+    if current_user.has_authority_over.any?
+      @user_auth = current_user.has_authority_over
+      @user_auth_id_ary = @user_auth.pluck(:id)
+      @unapproved_timesheet_hours = TimesheetHour.where(user_id: @user_auth_id_ary, timeoff_approved: nil, timeoff_reviewed: nil).group(:timesheet_id).all
+
+      if @unapproved_timesheet_hours.any?
+        flash.now[:success] = 'You have ' + @unapproved_timesheet_hours.count.to_s + ' timeoff ' + 'request'.pluralize(@unapproved_timesheet_hours.count) + ' to review.'
+      end
+    end
   end
 
   def help

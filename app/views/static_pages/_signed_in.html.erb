@@ -2,6 +2,7 @@
 
 <!-- need to add unreviewed timeoff notices using has_authority_over -->
 
+<!-- all user buttons -->
 <div class="row app-style">
   <a href="<%= "/users/#{current_user.id}/timesheets/new" %>" class="<%= @col_width %>">
     <div class="box-btn">
@@ -10,22 +11,34 @@
     </div>
   </a>
   
-  <a href='<%= "/users/#{current_user.id}/timesheets?view=timesheet" %>' class="<%= @col_width %>">
+  <a href='<%= "/users/#{current_user.id}/timesheets" %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
       <p>View past timesheets</p>
     </div>
   </a>
 
-  <a href='<%= "/users/#{current_user.id}/timesheets?view=timeoff" %>' class="<%= @col_width %>">
-    <div class="box-btn">
-      <i class="fa fa-check-square-o fa-3x"></i>
-      <p>Manage time off</p>
-    </div>
-  </a>
+  <% if @denied_timesheet_hours.any? %>
+    <a href='<%= "#" %>' class="<%= @col_width %>">
+      <div class="box-btn noticeable-red">
+        <i class="fa fa-minus-square-o fa-3x"></i>
+        <p>Check Timeoff</p>
+      </div>
+    </a>    
+  <% end %>
+
 
 <!-- Supervisor buttons -->
   <% if @supervisor %>
+    <% if @unapproved_timesheet_hours.any? %>
+      <a href='<%= "#" %>' class="<%= @col_width %>">
+        <div class="box-btn noticeable-green">
+          <i class="fa fa-check-square-o fa-2x"></i>
+          <p>Review Timeoff Requests</p>
+        </div>
+      </a>      
+    <% end %>
+
     <a href="/users/<%= current_user.id %>/timesheets?auth=over" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-thumbs-o-up fa-3x"></i>
@@ -48,7 +61,7 @@
     </a>
   <% end %> 
 
-<!-- Supervisor buttons -->
+<!-- Admin buttons -->
   <% if current_user.admin %> 
     <a href="<%= users_path %>" class="<%= @col_width %>">
       <div class="box-btn">
@@ -72,6 +85,7 @@
     </a>
   <% end %>
 
+<!-- all user buttons -->
   <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-user fa-3x"></i>
