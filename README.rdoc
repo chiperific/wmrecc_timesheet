@@ -1,17 +1,16 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* Timesheet#index - Date column ordered through inner join
-* Timesheet#Index::_auth_over_timesheet_table: select_tag has "fname lname".
-* Center the app-style btn-boxes
-
-==Next steps:
 5. Dismantle the Request archetecture
 5.1 Add new attributes to timesheets_controller
 5.2 Replace with a field on the Timesheet page: timeoff_hours
 5.4 Add new timeoff fields to timesheet form
 5.5 Add a hyperlink to hide/unhide
-5.6 Need a way to deny timoff?
+5.6 Need a way to deny timoff - reviewed but not approved = denied
+* Add Weekday model for less assumptive building of _timesheet_form
+
+==Next steps:
+5.7 Need views and routes for managing timeoff review and approval
 6. Page-by-page permissions. Check out CanCan
 
 7. Timesheet approval (RU)
@@ -26,6 +25,8 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 == Minor tweaks:
 * Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
+* Edit timesheet on behalf of another user, then press cancel - redirects to that user's index view
+
 
 ==Keep in mind:
 * http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
@@ -51,3 +52,4 @@ This product is a Time tracking application for the explicit use of West Michiga
 == Setup configurations
 * TimeZone => application.rb::WmreccTimesheet::config.time_zone
 * Start of week => TimsheetHour::day_name && self.day_name
+* Include Sat / Sun? = Manage Weekday model and table

@@ -73,5 +73,9 @@ class UpdateToSchema < ActiveRecord::Migration
 
     add_index "users", ["email"], name: "index_users_on_email", unique: true
     add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+    create_table "weekdays", force: true do |t|
+      t.string "name"
+    end
   end
 end

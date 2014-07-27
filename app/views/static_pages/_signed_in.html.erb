@@ -19,7 +19,7 @@
   </a>
 
   <% if @denied_timesheet_hours.any? %>
-    <a href='<%= "#" %>' class="<%= @col_width %>">
+    <a href='<%= user_timeoff_path(current_user) %>' class="<%= @col_width %>">
       <div class="box-btn noticeable-red">
         <i class="fa fa-minus-square-o fa-3x"></i>
         <p>Check Timeoff</p>
@@ -31,7 +31,7 @@
 <!-- Supervisor buttons -->
   <% if @supervisor %>
     <% if @unapproved_timesheet_hours.any? %>
-      <a href='<%= "#" %>' class="<%= @col_width %>">
+      <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' class="<%= @col_width %>">
         <div class="box-btn noticeable-green">
           <i class="fa fa-check-square-o fa-2x"></i>
           <p>Review Timeoff Requests</p>
@@ -39,7 +39,7 @@
       </a>      
     <% end %>
 
-    <a href="/users/<%= current_user.id %>/timesheets?auth=over" class="<%= @col_width %>">
+    <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-thumbs-o-up fa-3x"></i>
         <p>Approve timesheets</p>

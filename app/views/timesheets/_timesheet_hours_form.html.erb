@@ -1,4 +1,4 @@
-<%= t_form.fields_for :timesheet_hours, @timesheet.timesheet_hours do |th_form| %>
+<%= t_form.fields_for :timesheet_hours, @timesheet_hours do |th_form| %>
   <%= render 'shared/error_messages', object: th_form.object %>
   <%= th_form.hidden_field :timesheet_id %>
   <%= th_form.hidden_field :user_id, { value: @user.id } %>

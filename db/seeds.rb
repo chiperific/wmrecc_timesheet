@@ -1,3 +1,13 @@
+Weekday.create!([
+  {id: 1, name: "Monday" },
+  {id: 2, name: "Tuesday"}, 
+  {id: 3, name: "Wednesday"}, 
+  {id: 4, name: "Thursday"}, 
+  {id: 5, name: "Friday"}, 
+  {id: 6, name: "Saturday"}, 
+  {id: 7, name: "Sunday"}
+])
+
 Category.create!([
   {id: 1, name: "Admin", department_id: 1, active: true},
   {id: 2, name: "Vol Svcs", department_id: 1, active: true},
@@ -5,7 +15,6 @@ Category.create!([
   {id: 4, name: "Peer Support", department_id: 1, active: true},
   {id: 5, name: "Parent Engagement", department_id: 1, active: true},
   {id: 6, name: "School Engagement", department_id: 1, active: true}
-  {id: 7, name: "Time Off", department_id: 1, active: true},
 ])
 
 Department.create!([

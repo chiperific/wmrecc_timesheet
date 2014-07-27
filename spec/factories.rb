@@ -37,6 +37,7 @@ FactoryGirl.define do
     user_id                 1
     weekday                 2
     hours                   7
+    timeoff_hours           4.5
   end
 
   factory :timesheet_category do

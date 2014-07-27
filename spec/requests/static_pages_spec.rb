@@ -14,10 +14,11 @@ describe "Static pages" do
 
     describe "should allow you to login" do
       let(:user) { FactoryGirl.create(:user) }
+      let(:current_user) {user}
       before do
         visit root_path
         fill_in 'static_page_email', with: user.email
-        fill_in 'static_page_password', with: 'foobar'
+        fill_in 'static_page_password', with: user.password
         click_button 'Sign in'
       end
 

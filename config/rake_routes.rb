@@ -11,6 +11,7 @@ edit_user_timesheet GET    /users/:user_id/timesheets/:id/edit(.:format) timeshe
                     PATCH  /users/:user_id/timesheets/:id(.:format)      timesheets#update
                     PUT    /users/:user_id/timesheets/:id(.:format)      timesheets#update
                     DELETE /users/:user_id/timesheets/:id(.:format)      timesheets#destroy
+       user_timeoff GET    /users/:user_id/timeoff(.:format)             timesheets#timeoff
               users GET    /users(.:format)                              users#index
                     POST   /users(.:format)                              users#create
            new_user GET    /users/new(.:format)                          users#new

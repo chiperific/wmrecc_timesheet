@@ -26,6 +26,10 @@ class TimesheetsController < ApplicationController
 
   end
 
+  def timeoff
+
+  end
+
   def new
     @title = "New Timesheet"
     @user = User.find(params[:user_id])
@@ -34,9 +38,12 @@ class TimesheetsController < ApplicationController
 
     @url = user_timesheets_path(@user.id)
 
-    @timesheet_hours = Array.new(7) { 
-      @timesheet.timesheet_hours.build(user_id: @user.id)
-    }
+    @timesheet_hours = Array.new
+
+    Weekday.all.each do |wd|
+      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.id)
+      @timesheet_hours << timesheet_hour
+    end
 
     @timesheet_categories = Array.new
 
@@ -55,9 +62,12 @@ class TimesheetsController < ApplicationController
     
     @url = user_timesheet_path(@user.id, @timesheet.id)
 
-    @timesheet_hours = Array.new(7) { 
-      @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id)
-    }
+    @timesheet_hours = Array.new
+
+    Weekday.all.each do |wd|
+      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.id)
+      @timesheet_hours << timesheet_hour
+    end
 
 
     @timesheet_categories = Array.new
@@ -84,6 +94,7 @@ class TimesheetsController < ApplicationController
         redirect_to user_timesheets_path(@user)
       else
         flash[:error] = "It broke"
+        render 'new'
       end
 
     else
@@ -94,6 +105,7 @@ class TimesheetsController < ApplicationController
         redirect_to user_timesheets_path(@user)
       else
         flash[:error] = "It broke"
+        render 'new'
       end
 
     end
@@ -109,6 +121,7 @@ class TimesheetsController < ApplicationController
       redirect_to user_timesheets_path(@user)
     else
       flash[:error] = "It broke"
+      render 'edit'
     end
 
   end

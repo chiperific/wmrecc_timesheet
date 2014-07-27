@@ -7,6 +7,7 @@ WmreccTimesheet::Application.routes.draw do
   
   resources :users do
     resources :timesheets
+    get '/timeoff', to: 'timesheets#timeoff'
   end
 
   resources :categories
