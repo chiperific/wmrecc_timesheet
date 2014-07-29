@@ -10,13 +10,14 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Add approval well styling
 5.7.2 create hidden div with "now submit" msg
 5.7.3 create form select tags for un/reviewed and un/approved
-
-==Next steps:
-
 5.7.4 selecting approve automatically selects reviewed (if not selected)
 5.7.5 select form tags triggers jquery which adds Time.now to aproval hidden field
+5.7.6 use jQuery to automatically total the form values for timeoff_hours and hours
 
-5.8 Flesh out params[:auth] == "admin" => _auth_admin_timesheet_table #to view 
+==Next steps:
+5.7.7 Need alerts for unapproved on home#_signed_in -- probably have to switch to hidden divs or define own flashes:
+5.7.7 * https://github.com/rails/rails/blob/master/actionpack/lib/action_controller/metal/flash.rb
+5.8 Flesh out params[:auth] == "admin" => _auth_admin_timesheet_table #timeoff view 
 
 5.9 Need views and routes for managing timeoff review and approval - [auth: over, auth: admin]
 
