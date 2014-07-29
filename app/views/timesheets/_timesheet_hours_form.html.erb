@@ -3,12 +3,10 @@
   <%= th_form.hidden_field :timesheet_id %>
   <%= th_form.hidden_field :user_id, { value: @user.id } %>
   <%= th_form.hidden_field :weekday, { value: th_form.index+1 } %>
-  <span class="row span-no-padding-both form-group no-margin">
-    <%= th_form.hidden_field :reviewed, { class: "reviewed-field"} %>
-    <%= th_form.hidden_field :approved, { class: "approved-field"} %>
-    <%= th_form.hidden_field :timeoff_reviewed, { class: "timeoff-reviewed-field"} %>
-    <%= th_form.hidden_field :timeoff_approved, { class: "timeoff-approved-field"} %>
-  </span>
+  <%= th_form.hidden_field :reviewed, { class: "reviewed-field"} %>
+  <%= th_form.hidden_field :approved, { class: "approved-field"} %>
+  <%= th_form.hidden_field :timeoff_reviewed, { class: "timeoff-reviewed-field"} %>
+  <%= th_form.hidden_field :timeoff_approved, { class: "timeoff-approved-field"} %>
 
   <span class="row span-no-padding-both form-group no-margin">
     <span class="col-xs-2 expand-2-to-5">
@@ -26,10 +24,10 @@
     </span>
 
     <span class="col-xs-5 expand-5-to-7">
-      <%= th_form.number_field :hours, { class: "form-control width-limiter", step: 'any' } %>
+      <%= th_form.number_field :hours, { class: "form-control width-limiter hours-field", step: 'any' } %>
     </span>
     <span class="col-xs-5 timeoff-hide">
-      <%= th_form.number_field :timeoff_hours, { class: "form-control width-limiter", step: 'any' } %>
+      <%= th_form.number_field :timeoff_hours, { class: "form-control width-limiter timeoff-hours-field", step: 'any' } %>
     </span>
   </span>
 <% end %>

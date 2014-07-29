@@ -9,9 +9,10 @@ This product is a Time tracking application for the explicit use of West Michiga
 5.7.1 add reviewed and approved hidden fields
 * Add approval well styling
 5.7.2 create hidden div with "now submit" msg
+5.7.3 create form select tags for un/reviewed and un/approved
 
 ==Next steps:
-5.7.3 create form select tags for un/reviewed and un/approved (needs to be outside form_for?)
+
 5.7.4 selecting approve automatically selects reviewed (if not selected)
 5.7.5 select form tags triggers jquery which adds Time.now to aproval hidden field
 
