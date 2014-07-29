@@ -1,8 +1,15 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-jQuery ->
+RubyReadyDate = ->
+  n = new Date()
+  y = n.getFullYear()
+  m = n.getMonth()
+  d = n.getDate()
+  y + '/' + m + '/' + d
 
+jQuery ->
+# _timesheet_form.html.erb:
   $('#direct_report_chooser').click ->
     direct_report = $('#direct_report_select option:selected').val()
     if direct_report == ""
@@ -34,9 +41,9 @@ jQuery ->
     format: "yyyy"
     minViewMode: 2
     autoclose: true
-
-  $('.timeoff-hider').hide()
-  $('.timeoff-shower').show()
+  
+  $('.timeoff-hide').hide()
+  $('.timeoff-show').show()
   $('.expand-5-to-7').removeClass('col-xs-5').addClass('col-xs-7')
   $('.expand-2-to-5').removeClass('col-xs-2').addClass('col-xs-5')
 
@@ -45,13 +52,42 @@ jQuery ->
       htmlString = "(hide timeoff)"
       $('.expand-5-to-7').removeClass('col-xs-7').addClass('col-xs-5')
       $('.expand-2-to-5').removeClass('col-xs-5').addClass('col-xs-2')
-      $('.timeoff-hider').show()
-      $('.timeoff-shower').hide()
+      $('.timeoff-hide').show()
+      $('.timeoff-show').hide()
     else
       htmlString = "(add timeoff)"
       $('.expand-5-to-7').removeClass('col-xs-5').addClass('col-xs-7')
       $('.expand-2-to-5').removeClass('col-xs-2').addClass('col-xs-5')
-      $('.timeoff-hider').hide()
-      $('.timeoff-shower').show()
+      $('.timeoff-hide').hide()
+      $('.timeoff-show').show()
     $(this).text( htmlString )
     event.preventDefault()
+
+  # _timesheet_hours_form.html.erb
+  $('#review_select_tag').change ->
+    if $(this).val() == "true"
+      $('.reviewed-field').val(RubyReadyDate())
+    else
+      $('.reviewed-field').val('')
+
+  $('#approve_select_tag').change ->
+    if $(this).val() == "true"
+      $('.approved-field').val(RubyReadyDate())
+      $('.reviewed-field').val(RubyReadyDate())
+      $('#review_select_tag').val('true')
+    else
+      $('.approved-field').val('')
+
+  $('#to_review_select_tag').change ->
+    if $(this).val() == "true"
+      $('.timeoff-reviewed-field').val(RubyReadyDate())
+    else
+      $('.timeoff-reviewed-field').val('')
+
+  $('#to_approve_select_tag').change ->
+    if $(this).val() == "true"
+      $('.timeoff-approved-field').val(RubyReadyDate())
+      $('.timeoff-reviewed-field').val(RubyReadyDate())
+      $('#to_review_select_tag').val('true')
+    else
+      $('.timeoff-approved-field').val('')

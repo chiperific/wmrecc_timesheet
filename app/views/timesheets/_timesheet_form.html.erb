@@ -31,7 +31,7 @@
         <span class="leader col-xs-5 expand-5-to-7" >
           Worked
         </span>
-        <span class="leader col-xs-5 timeoff-hider">
+        <span class="leader col-xs-5 timeoff-hide">
           Time off
         </span>
       </span>
@@ -62,7 +62,7 @@
     </div>
     <div class="row well">
       <h5 class="center thin">Approvals:</h5>
-      <%= render 'timesheet_approval_form' %>
+      <%= render 'timesheet_approval_form', t_form: t_form  %>
       <span class="pull-right hidden" id="approval-msg">
         <br>
         <p>Now hit the submit button.</p>

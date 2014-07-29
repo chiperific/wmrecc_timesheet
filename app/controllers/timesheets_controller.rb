@@ -150,4 +150,20 @@ class TimesheetsController < ApplicationController
     )
   end
 
+  def reviewed?
+    if self.reviewed.blank?
+      false
+    else
+      true
+    end
+  end
+
+  def approved?
+    if self.approved.blank?
+      false
+    else
+      true
+    end
+  end
+
 end

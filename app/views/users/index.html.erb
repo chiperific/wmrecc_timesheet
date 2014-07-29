@@ -22,7 +22,7 @@
           </td>
           <td><%= u.department.name unless u.department_id.blank? %></td>
           <td><%= @supervisor.full_name unless @supervisor == nil %></td>
-          <td><%= link_to "Edit", edit_user_path(u.id) %></td>
+          <td><%= link_to "Edit", edit_user_path(u.id), { class: "btn btn-primary"} %></td>
         </tr>
         <% @direct_reports.each do |s| %>
           <tr class=<%= "super-list-#{u.id.to_s}".to_s %> >

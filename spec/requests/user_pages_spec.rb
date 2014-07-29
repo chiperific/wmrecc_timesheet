@@ -2,21 +2,10 @@ require 'spec_helper'
 require 'support/utilities'
 
 describe "User Pages" do
-  #include SessionsHelper
-  #let(:controller) { UsersController.new }
   let(:user) { FactoryGirl.create(:user) }
   let(:current_user) {user}
 
-  #before do
-  #  controller.stub(:path_switch) { path_switch }
-  #end
-
   subject { page }
-
-  # new and edit tests are failing because of inerited methods:
-  # http://stackoverflow.com/questions/24522294/rspec-how-to-stub-inherited-method-current-user-w-o-devise
-  # http://leeourand.com/2014/02/09/stub-that-object/
-  # https://www.relishapp.com/rspec/rspec-rails/v/2-13/docs/mocks/stub-model
 
   pending "Edit" do
     before do
@@ -101,6 +90,7 @@ describe "User Pages" do
   end
 
   describe "Index" do
+    let(:current_user) {user}
     before { visit users_path }
 
     it 'check links and content' do
