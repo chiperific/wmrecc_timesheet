@@ -1,4 +1,9 @@
 // home#_signed_in.html styling to make app-style buttons.
+.msg-text {
+  font-weight: bold;
+  min-height: 3em;
+}
+
 .box-btn {
   text-align: center;
   width: 6em;
@@ -15,25 +20,14 @@
   }
 }
 
-.noticeable-red {
-  background-color: rgba(176,89,89,.2);
-}
-
-.noticeable-green {
-  background-color: #dff0d8;
-}
-
 .app-style {
   a:hover {
     text-decoration: none;
-    background-color: white !important;
+    .box-btn {
+      background-color: #dff0d8 !important;
+    }
   }
   a:visited {
     color: #428bca;
-  }
-  :hover {
-    .box-btn {
-      background-color: #dff0d8;
-    }
   }
 }

@@ -9,10 +9,11 @@ This product is a Time tracking application for the explicit use of West Michiga
 5.7.4 selecting approve automatically selects reviewed (if not selected)
 5.7.5 select form tags triggers jquery which adds Time.now to aproval hidden field
 5.7.6 use jQuery to automatically total the form values for timeoff_hours and hours
+5.7.7 Create well for unapproved on home#_signed_in -- probably have to switch to hidden divs
 
 ==Next steps:
-5.7.7 Need alerts for unapproved on home#_signed_in -- probably have to switch to hidden divs or define own flashes:
-5.7.7 * https://github.com/rails/rails/blob/master/actionpack/lib/action_controller/metal/flash.rb
+* Users#index needs Reviewed column. Move the "Submitted" column and hide on small.
+
 5.8 Flesh out params[:auth] == "admin" => _auth_admin_timesheet_table #timeoff view 
 
 5.9 Need views and routes for managing timeoff review and approval - [auth: over, auth: admin]

@@ -25,6 +25,10 @@ h1, h2, h3, h4, h5, h6, p {
   line-height: 1;
 }
 
+.well-striped {
+  background-image: url('/assets/grey-striped-background2.png');
+}
+
 .small {
   font-size: .75em;
 }
@@ -150,7 +154,7 @@ tr[class*='-list-'] > td {
 }
 
 .readonly-disguiser {
-  background-color: white !important;
+  background-color: white ;
 }
 
 .min-padding-both {

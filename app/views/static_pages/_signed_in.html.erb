@@ -1,43 +1,101 @@
-<h4>Welcome <%= current_user.fname %></h4>
+<div class="row">
+  <h4 class="center">Welcome <%= current_user.fname %></h4>
+</div>
 
-<!-- need to add unreviewed timeoff notices using has_authority_over -->
+<% if @message_board %>
+  <div class="row message-board well well-striped app-style">
+    <legend>Messages for you:</legend>
 
-<!-- all user buttons -->
+    <% if @denied_timeoffs.any? %>
+      <span class="<%= @msg_col_width %> center">
+        <p class="msg-text">
+          <%= 'You have ' + @denied_timeoffs.count.to_s + ' denied timeoff ' + 'request'.pluralize(@denied_timeoffs.count) + '.' %>
+        </p>
+        <a href='<%= user_timeoff_path(current_user) %>' >
+          <div class="box-btn readonly-disguiser">
+            <i class="fa fa-minus-square-o fa-3x"></i>
+            <p>Check Timeoff</p>
+          </div>
+        </a>
+      </span>
+    <% end %>
+
+    <% if @denied_timesheets.any? %>
+      <span class="<%= @msg_col_width %> center">
+        <p class="msg-text">
+          <%= 'You have ' + @denied_timesheets.count.to_s + ' denied ' 'timesheet'.pluralize(@denied_timesheets.count) + '.' %>
+        </p>
+        <a href='<%= user_timesheets_path(current_user) %>' >
+          <div class="box-btn readonly-disguiser">
+            <i class="fa fa-clock-o fa-3x"></i>
+            <p>View past timesheets</p>
+          </div>
+        </a>
+      </span>
+    <% end %>
+
+    <% if !@unapproved_timeoffs.nil? %>
+      <span class="<%= @msg_col_width %> center">
+        <p class="msg-text">
+          <%= 'You have ' + @unapproved_timeoffs.count.to_s + ' timeoff ' + 'request'.pluralize(@unapproved_timeoffs.count) + ' to review.' %>
+        </p>
+        <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' >
+          <div class="box-btn readonly-disguiser">
+            <i class="fa fa-check-square-o fa-2x"></i>
+            <p>Review Timeoff Requests</p>
+          </div>
+        </a>
+      </span>
+    <% end %>
+
+    <% if !@unapproved_timesheets.nil? %>
+      <span class="<%= @msg_col_width %> center">
+        <p class="msg-text">
+          <%= 'You have ' + @unapproved_timesheets.count.to_s + ' ' + 'timesheet'.pluralize(@unapproved_timesheets.count) + ' to review.' %>
+        </p>
+        <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" >
+          <div class="box-btn readonly-disguiser">
+            <i class="fa fa-thumbs-o-up fa-3x"></i>
+            <p>Approve timesheets</p>
+          </div>
+        </a>
+      </span>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- all user buttons 1 -->
 <div class="row app-style">
-  <a href="<%= "/users/#{current_user.id}/timesheets/new" %>" class="<%= @col_width %>">
+  <a href="<%= new_user_timesheet_path(current_user) %>" class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
       <p>Submit timesheet</p>
     </div>
   </a>
   
-  <a href='<%= "/users/#{current_user.id}/timesheets" %>' class="<%= @col_width %>">
+  <a href='<%= user_timesheets_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
       <p>View past timesheets</p>
     </div>
   </a>
 
-  <% if @denied_timesheet_hours.any? %>
-    <a href='<%= user_timeoff_path(current_user) %>' class="<%= @col_width %>">
-      <div class="box-btn noticeable-red">
-        <i class="fa fa-minus-square-o fa-3x"></i>
-        <p>Check Timeoff</p>
-      </div>
-    </a>    
-  <% end %>
+  <a href='<%= user_timeoff_path(current_user) %>' class="<%= @col_width %>">
+    <div class="box-btn readonly-disguiser">
+      <i class="fa fa-minus-square-o fa-3x"></i>
+      <p>Check Timeoff</p>
+    </div>
+  </a>
 
 
 <!-- Supervisor buttons -->
-  <% if @supervisor %>
-    <% if @unapproved_timesheet_hours.any? %>
-      <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' class="<%= @col_width %>">
-        <div class="box-btn noticeable-green">
-          <i class="fa fa-check-square-o fa-2x"></i>
-          <p>Review Timeoff Requests</p>
-        </div>
-      </a>      
-    <% end %>
+  <% if current_user.has_authority_over.any? %>
+    <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-check-square-o fa-2x"></i>
+        <p>Review Timeoff Requests</p>
+      </div>
+    </a>
 
     <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" class="<%= @col_width %>">
       <div class="box-btn">
@@ -85,7 +143,7 @@
     </a>
   <% end %>
 
-<!-- all user buttons -->
+<!-- all user buttons 2 -->
   <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-user fa-3x"></i>
