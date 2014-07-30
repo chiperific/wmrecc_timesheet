@@ -7,10 +7,10 @@
     <p id="ttl-hours">#</p>
   </span>
   <span class="col-xs-4">
-    <%= select_tag "review_select_tag", options_for_select([["Reviewed", true], ["Unreviewed", false]], @timesheet.timesheet_hours.first.reviewed?), { class: "form-control width-limiter", id: "review_select_tag" }  %>
+    <%= select_tag "review_select_tag", options_for_select([["Reviewed", true], ["Unreviewed", false]], @timesheet.timesheet_hours.where(user_id: @user.id).first.reviewed?), { class: "form-control width-limiter", id: "review_select_tag" }  %>
   </span>
     <span class="col-xs-4">
-    <%= select_tag "approve_select_tag", options_for_select([["Approved", true], ["Unapproved", false]], @timesheet.timesheet_hours.first.approved?), { class: "form-control width-limiter", id: "approve_select_tag" }  %>
+    <%= select_tag "approve_select_tag", options_for_select([["Approved", true], ["Unapproved", false]], @timesheet.timesheet_hours.where(user_id: @user.id).first.approved?), { class: "form-control width-limiter", id: "approve_select_tag" }  %>
   </span>
 </span>
 <span class='row no-margin'>
@@ -25,9 +25,9 @@
     <p id="ttl-timeoff-hours">#</p>
   </span>
   <span class="col-xs-4">
-    <%= select_tag "to_review_select_tag", options_for_select([["Reviewed", true], ["Unreviewed", false]], @timesheet.timesheet_hours.first.timeoff_reviewed?), { class: "form-control width-limiter", id: "to_review_select_tag" }  %>
+    <%= select_tag "to_review_select_tag", options_for_select([["Reviewed", true], ["Unreviewed", false]], @timesheet.timesheet_hours.where(user_id: @user.id).first.timeoff_reviewed?), { class: "form-control width-limiter", id: "to_review_select_tag" }  %>
   </span>
     <span class="col-xs-4">
-    <%= select_tag "to_approve_select_tag", options_for_select([["Approved", true], ["Unapproved", false]], @timesheet.timesheet_hours.first.timeoff_approved?), { class: "form-control width-limiter", id: "to_approve_select_tag" }  %>
+    <%= select_tag "to_approve_select_tag", options_for_select([["Approved", true], ["Unapproved", false]], @timesheet.timesheet_hours.where(user_id: @user.id).first.timeoff_approved?), { class: "form-control width-limiter", id: "to_approve_select_tag" }  %>
   </span>
 </span>

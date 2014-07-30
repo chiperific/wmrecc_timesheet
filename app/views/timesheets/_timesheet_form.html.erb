@@ -56,7 +56,7 @@
     </fieldset>
   
   </div>
-  <% if (params[:auth] = "over" || params[:auth] == "admin") && ( current_user.has_authority_over.any? || current_user.admin)  %>
+  <% if ( params[:auth] == "over" || params[:auth] == "admin" ) && ( current_user.has_authority_over.any? || current_user.admin ) %>
     <div class="row buffered-row">
       <hr />
     </div>

@@ -54,7 +54,7 @@
           <td><%= u.fname + " " + u.lname %></td>
           <td><%= u.department.name %></td>
           <td><%= @inactive_super.full_name %></td>
-          <td><%= link_to "Edit", edit_user_path(u.id) %></td>
+          <td><%= link_to "Edit", edit_user_path(u.id), { class: "btn btn-primary"} %></td>
         </tr>
       <% end %>
     </tbody>

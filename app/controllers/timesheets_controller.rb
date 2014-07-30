@@ -128,12 +128,20 @@ class TimesheetsController < ApplicationController
   end
 
   def update
-  @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
 
     if @timesheet.update_attributes(timesheet_params)
       flash[:success] = "Timesheet updated"
-      redirect_to user_timesheets_path(@user)
+      if current_user != @user
+        if current_user.has_authority_over?(@user)
+          redirect_to user_timesheets_path(current_user, auth: "over")
+        elsif current_user.admin
+          redirect_to user_timesheets_path(current_user, auth: "admin")
+        end
+      else
+        redirect_to user_timesheets_path(@user)
+      end
     else
       flash[:error] = "It broke"
       render 'edit'
@@ -150,19 +158,36 @@ class TimesheetsController < ApplicationController
     )
   end
 
+  # for defaul select_tag values on _timesheet_approval_form
   def reviewed?
     if self.reviewed.blank?
-      false
+      ["Unreviewed", true]
     else
-      true
+      ["Reviewed", true]
     end
   end
 
   def approved?
     if self.approved.blank?
-      false
+      ["Unapproved", false]
     else
-      true
+      ["Approved", true]
+    end
+  end
+
+  def timeoff_reviewed?
+    if self.timeoff_reviewed.blank?
+      ["Unreviewed", true]
+    else
+      ["Reviewed", true]
+    end
+  end
+
+  def timeoff_approved?
+    if self.timeoff_approved.blank?
+      ["Unapproved", false]
+    else
+      ["Approved", true]
     end
   end
 

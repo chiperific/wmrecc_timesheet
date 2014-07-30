@@ -24,6 +24,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_authority_over?(user)
+    @users_ary = self.has_authority_over
+    if @users_ary.where(id: user.id).exists?
+      true
+    else
+      false
+    end
+  end
+
   def full_name
     "#{self.fname} #{self.lname}"
   end

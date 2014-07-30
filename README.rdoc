@@ -1,11 +1,7 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-5.6 Denied timoff = reviewed but not approved
-* If current_user.admin? => @timesheets_needing_review added to User#index && Timesheet#index::_auth_over_timesheet_table
-* If current_user.has_authority_over.any? => @timesheets_from_user_auth_needing_review added to User#show
-* Remove approved column from TimesheetCategories
-5.7 Implement ?auth=over or ?auth=admin triggers timesheet approval div
+5.7 Implement ?auth=over or ?auth=admin && current_user.admin or current_user.has_authority_over.any? triggers timesheet approval div
 5.7.1 add reviewed and approved hidden fields
 * Add approval well styling
 5.7.2 create hidden div with "now submit" msg
