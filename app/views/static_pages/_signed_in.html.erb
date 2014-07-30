@@ -4,7 +4,7 @@
 
 <% if @message_board %>
   <div class="row message-board well well-striped app-style">
-    <legend>Messages for you:</legend>
+    <legend class="msg-legend">Messages for you:</legend>
 
     <% if @denied_timeoffs.any? %>
       <span class="<%= @msg_col_width %> center">
