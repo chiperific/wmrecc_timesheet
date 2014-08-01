@@ -1,4 +1,4 @@
-<h3>Current users</h3>
+<h3 class="subtle">Current users</h3>
 <div id="active-users">
   <table class="table">
     <thead>
@@ -16,18 +16,18 @@
         <tr>
           <td>
           <% if @direct_reports.count > 0 %>
-            <%= link_to "<i class='fa fa-caret-right'></i>".html_safe, "#", {class: "center super-view-switch", id: "super-list-#{u.id}"} %>
+            <%= link_to FA_RIGHT, "#", {class: "center super-view-switch", id: "super-list-#{u.id}"} %>
           <% end %>
             <%= u.full_name %>
           </td>
           <td><%= u.department.name unless u.department_id.blank? %></td>
           <td><%= @supervisor.full_name unless @supervisor == nil %></td>
-          <td><%= link_to "Edit", edit_user_path(u.id), { class: "btn btn-primary"} %></td>
+          <td><%= link_to FA_EDIT, edit_user_path(u.id), { class: "btn btn-primary btn-sm"} %></td>
         </tr>
         <% @direct_reports.each do |s| %>
           <tr class=<%= "super-list-#{u.id.to_s}".to_s %> >
             <td class="hidden" colspan="3">&nbsp<%= s.fname + " " + s.lname %></td>
-            <td class="hidden"><%= link_to "Edit", edit_user_path(s.id) %></td>
+            <td class="hidden"><%= link_to FA_EDIT, edit_user_path(s.id), { class: "btn btn-primary btn-sm"} %></td>
           </tr>
         <% end %>
       <% end %>
@@ -35,7 +35,7 @@
   </table>
 </div>
 <% if @inactive_users.count > 0 %>
-  <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right btn btn-primary"} %>
+  <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
 <% end %>
 <div class="hidden" id="inactive-users">
   <table class="table">
@@ -54,7 +54,7 @@
           <td><%= u.fname + " " + u.lname %></td>
           <td><%= u.department.name %></td>
           <td><%= @inactive_super.full_name %></td>
-          <td><%= link_to "Edit", edit_user_path(u.id), { class: "btn btn-primary"} %></td>
+          <td><%= link_to FA_EDIT, edit_user_path(u.id), { class: "btn btn-primary btn-sm"} %></td>
         </tr>
       <% end %>
     </tbody>

@@ -18,6 +18,9 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 * Timesheets#Index auth=admin view needs to be created
 
+* If the user has no SV, who approves?
+** Users w/o SV need to be admin?
+
 
 
 5.8 Flesh out params[:auth] == "admin" => _auth_admin_timesheet_table #timeoff view 

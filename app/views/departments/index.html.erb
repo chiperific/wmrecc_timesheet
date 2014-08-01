@@ -1,7 +1,7 @@
 <div class="row">
   <h3 class="col-xs-6 col-md-6 col-lg-6 subtle">Departments</h3>
   <div class="col-xs-6 col-md-6 col-lg-6">
-    <%= link_to "Go to categories", categories_path, {class: "pull-right btn btn-info btn-xs"} %>
+    <%= link_to icon('level-down')+" Go to categories", categories_path, {class: "pull-right btn btn-info btn-xs"} %>
   </div>
 </div>
   
@@ -16,12 +16,12 @@
             <% end %>
             <%= d.name %>
           </td>
-          <td class="center"><%= link_to FA_EDIT, edit_department_path(d.id), { class: "btn btn-primary"} %></td>
+          <td class="center"><%= link_to FA_EDIT, edit_department_path(d.id), { class: "btn btn-primary btn-sm"} %></td>
         </tr>
         <% d.categories.sort_by {|c| c.name }.each do |c| %>
           <tr class=<%= "cat-list-#{d.id.to_s}" %>>
             <td class="hidden">&nbsp &nbsp <%= c.name %></td>
-            <td class="hidden"><%= link_to FA_EDIT, edit_category_path(c.id), { class: "btn btn-primary"} %></td>
+            <td class="hidden"><%= link_to FA_EDIT, edit_category_path(c.id), { class: "btn btn-primary btn-sm"} %></td>
           </tr>
         <% end %>
       <% end %>
@@ -43,7 +43,7 @@
       <% @depts_inactive.each do |d| %>
         <tr>
           <td><%= d.name %></td>
-          <td class="center"><%= link_to FA_EDIT, edit_department_path(d.id), { class: "btn btn-primary"} %></td>
+          <td class="center"><%= link_to FA_EDIT, edit_department_path(d.id), { class: "btn btn-primary btn-sm"} %></td>
         </tr>
       <% end %>
     </tbody>

@@ -19,14 +19,14 @@
         <tr>
           <td><%= c.name %></td>
           <td><%= c.department.name %></td>
-          <td class="center"><%= link_to FA_EDIT, edit_category_path(c.id), { class: "btn btn-primary"} %></td>
+          <td class="center"><%= link_to FA_EDIT, edit_category_path(c.id), { class: "btn btn-primary btn-sm"} %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 <% if @cats_inactive.count > 0 %>
-  <%= link_to "View inactive categories", "#", {id: "cat-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
+  <%= link_to icon('search')+" View inactive categories", "#", {id: "cat-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
 <% end %>
 <div class="hidden" id="inactive-cats">
   <table class="table">
@@ -43,7 +43,7 @@
         <tr>
           <td><%= c.name %></td>
           <td><%= @dept_for_cat.name %></td>
-          <td><%= link_to FA_EDIT, edit_category_path(c.id), { class: "btn btn-primary"} %></td>
+          <td><%= link_to FA_EDIT, edit_category_path(c.id), { class: "btn btn-primary btn-sm"} %></td>
         </tr>
       <% end %>
     </tbody>

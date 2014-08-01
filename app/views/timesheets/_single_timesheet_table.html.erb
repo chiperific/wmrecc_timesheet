@@ -35,7 +35,7 @@
           <td><%= t.timesheet_hours.where(user_id: th.user.id).pluck(:timeoff_hours).inject(0) {|sum, i| sum + i} %></td>
           <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
           <td><%= th.status %></td>
-          <td><%= link_to FA_EDIT, edit_user_timesheet_path( @user.id, t.id), class: "btn btn-primary" %></td>
+          <td><%= link_to FA_EDIT, edit_user_timesheet_path( @user.id, t.id), class: "btn btn-primary btn-sm" %></td>
         </tr>
       <% end %>
     </tbody>
