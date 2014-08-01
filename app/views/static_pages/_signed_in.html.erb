@@ -1,9 +1,19 @@
-<div class="row">
-  <h4 class="center">Welcome <%= current_user.fname %></h4>
+<div class="row buffered-row">
+  <h3 class="col-xs-10 subtle">Welcome <%= current_user.fname %></h3>
+  <% if @message_board %>
+    <a href="#" id="msg-board-hider" class="col-xs-2 unhide">
+      <span class="fa-stack fa-2x">
+        <i class="fa fa-comment-o fa-stack-2x"></i>
+        <i class="fa fa-exclamation fa-stack-1x fa-hideable"></i>
+        <i class='fa fa-minus fa-stack-1x fa-hideable' style="display : none"></i>
+      </span>
+        
+    </a>
+  <% end %>
 </div>
 
 <% if @message_board %>
-  <div class="row message-board well well-striped app-style">
+  <div class="row message-board well well-striped app-style" id="message-board" style="display : none">
     <legend class="msg-legend">Messages for you:</legend>
 
     <% if @denied_timeoffs.any? %>
@@ -13,8 +23,8 @@
         </p>
         <a href='<%= user_timeoff_path(current_user) %>' >
           <div class="box-btn readonly-disguiser">
-            <i class="fa fa-minus-square-o fa-3x"></i>
-            <p>Check Timeoff</p>
+            <i class="fa fa-times-circle-o fa-3x"></i>
+            <p>Your Timeoff</p>
           </div>
         </a>
       </span>
@@ -41,8 +51,8 @@
         </p>
         <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' >
           <div class="box-btn readonly-disguiser">
-            <i class="fa fa-check-square-o fa-2x"></i>
-            <p>Review Timeoff Requests</p>
+            <i class="fa fa-check-square-o fa-3x"></i>
+            <p>Your Staff's Timeoff</p>
           </div>
         </a>
       </span>
@@ -56,7 +66,7 @@
         <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" >
           <div class="box-btn readonly-disguiser">
             <i class="fa fa-thumbs-o-up fa-3x"></i>
-            <p>Approve timesheets</p>
+            <p>Review Timesheets</p>
           </div>
         </a>
       </span>
@@ -69,45 +79,45 @@
   <a href="<%= new_user_timesheet_path(current_user) %>" class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
-      <p>Submit timesheet</p>
+      <p>Submit Timesheet</p>
     </div>
   </a>
   
   <a href='<%= user_timesheets_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
-      <p>View past timesheets</p>
+      <p>View Past Timesheets</p>
     </div>
   </a>
 
   <a href='<%= user_timeoff_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn readonly-disguiser">
-      <i class="fa fa-minus-square-o fa-3x"></i>
-      <p>Check Timeoff</p>
+      <i class="fa fa-times-circle-o fa-3x"></i>
+      <p>Your Timeoff</p>
     </div>
   </a>
 
 
 <!-- Supervisor buttons -->
   <% if current_user.has_authority_over.any? %>
-    <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' class="<%= @col_width %>">
-      <div class="box-btn">
-        <i class="fa fa-check-square-o fa-2x"></i>
-        <p>Review Timeoff Requests</p>
-      </div>
-    </a>
-
     <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-thumbs-o-up fa-3x"></i>
-        <p>Approve timesheets</p>
+        <p>Review Timesheets</p>
+      </div>
+    </a>
+
+    <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-check-square-o fa-3x"></i>
+        <p>Your Staff's Timeoff</p>
       </div>
     </a>
 
     <a href="#" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-table fa-3x"></i>
-        <p>Run reports</p>
+        <p>Run Reports</p>
       </div>
     </a>
 
@@ -146,7 +156,7 @@
 <!-- all user buttons 2 -->
   <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>">
     <div class="box-btn">
-      <i class="fa fa-user fa-3x"></i>
+      <i class="fa fa-sliders fa-3x"></i>
       <p>Edit your profile</p>
     </div>
   </a>

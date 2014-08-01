@@ -4,6 +4,23 @@
   border-bottom: 2px solid #FAFAFA;
 }
 
+#msg-board-hider {
+  margin-top: -1em;
+  margin-left: -1em;
+}
+
+a.unhide > span > i.fa {
+  color: #C83445;
+}
+
+a.unhide:hover > span > i.fa {
+  color: #AA1627;
+}
+
+a:hover > span > i.fa {
+  color: #246DAC;
+}
+
 .msg-text {
   margin-top: 1em;
   min-height: 3em;

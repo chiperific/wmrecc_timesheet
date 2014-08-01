@@ -13,9 +13,11 @@
     </div>
   </div>
   <div class="row center col-xs-6 col-md-6">
-    <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
+    <button type="submit" class="btn btn-success">
+      <%= FA_SUBMIT %>
+    </button>
   </div>
   <div class="row center col-xs-6 col-md-6">
-    <%= link_to "Cancel", departments_path, { class: "btn btn-primary btn-large"}  %>
+    <%= link_to FA_CANCEL, departments_path, { class: "btn btn-danger btn-large"}  %>
   </div>
 <% end %>

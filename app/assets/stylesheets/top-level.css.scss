@@ -25,12 +25,16 @@ h1, h2, h3, h4, h5, h6, p {
   line-height: 1;
 }
 
+.subtle {
+  color: rgb(109,110,112);
+}
+
 .well-striped {
   background-image: url('/assets/grey-striped-background2.png');
 }
 
 .small {
-  font-size: .75em;
+  font-size: .85em;
 }
 
 .thin {
@@ -39,13 +43,15 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .buffered-row {
-//  margin-top: 2em;
+  margin-top: 1em;
   margin-right: 2em;
   margin-left: 2em;
+  margin-bottom: 1em;
 }
 
-a:hover {
+a:hover > div > i, a:hover > div > p {
   background-color: transparent;
+  color: #246DAC;
 }
 
 a:visited {
@@ -59,6 +65,8 @@ a[class*="btn-"]:visited {
 
 .center {
   text-align: center;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #logo-home-link {
@@ -101,6 +109,21 @@ legend {
   margin-right: 0px;
 }
 
+// universal table styling
+
+// new color def for sub-table rows
+tr[class*='-list-'] > td {
+  background-color: #eeeeee;
+}
+
+.table-center {
+  th {
+    text-align: center;
+  }
+  td {
+    text-align: center;
+  }
+}
 
 // universal form styling
 
@@ -125,10 +148,6 @@ div.input-group {
   border-radius: 4px !important;
 }
 
-// new color def for sub-table rows
-tr[class*='-list-'] > td {
-  background-color: #eeeeee;
-}
 
 // Shrink text on mobile views only
 @media (max-width: 768px) {

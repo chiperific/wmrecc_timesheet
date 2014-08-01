@@ -3,14 +3,14 @@
   <div class="row form-group">
     <div class="col-xs-6">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <span class="input-group-addon"><%= icon('calendar') %></span>
         <%= text_field_tag "week_num_to_date_field", @timesheet_date.strftime("%m/%d"), { class: "form-control readonly-disguiser width-limiter", readonly: true } %>
       </div>
       <%= t_form.hidden_field :week_num, { value: @timesheet.week_num || @timesheet_date.cweek } %>
     </div>
     <div class="col-xs-6">
       <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+        <span class="input-group-addon"><%= icon('calendar-o') %></span>
         <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
       </div>
     </div>
@@ -19,19 +19,21 @@
   <div class="row">
 
     <fieldset class="col-xs-6 span-no-padding-both" id="hours_fieldset">
-      <legend>
+      <legend class="subtle">
         Hours: 
-        <span class="small pull-right"> <%= link_to "(add timeoff)", "#", { id: 'show_timeoff_switch'} %>
+        <span class="small pull-right"> <%= link_to "(add timeoff)", "#", { id: 'show_timeoff_switch', class: 'btn btn-primary btn-xs'} %>
         </span>
       </legend>
       <span class="span-no-padding-both center">
         <span class="col-xs-2 expand-2-to-5" >
           &nbsp
         </span>
-        <span class="leader col-xs-5 expand-5-to-7" >
+        <span class="leader col-xs-5 expand-5-to-7 subtle" >
+          <i class='fa fa-clock-o fa-2x'></i><br>
           Worked
         </span>
-        <span class="leader col-xs-5 timeoff-hide">
+        <span class="leader col-xs-5 timeoff-hide subtle">
+          <i class='fa fa-times-circle-o fa-2x'></i><br>
           Time off
         </span>
       </span>
@@ -40,7 +42,7 @@
     </fieldset>
     
     <fieldset class="col-xs-6" id="categories_fieldset">
-      <legend>Categories:</legend>
+      <legend class="subtle">Categories:</legend>
       <span class="span-no-padding-both center">
         <span class="col-xs-7">
           &nbsp
@@ -48,7 +50,8 @@
         <span class="leader col-xs-5 visible-xs-block">
           Ttl Hrs
         </span>
-        <span class="leader col-xs-5 hidden-xs">
+        <span class="leader col-xs-5 hidden-xs subtle">
+          <i class='fa fa-clock-o fa-2x'></i><br>
           Total Hours
         </span>
       </span>
@@ -73,11 +76,13 @@
 
   <div class="row buffered-row">
     <% if @user != current_user %>
-      <%= link_to "Cancel", user_timesheets_path(current_user, auth: "over"), class: "btn btn-danger" %>
+      <%= link_to FA_CANCEL, user_timesheets_path(current_user, auth: "over"), class: "btn btn-danger pull-right" %>
     <% else %>
-      <%= link_to "Cancel", user_timesheets_path(@user), class: "btn btn-danger" %>
+      <%= link_to FA_CANCEL, user_timesheets_path(@user), class: "btn btn-danger pull-right" %>
     <% end %>
-    <%= t_form.submit "Submit", class: "btn btn-success pull-right" %>
+    <button type="submit" class="btn btn-success">
+      <%= FA_SUBMIT %>
+    </button>
   </div>
 
 <% end %>

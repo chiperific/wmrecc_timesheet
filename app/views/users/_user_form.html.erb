@@ -3,13 +3,13 @@
   <span class="form-controller">
     <div class="row col-xs-12 col-md-6">
       <div class="input-group" title="First Name">
-        <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
+        <span class="input-group-addon"><%= icon('arrow-right') %></span>
         <%= f.text_field :fname, {class: "form-control", placeholder: "First Name"} %>
       </div>
     </div>
     <div class="row col-xs-12 col-md-6">
       <div class="input-group" title="Last Name">
-        <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
+        <span class="input-group-addon"><%= icon('arrow-right') %></span>
         <%= f.text_field :lname, {class: "form-control", placeholder: "Last Name"} %>
       </div>
     </div>
@@ -36,36 +36,36 @@
 
     <div class="row col-xs-12 col-md-6">
       <div class="input-group input-selector" title="Supervisor">
-        <span class="input-group-addon addon-selector"><i class="fa fa-level-up"></i></span>
+        <span class="input-group-addon addon-selector"><%= icon('level-up') %></span>
         <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id ), {}, { class: "form-control", disabled: @disabled } %>
       </div>
     </div>
-    <div class="row  col-xs-12 col-md-6">
+    <div class="row col-xs-12 col-md-6">
       <div class="input-group input-selector" title="Department">
-        <span class="input-group-addon addon-selector"><i class="fa fa-sitemap"></i></span>
+        <span class="input-group-addon addon-selector"><%= icon('sitemap') %></span>
         <%= f.select :department_id, options_for_select(@dept_array, @user.department_id), {}, {class: "form-control", disabled: @disabled } %>
       </div>
     </div>
 
     <% if @sv_or_admin %>
-      <div class="row  col-xs-12 col-md-6">
+      <div class="row col-xs-12 col-md-6">
         <hr class="hr-thin">
       </div>
 
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Default hours per week">
-          <span class="input-group-addon rate"><i class="fa fa-clock-o">/wk</i></span>
+          <span class="input-group-addon rate"><%= icon('clock-o') %>/wk</span>
           <%= f.number_field :standard_hours, {class: "form-control", placeholder: "Hrs Per Week"} %>
         </div>
       </div>
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Time off (in hours) per year">
-          <span class="input-group-addon rate"><i class="fa fa-ban">/yr</i></span>
+          <span class="input-group-addon rate"><%= icon('times-circle') %>/yr</span>
           <%= f.number_field :annual_time_off, {class: "form-control", placeholder: "Time Off"} %>
         </div>
       </div>
 
-      <div class="row  col-xs-12 col-md-6">
+      <div class="row col-xs-12 col-md-6">
         <hr class="hr-thin">
       </div>
 
@@ -78,32 +78,32 @@
 
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Annual Salary">
-          <span class="input-group-addon rate">$/<i class="fa fa-calendar"></i></span>
+          <span class="input-group-addon rate">$/<%= icon('calendar') %></span>
           <%= f.number_field :salary_rate, {class: "form-control", placeholder: "Salary"} %>
         </div>
       </div>
+
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Hourly Rate">
-          <span class="input-group-addon rate">$/<i class="fa fa-clock-o"></i></span>
+          <span class="input-group-addon rate">$/<%= icon('clock-o') %></span>
           <%= f.number_field :hourly_rate, {class: "form-control", placeholder: "Hourly Rate"} %>
         </div>
       </div>
-
     <% end %>
 
     <% if current_user.admin? %>
-      <div class="row  col-xs-12 col-md-6">
+      <div class="row col-xs-12 col-md-6">
         <hr class="hr-thin">
       </div>
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group input-selector">
-          <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
+          <span class="input-group-addon addon-selector"><%= icon('cogs') %></span>
           <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector"} %>
         </div>
       </div>
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group input-selector">
-          <span class="input-group-addon addon-selector"><i class="fa fa-bars"></i></span>
+          <span class="input-group-addon addon-selector"><%= icon('bars') %></span>
           <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin? ), {}, {class: "form-control selector", disabled: @admin_disabled } %>
         </div>
         <% if @admin_disabled %>
@@ -112,26 +112,32 @@
       </div>
     <% end %>
 
-    <div class="row  col-xs-12 col-md-12">
+    <div class="row col-xs-12 col-md-12">
       <hr class="hr-thin">
     </div>
-    <div class="row  col-xs-12 col-md-6">
+    <div class="row col-xs-12 col-md-6">
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
         <%= f.text_field :password, {class: "form-control", placeholder: @pw_lang} %>
       </div>
     </div>
-    <div class="row  col-xs-12 col-md-6">
+    <div class="row col-xs-12 col-md-6">
       <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
         <%= f.text_field :password_confirmation, {class: "form-control", placeholder: "Re-Enter Password"} %>
       </div>
     </div>
-    <div class="row center col-xs-6 col-md-6">
-      <%= f.submit "Submit", { class: "btn btn-primary btn-large"} %>
+
+    <div class="row col-xs-12 center buffered-row">
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success">
+          <%= FA_SUBMIT %>
+        </button>
+      </div>
+      <div class="col-xs-6">
+        <%= link_to FA_CANCEL, @path_switch, { class: "btn btn-danger" }  %>
+      </div>
     </div>
-    <div class="row center col-xs-6 col-md-6">
-      <%= link_to "Cancel", @path_switch, { class: "btn btn-primary btn-large"}  %>
-    </div>
+
   </span>
 <% end %>

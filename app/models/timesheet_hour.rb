@@ -54,4 +54,14 @@ class TimesheetHour < ActiveRecord::Base
     day_ary_hash[weekday]
   end
 
+  def status
+    if self.approved
+      self.approved.strftime("%m/%d/%Y")
+    elsif self.reviewed
+      "Denied"
+    else
+      "Unreviewed"
+    end
+  end
+
 end
