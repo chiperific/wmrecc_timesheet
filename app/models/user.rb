@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, allow_blank: true
 
   def has_authority_over
-    if User.where(supervisor_id: self.id).exists?
-      User.where(supervisor_id: self.id)
+    if User.where(supervisor_id: self.id, active: true).exists?
+      User.where(supervisor_id: self.id, active: true)
     else
       []
     end

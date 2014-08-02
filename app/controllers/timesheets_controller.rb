@@ -29,7 +29,11 @@ class TimesheetsController < ApplicationController
     elsif params[:auth] == "admin"
       @page_title = "All Timesheets"
       @timesheets_all = TimesheetHour.group(:timesheet_id)
-      @all_users_select = User.all
+      @all_users_select = Hash.new
+
+      User.where(active: true).each do |usr|
+        @all_users_select[usr.full_name] = usr.id
+      end
     else
       @page_title = "Your Timesheets"
       @timesheet_hours = TimesheetHour.where(user_id: @user.id).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])

@@ -66,7 +66,7 @@
     </div>
     <div class="row well">
       <div class="col-xs-12">
-        <% if current_user.supervisor_id == nil %>
+        <% if current_user.supervisor_id == nil && current_user == @user %>
           <h4 class="thin subtle">Approvals:</h4>
           <i id="approval_explanation" class="pull-right wrapped-and-right small">You can approve this because <br>you don't have a supervisor</i>
         <% else %>

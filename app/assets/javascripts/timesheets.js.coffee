@@ -22,8 +22,10 @@ jQuery ->
       # Shows the 'Please select a name.' hidden div
       $('#direct_report_error').toggleClass('hidden')
     else
-      urlString = "/users/"+direct_report+"/timesheets/new"
-      location.pathname = urlString
+      pathString = "/users/"+direct_report+"/timesheets/new"
+      originString = location.origin
+      urlString = originString + pathString
+      window.location = urlString
     event.preventDefault()
     false
 
@@ -108,6 +110,12 @@ jQuery ->
     calculateTotal('.timeoff-hours-field', '#ttl-timeoff-hours')
 
   $('#timesheet-admin-table').dataTable
+    pagingType: "full_numbers"
+    columnDefs: [
+      targets: -1, sortable: false, searchable: false
+    ]
+
+  $('#timesheet-over-table').dataTable
     pagingType: "full_numbers"
     columnDefs: [
       targets: -1, sortable: false, searchable: false
