@@ -28,11 +28,11 @@
         <span class="col-xs-2 expand-2-to-5" >
           &nbsp
         </span>
-        <span class="leader col-xs-5 expand-5-to-7 subtle" >
+        <span class="col-xs-5 expand-5-to-7 subtle" >
           <i class='fa fa-clock-o fa-2x'></i><br>
           Worked
         </span>
-        <span class="leader col-xs-5 timeoff-hide subtle">
+        <span class="col-xs-5 timeoff-hide subtle">
           <i class='fa fa-times-circle-o fa-2x'></i><br>
           Time off
         </span>
@@ -47,11 +47,12 @@
         <span class="col-xs-7">
           &nbsp
         </span>
-        <span class="leader col-xs-5 visible-xs-block">
+        <span class="col-xs-5 visible-xs-block subtle">
+          <%= icon('clock-o fa-2x') %><br>
           Ttl Hrs
         </span>
-        <span class="leader col-xs-5 hidden-xs subtle">
-          <i class='fa fa-clock-o fa-2x'></i><br>
+        <span class="col-xs-5 hidden-xs subtle">
+          <%= icon('clock-o fa-2x') %><br>
           Total Hours
         </span>
       </span>
@@ -59,17 +60,20 @@
     </fieldset>
   
   </div>
-  <% if ( params[:auth] == "over" || params[:auth] == "admin" ) && ( current_user.has_authority_over.any? || current_user.admin ) %>
+  <% if current_user.can_approve_this?(@user) %>
     <div class="row buffered-row">
       <hr />
     </div>
     <div class="row well">
-      <h5 class="center thin">Approvals:</h5>
+      <div class="col-xs-12">
+        <% if current_user.supervisor_id == nil %>
+          <h4 class="thin subtle">Approvals:</h4>
+          <i id="approval_explanation" class="pull-right wrapped-and-right small">You can approve this because <br>you don't have a supervisor</i>
+        <% else %>
+          <h4 class="center thin subtle">Approvals:</h4>
+        <% end %>
+      </div>
       <%= render 'timesheet_approval_form', t_form: t_form  %>
-      <span class="pull-right hidden" id="approval-msg">
-        <br>
-        <p>Now hit the submit button.</p>
-      </span>
     </div>  
   <% end %>
 

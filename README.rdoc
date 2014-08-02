@@ -1,25 +1,12 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-5.7 Implement ?auth=over or ?auth=admin && current_user.admin or current_user.has_authority_over.any? triggers timesheet approval div
-5.7.1 add reviewed and approved hidden fields
-* Add approval well styling
-5.7.2 create hidden div with "now submit" msg
-5.7.3 create form select tags for un/reviewed and un/approved
-5.7.4 selecting approve automatically selects reviewed (if not selected)
-5.7.5 select form tags triggers jquery which adds Time.now to aproval hidden field
-5.7.6 use jQuery to automatically total the form values for timeoff_hours and hours
-5.7.7 Create well for unapproved on home#_signed_in -- probably have to switch to hidden divs
 * Timesheet#index needs Reviewed column. Move the "Submitted" column and hide on small.
+* Timesheets#Index auth=admin view shows all timesheets
+* If the user has no SV, can self-approve
 
 ==Next steps:
-* Upper right buttons should be btn-info
-* cancel buttons should be btn-danger
-
-* Timesheets#Index auth=admin view needs to be created
-
-* If the user has no SV, who approves?
-** Users w/o SV need to be admin?
+* auth= is useless for _timesheet_form
 
 
 
@@ -37,6 +24,8 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 8. Reports
 8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+
+9. Destroy action for user with delete nested models
 
 == Minor tweaks:
 * Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
@@ -71,3 +60,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 * TimeZone => application.rb::WmreccTimesheet::config.time_zone
 * Start of week => TimsheetHour::day_name && self.day_name
 * Include Sat / Sun? = Manage Weekday model and table
+
+== Future releases:
+* _auth_admin_timesheet_table => > 10k records needs server-side pull:
+** http://railscasts.com/episodes/340-datatables

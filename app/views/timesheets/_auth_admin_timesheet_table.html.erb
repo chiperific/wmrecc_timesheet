@@ -1,5 +1,67 @@
-<p>Needs all unreviewed timesheets</p>
-<hr>
-<p>Plus a hidden table for reviewed timesheets</p>
-<p>With a search field?</p>
-<p>Or sortable columns?</p>
+<div id="admin-timesheets">
+  <table class="table table-striped table-center" id="timesheet-admin-table">
+    <thead class="subtle">
+      <tr>
+        <td>
+          <%= icon('user fa-2x') %>
+          <p>User</p>
+        </td>
+        <td>
+          <%= icon('calendar fa-2x') %>
+          <p>Date</p>
+        </td>
+        <td class="hidden-xs">
+          <%= icon('clock-o fa-2x') %>
+          <p>Hours</p>
+        </td>
+        <td>
+          <%= icon('times-circle-o fa-2x') %>
+          <p class='hidden-xs'>Time off</p>
+          <p class='visible-xs-block'>Off</p>
+        </td>
+        <td class="hidden-xs">
+          <%= icon('toggle-up fa-2x') %>
+          <p>Submitted</p>
+        </td>
+        <td>
+          <%= icon('check-square-o fa-2x') %>
+          <p>Approved</p>
+        </td>
+        <th></th>
+      </tr>
+    </thead>
+  <tbody>
+      <% @timesheets_all.each do |th| %>
+        <% t = th.timesheet %>
+        <tr>
+          <th><%= th.user.full_name %></th>
+          <td><%= t.week_num_to_date %></td>
+          <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).pluck(:hours).inject(0) {|sum, i| sum + i} %></td>
+          <td><%= t.timesheet_hours.where(user_id: th.user.id).pluck(:timeoff_hours).inject(0) {|sum, i| sum + i} %></td>
+          <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
+          <td><%= th.status %></td>
+          <td><%= link_to FA_GO, edit_user_timesheet_path( th.user_id, t.id ), class: "btn btn-success btn-sm" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="row center">
+    <hr />
+  </div>
+
+  <div class="row buffered-row">
+    <div class="col-xs-4">
+      <%= link_to "Create for:", "#", { class: "btn btn-primary", id: "direct_report_chooser"} %>
+    </div>
+    <div class="col-xs-8">
+      <%= select_tag "direct_reports", options_for_select(@all_users_select), { include_blank: true, class: "expand form-control", id: "direct_report_select" } %>
+    </div>
+  </div>
+
+  <div class="hidden pull-right" id="direct_report_error">
+    <code>Please select a name.</code>
+  </div>
+
+</div>
+

@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <% if @sv_or_admin %>
+    <% if current_user.can_approve_this?(@user) %>
       <div class="row col-xs-12 col-md-6">
         <hr class="hr-thin">
       </div>
@@ -104,10 +104,10 @@
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group input-selector">
           <span class="input-group-addon addon-selector"><%= icon('bars') %></span>
-          <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin? ), {}, {class: "form-control selector", disabled: @admin_disabled } %>
+          <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin? ), {}, {class: "form-control selector", disabled: if current_user == @user then true else false end } %>
         </div>
-        <% if @admin_disabled %>
-          <p class="small center" id="admin-selector-warning">(You can't disabled your own admin account.)</p>
+        <% if current_user == @user %>
+          <i class="small pull-right" id="admin-selector-warning">(You can't disabled your own admin account.)</i>
         <% end %>
       </div>
     <% end %>

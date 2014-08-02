@@ -61,23 +61,6 @@ class UsersController < ApplicationController
 
     
     @path_switch = path_switch
-    
-    if current_user.id == @user.id 
-      @admin_disabled = true
-    else
-      @admin_disabled = false
-    end
-
-    @sv_or_admin = false
-    if current_supervisor? || (current_user.admin && current_user != @user)
-      @sv_or_admin = true
-    end
-
-    if @sv_or_admin == false
-      @disabled = true
-    else
-      @disabled = false
-    end
 
   end
 

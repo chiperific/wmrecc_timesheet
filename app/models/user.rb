@@ -27,6 +27,19 @@ class User < ActiveRecord::Base
   def has_authority_over?(user)
     @users_ary = self.has_authority_over
     if @users_ary.where(id: user.id).exists?
+    true
+    else
+      false
+    end
+  end
+
+  def can_approve_this?(source)
+    # if self is an admin but not accessing their own source
+    # if self has authority over the source
+    if (self.admin && self.id != source.id ) || self.has_authority_over?(source)
+      true
+    # if self doesn't have a supervisor and is accessing their own source
+    elsif self.supervisor_id == nil && self.id == source.id
       true
     else
       false

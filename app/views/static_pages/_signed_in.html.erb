@@ -24,7 +24,7 @@
         <a href='<%= user_timeoff_path(current_user) %>' >
           <div class="box-btn readonly-disguiser">
             <i class="fa fa-times-circle-o fa-3x"></i>
-            <p>Your Timeoff</p>
+            <p>Your timeoff</p>
           </div>
         </a>
       </span>
@@ -52,7 +52,7 @@
         <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' >
           <div class="box-btn readonly-disguiser">
             <i class="fa fa-check-square-o fa-3x"></i>
-            <p>Your Staff's Timeoff</p>
+            <p>Your staff's timeoff</p>
           </div>
         </a>
       </span>
@@ -66,7 +66,7 @@
         <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" >
           <div class="box-btn readonly-disguiser">
             <i class="fa fa-thumbs-o-up fa-3x"></i>
-            <p>Review Timesheets</p>
+            <p>Your staff's timesheets</p>
           </div>
         </a>
       </span>
@@ -79,21 +79,21 @@
   <a href="<%= new_user_timesheet_path(current_user) %>" class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
-      <p>Submit Timesheet</p>
+      <p>Submit timesheet</p>
     </div>
   </a>
   
   <a href='<%= user_timesheets_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
-      <p>View Past Timesheets</p>
+      <p>View past timesheets</p>
     </div>
   </a>
 
   <a href='<%= user_timeoff_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn readonly-disguiser">
       <i class="fa fa-times-circle-o fa-3x"></i>
-      <p>Your Timeoff</p>
+      <p>Your timeoff</p>
     </div>
   </a>
 
@@ -103,21 +103,21 @@
     <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-thumbs-o-up fa-3x"></i>
-        <p>Review Timesheets</p>
+        <p>Your staff's timesheets</p>
       </div>
     </a>
 
     <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-check-square-o fa-3x"></i>
-        <p>Your Staff's Timeoff</p>
+        <p>Your staff's timeoff</p>
       </div>
     </a>
 
     <a href="#" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-table fa-3x"></i>
-        <p>Run Reports</p>
+        <p>Run reports</p>
       </div>
     </a>
 
@@ -138,17 +138,24 @@
       </div>
     </a>
 
+    <a href="<%= user_timesheets_path(current_user, auth: 'admin') %>" class="<%= @col_width %>">
+      <div class="box-btn">
+        <i class="fa fa-thumbs-o-up fa-3x"></i>
+        <p>Manage all timesheets</p>
+      </div>
+    </a>
+
     <a href="<%= departments_path %>" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-sitemap fa-3x"></i>
-        <p class="small">Manage Departments</p>
+        <p class="small">Manage departments</p>
       </div>
     </a>
 
     <a href="<%= categories_path %>" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-list fa-3x"></i>
-        <p class="small">Manage Categories</p>
+        <p class="">Manage categories</p>
       </div>
     </a>
   <% end %>

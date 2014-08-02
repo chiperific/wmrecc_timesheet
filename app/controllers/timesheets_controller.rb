@@ -12,7 +12,6 @@ class TimesheetsController < ApplicationController
       @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
 
       if current_user.admin?
-        #@timesheets_for_other_users = TimesheetHour.where.not(user_id: @user_auth_id_ary).group(:timesheet_id)
         @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).all
       end
 
@@ -26,14 +25,15 @@ class TimesheetsController < ApplicationController
       @user_auth.each do |usr|
         @direct_reports_select[usr.full_name] = usr.id
       end
+
+    elsif params[:auth] == "admin"
+      @page_title = "All Timesheets"
+      @timesheets_all = TimesheetHour.group(:timesheet_id)
+      @all_users_select = User.all
     else
       @page_title = "Your Timesheets"
       @timesheet_hours = TimesheetHour.where(user_id: @user.id).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
-    end # if params[:auth] == 'over'
-
-    if params[:auth] == "admin"
-      @page_title = "All Unreviewed Timesheets"
-    end
+    end # if params[:auth]
 
   end
 
@@ -50,6 +50,12 @@ class TimesheetsController < ApplicationController
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.new
     @timesheet_date = Date.today
+
+    @hours_reviewed = ["Unreviewed", false]
+    @hours_approved = ["Unapproved", false]
+    @timeoff_hours_reviewed = ["Unreviewed", false]
+    @timeoff_hours_approved = ["Unapproved", false]
+
 
     @url = user_timesheets_path(@user.id)
 
@@ -74,6 +80,11 @@ class TimesheetsController < ApplicationController
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
     @timesheet_date = Date.parse @timesheet.week_num_to_date_obj
+
+    @hours_reviewed = @timesheet.timesheet_hours.where(user_id: @user.id).first.reviewed?
+    @hours_approved = @timesheet.timesheet_hours.where(user_id: @user.id).first.approved?
+    @timeoff_hours_reviewed = @timesheet.timesheet_hours.where(user_id: @user.id).first.timeoff_reviewed?
+    @timeoff_hours_approved = @timesheet.timesheet_hours.where(user_id: @user.id).first.timeoff_approved?
     
     @url = user_timesheet_path(@user.id, @timesheet.id)
 
@@ -108,7 +119,7 @@ class TimesheetsController < ApplicationController
         flash[:success] = "Timesheet updated"
         redirect_to user_timesheets_path(@user)
       else
-        flash[:error] = "It broke"
+        flash[:error] = "Failed to submit"
         render 'new'
       end
 
@@ -119,7 +130,7 @@ class TimesheetsController < ApplicationController
         flash[:success] = "Timesheet submitted"
         redirect_to user_timesheets_path(@user)
       else
-        flash[:error] = "It broke"
+        flash[:error] = "Failed to submit"
         render 'new'
       end
 
@@ -143,7 +154,7 @@ class TimesheetsController < ApplicationController
         redirect_to user_timesheets_path(@user)
       end
     else
-      flash[:error] = "It broke"
+      flash[:error] = "Failed to update"
       render 'edit'
     end
 
@@ -161,7 +172,7 @@ class TimesheetsController < ApplicationController
   # for defaul select_tag values on _timesheet_approval_form
   def reviewed?
     if self.reviewed.blank?
-      ["Unreviewed", true]
+      ["Unreviewed", false]
     else
       ["Reviewed", true]
     end
