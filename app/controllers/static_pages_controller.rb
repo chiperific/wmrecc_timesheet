@@ -1,4 +1,7 @@
 class StaticPagesController < ApplicationController
+
+  skip_before_action :require_login, only: [:home, :create, :destroy]
+  
   def home
     @title = "Home"
     @col_width = "col-xs-4 col-sm-2 col-md-2 col-lg-1"
@@ -40,7 +43,6 @@ class StaticPagesController < ApplicationController
   end
 
   def destroy
-    @title = "Sign out"
     sign_out
     redirect_to root_path
   end

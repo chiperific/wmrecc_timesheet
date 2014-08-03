@@ -1,4 +1,4 @@
-<%= form_for @cat do |f| %>
+<%= form_for @category do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group">
@@ -15,7 +15,7 @@
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
       <span class="input-group-addon addon-selector"><%= icon('sitemap') %></span>
-      <%= f.select :department_id, options_for_select(@dept_array, @cat.department_id), {}, {class: "form-control selector" } %>
+      <%= f.select :department_id, options_for_select(@dept_array, @category.department_id), {}, {class: "form-control selector" } %>
     </div>
   </div>
   <div class="row center col-xs-6 col-md-6">

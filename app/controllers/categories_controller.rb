@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+
+  before_filter @department = @category.department if @category
+  
   def index
     @title = "Categories"
     @cats_active = Category.where(active: true)
@@ -6,9 +9,9 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @cat = Category.new(cat_params)
+    @category = Category.new(cat_params)
 
-    if @cat.save
+    if @category.save
       flash[:success] = "Category created"
       redirect_to categories_path
     else
@@ -20,26 +23,26 @@ class CategoriesController < ApplicationController
 
   def new
     @title = "Add Categories"
-    @cat = Category.new
+    @category = Category.new
     @dept_array = dept_array
     @active_status = true
   end
 
   def edit
     @title = "Edit categories"
-    @cat = Category.find(params[:id])
+    @category = Category.find(params[:id])
     @active_status = @cat.active
     @dept_array = dept_array
   end
 
   def update
-    @cat = Category.find(params[:id])
+    @category = Category.find(params[:id])
 
-    if @cat.update_attributes(cat_params)
+    if @category.update_attributes(cat_params)
       flash[:success] = "Category updated"
       redirect_to categories_path
     else
-      @active_status = @cat.active
+      @active_status = @category.active
       @dept_array = dept_array
       render 'edit'
     end

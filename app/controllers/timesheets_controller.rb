@@ -137,9 +137,7 @@ class TimesheetsController < ApplicationController
         flash[:error] = "Failed to submit"
         render 'new'
       end
-
     end
-
   end
 
   def update
@@ -161,49 +159,48 @@ class TimesheetsController < ApplicationController
       flash[:error] = "Failed to update"
       render 'edit'
     end
-
   end
 
   private
 
-  def timesheet_params
-    params.require(:timesheet).permit(:week_num, :year,
-      :timesheet_hours_attributes =>      [:id, :timesheet_id, :user_id, :weekday, :hours, :reviewed, :approved, :timeoff_hours, :timeoff_reviewed, :timeoff_approved],
-      :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :hours, :category_id]
-    )
-  end
-
-  # for defaul select_tag values on _timesheet_approval_form
-  def reviewed?
-    if self.reviewed.blank?
-      ["Unreviewed", false]
-    else
-      ["Reviewed", true]
+    def timesheet_params
+      params.require(:timesheet).permit(:week_num, :year,
+        :timesheet_hours_attributes =>      [:id, :timesheet_id, :user_id, :weekday, :hours, :reviewed, :approved, :timeoff_hours, :timeoff_reviewed, :timeoff_approved],
+        :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :hours, :category_id]
+      )
     end
-  end
 
-  def approved?
-    if self.approved.blank?
-      ["Unapproved", false]
-    else
-      ["Approved", true]
+    # for defaul select_tag values on _timesheet_approval_form
+    def reviewed?
+      if self.reviewed.blank?
+        ["Unreviewed", false]
+      else
+        ["Reviewed", true]
+      end
     end
-  end
 
-  def timeoff_reviewed?
-    if self.timeoff_reviewed.blank?
-      ["Unreviewed", true]
-    else
-      ["Reviewed", true]
+    def approved?
+      if self.approved.blank?
+        ["Unapproved", false]
+      else
+        ["Approved", true]
+      end
     end
-  end
 
-  def timeoff_approved?
-    if self.timeoff_approved.blank?
-      ["Unapproved", false]
-    else
-      ["Approved", true]
+    def timeoff_reviewed?
+      if self.timeoff_reviewed.blank?
+        ["Unreviewed", true]
+      else
+        ["Reviewed", true]
+      end
     end
-  end
 
+    def timeoff_approved?
+      if self.timeoff_approved.blank?
+        ["Unapproved", false]
+      else
+        ["Approved", true]
+      end
+    end
+  #end private
 end

@@ -6,7 +6,7 @@ describe "Categories Pages" do
   describe "Index" do
     before { visit categories_path }
 
-    it { should have_content('Current Categories')}
+    it { should have_content('Categories')}
     it { should have_link('Add New')}
   end
 

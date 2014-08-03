@@ -1,5 +1,6 @@
 class DepartmentsController < ApplicationController
-    def index
+  
+  def index
     @title = "Departments"
 
     @depts_active = Department.where(active: true)

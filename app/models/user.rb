@@ -25,9 +25,15 @@ class User < ActiveRecord::Base
   end
 
   def has_authority_over?(user)
-    @users_ary = self.has_authority_over
-    if @users_ary.where(id: user.id).exists?
-    true
+    if self.has_authority_over.any?
+      @users_ary = self.has_authority_over
+      
+      if @users_ary.where(id: user.id).exists?
+        true
+      else
+        false
+      end
+
     else
       false
     end

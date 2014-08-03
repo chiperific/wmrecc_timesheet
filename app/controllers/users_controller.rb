@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
 
+  before_action :require_admin, only: :index
+
+  before_action only: :show do
+    require_supervisor(User.find(params[:id]))
+  end
+
   def index
     @title = "Users"
     @users = User.all
