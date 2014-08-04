@@ -33,7 +33,7 @@
           Worked
         </span>
         <span class="col-xs-5 timeoff-hide subtle">
-          <i class='fa fa-times-circle-o fa-2x'></i><br>
+          <i class='fa fa-minus-square-o fa-2x'></i><br>
           Time off
         </span>
       </span>
@@ -79,11 +79,7 @@
 
 
   <div class="row buffered-row">
-    <% if @user != current_user %>
-      <%= link_to FA_CANCEL, user_timesheets_path(current_user, auth: "over"), class: "btn btn-danger pull-right" %>
-    <% else %>
-      <%= link_to FA_CANCEL, user_timesheets_path(@user), class: "btn btn-danger pull-right" %>
-    <% end %>
+    <%= link_to FA_CANCEL, session[:saved_previous_url], class: "btn btn-danger pull-right" %>
     <button type="submit" class="btn btn-success">
       <%= FA_SUBMIT %>
     </button>

@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   private
 
   # permission defs
+    def save_previous_url
+      session[:saved_previous_url] = URI(request.referrer).path
+    end
 
    def require_login
     unless !current_user.nil?

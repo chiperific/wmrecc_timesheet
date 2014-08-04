@@ -6,6 +6,8 @@ class UsersController < ApplicationController
     require_supervisor(User.find(params[:id]))
   end
 
+  after_action :save_previous_url, only: [:new, :edit]
+
   def index
     @title = "Users"
     @users = User.all
@@ -52,8 +54,6 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Create password"
-
-    @path_switch = path_switch
   end
 
   def edit
@@ -64,10 +64,6 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Change password"
-
-    
-    @path_switch = path_switch
-
   end
 
   def create
@@ -110,12 +106,14 @@ class UsersController < ApplicationController
         :email, :password, :password_confirmation, :admin, :annual_time_off, :standard_hours)
     end
 
+    # for _user_form select field
     def dept_array
       @dept_arry = Array.new([["(no department)", nil]])
       @dept_arry += Department.all.sort_by { |d| d.name }.map { |d| [d.name, d.id]}
       @dept_arry
     end
 
+    # for _user_form select field
     def super_array
       @super_arry = Array.new([["(no supervisor)", nil]])
       sorted_arry = User.all.sort_by { |u| u.fname }.sort_by { |u| u.lname}
@@ -123,15 +121,4 @@ class UsersController < ApplicationController
       @super_arry += sorted_arry.map { |u| [u.fname+" "+u.lname, u.id]}
       @super_arry
     end
-
-    def path_switch
-      if current_user.admin?
-        users_path
-      elsif current_user.has_authority_over.count > 0
-        user_path(current_user)
-      else
-        root_path
-      end
-    end
-
 end

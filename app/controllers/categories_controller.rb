@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
 
   before_action :require_admin
+  after_action :save_previous_url, only: [:new, :edit]
   
   def index
     @title = "Categories"

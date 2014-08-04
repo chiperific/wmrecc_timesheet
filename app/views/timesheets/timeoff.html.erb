@@ -1,1 +1,8 @@
-<p>This is your timeoff!</p>
+<h3 class="center subtle"><%= @page_title %></h3>
+<% if params[:auth] == "over" %>
+  <%= render 'auth_over_timeoff_table' %>
+<% elsif params[:auth] == "admin" %>
+  <%= render 'auth_admin_timeoff_table' %>
+<% else %>
+  <%= render 'single_timeoff_table' %>
+<% end %>

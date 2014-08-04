@@ -5,7 +5,14 @@ This product is a Time tracking application for the explicit use of West Michiga
 * modify dataTables defaults
 
 ==Next steps:
-5.8 Flesh out params[:auth] == "admin" => _auth_admin_timesheet_table #timeoff view
+* draft timeoff views
+** _single_timeoff table done
+*** needs alert for denied timeoff
+** _auth_over_timeoff and _auth_admin_timeoff need tables
+
+* timeoff views need sums:
+** timeoff used && remaining between date ranges with 'only approved' || 'all submitted'
+
 
 6. UX validation of hours and cats
 6.1 Progress bars:

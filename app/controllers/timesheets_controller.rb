@@ -4,6 +4,8 @@ class TimesheetsController < ApplicationController
     require_supervisor(User.find(params[:user_id]))
   end
 
+  after_action :save_previous_url, only: [:new, :edit]
+
   def index
     @title = "Timesheet"
     @user = User.find(params[:user_id])
@@ -13,7 +15,7 @@ class TimesheetsController < ApplicationController
 
       @user_auth = @user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
+      @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id).all
 
       if current_user.admin?
         @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).all
@@ -40,12 +42,26 @@ class TimesheetsController < ApplicationController
       end
     else
       @page_title = "Your Timesheets"
-      @timesheet_hours = TimesheetHour.where(user_id: @user.id).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
+      @timesheet_hours = TimesheetHour.where(user_id: @user.id).group(:timesheet_id).all
     end # if params[:auth]
 
   end
 
   def timeoff
+    @user = User.find(params[:user_id])
+
+    if params[:auth] == "over"
+      @page_title = "Your Team's Timeoff"
+    elsif params[:auth] == "admin"
+      @page_title = "All User's Timeoff"
+    else
+      if current_user == @user
+        @page_title = "Your Timeoff"
+      else
+        @page_title = "#{@user.fname}'s Timeoff"
+      end
+      @timeoff_hours = TimesheetHour.where(user_id: @user.id).where.not(timeoff_hours: 0).group(:timesheet_id).all
+    end
 
   end
 
