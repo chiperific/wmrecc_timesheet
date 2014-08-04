@@ -1,3 +1,34 @@
-<h4>Need some help?</h4>
+<div class="row">
+  <h3 class="subtle center">Need some help?</h3>
+</div>
 
-<p class="btn">Other questions? <%= mail_to "it@westmirefugee.org", "Email the IT Department" %>.</p>
+<div class="row buffered-row">
+  <h4>Here are your Administrators:</h4>
+  <table class="table center" id="admin-table">
+    <thead>
+      <th class="center">Admin</th>
+      <th class="center">Email</th>
+    </thead>
+    <tbody>
+      <% @admin_users.each do |u| %>
+        <tr>
+          <td><%= u.full_name %></td>
+          <td><%= mail_to u.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="row center">
+  <br>
+  <p class="btn">Other questions? <%= mail_to "it@westmirefugee.org", "Email the IT Department" %>.</p>
+</div>
+<% if current_user.admin %>
+  <div class="row">
+    <hr />
+  </div>
+  <div class="row well">
+    <h4>You're actually listed as an Administrator.</h4>
+    <p>If there's something wrong, you can contact <%= link_to "the app's creator", "http://chiperific.com", target: "blank" %>.</p>
+  </div>
+<% end %>

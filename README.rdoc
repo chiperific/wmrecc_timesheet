@@ -1,24 +1,16 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ==Last completed step:
-* Timesheet#index needs Reviewed column. Move the "Submitted" column and hide on small.
-* Timesheets#Index auth=admin view shows all timesheets
-* If the user has no SV, can self-approve
-* auth= is useless for _timesheet_form
-* Create for has only active users
+* Permissions: require_login | require_admin | require_supervisor
+* modify dataTables defaults
 
 ==Next steps:
-5.8 Flesh out params[:auth] == "admin" => _auth_admin_timesheet_table #timeoff view 
-
-* Timesheet_form: Admin can scam the url to approve their own timesheets. Need a && current_user != user.
-* user_timeoff_path w/ auth=over can probably be scammed as well
+5.8 Flesh out params[:auth] == "admin" => _auth_admin_timesheet_table #timeoff view
 
 6. UX validation of hours and cats
 6.1 Progress bars:
 6.1.1 TH.hrs vs. user.standard_hours
 6.1.2 TC.hrs vs. TH.hrs
-
-7. Page-by-page permissions. Check out CanCan
 
 8. Reports
 8.1 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
@@ -58,6 +50,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 * TimeZone => application.rb::WmreccTimesheet::config.time_zone
 * Start of week => TimsheetHour::day_name && self.day_name
 * Include Sat / Sun? = Manage Weekday model and table
+* StaticPages#Help -> Email the IT Department
 
 == Future releases:
 * _auth_admin_timesheet_table => > 10k records needs server-side pull:

@@ -24,3 +24,21 @@ Date.prototype.getWeek = function() {
   var onejan = new Date(this.getFullYear(),0,1);
   return Math.ceil((((this - onejan) / 86400000) + onejan.getDay())/7);
 }
+
+$.extend( true, $.fn.dataTable.defaults, {
+  pagingType: "full_numbers",
+  lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+  info: false,
+  dom:
+    "<'row'<'col-xs-4'l><'col-xs-8'f>r>"+
+    "t"+
+    "<'row'<'col-xs-8'p>>",
+  language: {
+    paginate: {
+      first: "&#8676",
+      previous: "&#8592",
+      next: "&#8594",
+      last: "&#8677"
+    }
+  }
+} );

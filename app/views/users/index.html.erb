@@ -1,11 +1,13 @@
 <h3 class="subtle">Current users</h3>
-<div id="active-users">
-  <table class="table">
+<div id="active-users" class="row">
+  <table class="table" id="users-table">
     <thead>
       <tr>
+        <th></th>
         <th>Name</th>
         <th>Dept.</th>
         <th>Supervisor</th>
+        <th class="hidden-xs">Role</th>
         <th></th>
       </tr>
     </thead>
@@ -14,19 +16,26 @@
         <% @direct_reports = @supervised_active_users.where(supervisor_id: u.id) %>
         <% @supervisor = @active_users.find_by(id: u.supervisor_id) %>
         <tr>
+          <td class="pull-right">
+            <% if @direct_reports.count > 0 %>
+              <%= link_to FA_RIGHT, "#", {class: "center super-view-switch", id: "super-list-#{u.id}"} %>
+            <% end %>
+          </td>
           <td>
-          <% if @direct_reports.count > 0 %>
-            <%= link_to FA_RIGHT, "#", {class: "center super-view-switch", id: "super-list-#{u.id}"} %>
-          <% end %>
             <%= u.full_name %>
           </td>
           <td><%= u.department.name unless u.department_id.blank? %></td>
-          <td><%= @supervisor.full_name unless @supervisor == nil %></td>
+          <td><%= if @supervisor != nil then @supervisor.full_name else "(none)" end %></td>
+          <td class="hidden-xs"><%= if u.admin then "Admin" else "User" end %></td>
           <td><%= link_to FA_EDIT, edit_user_path(u.id), { class: "btn btn-primary btn-sm"} %></td>
         </tr>
         <% @direct_reports.each do |s| %>
           <tr class=<%= "super-list-#{u.id.to_s}".to_s %> >
-            <td class="hidden" colspan="3">&nbsp<%= s.fname + " " + s.lname %></td>
+            <td class="hidden"></td>
+            <td class="hidden"><%= s.full_name %></td>
+            <td class="hidden"></td>
+            <td class="hidden"></td>
+            <td class="hidden hidden-xs"></td>
             <td class="hidden"><%= link_to FA_EDIT, edit_user_path(s.id), { class: "btn btn-primary btn-sm"} %></td>
           </tr>
         <% end %>
@@ -34,11 +43,15 @@
     </tbody>
   </table>
 </div>
+
 <% if @inactive_users.count > 0 %>
   <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
 <% end %>
-<div class="hidden" id="inactive-users">
-  <table class="table">
+<div class="hidden row buffered-row" id="inactive-users">
+  <div class="row">
+    <hr />
+  </div> 
+  <table class="table" id="inactive-users-table">
     <thead>
       <tr>
         <th>Inactive</th>

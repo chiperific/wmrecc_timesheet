@@ -110,13 +110,11 @@ jQuery ->
     calculateTotal('.timeoff-hours-field', '#ttl-timeoff-hours')
 
   $('#timesheet-admin-table').dataTable
-    pagingType: "full_numbers"
     columnDefs: [
       targets: -1, sortable: false, searchable: false
     ]
 
   $('#timesheet-over-table').dataTable
-    pagingType: "full_numbers"
     columnDefs: [
       targets: -1, sortable: false, searchable: false
     ]

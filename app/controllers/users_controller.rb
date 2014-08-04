@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_action :require_admin, only: :index
+  before_action :require_admin, only: [:index, :new, :create]
 
-  before_action only: :show do
+  before_action only: [:show, :edit, :update] do
     require_supervisor(User.find(params[:id]))
   end
 

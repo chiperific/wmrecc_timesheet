@@ -5,22 +5,30 @@
   </div>
 </div>
   
-<div id="active-depts">
-  <table class="table">
+<div id="active-depts" class="row">
+  <table class="table" id="departments-table">
+    <thead>
+      <th></th>
+      <th>Department</th>
+      <th></th>
+    </thead>
     <tbody>
       <% @depts_active.sort_by { |d| d.name }.each do |d| %>
         <tr>
-          <td>
+          <td class="pull-right">
             <% if d.categories.count > 0 %>
               <%= link_to FA_RIGHT, "#", {class: "center cat-view-switch", id: "cat-list-#{d.id}"} %>
             <% end %>
+          </td>
+          <td>
             <%= d.name %>
           </td>
           <td class="center"><%= link_to FA_EDIT, edit_department_path(d.id), { class: "btn btn-primary btn-sm"} %></td>
         </tr>
         <% d.categories.sort_by {|c| c.name }.each do |c| %>
           <tr class=<%= "cat-list-#{d.id.to_s}" %>>
-            <td class="hidden">&nbsp &nbsp <%= c.name %></td>
+            <td class="hidden"></td>
+            <td class="hidden"><%= c.name %></td>
             <td class="hidden"><%= link_to FA_EDIT, edit_category_path(c.id), { class: "btn btn-primary btn-sm"} %></td>
           </tr>
         <% end %>
@@ -32,7 +40,7 @@
   <%= link_to "View inactive departments", "#", {id: "dept-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
 <% end %>
 <div class="hidden" id="inactive-depts">
-  <table class="table">
+  <table class="table" id="inactive-departments-table">
     <thead>
       <tr>
         <th>Inactive Departments</th>

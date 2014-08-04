@@ -24,3 +24,15 @@ jQuery ->
       $(this).children('i').addClass(closed)
     event.preventDefault()
     false
+
+  $('#departments-table').dataTable
+    ordering: false
+    columnDefs: [
+      targets: -1, searchable: false, orderable: false
+    ]
+
+  $('#inactive-departments-table').dataTable
+    ordering: false
+    columnDefs: [
+      targets: -1, searchable: false, orderable: false
+    ]

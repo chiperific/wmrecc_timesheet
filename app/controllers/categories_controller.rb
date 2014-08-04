@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 
-  before_filter @department = @category.department if @category
+  before_action :require_admin
   
   def index
     @title = "Categories"
@@ -15,7 +15,7 @@ class CategoriesController < ApplicationController
       flash[:success] = "Category created"
       redirect_to categories_path
     else
-      @active_status = @cat.active
+      @active_status = @category.active
       @dept_array = dept_array
       render 'new'
     end
@@ -31,7 +31,7 @@ class CategoriesController < ApplicationController
   def edit
     @title = "Edit categories"
     @category = Category.find(params[:id])
-    @active_status = @cat.active
+    @active_status = @category.active
     @dept_array = dept_array
   end
 

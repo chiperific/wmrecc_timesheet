@@ -9,3 +9,8 @@ jQuery ->
     $(this).toggleClass('unhide')
     event.preventDefault()
     false
+
+  $('#admin-table').dataTable
+    ordering: false
+    paging: false
+    info: false

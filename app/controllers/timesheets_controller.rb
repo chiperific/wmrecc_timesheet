@@ -1,5 +1,9 @@
 class TimesheetsController < ApplicationController
 
+  before_action do
+    require_supervisor(User.find(params[:user_id]))
+  end
+
   def index
     @title = "Timesheet"
     @user = User.find(params[:user_id])
@@ -38,10 +42,6 @@ class TimesheetsController < ApplicationController
       @page_title = "Your Timesheets"
       @timesheet_hours = TimesheetHour.where(user_id: @user.id).joins(:timesheet).order('timesheets.year DESC', 'timesheets.week_num DESC').group(:timesheet_id).page(params[:page])
     end # if params[:auth]
-
-  end
-
-  def show
 
   end
 

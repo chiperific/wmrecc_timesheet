@@ -3,9 +3,11 @@ class ApplicationController < ActionController::Base
   include StaticPagesHelper
   include UsersHelper
 
-  before_filter :require_login
+  before_action :require_login
 
   private
+
+  # permission defs
 
    def require_login
     unless !current_user.nil?
@@ -17,12 +19,12 @@ class ApplicationController < ActionController::Base
   def require_admin
     unless current_user.admin
       flash[:error] = "You need to be an Administrator."
-      redirect_to :back
+      redirect_to root_path
     end
   end
 
-  def require_supervisor(target)
-    unless current_user.has_authority_over?(target)
+  def require_supervisor(user)
+    unless current_user.has_authority_over?(user) || current_user == user || current_user.admin
       flash[:error] = "You don't supervise that user."
       redirect_to root_path
     end

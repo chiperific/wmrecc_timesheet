@@ -10,3 +10,13 @@ jQuery ->
       $(this).html("View inactive categories")
     event.preventDefault()
     false
+
+  $('#categories-table').dataTable
+    columnDefs: [
+      targets: -1, searchable: false, orderable: false
+    ]
+
+  $('#inactive-categories-table').dataTable
+    columnDefs: [
+      targets: -1, searchable: false, orderable: false
+    ]

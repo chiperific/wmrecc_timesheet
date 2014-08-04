@@ -24,4 +24,20 @@ jQuery ->
       $(this).children('i').addClass(closed)
     event.preventDefault()
     false
-    
+  
+  $('#users-table').dataTable
+    ordering: false
+    columnDefs: [
+      targets: [0, -1], searchable: false, orderable: false
+    ]
+
+  $('#inactive-users-table').dataTable
+    ordering: false
+    columnDefs: [
+      targets: [0, -1], searchable: false, orderable: false
+    ]
+
+  $('#users-show-table').dataTable
+    columnDefs: [
+      targets: -1, searchable: false, orderable: false
+    ]

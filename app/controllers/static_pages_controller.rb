@@ -29,6 +29,8 @@ class StaticPagesController < ApplicationController
 
   def help
     @title = "Help"
+
+    @admin_users = User.where(admin: true, active: true)
   end
 
   def create

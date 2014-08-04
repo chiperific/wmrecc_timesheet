@@ -5,8 +5,8 @@
   </div>
 </div>
   
-<div id="active-cats">
-  <table class="table">
+<div id="active-cats" class="row">
+  <table class="table" id="categories-table">
     <thead>
       <tr>
         <th>Name</th>
@@ -26,10 +26,14 @@
   </table>
 </div>
 <% if @cats_inactive.count > 0 %>
-  <%= link_to icon('search')+" View inactive categories", "#", {id: "cat-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
+  <%= link_to "View inactive categories", "#", {id: "cat-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
+
 <% end %>
-<div class="hidden" id="inactive-cats">
-  <table class="table">
+<div class="hidden row buffered-row" id="inactive-cats">
+  <div class="row">
+    <hr />
+  </div> 
+  <table class="table" id="inactive-categories-table">
     <thead>
       <tr>
         <th>Inactive categories</th>
