@@ -90,10 +90,11 @@ describe "User Pages" do
   end
 
   describe "Index" do
+    let(:user) { FactoryGirl.create(:user) }
     let(:current_user) {user}
     before { visit users_path }
 
-    it 'check links and content' do
+    it 'checks links and content' do
       should have_content('Current users')
       should have_link('Add new user')
     end

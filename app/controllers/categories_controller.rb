@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 
   before_action :require_admin
-  after_action :save_previous_url, only: [:new, :edit]
+  after_action :save_return_url, only: [:new, :edit]
   
   def index
     @title = "Categories"
@@ -9,24 +9,12 @@ class CategoriesController < ApplicationController
     @cats_inactive = Category.where(active: false)
   end
 
-  def create
-    @category = Category.new(cat_params)
-
-    if @category.save
-      flash[:success] = "Category created"
-      redirect_to categories_path
-    else
-      @active_status = @category.active
-      @dept_array = dept_array
-      render 'new'
-    end
-  end
-
   def new
     @title = "Add Categories"
     @category = Category.new
     @dept_array = dept_array
     @active_status = true
+    session[:return_url] = URI(request.referrer).path
   end
 
   def edit
@@ -34,6 +22,20 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @active_status = @category.active
     @dept_array = dept_array
+    session[:return_url] = URI(request.referrer).path
+  end
+
+  def create
+    @category = Category.new(cat_params)
+
+    if @category.save
+      flash[:success] = "Category created"
+      redirect_to session[:return_url]
+    else
+      @active_status = @category.active
+      @dept_array = dept_array
+      render 'new'
+    end
   end
 
   def update
@@ -41,7 +43,7 @@ class CategoriesController < ApplicationController
 
     if @category.update_attributes(cat_params)
       flash[:success] = "Category updated"
-      redirect_to categories_path
+      redirect_to session[:return_url]
     else
       @active_status = @category.active
       @dept_array = dept_array

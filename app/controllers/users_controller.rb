@@ -6,8 +6,6 @@ class UsersController < ApplicationController
     require_supervisor(User.find(params[:id]))
   end
 
-  after_action :save_previous_url, only: [:new, :edit]
-
   def index
     @title = "Users"
     @users = User.all
@@ -54,6 +52,7 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Create password"
+    session[:return_url] = URI(request.referrer).path
   end
 
   def edit
@@ -64,6 +63,7 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Change password"
+    session[:return_url] = URI(request.referrer).path
   end
 
   def create
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = "User created"
-      redirect_to users_path
+      redirect_to session[:return_url]
     else
       @dept_array = dept_array
       @super_array = super_array
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
 
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
-      redirect_to path_switch
+      redirect_to session[:return_url]
     else
       @dept_array = dept_array
       @super_array = super_array

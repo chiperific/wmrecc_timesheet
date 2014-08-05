@@ -1,3 +1,4 @@
+<p><%= session[:return_url] %></p>
 <%= form_for [@user, @timesheet], { class: "form-inline"} do |t_form| %>
   <%= render 'shared/error_messages', object: t_form.object %>
   <div class="row form-group">
@@ -79,7 +80,7 @@
 
 
   <div class="row buffered-row">
-    <%= link_to FA_CANCEL, session[:saved_previous_url], class: "btn btn-danger pull-right" %>
+    <%= link_to FA_CANCEL, session[:return_url], class: "btn btn-danger pull-right" %>
     <button type="submit" class="btn btn-success">
       <%= FA_SUBMIT %>
     </button>

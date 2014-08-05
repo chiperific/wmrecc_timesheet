@@ -27,7 +27,7 @@
           <td><%= u.department.name unless u.department_id.blank? %></td>
           <td><%= if @supervisor != nil then @supervisor.full_name else "(none)" end %></td>
           <td class="hidden-xs"><%= if u.admin then "Admin" else "User" end %></td>
-          <td><%= link_to FA_EDIT, edit_user_path(u.id), { class: "btn btn-primary btn-sm"} %></td>
+          <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
         </tr>
         <% @direct_reports.each do |s| %>
           <tr class=<%= "super-list-#{u.id.to_s}".to_s %> >
@@ -36,7 +36,7 @@
             <td class="hidden"></td>
             <td class="hidden"></td>
             <td class="hidden hidden-xs"></td>
-            <td class="hidden"><%= link_to FA_EDIT, edit_user_path(s.id), { class: "btn btn-primary btn-sm"} %></td>
+            <td class="hidden"><%= link_to FA_EDIT, edit_user_path(s.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
           </tr>
         <% end %>
       <% end %>
@@ -67,18 +67,18 @@
           <td><%= u.fname + " " + u.lname %></td>
           <td><%= u.department.name %></td>
           <td><%= @inactive_super.full_name %></td>
-          <td><%= link_to FA_EDIT, edit_user_path(u.id), { class: "btn btn-primary btn-sm"} %></td>
+          <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<p><%= link_to "Add new user", new_user_path, { class: "btn btn-success"} %></p>
+<p><%= link_to "Add new user", new_user_path, { method: :get, class: "btn btn-success"} %></p>
 
 <div class="row center">
   <% if @timesheets_needing_review %>
     <hr />
     <%= "There are " + @timesheets_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_needing_review.count) + " for review." %>
-    <%= link_to "Review as Admin", user_timesheets_path(current_user, auth: "admin"), { class: "btn btn-success"} %>
+    <%= link_to "Review as Admin", user_timesheets_admin_path(current_user), { class: "btn btn-success"} %>
   <% end %>
 </div>

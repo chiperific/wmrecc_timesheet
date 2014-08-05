@@ -4,65 +4,60 @@ class TimesheetsController < ApplicationController
     require_supervisor(User.find(params[:user_id]))
   end
 
-  after_action :save_previous_url, only: [:new, :edit]
+  before_action :deny_all, only: :index
 
   def index
-    @title = "Timesheet"
-    @user = User.find(params[:user_id])
-
-    if params[:auth] == "over"
-      @page_title = "Your Team's Timesheets"
-
-      @user_auth = @user.has_authority_over
-      @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id).all
-
-      if current_user.admin?
-        @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).all
-      end
-
-      if current_user.has_authority_over.any?
-        @user_auth = current_user.has_authority_over
-        @user_auth_id_ary = @user_auth.pluck(:id)
-        @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).all
-      end
-
-      @direct_reports_select = Hash.new
-      @user_auth.each do |usr|
-        @direct_reports_select[usr.full_name] = usr.id
-      end
-
-    elsif params[:auth] == "admin"
-      @page_title = "All Timesheets"
-      @timesheets_all = TimesheetHour.group(:timesheet_id)
-      @all_users_select = Hash.new
-
-      User.where(active: true).each do |usr|
-        @all_users_select[usr.full_name] = usr.id
-      end
-    else
-      @page_title = "Your Timesheets"
-      @timesheet_hours = TimesheetHour.where(user_id: @user.id).group(:timesheet_id).all
-    end # if params[:auth]
-
   end
 
-  def timeoff
-    @user = User.find(params[:user_id])
+  def show
+  end
 
-    if params[:auth] == "over"
-      @page_title = "Your Team's Timeoff"
-    elsif params[:auth] == "admin"
-      @page_title = "All User's Timeoff"
+  def single
+    @title = "Timesheet"
+    @user = User.find(params[:user_id])
+    if current_user == @user
+      @page_title = "Your Timesheet"
     else
-      if current_user == @user
-        @page_title = "Your Timeoff"
-      else
-        @page_title = "#{@user.fname}'s Timeoff"
-      end
-      @timeoff_hours = TimesheetHour.where(user_id: @user.id).where.not(timeoff_hours: 0).group(:timesheet_id).all
+      @page_title = "#{@user.fname}'s Timesheet"
+    end
+    @timesheet_hours = TimesheetHour.where(user_id: @user.id).group(:timesheet_id).all
+  end
+
+  def supervisor
+    @title = "Timesheet"
+    @user = User.find(params[:user_id])
+    @page_title = "Your Team's Timesheets"
+
+    @user_auth = @user.has_authority_over
+    @user_auth_id_ary = @user_auth.pluck(:id)
+    @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+
+    if current_user.admin?
+      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).all
     end
 
+    if current_user.has_authority_over.any?
+      @user_auth = current_user.has_authority_over
+      @user_auth_id_ary = @user_auth.pluck(:id)
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+    end
+
+    @direct_reports_select = Hash.new
+    @user_auth.each do |usr|
+      @direct_reports_select[usr.full_name] = usr.id
+    end
+  end
+
+  def admin
+    @title = "Timesheet"
+    @user = User.find(params[:user_id])
+    @page_title = "All Timesheets"
+    @timesheets_all = TimesheetHour.group(:timesheet_id)
+    @all_users_select = Hash.new
+
+    User.where(active: true).each do |usr|
+      @all_users_select[usr.full_name] = usr.id
+    end
   end
 
   def new
@@ -92,7 +87,7 @@ class TimesheetsController < ApplicationController
       timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
       @timesheet_categories << timesheet_category
     end
-
+    session[:return_url] = URI(request.referrer).path
   end
 
   def edit
@@ -122,7 +117,7 @@ class TimesheetsController < ApplicationController
       timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
       @timesheet_categories << timesheet_category
     end
-
+    session[:return_url] = URI(request.referrer).path
   end
 
   def create
@@ -137,18 +132,17 @@ class TimesheetsController < ApplicationController
 
       if @timesheet.update_attributes(timesheet_params)
         flash[:success] = "Timesheet updated"
-        redirect_to user_timesheets_path(@user)
+        redirect_to session[:return_url]
       else
         flash[:error] = "Failed to submit"
         render 'new'
       end
 
     else
-
       @timesheet = Timesheet.new(timesheet_params)
       if @timesheet.save
         flash[:success] = "Timesheet submitted"
-        redirect_to user_timesheets_path(@user)
+        redirect_to session[:return_url]
       else
         flash[:error] = "Failed to submit"
         render 'new'
@@ -162,15 +156,7 @@ class TimesheetsController < ApplicationController
 
     if @timesheet.update_attributes(timesheet_params)
       flash[:success] = "Timesheet updated"
-      if current_user != @user
-        if current_user.has_authority_over?(@user)
-          redirect_to user_timesheets_path(current_user, auth: "over")
-        elsif current_user.admin
-          redirect_to user_timesheets_path(current_user, auth: "admin")
-        end
-      else
-        redirect_to user_timesheets_path(@user)
-      end
+      redirect_to session[:return_url]
     else
       flash[:error] = "Failed to update"
       render 'edit'

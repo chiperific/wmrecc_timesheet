@@ -24,10 +24,6 @@ describe "Static pages" do
 
       it { should have_content 'Welcome' }
     end
-
-    
-
-    describe "should allow you to logout"
   end
 
   describe "Help page" do

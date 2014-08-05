@@ -19,11 +19,11 @@
     </div>
   </div>
   <div class="row center col-xs-6 col-md-6">
-    <button type="submit" class="btn btn-success btn-large">
+    <button type="submit" class="btn btn-success btn-large" id="submit">
       <%= FA_SUBMIT %>
     </button>
   </div>
   <div class="row center col-xs-6 col-md-6">
-    <%= link_to FA_CANCEL, session[:saved_previous_url], { class: "btn btn-danger"}  %>
+    <%= link_to FA_CANCEL, session[:return_url], { class: "btn btn-danger"}  %>
   </div>
 <% end %>

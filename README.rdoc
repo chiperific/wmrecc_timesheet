@@ -3,6 +3,12 @@ This product is a Time tracking application for the explicit use of West Michiga
 ==Last completed step:
 * Permissions: require_login | require_admin | require_supervisor
 * modify dataTables defaults
+* Implement session[:return_url]
+* Modify .inject to .sum to protect from float issue
+* create timeoff model and controller
+* custom routes for timesheet (except: :show) and timeoff
+* 'all bad routes' catcher routes to static_pages#route_error
+* Implement ActiveRecord::RecordNotFound handler
 
 ==Next steps:
 * draft timeoff views
@@ -51,6 +57,12 @@ This product is a Time tracking application for the explicit use of West Michiga
 ==Ongoing issues:
 * Controllers are fat and messy...
 * Instead of .each = use partial '', collection: @var, as: :var
+
+==Manlycode will save me!
+* RSpec - pending specs - need a stub?
+* Why doesn't this set current_user: let(:current_user) {user}
+** Getting `undefined method `admin?' for nil:NilClass` on current_user.admin
+** before_action calls are wreacking havoc?
 
 
 == Setup configurations

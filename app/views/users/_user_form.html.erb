@@ -55,13 +55,13 @@
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Default hours per week">
           <span class="input-group-addon rate"><%= icon('clock-o') %>/wk</span>
-          <%= f.number_field :standard_hours, {class: "form-control", placeholder: "Hrs Per Week"} %>
+          <%= f.number_field :standard_hours, {class: "form-control", placeholder: "Hrs Per Week", step: 'any', min: 0 } %>
         </div>
       </div>
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Time off (in hours) per year">
-          <span class="input-group-addon rate"><%= icon('times-circle') %>/yr</span>
-          <%= f.number_field :annual_time_off, {class: "form-control", placeholder: "Time Off"} %>
+          <span class="input-group-addon rate"><%= icon('minus-square-o') %>/yr</span>
+          <%= f.number_field :annual_time_off, {class: "form-control", placeholder: "Time Off", step: 'any', min: 0 } %>
         </div>
       </div>
 
@@ -72,21 +72,21 @@
       <div class="row col-xs-12 col-sm-12 col-md-12">
         <div class="input-group" title="Pay Type">
           <span class="input-group-addon">$</span>
-          <%= f.select :pay_type, options_for_select([["Salary", true], ["Hourly", false]], @active_def), {}, {class: "form-control selector"} %>
+          <%= f.select :pay_type, options_for_select([["Salary", true], ["Hourly", false]], @active_def), {}, {class: "form-control selector", step: 'any', min: 0 } %>
         </div>
       </div>
 
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Annual Salary">
           <span class="input-group-addon rate">$/<%= icon('calendar') %></span>
-          <%= f.number_field :salary_rate, {class: "form-control", placeholder: "Salary"} %>
+          <%= f.number_field :salary_rate, {class: "form-control", placeholder: "Salary", step: 'any', min: 0 } %>
         </div>
       </div>
 
       <div class="row col-xs-6 col-sm-6 col-md-3">
         <div class="input-group" title="Hourly Rate">
           <span class="input-group-addon rate">$/<%= icon('clock-o') %></span>
-          <%= f.number_field :hourly_rate, {class: "form-control", placeholder: "Hourly Rate"} %>
+          <%= f.number_field :hourly_rate, {class: "form-control", placeholder: "Hourly Rate", step: 'any', min: 0 } %>
         </div>
       </div>
     <% end %>
@@ -135,7 +135,7 @@
         </button>
       </div>
       <div class="col-xs-6">
-        <%= link_to FA_CANCEL, session[:saved_previous_url], { class: "btn btn-danger" }  %>
+        <%= link_to FA_CANCEL, session[:return_url], { class: "btn btn-danger" }  %>
       </div>
     </div>
 

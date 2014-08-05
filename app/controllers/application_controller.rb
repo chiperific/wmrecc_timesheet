@@ -5,14 +5,20 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
+  rescue_from 'ActiveRecord::RecordNotFound' do
+    flash[:error] = "That doesn't seem to exist."
+    redirect_to root_path
+  end
+
   private
 
   # permission defs
-    def save_previous_url
-      session[:saved_previous_url] = URI(request.referrer).path
-    end
+  def deny_all
+    flash[:error] = "There's nothing there."
+    redirect_to root_path
+  end
 
-   def require_login
+  def require_login
     unless !current_user.nil?
       flash[:error] = "You need to login first."
       redirect_to root_path

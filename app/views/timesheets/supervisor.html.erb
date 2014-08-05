@@ -1,5 +1,6 @@
-<div id="admin-timesheets">
-  <table class="table table-striped table-center" id="timesheet-admin-table">
+<h3 class="center subtle">Your Team's Timesheets</h3>
+<div id="recent-timesheets">
+  <table class="table table-striped table-center" id="timesheet-over-table">
     <thead class="subtle">
       <tr>
         <td>
@@ -27,20 +28,20 @@
           <%= icon('check-square-o fa-2x') %>
           <p>Approved</p>
         </td>
-        <th></th>
+        <td></td>
       </tr>
     </thead>
   <tbody>
-      <% @timesheets_all.each do |th| %>
+      <% @timesheets_for_user_auth.each do |th| %>
         <% t = th.timesheet %>
         <tr>
           <th><%= th.user.full_name %></th>
           <td><%= t.week_num_to_date %></td>
-          <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).pluck(:hours).inject(0) {|sum, i| sum + i} %></td>
-          <td><%= t.timesheet_hours.where(user_id: th.user.id).pluck(:timeoff_hours).inject(0) {|sum, i| sum + i} %></td>
+          <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).sum(:hours) %></td>
+          <td><%= t.timesheet_hours.where(user_id: th.user.id).sum(:timeoff_hours) %></td>
           <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
           <td><%= th.status %></td>
-          <td><%= link_to FA_GO, edit_user_timesheet_path( th.user_id, t.id ), class: "btn btn-success btn-sm" %></td>
+          <td><%= link_to FA_GO, edit_user_timesheet_path( th.user_id, t.id ), { method: :get, class: "btn btn-success btn-sm" } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -52,10 +53,10 @@
 
   <div class="row buffered-row">
     <div class="col-xs-4">
-      <%= link_to "Create for:", "#", { class: "btn btn-primary", id: "direct_report_chooser"} %>
+      <%= link_to "Create for:", "#", { method: :get, class: "btn btn-primary", id: "direct_report_chooser"} %>
     </div>
     <div class="col-xs-8">
-      <%= select_tag "direct_reports", options_for_select(@all_users_select), { include_blank: true, class: "expand form-control", id: "direct_report_select" } %>
+      <%= select_tag "direct_reports", options_for_select(@direct_reports_select), { include_blank: true, class: "expand form-control", id: "direct_report_select" } %>
     </div>
   </div>
 
@@ -64,4 +65,13 @@
   </div>
 
 </div>
+
+<% if @timesheets_needing_review %>
+  <div class="row center">
+    <hr />
+    <%= "There are " + @timesheets_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_needing_review.count) + " for review." %>
+    <%= link_to "Review as Admin", user_timesheets_admin_path(current_user), { method: :get, class: "btn btn-success"} %>
+    <hr />
+  </div>
+<% end %>
 

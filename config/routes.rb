@@ -2,15 +2,22 @@ WmreccTimesheet::Application.routes.draw do
 
   root 'static_pages#home'
   get 'help', to: 'static_pages#help'
-  match '/signin', to: 'static_pages#create',        via: 'post'
+  match '/signin', to: 'static_pages#create',       via: 'post'
   match '/signout', to: 'static_pages#destroy',     via: 'delete'
   
   resources :users do
-    resources :timesheets
-    get '/timeoff', to: 'timesheets#timeoff'
+    resources :timesheets, except: :show
+    get 'timesheets/single', to: 'timesheets#single'
+    get 'timesheets/supervisor', to: 'timesheets#supervisor'
+    get 'timesheets/admin', to: 'timesheets#admin'
+
+    get 'timeoff/single',     to: 'timeoff#single'
+    get 'timeoff/supervisor', to: 'timeoff#supervisor'
+    get 'timeoff/admin',      to: 'timeoff#admin'
   end
 
-  resources :categories
-  resources :departments
+  resources :categories, :departments
+
+  get "*path", to:  'static_pages#route_error'
   
 end

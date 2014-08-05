@@ -1,5 +1,6 @@
 <div class="row buffered-row">
   <h3 class="col-xs-10 subtle">Welcome <%= current_user.fname %></h3>
+
   <% if @message_board %>
     <a href="#" id="msg-board-hider" class="col-xs-2 unhide">
       <span class="fa-stack fa-2x">
@@ -7,9 +8,9 @@
         <i class="fa fa-exclamation fa-stack-1x fa-hideable"></i>
         <i class='fa fa-minus fa-stack-1x fa-hideable' style="display : none"></i>
       </span>
-        
     </a>
   <% end %>
+
 </div>
 
 <% if @message_board %>
@@ -21,7 +22,7 @@
         <p class="msg-text">
           <%= 'You have ' + @denied_timeoffs.count.to_s + ' denied timeoff ' + 'request'.pluralize(@denied_timeoffs.count) + '.' %>
         </p>
-        <a href='<%= user_timeoff_path(current_user) %>' >
+        <a href='<%= user_timeoff_single_path(current_user) %>' >
           <div class="box-btn readonly-disguiser">
             <i class="fa fa-minus-square-o fa-3x"></i>
             <p>Your timeoff</p>
@@ -35,7 +36,7 @@
         <p class="msg-text">
           <%= 'You have ' + @denied_timesheets.count.to_s + ' denied ' 'timesheet'.pluralize(@denied_timesheets.count) + '.' %>
         </p>
-        <a href='<%= user_timesheets_path(current_user) %>' >
+        <a href='<%= user_timesheets_single_path(current_user) %>' >
           <div class="box-btn readonly-disguiser">
             <i class="fa fa-clock-o fa-3x"></i>
             <p>View past timesheets</p>
@@ -49,7 +50,7 @@
         <p class="msg-text">
           <%= 'You have ' + @unapproved_timeoffs.count.to_s + ' timeoff ' + 'request'.pluralize(@unapproved_timeoffs.count) + ' to review.' %>
         </p>
-        <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' >
+        <a href='<%= user_timeoff_supervisor_path(current_user) %>' >
           <div class="box-btn readonly-disguiser">
             <i class="fa fa-check-square-o fa-3x"></i>
             <p>Your staff's timeoff</p>
@@ -63,7 +64,7 @@
         <p class="msg-text">
           <%= 'You have ' + @unapproved_timesheets.count.to_s + ' ' + 'timesheet'.pluralize(@unapproved_timesheets.count) + ' to review.' %>
         </p>
-        <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" >
+        <a href="<%= user_timesheets_supervisor_path(current_user) %>" >
           <div class="box-btn readonly-disguiser">
             <i class="fa fa-thumbs-o-up fa-3x"></i>
             <p>Your staff's timesheets</p>
@@ -83,14 +84,14 @@
     </div>
   </a>
   
-  <a href='<%= user_timesheets_path(current_user) %>' class="<%= @col_width %>">
+  <a href='<%= user_timesheets_single_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn">
       <i class="fa fa-clock-o fa-3x"></i>
       <p>View past timesheets</p>
     </div>
   </a>
 
-  <a href='<%= user_timeoff_path(current_user) %>' class="<%= @col_width %>">
+  <a href='<%= user_timeoff_single_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn readonly-disguiser">
       <i class="fa fa-minus-square-o fa-3x"></i>
       <p>Your timeoff</p>
@@ -100,14 +101,14 @@
 
 <!-- Supervisor buttons -->
   <% if current_user.has_authority_over.any? %>
-    <a href="<%= user_timesheets_path(current_user, auth: 'over') %>" class="<%= @col_width %>">
+    <a href="<%= user_timesheets_supervisor_path(current_user) %>" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-thumbs-o-up fa-3x"></i>
         <p>Your staff's timesheets</p>
       </div>
     </a>
 
-    <a href='<%= user_timeoff_path(current_user, auth: 'over') %>' class="<%= @col_width %>">
+    <a href='<%= user_timeoff_supervisor_path(current_user) %>' class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-check-square-o fa-3x"></i>
         <p>Your staff's timeoff</p>
@@ -138,14 +139,14 @@
       </div>
     </a>
 
-    <a href="<%= user_timesheets_path(current_user, auth: 'admin') %>" class="<%= @col_width %>">
+    <a href="<%= user_timesheets_admin_path(current_user) %>" class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-thumbs-o-up fa-3x"></i>
         <p>Manage all timesheets</p>
       </div>
     </a>
 
-    <a href='<%= user_timeoff_path(current_user, auth: 'admin') %>' class="<%= @col_width %>">
+    <a href='<%= user_timeoff_admin_path(current_user) %>' class="<%= @col_width %>">
       <div class="box-btn">
         <i class="fa fa-check-square-o fa-3x"></i>
         <p>Manage all timeoff</p>
