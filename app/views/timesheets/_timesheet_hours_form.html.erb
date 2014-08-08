@@ -12,14 +12,14 @@
     <span class="col-xs-2 expand-2-to-5">
       <span class="visible-xs-block">
         <span class="pull-right plus-r-padding timeoff-show" id="day_name_full">
-          <%= TimesheetHour.day_name(th_form.index+1) %>
+          <%= Weekday.where(day_num: th_form.index+1).first.name %>
         </span>
         <span class="pull-right plus-r-padding timeoff-hide" id="day_name_abbr">
-          <%= TimesheetHour.day_name_abbr(th_form.index+1) %>
+          <%= Weekday.where(day_num: th_form.index+1).first.abbr %>
         </span>
       </span>
       <span class="pull-right plus-r-padding hidden-xs" id="day_name_full">
-        <%= TimesheetHour.day_name(th_form.index+1) %>
+        <%= Weekday.where(day_num: th_form.index+1).first.name %>
       </span>
     </span>
 

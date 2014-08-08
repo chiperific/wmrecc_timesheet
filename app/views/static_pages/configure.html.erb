@@ -7,6 +7,6 @@
   <br>Most of these items should only be adjusted upon initial setup.
 </div>
 
-<% @weekdays.each do |w| %>
-  <%= w.name %>
-<% end %>
+<%= @weekdays.count %>
+
+<%= render 'weekdays_form', collection: Weekday.first, as: :weekday %>

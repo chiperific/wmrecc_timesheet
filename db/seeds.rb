@@ -1,11 +1,11 @@
 Weekday.create!([
-  {id: 1, name: "Monday" },
-  {id: 2, name: "Tuesday"}, 
-  {id: 3, name: "Wednesday"}, 
-  {id: 4, name: "Thursday"}, 
-  {id: 5, name: "Friday"}, 
-  {id: 6, name: "Saturday"}, 
-  {id: 7, name: "Sunday"}
+  {day_num: 1, name: "Monday", abbr: "Mon" },
+  {day_num: 2, name: "Tuesday", abbr: "Tues" }, 
+  {day_num: 3, name: "Wednesday", abbr: "Wed" }, 
+  {day_num: 4, name: "Thursday", abbr: "Thurs" }, 
+  {day_num: 5, name: "Friday", abbr: "Fri" }, 
+  {day_num: 6, name: "Saturday", abbr: "Sat" }, 
+  {day_num: 7, name: "Sunday", abbr: "Sun" }
 ])
 
 Category.create!([

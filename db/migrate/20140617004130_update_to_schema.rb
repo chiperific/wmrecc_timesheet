@@ -76,6 +76,8 @@ class UpdateToSchema < ActiveRecord::Migration
 
     create_table "weekdays", force: true do |t|
       t.string "name"
+      t.string "abbr"
+      t.integer "day_num"
     end
   end
 end

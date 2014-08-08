@@ -52,6 +52,7 @@ class StaticPagesController < ApplicationController
   end
 
   def configure
+    @title = "Configure"
     @weekdays = Weekday.all
   end
 

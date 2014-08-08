@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727212606) do
+ActiveRecord::Schema.define(version: 20140808194216) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -88,7 +88,9 @@ ActiveRecord::Schema.define(version: 20140727212606) do
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
   create_table "weekdays", force: true do |t|
-    t.string "name"
+    t.string  "name"
+    t.string  "abbr"
+    t.integer "day_num"
   end
 
 end

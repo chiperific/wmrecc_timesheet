@@ -13,4 +13,3 @@ jQuery ->
   $('#admin-table').dataTable
     ordering: false
     paging: false
-    info: false
