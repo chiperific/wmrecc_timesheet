@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
 
   skip_before_action :require_login, only: [:home, :create, :destroy]
+
+  before_action :require_admin, only: [:configure]
   
   def home
     @title = "Home"
@@ -47,6 +49,9 @@ class StaticPagesController < ApplicationController
   def destroy
     sign_out
     redirect_to root_path
+  end
+
+  def configure
   end
 
   def route_error

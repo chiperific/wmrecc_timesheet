@@ -56,6 +56,7 @@ This product is a Time tracking application for the explicit use of West Michiga
   ```
 
 ## Ongoing issues:
+
 * Controllers are fat and messy...
 * Instead of .each = use partial '', collection: @var, as: :var
 
@@ -67,6 +68,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 
 ## Setup configurations
+* Annual timeoff - calendar year vs fiscal year
 * TimeZone => application.rb::WmreccTimesheet::config.time_zone
 * Start of week => TimsheetHour::day_name && self.day_name
 * Include Sat / Sun? = Manage Weekday model and table
