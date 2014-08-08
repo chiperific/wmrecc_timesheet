@@ -12,21 +12,23 @@
         </tr>
       </thead>
       <tbody>
-        <%= form_for :weekday do |f| %>
-          <tr class="row form-controller">
-            <td class="min-padding-both">
-              <%= f.number_field :day_num, { class: "form-control"} %>
-            </td>
-            <td class="min-padding-both">
-              <%= f.text_field :name, { class: "form-control"} %>
-            </td>
-            <td class="min-padding-both">
-              <%= f.text_field :abbr, { class: "form-control"} %>
-            </td>
-            <td>
-              <%= icon('times') %>
-            </td>
-          </tr>
+        <% @weekdays.each_with_index do |weekday, index| %>
+          <%= form_for :weekday do |f| %>
+            <tr class="row form-controller">
+              <td class="min-padding-both">
+                <%= f.number_field :day_num, { class: "form-control"} %>
+              </td>
+              <td class="min-padding-both">
+                <%= f.text_field :name, { class: "form-control"} %>
+              </td>
+              <td class="min-padding-both">
+                <%= f.text_field :abbr, { class: "form-control"} %>
+              </td>
+              <td>
+                <%= icon('times') %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>

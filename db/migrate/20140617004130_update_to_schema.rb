@@ -1,5 +1,9 @@
 class UpdateToSchema < ActiveRecord::Migration
   def change
+    create_table "app_defaults", force: true do |t|
+      t.string "name"
+    end
+
     create_table "categories", force: true do |t|
       t.string   "name"
       t.integer  "department_id"
@@ -78,6 +82,7 @@ class UpdateToSchema < ActiveRecord::Migration
       t.string "name"
       t.string "abbr"
       t.integer "day_num"
+      t.integer "app_default_id"
     end
   end
 end

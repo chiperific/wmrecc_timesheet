@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140808194216) do
+ActiveRecord::Schema.define(version: 20140808212358) do
+
+  create_table "app_defaults", force: true do |t|
+    t.string "name"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -91,6 +95,7 @@ ActiveRecord::Schema.define(version: 20140808194216) do
     t.string  "name"
     t.string  "abbr"
     t.integer "day_num"
+    t.integer "app_default_id"
   end
 
 end
