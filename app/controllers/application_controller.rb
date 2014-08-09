@@ -5,10 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
-  rescue_from 'ActiveRecord::RecordNotFound' do
-    flash[:error] = "That doesn't seem to exist."
-    redirect_to root_path
-  end
+  # rescue_from 'ActiveRecord::RecordNotFound' do
+  #   flash[:error] = "That doesn't seem to exist."
+  #   redirect_to root_path
+  # end
 
   private
 

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Departments Pages" do
   subject { page }
+  let!(:user) { FactoryGirl.create(:user) }
+  before { sign_in(user) }
 
   describe "New" do
     before { visit new_department_path }

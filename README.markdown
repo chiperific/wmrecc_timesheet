@@ -10,6 +10,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 ## Next steps:
 0.1. Create nested form for Weekdays through AppDefault.first
 0.2. Refractor the .all calls with .to_a
+
 1. draft timeoff views
   * \_single\_timeoff table done
     * needs alert for denied timeoff

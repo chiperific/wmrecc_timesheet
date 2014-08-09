@@ -14,7 +14,7 @@
     <tbody>
       <% @active_users.sort_by { |u| u.fname }.sort_by { |u| u.lname}.each do |u| %>
         <% @direct_reports = @supervised_active_users.where(supervisor_id: u.id) %>
-        <% @supervisor = @active_users.find_by(id: u.supervisor_id) %>
+        <% @supervisor = @active_users.find_by( id: u.supervisor_id ) %>
         <tr>
           <td class="pull-right">
             <% if @direct_reports.count > 0 %>
@@ -62,7 +62,7 @@
     </thead>
     <tbody>
       <% @inactive_users.each do |u| %>
-        <% @inactive_super = @users.find_by(id: u.supervisor_id) %>
+        <% @inactive_super = @users.find_by( id: u.supervisor_id ) %>
         <tr>
           <td><%= u.fname + " " + u.lname %></td>
           <td><%= u.department.name %></td>

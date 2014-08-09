@@ -9,25 +9,49 @@ describe "Static pages" do
     it 'has page elements' do
       should have_title('Home')
       should have_content('Timekeeper')
-      should_not have_link('Home')
     end
 
-    describe "should allow you to login" do
-      let(:user) { FactoryGirl.create(:user) }
-      let(:current_user) {user}
-      before do
-        visit root_path
-        fill_in 'static_page_email', with: user.email
-        fill_in 'static_page_password', with: user.password
-        click_button 'Sign in'
+    context "When not signed in" do
+      it { should have_content 'Sign in to continue'}
+
+      describe "should allow you to login" do
+        let!(:user) { FactoryGirl.create(:user) }
+        let!(:current_user) {user}
+        before do
+          fill_in 'static_page_email', with: user.email
+          fill_in 'static_page_password', with: user.password
+          click_button 'Sign in'
+        end
+
+        it { should have_content 'Welcome' }
+      end
+    end
+
+    context "When signed in" do
+      let!(:user) { FactoryGirl.create(:user) }
+      before { sign_in(user) }
+
+      it 'has page elements' do
+        should have_title('Home')
+        should have_content('Welcome')
+        should have_link('Submit timesheet')
       end
 
-      it { should have_content 'Welcome' }
+      describe "should allow you to sign out" do
+        before { click_link('Sign out') }
+
+        it { should have_content 'Sign in to continue'}
+      end
     end
-  end
+
+  end #describe 'Home'
 
   describe "Help page" do
-    before { visit help_path}
+    let!(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in(user)
+      visit help_path
+    end
 
     it { should have_title('Help')}
     it { should have_link('Email the IT Department')}

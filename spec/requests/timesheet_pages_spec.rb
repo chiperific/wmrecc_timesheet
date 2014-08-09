@@ -2,20 +2,36 @@ require 'spec_helper'
 require 'support/utilities'
 
 describe "Timesheet Pages" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:timesheet) { FactoryGirl.create(:timesheet) }
-  let(:timesheet_hour) { FactoryGirl.create(:timesheet_hour) }
-  let(:timesheet_category) { FactoryGirl.create(:timesheet_category) }
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:users_staff) { FactoryGirl.create(:users_staff) }
+  let!(:timesheet) { FactoryGirl.create(:timesheet) }
+  let!(:timesheet_hour) { FactoryGirl.create(:timesheet_hour) }
+  let!(:timesheet_category) { FactoryGirl.create(:timesheet_category) }
+  before { sign_in(user) }
 
   subject { page }
 
-  pending "Index" do
-    # _single_timesheet_table is not loading because th.timesheet == nil
+  describe "Single" do
     before do
-      visit user_timesheets_path(user)
+      visit user_timesheets_single_path(user)
     end
+    it { should have_content("Timesheet") }
 
-    it { should have_content("Timesheets") }
+  end
+
+  describe "Supervisor" do
+    before do
+      visit user_timesheets_supervisor_path(user)
+    end
+    it { should have_content("Your Team's Timesheets") }
+
+  end
+
+  describe "Admin" do
+    before do
+      visit user_timesheets_admin_path(user)
+    end
+    it { should have_content("All Users' Timesheets") }
 
   end
 

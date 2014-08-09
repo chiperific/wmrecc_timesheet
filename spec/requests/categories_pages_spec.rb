@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "Categories Pages" do
   subject { page }
+  let!(:user) { FactoryGirl.create(:user) }
+  before { sign_in(user) }
 
   describe "Index" do
     before { visit categories_path }
@@ -37,7 +39,7 @@ describe "Categories Pages" do
       visit edit_category_path(category)
     end
 
-    it { should have_button('Submit')}
+    it { should have_button('Submit') }
     it { should have_link('Cancel')}
   end
 

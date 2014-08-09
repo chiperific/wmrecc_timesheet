@@ -7,27 +7,27 @@ FactoryGirl.define do
     admin                 true
     active                true
     department_id         1
-    supervisor_id         2
+    supervisor_id         nil
     password              "foobar"
     password_confirmation "foobar"
     annual_time_off       158.5
     standard_hours        80
   end
 
-#  factory :current_user, class: User do
-#    id                    2
-#    fname                 "Factory"
-#    lname                 "Current_User"
-#    email                 "chip@kragt.com"
-#    admin                 true
-#    active                true
-#    department_id         1
-#    supervisor_id         1
-#    password              "foobar"
-#    password_confirmation "foobar"
-#    annual_time_off       158.5
-#    standard_hours        80
-#  end
+  factory :users_staff, class: User do
+    id                    2
+    fname                 "Factory"
+    lname                 "User2"
+    email                 "chip@kragt.com"
+    admin                 true
+    active                true
+    department_id         1
+    supervisor_id         1
+    password              "foobar"
+    password_confirmation "foobar"
+    annual_time_off       158.5
+    standard_hours        80
+  end
 
   factory :category do
     name          "factory category"

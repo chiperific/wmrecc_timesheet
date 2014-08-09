@@ -16,13 +16,13 @@ class UsersController < ApplicationController
     @departments = Department.where(active: true)
 
     if current_user.admin?
-      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).all
+      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
     end
 
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
     end
 
   end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @title = "Staff"
     @user = User.find(params[:id])
     @user_staff = User.where(supervisor_id: @user.id)
-    @users = User.all
+    @users = User.to_a
     @active_users = @user_staff.where(active: true)
     @inactive_users = @user_staff.where(active: false)
     @supervised_active_users = User.where("supervisor_id IS NOT NULL")
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
     end
   end
 

@@ -20,7 +20,7 @@ class TimesheetsController < ApplicationController
     else
       @page_title = "#{@user.fname}'s Timesheet"
     end
-    @timesheet_hours = TimesheetHour.where(user_id: @user.id).group(:timesheet_id).all
+    @timesheet_hours = TimesheetHour.where(user_id: @user.id).group(:timesheet_id).to_a
   end
 
   def supervisor
@@ -29,17 +29,17 @@ class TimesheetsController < ApplicationController
     @page_title = "Your Team's Timesheets"
 
     @user_auth = @user.has_authority_over
-    @user_auth_id_ary = @user_auth.pluck(:id)
-    @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+    @user_auth_id_ary = @user_auth.pluck(:id) || nil
+    @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
 
     if current_user.admin?
-      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).all
+      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
     end
 
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).all
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
     end
 
     @direct_reports_select = Hash.new
@@ -76,7 +76,7 @@ class TimesheetsController < ApplicationController
 
     @timesheet_hours = Array.new
 
-    Weekday.all.each do |wd|
+    Weekday.to_a.each do |wd|
       timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.id)
       @timesheet_hours << timesheet_hour
     end
@@ -105,7 +105,7 @@ class TimesheetsController < ApplicationController
 
     @timesheet_hours = Array.new
 
-    Weekday.all.each do |wd|
+    Weekday.to_a.each do |wd|
       timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.id)
       @timesheet_hours << timesheet_hour
     end

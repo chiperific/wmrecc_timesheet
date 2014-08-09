@@ -86,7 +86,7 @@ describe User do
     it { should_not be_valid }
   end
 
-  pending "with a password that's too short" do
+  describe "with a password that's too short" do
     #the let(:user) passes @user.already_has_password? since the short password becomes a password_digest
     let(:user) {User.new(fname: "Short", lname: "Password", email: "short@password.com", password: "aaaa", password_confirmation: "aaaa")}
     it { should_not be_valid }

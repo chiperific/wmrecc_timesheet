@@ -3,15 +3,15 @@ require 'support/utilities'
 
 describe "User Pages" do
   let!(:user) { FactoryGirl.create(:user) }
-  let!(:current_user) { user } 
+  let!(:current_user) { user }
+  let!(:department) { FactoryGirl.create(:department) }
+
+  before { sign_in(user) }
 
   subject { page }
 
   describe "Edit" do
-    before do
-      sign_in(user)
-      visit edit_user_path(user) 
-    end
+    before { visit edit_user_path(user) }
 
     it '(check links and content)' do
       should have_button('Submit')
@@ -52,12 +52,8 @@ describe "User Pages" do
     end
   end
 
-  pending "New" do
-    
-    before do
-      sign_in(user)
-      visit new_user_path
-    end
+  describe "New" do
+    before { visit new_user_path }
 
     it '(check links and content)' do
       should have_content('Add new user')
@@ -90,8 +86,7 @@ describe "User Pages" do
   end
 
   describe "Index" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:current_user) {user}
+    
     before { visit users_path }
 
     it 'checks links and content' do
