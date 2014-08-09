@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) { FactoryGirl.create(:user) }
+  let!(:user) { FactoryGirl.create(:user) }
 
   subject { user }
 
@@ -65,18 +65,19 @@ describe User do
   end
 
   describe "when email address is already taken" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:user_dup) {User.new(fname: "Duplicate", lname: "User", email: "chip@kragt.com", password: "foobar", password_confirmation: "foobar")}
-    before do
-      user.save
-      user_dup.save
-    end
-    subject {user_dup}
+    let(:dup_user) { User.new(fname: "Duplicate", lname: "Email", email: "susan@kragt.com", password: "foobar", password_confirmation: "foobar") }
+
+    subject { dup_user }
+
     it { should_not be_valid }
   end
 
   describe "when password is not present" do
-    let(:user) {User.new(fname: "Example", lname: "User", email: "user@example.com", password: "", password_confirmation: "")}
+    before do
+      user.password = ""
+      user.password_confirmation = ""
+    end
+
     it { should_not be_valid }
   end
 
@@ -87,8 +88,11 @@ describe User do
   end
 
   describe "with a password that's too short" do
-    #the let(:user) passes @user.already_has_password? since the short password becomes a password_digest
-    let(:user) {User.new(fname: "Short", lname: "Password", email: "short@password.com", password: "aaaa", password_confirmation: "aaaa")}
+    before do
+      user.password = "aaa"
+      user.password_confirmation = "aaa"
+    end
+
     it { should_not be_valid }
   end
 
