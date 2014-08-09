@@ -61,4 +61,15 @@ FactoryGirl.define do
     category_id   1
     hours         7
   end
+
+  factory :app_default do
+    name "default"
+  end
+
+  factory :weekday do
+    name            "Monday"
+    abbr            "Mon"
+    day_num         1
+    app_default_id  1
+  end
 end

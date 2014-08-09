@@ -1,5 +1,5 @@
 class Weekday < ActiveRecord::Base
-  validates :name, presence: true
+  validates :name, :abbr, :app_default_id, presence: true
 
   belongs_to :app_default
 end

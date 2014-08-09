@@ -2,9 +2,8 @@ require 'spec_helper'
 
 
 describe Category do
-  before { @category = Category.new(name: "Tutoring", department_id: 1, active: true)}
-
-  subject { @category }
+  let!(:category) { FactoryGirl.create(:category) }
+  subject { category }
 
   it { should respond_to(:id)}
   it { should respond_to(:name)}

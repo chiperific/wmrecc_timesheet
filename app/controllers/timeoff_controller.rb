@@ -1,6 +1,7 @@
 class TimeoffController < ApplicationController
 
   def single
+    @title = "Timeoff"
     @user = User.find(params[:user_id])
     if current_user == @user
       @page_title = "Your Timeoff"
@@ -11,10 +12,12 @@ class TimeoffController < ApplicationController
   end
 
   def supervisor
+    @title = "Timeoff"
     @user = User.find(params[:user_id])
   end
 
   def admin
+    @title = "Timeoff"
     @user = User.find(params[:user_id])
   end
 end

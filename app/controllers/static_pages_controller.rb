@@ -53,7 +53,7 @@ class StaticPagesController < ApplicationController
 
   def configure
     @title = "Configure"
-    @weekdays = Weekday.to_a
+    @weekdays = Weekday.all
   end
 
   def route_error

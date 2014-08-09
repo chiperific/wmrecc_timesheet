@@ -6,10 +6,13 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Implement ActiveRecord::RecordNotFound handler
 * Flesh out Weekday model
 * Create AppDefault model / controller
+0.2. Refractor the .all calls with .to_a
+* static_pages_spec#config
+* timeoff_pages_spec
 
 ## Next steps:
+* timesheet_pages_spec#new, edit
 0.1. Create nested form for Weekdays through AppDefault.first
-0.2. Refractor the .all calls with .to_a
 
 1. draft timeoff views
   * \_single\_timeoff table done
@@ -22,12 +25,18 @@ This product is a Time tracking application for the explicit use of West Michiga
     1. TH.hrs vs. user.standard_hours
     2. TC.hrs vs. TH.hrs
 4. Reports
-  1. http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+  1.0 Timeoff reports through 'users/#/timeoff/{level}'
+  1.1 Timesheet reports through 'users/#/report/{level}'
+    * Between dates - s, sv, ad
+    * Staff selector - sv, ad
+    * TS && TO
+  2. http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
 
 5. Destroy action for user with delete nested models
 
 ## Minor tweaks:
 * Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
+* Timesheet_controller#new and #edit - building weekdays and cats is not DRY
 
 
 ## Keep in mind:

@@ -4,14 +4,6 @@ class TimesheetsController < ApplicationController
     require_supervisor(User.find(params[:user_id]))
   end
 
-  before_action :deny_all, only: :index
-
-  def index
-  end
-
-  def show
-  end
-
   def single
     @title = "Timesheet"
     @user = User.find(params[:user_id])
@@ -76,8 +68,8 @@ class TimesheetsController < ApplicationController
 
     @timesheet_hours = Array.new
 
-    Weekday.to_a.each do |wd|
-      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.id)
+    Weekday.all.each do |wd|
+      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.day_num)
       @timesheet_hours << timesheet_hour
     end
 
@@ -105,8 +97,8 @@ class TimesheetsController < ApplicationController
 
     @timesheet_hours = Array.new
 
-    Weekday.to_a.each do |wd|
-      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.id)
+    Weekday.all.each do |wd|
+      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.day_num)
       @timesheet_hours << timesheet_hour
     end
 

@@ -53,8 +53,19 @@ describe "Static pages" do
       visit help_path
     end
 
-    it { should have_title('Help')}
+    it { should have_title('Help') }
     it { should have_link('Email the IT Department')}
+  end
+
+  describe "Configure page" do
+    let!(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in(user)
+      visit configure_path
+    end
+
+    it { should have_title('Configure') }
+    it { should have_content('Manage Configuration') }
   end
 
 end
