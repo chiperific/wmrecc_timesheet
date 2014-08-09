@@ -2,12 +2,12 @@ require 'spec_helper'
 require 'support/utilities'
 
 describe "User Pages" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:current_user) {user}
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:current_user) { user } 
 
   subject { page }
 
-  pending "Edit" do
+  describe "Edit" do
     before do
       sign_in(user)
       visit edit_user_path(user) 
@@ -95,7 +95,7 @@ describe "User Pages" do
     before { visit users_path }
 
     it 'checks links and content' do
-      should have_content('Current users')
+      should have_content('users')
       should have_link('Add new user')
     end
   end

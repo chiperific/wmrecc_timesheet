@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Create password"
-    session[:return_url] = URI(request.referrer).path
+    session[:return_url] = back_uri
   end
 
   def edit
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     @super_array = super_array
     @dept_array = dept_array
     @pw_lang = "Change password"
-    session[:return_url] = URI(request.referrer).path
+    session[:return_url] = back_uri
   end
 
   def create
@@ -109,14 +109,14 @@ class UsersController < ApplicationController
     # for _user_form select field
     def dept_array
       @dept_arry = Array.new([["(no department)", nil]])
-      @dept_arry += Department.all.sort_by { |d| d.name }.map { |d| [d.name, d.id]}
+      @dept_arry += Department.order(:name).to_a.map { |d| [d.name, d.id]}
       @dept_arry
     end
 
     # for _user_form select field
     def super_array
       @super_arry = Array.new([["(no supervisor)", nil]])
-      sorted_arry = User.all.sort_by { |u| u.fname }.sort_by { |u| u.lname}
+      sorted_arry = User.order(:fname, :lname).to_a
       sorted_arry.delete(@user)
       @super_arry += sorted_arry.map { |u| [u.fname+" "+u.lname, u.id]}
       @super_arry

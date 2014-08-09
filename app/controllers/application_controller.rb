@@ -39,4 +39,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def back_uri
+    path = request.referrer || root_path
+    URI(path).path
+  end
+
 end

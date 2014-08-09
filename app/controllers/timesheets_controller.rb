@@ -87,7 +87,7 @@ class TimesheetsController < ApplicationController
       timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
       @timesheet_categories << timesheet_category
     end
-    session[:return_url] = URI(request.referrer).path
+    session[:return_url] = back_uri
   end
 
   def edit
@@ -117,7 +117,7 @@ class TimesheetsController < ApplicationController
       timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
       @timesheet_categories << timesheet_category
     end
-    session[:return_url] = URI(request.referrer).path
+    session[:return_url] = back_uri
   end
 
   def create

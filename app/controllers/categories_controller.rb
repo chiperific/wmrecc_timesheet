@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
     @category = Category.new
     @dept_array = dept_array
     @active_status = true
-    session[:return_url] = URI(request.referrer).path
+    session[:return_url] = back_uri
   end
 
   def edit
@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @active_status = @category.active
     @dept_array = dept_array
-    session[:return_url] = URI(request.referrer).path
+    session[:return_url] = back_uri
   end
 
   def create

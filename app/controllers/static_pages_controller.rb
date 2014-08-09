@@ -10,8 +10,8 @@ class StaticPagesController < ApplicationController
     @msg_col_width = "col-xs-6 col-sm-3"
 
     if current_user
-      @denied_timesheets = TimesheetHour.where(user_id: current_user.id, approved: nil).where.not(reviewed: nil).group(:timesheet_id).all
-      @denied_timeoffs = TimesheetHour.where(user_id: current_user.id, timeoff_approved: nil).where.not(timeoff_reviewed: nil).group(:timesheet_id).all
+      @denied_timesheets = TimesheetHour.where(user_id: current_user.id, approved: nil).where.not(reviewed: nil).group(:timesheet_id).to_a
+      @denied_timeoffs = TimesheetHour.where(user_id: current_user.id, timeoff_approved: nil).where.not(timeoff_reviewed: nil).group(:timesheet_id).to_a
 
       if current_user.has_authority_over.any?
         @user_auth = current_user.has_authority_over
