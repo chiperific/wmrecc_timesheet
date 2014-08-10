@@ -48,6 +48,7 @@ describe "Static pages" do
 
   describe "Help page" do
     let!(:user) { FactoryGirl.create(:user) }
+    let!(:it_email) { FactoryGirl.create(:it_email) }
     before do
       sign_in(user)
       visit help_path

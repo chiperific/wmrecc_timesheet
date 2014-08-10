@@ -40,16 +40,30 @@
     </div>
 
     <div class="col-xs-12 col-sm-6">
-      <%= @time_zone %>
+      <h3 class="subtle">Start of year <small>(ex. fiscal year or calendar year)</small></h3>
+      <%= f.fields_for :start_months do |s_f| %>
+        <%= render 'shared/error_messages', object: s_f.object %>
+        <span class="form-controller">
+          <div class="input-group" title="Start Year">
+            <span class="input-group-addon"><%= icon('calendar') %></span>
+            <%= s_f.select :month, options_for_select(@months), {}, { class: "form-control" } %>
+          </div>
+        </span>
+      <% end %>
     </div>
 
     <div class="col-xs-12 col-sm-6">
-      Other config variables:
-      <ul>
-        <li>Start of year (month)</li>
-        <li>IT Email addr</li>
-      </ul>
+      <h3 class="subtle">Contacting IT <small>(for help page)</small></h3>
+      <%= f.fields_for :it_emails do |i_f| %>
+        <span class="form-controller">
+          <div class="input-group" title="IT Email">
+            <span class="input-group-addon">@</span>
+            <%= i_f.text_field :email, { class: "form-control", placeholder: "IT Email address" } %>
+          </div>
+        </span>
+      <% end %>
     </div>
+
   </div>
   <div class="row buffered-row">
     <%= f.submit "Update Configuration", { class: "btn btn-warning" } %>

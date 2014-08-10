@@ -21,6 +21,20 @@ class UpdateToSchema < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
+    create_table "it_emails", force: true do |t|
+      t.string   "email"
+      t.integer  "app_default_id", default: 1
+      t.datetime "created_at"
+      t.datetime "updated_at"
+    end
+
+    create_table "start_months", force: true do |t|
+      t.string   "month",          default: "January"
+      t.integer  "app_default_id", default: 1
+      t.datetime "created_at"
+      t.datetime "updated_at"
+    end
+
     create_table "timesheet_categories", force: true do |t|
       t.integer  "timesheet_id"
       t.integer  "user_id"
@@ -80,10 +94,10 @@ class UpdateToSchema < ActiveRecord::Migration
     add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
     create_table "weekdays", force: true do |t|
+      t.integer "app_default_id"
       t.string "name"
       t.string "abbr"
       t.integer "day_num"
-      t.integer "app_default_id"
     end
   end
 end

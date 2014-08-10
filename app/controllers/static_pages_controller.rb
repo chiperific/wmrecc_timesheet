@@ -33,6 +33,8 @@ class StaticPagesController < ApplicationController
     @title = "Help"
 
     @admin_users = User.where(admin: true, active: true)
+
+    @it_email = ItEmail.first
   end
 
   def create
@@ -55,6 +57,11 @@ class StaticPagesController < ApplicationController
     @title = "Configure"
     @app_default = AppDefault.first
     @weekdays = @app_default.weekdays.order( :day_num )
+
+    @start_month = @app_default.start_months.first
+    @months = Date::MONTHNAMES.dup.drop(1)
+
+    @it_email = @app_default.it_emails.first || @app_default.it_emails.new
   end
 
   def configure_update
@@ -66,6 +73,14 @@ class StaticPagesController < ApplicationController
       redirect_to root_path
     else
       flash[:error] = "Failed to update"
+      @title = "Error"
+      @app_default = AppDefault.first
+      @weekdays = @app_default.weekdays.order( :day_num )
+
+      @start_month = @app_default.start_months.first
+      @months = Date::MONTHNAMES.dup.drop(1)
+      
+      @it_email = @app_default.it_emails.first || @app_default.it_emails.new
       render 'configure'
     end
   end
@@ -81,7 +96,10 @@ class StaticPagesController < ApplicationController
       params.require(:app_default).permit( :name,
         :weekdays_attributes => [
           :id, :name, :abbr, :day_num, :app_default_id, :_destroy
-        ])
+        ],
+        :start_months_attributes => [:id, :month],
+        :it_emails_attributes => [:id, :email]
+      )
     end
 end
 

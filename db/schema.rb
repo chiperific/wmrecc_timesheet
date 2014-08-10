@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810195935) do
+ActiveRecord::Schema.define(version: 20140810212217) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 20140810195935) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "it_emails", force: true do |t|
+    t.string   "email"
+    t.integer  "app_default_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "start_months", force: true do |t|
+    t.string   "month",          default: "January"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "app_default_id"
   end
 
   create_table "timesheet_categories", force: true do |t|

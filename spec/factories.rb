@@ -72,4 +72,12 @@ FactoryGirl.define do
     day_num         1
     app_default_id  1
   end
+
+  factory :it_email do
+    email "it@email.com"
+  end
+
+  factory :start_month do
+    month "January"
+  end
 end

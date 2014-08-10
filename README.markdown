@@ -1,22 +1,17 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ## Last completed step:
-* custom routes for timesheet (except: :show) and timeoff
-* 'all bad routes' catcher routes to static_pages#route_error
-* Implement ActiveRecord::RecordNotFound handler
-* Flesh out Weekday model
-* Create AppDefault model / controller
-* Refractor the .all calls with .to_a
-* static_pages_spec#config
-* timeoff_pages_spec
-* timesheet_pages_spec#new, edit
 * Create nested form for Weekdays through AppDefault.first
+* Configure page:
+  * model and nested_form for start of year
+  * set timezone through user
+  * model and nested_form for IT email address
 
 ## Next steps:
-1. Configure page:
-  * model, controller and nested_form for start of year
-  * set timezone through view
-  * model, controller and nested_form for IT email address
+* _error_messages is not responding properly to nested_models
+* start_month model spec
+* it_email model spec
+* update static_pages_spec with it_email and start_month factories
 
 2. draft timeoff views
   * \_single\_timeoff table done

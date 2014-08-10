@@ -21,7 +21,9 @@
 </div>
 <div class="row center">
   <br>
-  <p class="btn">Other questions? <%= mail_to "it@westmirefugee.org", "Email the IT Department" %>.</p>
+  <% if @it_email %>
+    <p class="btn">Other questions? <%= mail_to @it_email.email, "Email the IT Department" %>.</p>
+  <% end %>
 </div>
 <% if current_user.admin %>
   <div class="row">
