@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :fname, :lname, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
+  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true

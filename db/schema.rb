@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140808212358) do
+ActiveRecord::Schema.define(version: 20140810195935) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140808212358) do
     t.decimal  "salary_rate",     precision: 10, scale: 2
     t.decimal  "hourly_rate",     precision: 6,  scale: 2
     t.boolean  "pay_type",                                 default: true
+    t.string   "time_zone",                                default: "UTC"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

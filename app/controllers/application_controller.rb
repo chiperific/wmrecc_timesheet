@@ -5,10 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
-  # rescue_from 'ActiveRecord::RecordNotFound' do
-  #   flash[:error] = "That doesn't seem to exist."
-  #   redirect_to root_path
-  # end
+  around_filter :user_time_zone, if: :current_user
+
+  rescue_from 'ActiveRecord::RecordNotFound' do
+    flash[:error] = "That doesn't seem to exist."
+    redirect_to root_path
+  end
 
   private
 
@@ -40,8 +42,12 @@ class ApplicationController < ActionController::Base
   end
 
   def back_uri
-    path = request.referrer || root_path
+    path = request.referer || root_path
     URI(path).path
+  end
+
+  def user_time_zone(&block)
+    Time.use_zone(current_user.time_zone, &block)
   end
 
 end

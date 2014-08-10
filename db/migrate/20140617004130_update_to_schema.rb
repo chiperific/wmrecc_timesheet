@@ -70,6 +70,7 @@ class UpdateToSchema < ActiveRecord::Migration
       t.decimal  "salary_rate",     precision: 10, scale: 2
       t.decimal  "hourly_rate",     precision: 6,  scale: 2
       t.boolean  "pay_type",                                 default: true
+      t.string   "time_zone",                                default: "UTC"
       t.string   "remember_token"
       t.datetime "created_at"
       t.datetime "updated_at"

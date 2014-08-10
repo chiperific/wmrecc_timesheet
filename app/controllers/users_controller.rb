@@ -102,7 +102,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(
         :fname, :lname, :active, 
-        :department_id, :supervisor_id, 
+        :department_id, :supervisor_id, :time_zone,
         :email, :password, :password_confirmation, :admin, :annual_time_off, :standard_hours)
     end
 

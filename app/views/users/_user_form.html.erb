@@ -1,3 +1,4 @@
+<%= session[:return_url] %>
 <%= form_for @user do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <span class="form-controller">
@@ -22,12 +23,13 @@
     
     <div class="row col-xs-12 col-sm-6 col-md-6">
       <div class="input-group">
-        <div class="form-control form-matcher" title="Timestamps">
+        <div class="form-control form-matcher center" title="Timestamps">
           <% if @user.new_record? %>
             <p style="color: #ababab; text-align: center">(Timestaps)</p>
           <% else %>
             <small>
-              <%= @user.created_at.strftime("Added: %m/%d/%Y") %>&nbsp <%= @user.updated_at.strftime("Last updated: %m/%d/%Y") %>
+              <%= @user.created_at.strftime("Added: %m/%d/%Y") %>&nbsp&nbsp|&nbsp 
+              <%= @user.updated_at.strftime("Updated: %m/%d/%Y") %>
             </small>
           <% end %>
         </div>
@@ -38,6 +40,12 @@
       <div class="input-group input-selector" title="Supervisor">
         <span class="input-group-addon addon-selector"><%= icon('level-up') %></span>
         <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id ), {}, { class: "form-control", disabled: @disabled } %>
+      </div>
+    </div>
+    <div class="row col-xs-12 col-md-6">
+      <div class="input-group input-selector" title="Time Zone">
+        <span class="input-group-addon addon-selector"><%= icon('globe') %></span>
+        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { default: "UTC" }, { class: "form-control" } %>
       </div>
     </div>
     <div class="row col-xs-12 col-md-6">
@@ -96,13 +104,16 @@
         <hr class="hr-thin">
       </div>
       <div class="row col-xs-6 col-sm-6 col-md-3">
-        <div class="input-group input-selector">
+        <div class="input-group input-selector" title="Active or Inactive">
           <span class="input-group-addon addon-selector"><%= icon('cogs') %></span>
-          <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector"} %>
+          <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector", disabled: if current_user == @user then true else false end } %>
         </div>
+        <% if current_user == @user %>
+          <i class="small" id="admin-selector-warning">(You can't deactivate your own account.)</i>
+        <% end %>
       </div>
       <div class="row col-xs-6 col-sm-6 col-md-3">
-        <div class="input-group input-selector">
+        <div class="input-group input-selector" title="Admin or User">
           <span class="input-group-addon addon-selector"><%= icon('bars') %></span>
           <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin? ), {}, {class: "form-control selector", disabled: if current_user == @user then true else false end } %>
         </div>
@@ -116,14 +127,14 @@
       <hr class="hr-thin">
     </div>
     <div class="row col-xs-12 col-md-6">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+      <div class="input-group" title="Password">
+        <span class="input-group-addon"><%= icon('key') %></span>
         <%= f.text_field :password, {class: "form-control", placeholder: @pw_lang} %>
       </div>
     </div>
     <div class="row col-xs-12 col-md-6">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+      <div class="input-group" title="Password Confirmation">
+        <span class="input-group-addon"><%= icon('key') %></span>
         <%= f.text_field :password_confirmation, {class: "form-control", placeholder: "Re-Enter Password"} %>
       </div>
     </div>

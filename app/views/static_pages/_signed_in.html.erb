@@ -176,7 +176,7 @@
   <% end %>
 
 <!-- all user buttons 2 -->
-  <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>">
+  <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>" data-method="get">
     <div class="box-btn">
       <%= icon('sliders fa-3x') %>
       <p>Edit your profile</p>
