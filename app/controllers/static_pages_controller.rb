@@ -55,8 +55,6 @@ class StaticPagesController < ApplicationController
     @title = "Configure"
     @app_default = AppDefault.first
     @weekdays = @app_default.weekdays.order( :day_num )
-
-    @time_zone = config.time_zone
   end
 
   def configure_update

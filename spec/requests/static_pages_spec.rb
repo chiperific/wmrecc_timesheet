@@ -59,13 +59,14 @@ describe "Static pages" do
 
   describe "Configure page" do
     let!(:user) { FactoryGirl.create(:user) }
+    let!(:app_default) { FactoryGirl.create(:app_default) }
     before do
       sign_in(user)
       visit configure_path
     end
 
     it { should have_title('Configure') }
-    it { should have_content('Manage Configuration') }
+    it { should have_content('System Configuration') }
   end
 
 end
