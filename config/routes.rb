@@ -3,6 +3,7 @@ WmreccTimesheet::Application.routes.draw do
   root 'static_pages#home'
   get 'help', to: 'static_pages#help'
   get 'configure', to: 'static_pages#configure'
+  get 'configure_update', to: 'static_pages#configure_update'
   match '/signin', to: 'static_pages#create',       via: 'post'
   match '/signout', to: 'static_pages#destroy',     via: 'delete'
   

@@ -13,3 +13,10 @@ jQuery ->
   $('#admin-table').dataTable
     ordering: false
     paging: false
+
+  $('#weekday_list').sortable
+    axis: 'y'
+    update: ->
+      $('.weekday-li').each (index)->
+        new_val = index+1
+        $(this).find('.day_num').val(new_val)

@@ -2,6 +2,7 @@
                       root GET    /                                               static_pages#home
                       help GET    /help(.:format)                                 static_pages#help
                  configure GET    /configure(.:format)                            static_pages#configure
+          configure_update GET    /configure_update(.:format)                     static_pages#configure_update
                     signin POST   /signin(.:format)                               static_pages#create
                    signout DELETE /signout(.:format)                              static_pages#destroy
            user_timesheets GET    /users/:user_id/timesheets(.:format)            timesheets#index

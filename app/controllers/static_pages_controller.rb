@@ -53,11 +53,27 @@ class StaticPagesController < ApplicationController
 
   def configure
     @title = "Configure"
-    @weekdays = Weekday.all
+    @app_default = AppDefault.first
+    @weekdays = @app_default.weekdays.order( :day_num )
+  end
+
+  def configure_update
+    #handle the nested attributes from app_default
   end
 
   def route_error
     flash[:error] = "That's not a real place."
     redirect_to root_path
   end
+
+  private
+
+    def app_default_params
+      params.require(:app_default).permit( :name,
+        :weekdays_attributes => [
+          :name, :abbr, :day_num, :app_default_id
+        ])
+    end
 end
+
+

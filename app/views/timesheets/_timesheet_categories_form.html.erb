@@ -1,5 +1,5 @@
-<% @timesheet_categories.each_with_index do |timesheet_category, index| %>
-  <%= t_form.fields_for :timesheet_categories, timesheet_category do |tc_form| %>
+
+  <%= t_form.fields_for :timesheet_categories, @timesheet_categories do |tc_form| %>
     <%= render 'shared/error_messages', object: tc_form.object %>
     <%= tc_form.hidden_field :timesheet_id %>
     <%= tc_form.hidden_field :user_id, { value: @user.id } %>
@@ -7,7 +7,7 @@
     <span class="form-group span-no-padding-both no-margin">
       <span class="col-xs-7">
         <span class="pull-right plus-r-padding wrapped-and-right">
-          <%= timesheet_category.category.name %>
+          <%= tc_form.object.category.name %>
         </span>
       </span>
       <span class="col-xs-5">
@@ -15,4 +15,3 @@
       </span>
     </span>
   <% end %>
-<% end %>

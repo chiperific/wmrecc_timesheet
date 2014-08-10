@@ -6,14 +6,13 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Implement ActiveRecord::RecordNotFound handler
 * Flesh out Weekday model
 * Create AppDefault model / controller
-0.2. Refractor the .all calls with .to_a
+* Refractor the .all calls with .to_a
 * static_pages_spec#config
 * timeoff_pages_spec
+* timesheet_pages_spec#new, edit
+* Create nested form for Weekdays through AppDefault.first
 
 ## Next steps:
-* timesheet_pages_spec#new, edit
-0.1. Create nested form for Weekdays through AppDefault.first
-
 1. draft timeoff views
   * \_single\_timeoff table done
     * needs alert for denied timeoff
@@ -65,21 +64,13 @@ This product is a Time tracking application for the explicit use of West Michiga
   ```
 
 ## Ongoing issues:
-
 * Controllers are fat and messy...
 * Instead of .each = use partial '', collection: @var, as: :var
 
-## Manlycode will save me!
-* RSpec - pending specs - need a stub?
-* Why doesn't this set current\_user: let(:current_user) {user}
-  * Getting `undefined method `admin?' for nil:NilClass` on current_user.admin
-  * before_action calls are wreacking havoc?
 
-
-## Setup configurations
+## Setup configurations -- address in configure.html.erb
 * Annual timeoff - calendar year vs fiscal year
 * TimeZone => application.rb::WmreccTimesheet::config.time_zone
-* Start of week => TimsheetHour::day_name && self.day_name
 * Include Sat / Sun? = Manage Weekday model and table
 * StaticPages#Help -> Email the IT Department
 

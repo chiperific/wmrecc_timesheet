@@ -1,36 +1,34 @@
-<div class="col-xs-12 col-sm-6">  
-  <h3 class="subtle">Weekdays</h3>
+<h3 class="subtle">Weekdays <small>( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)</small></h3>
 
-  <div class="form-group">
-    <table id="weekday_form">
-      <thead>
-        <tr class="row">
-          <th class="col-xs-2">Order</th>
-          <th class="col-xs-6">Day name</th>
-          <th class="col-xs-3">Abbr.</th>
-          <th class="col-xs-1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @weekdays.each_with_index do |weekday, index| %>
-          <%= form_for :weekday do |f| %>
-            <tr class="row form-controller">
-              <td class="min-padding-both">
-                <%= f.number_field :day_num, { class: "form-control"} %>
-              </td>
-              <td class="min-padding-both">
-                <%= f.text_field :name, { class: "form-control"} %>
-              </td>
-              <td class="min-padding-both">
-                <%= f.text_field :abbr, { class: "form-control"} %>
-              </td>
-              <td>
-                <%= icon('times') %>
-              </td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+<div class="form-group">
+  <ul id="weekday_list_head">
+    <li class="row">
+      <span class="col-xs-1"></span>
+      <span class="col-xs-2">Order</span>
+      <span class="col-xs-5">Day name</span>
+      <span class="col-xs-3">Abbr.</span>
+      <span class="col-xs-1"></span>
+    </li>
+  </ul>
+  <ul id="weekday_list">
+    <%= f.fields_for :weekdays, @weekdays do |w_f| %>
+      <li class="row form-controller boxed weekday-li">
+        <span class="col-xs-1 min-padding-both">
+          <%= icon('bars row-resize') %>
+        </span>
+        <span class="col-xs-2 min-padding-both">
+          <%= w_f.number_field :day_num, { class: "form-control day_num", disabled: true  } %>
+        </span>
+        <span class="col-xs-5 min-padding-both">
+          <%= w_f.text_field :name, { class: "form-control"} %>
+        </span>
+        <span class="col-xs-3 min-padding-both">
+          <%= w_f.text_field :abbr, { class: "form-control"} %>
+        </span>
+        <span class="col-xs-1">
+          <%= icon('times') %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
 </div>

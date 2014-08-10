@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require jquery-ui/sortable
 //= require jquery_ujs
 //= require bootstrap-datepicker/core
 //= require bootstrap-sprockets
