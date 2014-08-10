@@ -1,34 +1,23 @@
-<h3 class="subtle">Weekdays <small>( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)</small></h3>
-
-<div class="form-group">
-  <ul id="weekday_list_head">
-    <li class="row">
-      <span class="col-xs-1"></span>
-      <span class="col-xs-2">Order</span>
-      <span class="col-xs-5">Day name</span>
-      <span class="col-xs-3">Abbr.</span>
-      <span class="col-xs-1"></span>
-    </li>
-  </ul>
-  <ul id="weekday_list">
-    <%= f.fields_for :weekdays, @weekdays do |w_f| %>
-      <li class="row form-controller boxed weekday-li">
-        <span class="col-xs-1 min-padding-both">
-          <%= icon('bars row-resize') %>
-        </span>
-        <span class="col-xs-2 min-padding-both">
-          <%= w_f.number_field :day_num, { class: "form-control day_num", disabled: true  } %>
-        </span>
-        <span class="col-xs-5 min-padding-both">
-          <%= w_f.text_field :name, { class: "form-control"} %>
-        </span>
-        <span class="col-xs-3 min-padding-both">
-          <%= w_f.text_field :abbr, { class: "form-control"} %>
-        </span>
-        <span class="col-xs-1">
-          <%= icon('times') %>
-        </span>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<%= render 'shared/error_messages', object: w_f.object %>
+<li class="row form-controller boxed weekday-li">
+  <span class="col-xs-1 min-padding-both">
+    <%= icon('bars row-resize') %>
+  </span>
+  <span class="col-xs-2 min-padding-both">
+    <%= w_f.hidden_field :day_num, class: 'day-num-hidden disabled-field-faker' %>
+    <span class="form-control day-num disabled-field-faker" >
+      <%= w_f.object.day_num %>
+    </span>
+  </span>
+  <span class="col-xs-5 min-padding-both">
+    <%= w_f.text_field :name, { class: "form-control"} %>
+  </span>
+  <span class="col-xs-3 min-padding-both">
+    <%= w_f.text_field :abbr, { class: "form-control"} %>
+  </span>
+  <span class="times col-xs-1">
+    <%= w_f.hidden_field :_destroy %>
+    <%= link_to icon('times'), "#", { class: "remove_day", confirm: "Are you sure?"}  %>
+  </span>
+</li>
+  

@@ -13,11 +13,32 @@
 
 <%= form_for @app_default, url: configure_update_path do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= f.hidden_field :id %>
   <div class="row form-group">
     <div class="col-xs-12 col-sm-6">
-      <%= render "weekdays_form", f: f %>
+      <h3 class="subtle">Weekdays <small>( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)</small></h3>
+
+      <div class="form-group">
+        <ul id="weekday_list_head">
+          <li class="row">
+            <span class="col-xs-1"></span>
+            <span class="col-xs-2">Order</span>
+            <span class="col-xs-5">Day name</span>
+            <span class="col-xs-3">Abbr.</span>
+            <span class="col-xs-1"></span>
+          </li>
+        </ul>
+        <ul id="weekday_list">
+          <%= f.fields_for :weekdays, @weekdays do |w_f| %>
+            <%= render "weekdays_form", w_f: w_f %>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="row center" id="add_weekday_div" >
+        <%= link_to_add_weekday(f) %>
+      </div>
     </div>
+
     <div class="col-xs-12 col-sm-6">
       Other config variables:
       <ul>

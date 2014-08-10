@@ -59,6 +59,15 @@ class StaticPagesController < ApplicationController
 
   def configure_update
     #handle the nested attributes from app_default
+    @app_default = AppDefault.first
+
+    if @app_default.update_attributes(app_default_params)
+      flash[:success] = "Configuration updated"
+      redirect_to root_path
+    else
+      flash[:error] = "Failed to update"
+      render 'configure'
+    end
   end
 
   def route_error
@@ -71,7 +80,7 @@ class StaticPagesController < ApplicationController
     def app_default_params
       params.require(:app_default).permit( :name,
         :weekdays_attributes => [
-          :name, :abbr, :day_num, :app_default_id
+          :id, :name, :abbr, :day_num, :app_default_id, :_destroy
         ])
     end
 end

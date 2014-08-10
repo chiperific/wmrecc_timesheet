@@ -148,6 +148,12 @@ div.input-group {
   border-radius: 4px !important;
 }
 
+.disabled-field-faker {
+  cursor: not-allowed;
+  background-color: #eeeeee;
+  opacity: 1;
+}
+
 
 // Shrink text on mobile views only
 @media (max-width: 768px) {

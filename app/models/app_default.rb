@@ -3,5 +3,5 @@ class AppDefault < ActiveRecord::Base
 
   has_many :weekdays
 
-  accepts_nested_attributes_for :weekdays
+  accepts_nested_attributes_for :weekdays, allow_destroy: true
 end

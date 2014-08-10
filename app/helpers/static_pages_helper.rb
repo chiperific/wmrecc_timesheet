@@ -24,4 +24,14 @@ module StaticPagesHelper
     cookies.delete(:remember_token)
     self.current_user = nil
   end
+
+  def link_to_add_weekday(f)
+    new_weekday = Weekday.new
+    id = new_weekday.object_id
+    fields = f.fields_for(:weekdays, new_weekday, child_index: id) do |w_f|
+      render "weekdays_form", w_f: w_f
+    end
+    link_to("Add weekday", "#", class: "btn btn-success add_day", data: { id: id, fields: fields.gsub("\n", "")})
+  end
+    
 end
