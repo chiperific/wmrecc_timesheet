@@ -72,15 +72,8 @@ class StaticPagesController < ApplicationController
       flash[:success] = "Configuration updated"
       redirect_to root_path
     else
-      flash[:error] = "Failed to update"
-      @title = "Error"
-      @app_default = AppDefault.first
-      @weekdays = @app_default.weekdays.order( :day_num )
-
-      @start_month = @app_default.start_months.first
+      @title = "Error!"
       @months = Date::MONTHNAMES.dup.drop(1)
-      
-      @it_email = @app_default.it_emails.first || @app_default.it_emails.new
       render 'configure'
     end
   end

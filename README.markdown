@@ -12,8 +12,6 @@ This product is a Time tracking application for the explicit use of West Michiga
 * department model spec validations
 
 ## Next steps:
-* _error_messages is not responding properly to nested_models
-
 * update static_pages_spec with it_email and start_month factories
 
 2. draft timeoff views
