@@ -2,7 +2,11 @@
 
 <% if @user.annual_time_off > 0 %>
   <div class="well well-striped row">
-    <p><%= @user.annual_time_off %></p>
+    <p>You have used # timeoff this pay period</p>
+    <p>You have used # timeoff this year</p>
+
+    <p>You have accrued # timeoff this pay period</p>
+    <p>You have accrued # timeoff this year</p>
   </div>
 <% end %>
 

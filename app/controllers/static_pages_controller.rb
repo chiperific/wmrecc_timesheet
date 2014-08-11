@@ -62,6 +62,9 @@ class StaticPagesController < ApplicationController
     @months = Date::MONTHNAMES.dup.drop(1)
 
     @it_email = @app_default.it_emails.first || @app_default.it_emails.new
+
+    @timeoff_accrual = @app_default.timeoff_accruals.first || @app_default.timeoff_accruals.new
+    @accruals = ["Annual", "Weekly", "Bi-weekly"]
   end
 
   def configure_update

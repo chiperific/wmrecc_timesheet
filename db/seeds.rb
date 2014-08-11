@@ -36,9 +36,13 @@ AppDefault.create!([
 ])
 
 StartMonth.create!([
-  {id: 1, month: "January"}
+  {id: 1, month: "January", app_default_id: 1}
 ])
 
 ItEmail.create!([
-  {id: 1, email: "it@email.com"}
+  {id: 1, email: "it@email.com", app_default_id: 1}
+])
+
+TimeoffAccrual.create!([
+  {id: 1, type: "Annual", app_default_id: 1}
 ])

@@ -82,4 +82,9 @@ FactoryGirl.define do
     month           "January"
     app_default_id  1
   end
+
+  factory :timeoff_accrual do
+    type            "Annual"
+    app_default_id  1
+  end
 end

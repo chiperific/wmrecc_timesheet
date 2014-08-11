@@ -1,5 +1,6 @@
 <h3 class="subtle">System Configuration</h3>
 
+<!-- comment out the warning message
 <div class="row">
   <div class="alert alert-danger alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" id="close-button">&times;</button>
@@ -10,6 +11,7 @@
     <br>Most items are for initial setup.
   </div>
 </div>
+-->
 
 <%= form_for @app_default, url: configure_update_path do |f| %>
   <div class="row form-group">
@@ -47,6 +49,19 @@
           <div class="input-group" title="Start Year">
             <span class="input-group-addon"><%= icon('calendar') %></span>
             <%= s_f.select :month, options_for_select(@months), {}, { class: "form-control" } %>
+          </div>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+      <h3 class="subtle">Timeoff accrual</h3>
+      <%= f.fields_for :timeoff_accruals do |t_f| %>
+       <%= render 'shared/error_messages', object: t_f.object %>
+        <span class="form-controller">
+          <div class="input-group" title="Start Year">
+            <span class="input-group-addon"><%= icon('minus-square-o') %></span>
+            <%= t_f.select :type, options_for_select(@accruals), {}, { class: "form-control" } %>
           </div>
         </span>
       <% end %>

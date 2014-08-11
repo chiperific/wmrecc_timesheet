@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811020807) do
+ActiveRecord::Schema.define(version: 20140811220232) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 20140811020807) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "app_default_id"
+  end
+
+  create_table "timeoff_accruals", force: true do |t|
+    t.string  "type",           default: "Annual"
+    t.integer "app_default_id", default: 1
   end
 
   create_table "timesheet_categories", force: true do |t|
