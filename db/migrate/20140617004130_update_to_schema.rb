@@ -36,7 +36,7 @@ class UpdateToSchema < ActiveRecord::Migration
     end
 
     create_table "timeoff_accruals", force: true do |t|
-      t.string  "type",           default: "Annual"
+      t.string  "accrual_type",   default: "Annual"
       t.integer "app_default_id", default: 1
     end
 

@@ -77,6 +77,7 @@ class StaticPagesController < ApplicationController
     else
       @title = "Error!"
       @months = Date::MONTHNAMES.dup.drop(1)
+      @accruals = ["Annual", "Weekly", "Bi-weekly"]
       render 'configure'
     end
   end
@@ -94,7 +95,8 @@ class StaticPagesController < ApplicationController
           :id, :name, :abbr, :day_num, :app_default_id, :_destroy
         ],
         :start_months_attributes => [:id, :month],
-        :it_emails_attributes => [:id, :email]
+        :it_emails_attributes => [:id, :email],
+        :timeoff_accruals_attributes => [:id, :accrual_type]
       )
     end
 end
