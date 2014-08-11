@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810212217) do
+ActiveRecord::Schema.define(version: 20140811020807) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140810212217) do
   create_table "categories", force: true do |t|
     t.string   "name"
     t.integer  "department_id"
-    t.boolean  "active"
+    t.boolean  "active",        default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140810212217) do
 
   create_table "departments", force: true do |t|
     t.string   "name"
-    t.boolean  "active"
+    t.boolean  "active",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

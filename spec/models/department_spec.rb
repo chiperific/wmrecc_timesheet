@@ -1,13 +1,25 @@
 require 'spec_helper'
 
 describe Department do
-  before { @department = Department.new(name: "Admin", active: true) }
+  let!(:department) { FactoryGirl.create(:department)}
 
-  subject { @department }
+  subject { department }
 
-  it { should respond_to(:id)}
-  it { should respond_to(:name)}
-  it { should respond_to(:active)}
-  it { should respond_to(:created_at)}
-  it { should respond_to(:updated_at)}
+  it "has all the fields" do
+    should respond_to(:name)
+    should respond_to(:active)
+  end
+
+  describe "when name is not present" do
+    before { department.name = "" }
+
+    it { should_not be_valid }
+  end
+
+  describe "when active is not present" do
+    before { department.active = nil }
+
+    it { should_not be_valid }
+  end
+
 end

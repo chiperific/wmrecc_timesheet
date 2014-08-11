@@ -6,11 +6,14 @@ This product is a Time tracking application for the explicit use of West Michiga
   * model and nested_form for start of year
   * set timezone through user
   * model and nested_form for IT email address
+* start_month model spec
+* it_email model spec
+* categories model spec validations
+* department model spec validations
 
 ## Next steps:
 * _error_messages is not responding properly to nested_models
-* start_month model spec
-* it_email model spec
+
 * update static_pages_spec with it_email and start_month factories
 
 2. draft timeoff views

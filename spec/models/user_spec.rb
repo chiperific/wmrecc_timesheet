@@ -18,12 +18,12 @@ describe User do
     should respond_to(:created_at)
     should respond_to(:updated_at)
     should respond_to(:remember_token)
-    should respond_to(:authenticate)
     should respond_to(:annual_time_off)
     should respond_to(:standard_hours)
     should respond_to(:salary_rate)
     should respond_to(:hourly_rate)
     should respond_to(:pay_type)
+    should respond_to(:time_zone)
   end
 
   it { should be_valid }
@@ -104,6 +104,12 @@ describe User do
       user.save
       expect(user.reload.email).to eq mixed_case_email.downcase
     end
+  end
+
+  describe 'when user.time_zone is not a time_zone' do
+    before { user.time_zone = "Mars" }
+
+    it { should_not be_valid }
   end
 
   describe "return value of authenticate method" do

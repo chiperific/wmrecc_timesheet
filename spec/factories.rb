@@ -74,10 +74,12 @@ FactoryGirl.define do
   end
 
   factory :it_email do
-    email "it@email.com"
+    email           "it@email.com"
+    app_default_id  1
   end
 
   factory :start_month do
-    month "January"
+    month           "January"
+    app_default_id  1
   end
 end

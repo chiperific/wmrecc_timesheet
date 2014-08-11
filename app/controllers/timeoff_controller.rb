@@ -8,7 +8,7 @@ class TimeoffController < ApplicationController
     else
       @page_title = "#{@user.fname}'s Timeoff"
     end
-    @timeoff_hours = TimesheetHour.where(user_id: @user.id).where.not(timeoff_hours: 0).group(:timesheet_id).all
+    @timeoff_hours = TimesheetHour.where(user_id: @user.id).where.not(timeoff_hours: 0).group(:timesheet_id).to_a
   end
 
   def supervisor

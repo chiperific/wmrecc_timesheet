@@ -7,7 +7,7 @@ class UpdateToSchema < ActiveRecord::Migration
     create_table "categories", force: true do |t|
       t.string   "name"
       t.integer  "department_id"
-      t.boolean  "active"
+      t.boolean  "active",        default: true
       t.datetime "created_at"
       t.datetime "updated_at"
     end
@@ -16,7 +16,7 @@ class UpdateToSchema < ActiveRecord::Migration
 
     create_table "departments", force: true do |t|
       t.string   "name"
-      t.boolean  "active"
+      t.boolean  "active",        default: true
       t.datetime "created_at"
       t.datetime "updated_at"
     end
