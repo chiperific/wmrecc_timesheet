@@ -28,6 +28,11 @@ class UpdateToSchema < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
+    create_table "pay_periods", force: true do |t|
+    t.string  "period_type",    default: "Bi-weekly"
+    t.integer "app_default_id", default: 1
+  end
+
     create_table "start_months", force: true do |t|
       t.string   "month",          default: "January"
       t.integer  "app_default_id", default: 1

@@ -2,11 +2,15 @@
 
 <% if @user.annual_time_off > 0 %>
   <div class="well well-striped row">
-    <p>You have used # timeoff this pay period</p>
-    <p>You have used # timeoff this year</p>
-
-    <p>You have accrued # timeoff this pay period</p>
-    <p>You have accrued # timeoff this year</p>
+    <div class="row">
+      <span class="col-xs-6">
+        Select year
+      </span>
+      <span class="col-xs-6">
+        Select pay period
+      </span>
+    </div>
+    <%= render 'timeoff_calculator', year: @year, pay_period: @pay_period %>
   </div>
 <% end %>
 

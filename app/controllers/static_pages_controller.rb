@@ -65,6 +65,9 @@ class StaticPagesController < ApplicationController
 
     @timeoff_accrual = @app_default.timeoff_accruals.first || @app_default.timeoff_accruals.new
     @accruals = ["Annual", "Weekly", "Bi-weekly"]
+
+    @pay_period = @app_default.pay_periods.first || @app_default.pay_periods.new
+    @periods = ["Bi-weekly", "Weekly", "Semi-monthly", "Monthly"]
   end
 
   def configure_update
@@ -96,7 +99,8 @@ class StaticPagesController < ApplicationController
         ],
         :start_months_attributes => [:id, :month],
         :it_emails_attributes => [:id, :email],
-        :timeoff_accruals_attributes => [:id, :accrual_type]
+        :timeoff_accruals_attributes => [:id, :accrual_type],
+        :pay_periods_attributes => [:id, :period_type]
       )
     end
 end

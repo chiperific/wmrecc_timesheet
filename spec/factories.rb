@@ -84,7 +84,12 @@ FactoryGirl.define do
   end
 
   factory :timeoff_accrual do
-    type            "Annual"
+    accrual_type    "Annual"
+    app_default_id  1
+  end
+
+  factory :pay_period do
+    period_type     "Bi-weekly"
     app_default_id  1
   end
 end

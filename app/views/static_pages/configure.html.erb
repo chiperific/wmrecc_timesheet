@@ -66,6 +66,19 @@
     </div>
 
     <div class="col-xs-12 col-sm-6">
+      <h3 class="subtle">Pay Period</h3>
+      <%= f.fields_for :pay_periods do |p_f| %>
+       <%= render 'shared/error_messages', object: p_f.object %>
+        <span class="form-controller">
+          <div class="input-group" title="Start Year">
+            <span class="input-group-addon"><%= icon('money') %></span>
+            <%= p_f.select :period_type, options_for_select(@periods), {}, { class: "form-control" } %>
+          </div>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
       <h3 class="subtle">Contacting IT <small>(for help page)</small></h3>
       <%= f.fields_for :it_emails do |i_f| %>
         <%= render 'shared/error_messages', object: i_f.object %>

@@ -44,5 +44,9 @@ ItEmail.create!([
 ])
 
 TimeoffAccrual.create!([
-  {id: 1, type: "Annual", app_default_id: 1}
+  {id: 1, accrual_type: "Annual", app_default_id: 1}
+])
+
+PayPeriod.create!([
+  {id: 1, period_type: "Bi-weekly", app_default_id: 1}
 ])
