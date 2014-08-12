@@ -1,7 +1,7 @@
 class TimesheetsController < ApplicationController
 
   before_action do
-    require_supervisor(User.find(params[:user_id]))
+    require_self_sv_or_admin(User.find(params[:user_id]))
   end
 
   def single

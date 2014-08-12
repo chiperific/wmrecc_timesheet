@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
+  before_action :require_active_user
+
   around_filter :user_time_zone, if: :current_user
 
   rescue_from 'ActiveRecord::RecordNotFound' do
@@ -27,6 +29,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_active_user
+    unless current_user.active?
+      flash[:error] = "You aren't an active user."
+      redirect_to root_path
+    end
+  end
+
   def require_admin
     unless current_user.admin
       flash[:error] = "You need to be an Administrator."
@@ -34,7 +43,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_supervisor(user)
+  def require_self_sv_or_admin(user)
     unless current_user.has_authority_over?(user) || current_user == user || current_user.admin
       flash[:error] = "You don't supervise that user."
       redirect_to root_path
@@ -49,5 +58,7 @@ class ApplicationController < ActionController::Base
   def user_time_zone(&block)
     Time.use_zone(current_user.time_zone, &block)
   end
+
+  
 
 end

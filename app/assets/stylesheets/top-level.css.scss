@@ -179,7 +179,8 @@ div.input-group {
 }
 
 .readonly-disguiser {
-  background-color: white ;
+  background-color: white !important;
+  cursor: pointer !important;
 }
 
 .min-padding-both {

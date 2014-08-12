@@ -26,7 +26,11 @@ class TimeoffController < ApplicationController
 
   private
 
-  def pay_period(date)
-    
+  def pay_period_start(m_d_y)
+    common_date = m_d_y.split('/')
+    m = common_date[0].to_i
+    d = common_date[1].to_i
+    y = common_date[2].to_i
+    Date.new(y,m,d)
   end
 end

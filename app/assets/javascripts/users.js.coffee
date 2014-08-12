@@ -24,6 +24,10 @@ jQuery ->
       $(this).children('i').addClass(closed)
     event.preventDefault()
     false
+
+  $('.datepicker').datepicker
+    todayBtn: "linked"
+    todayHighlight: true
   
   $('#users-table').dataTable
     ordering: false

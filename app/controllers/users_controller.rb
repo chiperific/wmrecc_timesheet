@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :require_admin, only: [:index, :new, :create]
 
   before_action only: [:show, :edit, :update] do
-    require_supervisor(User.find(params[:id]))
+    require_self_sv_or_admin(User.find(params[:id]))
   end
 
   def index
@@ -57,7 +57,23 @@ class UsersController < ApplicationController
 
   def edit
     @title = "Edit User"
+
     @user = User.find(params[:id])
+
+    if current_user == @user
+      @page_title = "Edit your profile"
+    else
+      @page_title = "Edit "+@user.fname+"\'s profile"
+    end
+
+    if current_user.can_approve_this?(@user)
+      @disabled = false
+      @readonly_disguiser = "readonly-disguiser"
+    else
+      @disabled = true
+      @readonly_disguiser = ""
+    end
+
     @active_def = @user.active
     @salary_def = @user.pay_type
     @super_array = super_array
@@ -103,7 +119,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(
         :fname, :lname, :active, 
         :department_id, :supervisor_id, :time_zone,
-        :email, :password, :password_confirmation, :admin, :annual_time_off, :standard_hours)
+        :email, :password, :password_confirmation, :admin, :time_zone, :start_date, :end_date,
+        :annual_time_off, :standard_hours, :salary_rate, :hourly_rate, :pay_type)
     end
 
     # for _user_form select field

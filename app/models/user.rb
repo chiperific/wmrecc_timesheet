@@ -53,6 +53,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def can_change_admin_status(user)
+    #self cannot change own admin status
+    #non-admins cannot change status
+    if self == user || !self.admin?
+      false
+    else
+      true
+    end
+  end
+
   def full_name
     "#{self.fname} #{self.lname}"
   end
