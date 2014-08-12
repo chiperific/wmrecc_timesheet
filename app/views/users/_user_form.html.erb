@@ -108,14 +108,14 @@
     <div class="col-xs-6 col-md-3">
       <div class="input-group input-selector" title="Start Date">
         <span class="input-group-addon addon-selector"><%= icon('play') %>&nbsp<%= icon('calendar') %></span>
-        <%= f.text_field  :start_date, { class: "form-control datepicker #{@readonly_disguiser}", readonly: true, disabled: @disabled } %>
+        <%= f.text_field  :start_date, { class: "form-control datepicker #{@readonly_disguiser}", readonly: true, value: @user.start_date.try(:strftime, "%m/%d/%Y"), disabled: @disabled } %>
       </div>
     </div>
 
     <div class="col-xs-6 col-md-3">
       <div class="input-group input-selector" title="End Date">
         <span class="input-group-addon addon-selector"><%= icon('stop') %>&nbsp<%= icon('calendar') %></span>
-        <%= f.text_field  :end_date, { class: "form-control datepicker #{@readonly_disguiser}", readonly: true, disabled: @disabled } %>
+        <%= f.text_field  :end_date, { class: "form-control datepicker #{@readonly_disguiser}", readonly: true, value: @user.end_date.try(:strftime, "%m/%d/%Y"), disabled: @disabled } %>
       </div>
     </div>
 

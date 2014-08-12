@@ -28,6 +28,7 @@ jQuery ->
   $('.datepicker').datepicker
     todayBtn: "linked"
     todayHighlight: true
+
   
   $('#users-table').dataTable
     ordering: false

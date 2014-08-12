@@ -1,15 +1,11 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ## Last completed step:
-* Create nested form for Weekdays through AppDefault.first
-* Configure page:
-  * model and nested_form for start of year
-  * set timezone through user
-  * model and nested_form for IT email address
-* start_month model spec
-* it_email model spec
-* categories model spec validations
-* department model spec validations
+* fix configure error handling
+* update 
+* create timeoff_accrual model (for app_default)
+* create pay_period model (for app_default)
+* add start_date and end_date to user and implement
 
 ## Next steps:
 * update static_pages_spec with it_email and start_month factories

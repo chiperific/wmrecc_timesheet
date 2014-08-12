@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812014447) do
+ActiveRecord::Schema.define(version: 20140812050942) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"
@@ -36,21 +36,21 @@ ActiveRecord::Schema.define(version: 20140812014447) do
 
   create_table "it_emails", force: true do |t|
     t.string   "email"
-    t.integer  "app_default_id"
+    t.integer  "app_default_id", default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "pay_periods", force: true do |t|
     t.string  "period_type",    default: "Bi-weekly"
-    t.integer "app_default_id"
+    t.integer "app_default_id", default: 1
   end
 
   create_table "start_months", force: true do |t|
     t.string   "month",          default: "January"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "app_default_id"
+    t.integer  "app_default_id", default: 1
   end
 
   create_table "timeoff_accruals", force: true do |t|
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20140812014447) do
     t.string  "name"
     t.string  "abbr"
     t.integer "day_num"
-    t.integer "app_default_id"
+    t.integer "app_default_id", default: 1
   end
 
 end

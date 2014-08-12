@@ -3,6 +3,7 @@ ruby '2.0.0'
 #ruby-gemset=wmrecc
 
 gem 'rails', '4.0.5'
+gem 'american_date'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'bootstrap-datepicker-rails'
