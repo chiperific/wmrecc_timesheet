@@ -12,11 +12,10 @@ describe "User Pages" do
 
   describe "Edit" do
     before { visit edit_user_path(user) }
-
     it '(check links and content)' do
       should have_button('Submit')
       should have_link('Cancel')
-      should have_content(user.fname+"\'s profile")
+      should have_content("Edit your profile")
     end
 
     describe "when submitting with valid info" do

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
-  before_action :require_active_user
+  before_action :require_active_user, if: :current_user
 
   around_filter :user_time_zone, if: :current_user
 

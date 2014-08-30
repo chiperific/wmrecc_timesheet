@@ -65,7 +65,7 @@ describe User do
   end
 
   describe "when email address is already taken" do
-    let(:dup_user) { User.new(fname: "Duplicate", lname: "Email", email: "susan@kragt.com", password: "foobar", password_confirmation: "foobar") }
+    let(:dup_user) { User.new(fname: "Duplicate", lname: "Email", email: user.email, password: "foobar", password_confirmation: "foobar") }
 
     subject { dup_user }
 

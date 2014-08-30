@@ -3,7 +3,7 @@ FactoryGirl.define do
     id                    1
     fname                 "Factory"
     lname                 "User"
-    email                 "susan@kragt.com"
+    email                 "chip@kragt.com"
     admin                 true
     active                true
     department_id         1
@@ -18,7 +18,7 @@ FactoryGirl.define do
     id                    2
     fname                 "Factory"
     lname                 "User2"
-    email                 "chip@kragt.com"
+    email                 "active@user.com"
     admin                 true
     active                true
     department_id         1

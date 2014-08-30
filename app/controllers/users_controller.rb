@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @title = "Staff"
     @user = User.find(params[:id])
     @user_staff = User.where(supervisor_id: @user.id)
-    @users = User.to_a
+    @users = User.all
     @active_users = @user_staff.where(active: true)
     @inactive_users = @user_staff.where(active: false)
     @supervised_active_users = User.where("supervisor_id IS NOT NULL")

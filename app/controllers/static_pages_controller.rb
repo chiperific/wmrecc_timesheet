@@ -43,8 +43,8 @@ class StaticPagesController < ApplicationController
       sign_in user
       redirect_to root_path
     else
-      flash.now[:error] = 'Invalid email/password combination.'
-      render root_path
+      flash[:error] = 'Invalid email/password combination.'
+      redirect_to root_path
     end
   end
 
