@@ -7,6 +7,9 @@ This product is a Time tracking application for the explicit use of West Michiga
 * add start_date and end_date to user and implement
 * implement ruby-american_date gem
 * update static_pages_spec with it_email and start_month factories
+* Timeoff views complete
+* Fix issue with timesheet timesheet_hour.status
+* move timesheets table to partial on sv and admin
 
 ## Next steps:
 2. draft timeoff views

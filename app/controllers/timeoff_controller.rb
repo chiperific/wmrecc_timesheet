@@ -1,5 +1,9 @@
 class TimeoffController < ApplicationController
 
+  before_action do
+    require_self_sv_or_admin(User.find(params[:user_id]))
+  end
+
   def single
     @title = "Timeoff"
     @user = User.find(params[:user_id])
@@ -16,6 +20,8 @@ class TimeoffController < ApplicationController
 
     @timeoff_earned_per_period_exact = @user.annual_time_off / 26
     @timeoff_earned_per_period = @timeoff_earned_per_period_exact.round(1)
+
+    @timeoff_accrual_type = TimeoffAccrual.first.accrual_type
   end
 
   def supervisor

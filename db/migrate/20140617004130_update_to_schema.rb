@@ -89,7 +89,7 @@ class UpdateToSchema < ActiveRecord::Migration
       t.string   "email"
       t.string   "password_digest"
       t.boolean  "admin",                                    default: false
-      t.decimal  "annual_time_off", precision: 6,  scale: 2
+      t.decimal  "annual_time_off", precision: 6,  scale: 2, default: 0.0
       t.decimal  "standard_hours",  precision: 6,  scale: 2
       t.decimal  "salary_rate",     precision: 10, scale: 2
       t.decimal  "hourly_rate",     precision: 6,  scale: 2

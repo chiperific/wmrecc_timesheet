@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812050942) do
+ActiveRecord::Schema.define(version: 20140901172306) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20140812050942) do
     t.string   "password_digest"
     t.boolean  "admin",                                    default: false
     t.string   "remember_token"
-    t.decimal  "annual_time_off", precision: 6,  scale: 2
+    t.decimal  "annual_time_off", precision: 6,  scale: 2, default: 0.0
     t.decimal  "standard_hours",  precision: 6,  scale: 2
     t.decimal  "salary_rate",     precision: 10, scale: 2
     t.decimal  "hourly_rate",     precision: 6,  scale: 2

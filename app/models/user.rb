@@ -67,20 +67,45 @@ class User < ActiveRecord::Base
     "#{self.fname} #{self.lname}"
   end
 
-  # for _timeoff_calculator
-  def timeoff_used_by_year(year)
-    if year.class == String
-      year = year.to_i
-    end
-    self.timesheet_hours.joins(:timesheet).where( timesheets: { year: year}).sum(:timeoff_hours).to_f
-  end
-
-  def timeoff_used_by_period(period, year)
+  # methods for _timeoff_calculator
+  def date_from_period_year(period, year)
     m_d = period.split('-')
     m = m_d[0].to_i
     d = m_d[1].to_i
     year = year.to_i
     date = Date.new(year,m,d)
+  end
+
+  def timeoff_accumulated(period, year)
+    date = date_from_period_year(period, year)
+    if TimeoffAccrual.first.accrual_type == "Weekly"
+      weekly = (self.annual_time_off / 52.0 ).to_f
+      accumulated = (date.cweek * weekly).round(2)
+    elsif TimeoffAccrual.first.accrual_type == "Bi-weekly"
+      bi_weekly = (self.annual_time_off / 26.0 ).to_f
+      accumulated = ((date.cweek.to_f / 2.0).round(0) * bi_weekly).round(2)
+    else
+      accumulated = self.annual_time_off
+    end
+    accumulated
+  end
+
+  def timeoff_approved_by_year(year)
+    if year.class == String
+      year = year.to_i
+    end
+    self.timesheet_hours.joins(:timesheet).where( timesheets: { year: year}).where.not(timeoff_approved: nil).sum(:timeoff_hours).to_f
+  end
+
+  def timeoff_unapproved_by_year(year)
+    if year.class == String
+      year = year.to_i
+    end
+    self.timesheet_hours.joins(:timesheet).where( timesheets: { year: year}).where(timeoff_approved: nil).sum(:timeoff_hours).to_f
+  end
+
+  def timeoff_used_by_period(period, year)
+    date = date_from_period_year(period, year)
     if date.cweek.even?
       wk1 = (date - 7.days).cweek
       wk2 = date.cweek
@@ -89,7 +114,18 @@ class User < ActiveRecord::Base
       wk2 = (date + 7.days).cweek
     end
     week_num_ary = [wk1, wk2]
-    self.timesheet_hours.joins(:timesheet).where( timesheets: { year: year, week_num: week_num_ary}).sum(:timeoff_hours).to_f
+    self.timesheet_hours.joins(:timesheet).where.not(timeoff_approved: nil).where( timesheets: { year: year, week_num: week_num_ary}).sum(:timeoff_hours).to_f
+  end
+
+  def timeoff_used_to_period(period, year)
+    date = date_from_period_year(period, year)
+    if date.cweek.even?
+      pay_period = (date - 7.days).cweek
+    else
+      pay_period = date.cweek
+    end
+    pay_period_ary = [1...pay_period]
+    self.timesheet_hours.joins(:timesheet).where.not(timeoff_approved: nil).where( timesheets: { year: year, week_num: pay_period_ary}).sum(:timeoff_hours).to_f
   end
 
   private

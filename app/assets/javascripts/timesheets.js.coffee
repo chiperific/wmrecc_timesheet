@@ -74,9 +74,11 @@ jQuery ->
   # _timesheet_hours_form.html.erb
   $('#review_select_tag').change ->
     if $(this).val() == "true"
-      $('.reviewed-field').val(RubyReadyDate())
+      $('.reviewed-field').val(rubyReadyDate())
     else
       $('.reviewed-field').val('')
+      $('#approve_select_tag').val('false')
+      $('.approved-field').val('')
 
   $('#approve_select_tag').change ->
     if $(this).val() == "true"
@@ -91,6 +93,8 @@ jQuery ->
       $('.timeoff-reviewed-field').val(rubyReadyDate())
     else
       $('.timeoff-reviewed-field').val('')
+      $('#to_approve_select_tag').val('false')
+      $('.timeoff-approved-field').val('')
 
   $('#to_approve_select_tag').change ->
     if $(this).val() == "true"

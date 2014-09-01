@@ -14,12 +14,21 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  rescue_from 'NoMethodError' do
-    flash[:error] = "That doesn't seem to exist."
-    redirect_to root_path
-  end
+#  rescue_from 'NoMethodError' do
+#    flash[:error] = "That doesn't seem to exist."
+#    redirect_to root_path
+#  end
 
   private
+
+  # create a fiscalweek based upon Config#StartMonths
+  class Date
+    def fweek
+      month_text = StartMonth.first.month
+      month_num = Date::MONTHNAMES.index(month_text)
+      cweek_as_month_fraction = self.cweek.to_f / 4.0
+    end
+  end
 
   # permission defs
   def deny_all

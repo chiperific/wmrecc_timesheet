@@ -22,6 +22,7 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'will_paginate', '3.0.4'
 gem 'will_paginate-bootstrap'
+gem 'fiscali'
 
 gem 'jquery-datatables-rails'
 gem 'lodash-rails'

@@ -46,7 +46,7 @@
         <span class="form-controller">
           <div class="input-group" title="Start Year">
             <span class="input-group-addon"><%= icon('calendar') %></span>
-            <%= s_f.select :month, options_for_select(@months), {}, { class: "form-control" } %>
+            <%= s_f.select :month, options_for_select(@months, @start_month.month), {}, { class: "form-control" } %>
           </div>
         </span>
       <% end %>
@@ -59,7 +59,7 @@
         <span class="form-controller">
           <div class="input-group" title="Start Year">
             <span class="input-group-addon"><%= icon('minus-square-o') %></span>
-            <%= t_f.select :accrual_type, options_for_select(@accruals), {}, { class: "form-control" } %>
+            <%= t_f.select :accrual_type, options_for_select(@accruals, @timeoff_accrual.accrual_type), {}, { class: "form-control" } %>
           </div>
         </span>
       <% end %>
@@ -72,7 +72,7 @@
         <span class="form-controller">
           <div class="input-group" title="Start Year">
             <span class="input-group-addon"><%= icon('money') %></span>
-            <%= p_f.select :period_type, options_for_select(@periods), {}, { class: "form-control" } %>
+            <%= p_f.select :period_type, options_for_select(@periods, @pay_period.period_type), {}, { class: "form-control" } %>
           </div>
         </span>
       <% end %>

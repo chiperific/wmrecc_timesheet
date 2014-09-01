@@ -25,6 +25,7 @@ describe 'Timeoff Pages' do
       should have_button 'Submit'
       should have_content 'hours off per year'
       should have_content 'hours off earned per period'
+      should have_table 'timeoff-single-table'
     end
   end
 

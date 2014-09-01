@@ -1,0 +1,44 @@
+<thead class="subtle">
+  <tr>
+    <td>
+      <%= icon('user fa-2x') %>
+      <p>User</p>
+    </td>
+    <td>
+      <%= icon('calendar fa-2x') %>
+      <p>Date</p>
+    </td>
+    <td class="hidden-xs">
+      <%= icon('clock-o fa-2x') %>
+      <p>Hours</p>
+    </td>
+    <td>
+      <%= icon('minus-square-o fa-2x') %>
+      <p class='hidden-xs'>Time off</p>
+      <p class='visible-xs-block'>Off</p>
+    </td>
+    <td class="hidden-xs">
+      <%= icon('toggle-up fa-2x') %>
+      <p>Submitted</p>
+    </td>
+    <td>
+      <%= icon('check-square-o fa-2x') %>
+      <p>Approved</p>
+    </td>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <% timesheets_collection.each do |th| %>
+    <% t = th.timesheet %>
+    <tr>
+      <th><%= th.user.full_name %></th>
+      <td><%= t.week_num_to_date %></td>
+      <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).sum(:hours) %></td>
+      <td><%= t.timesheet_hours.where(user_id: th.user.id).sum(:timeoff_hours) %></td>
+      <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
+      <td><%= th.status %></td>
+      <td><%= link_to FA_GO, edit_user_timesheet_path( th.user_id, t.id ), { method: :get, class: "btn btn-success btn-sm" } %></td>
+    </tr>
+  <% end %>
+</tbody>

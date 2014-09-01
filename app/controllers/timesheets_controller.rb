@@ -22,6 +22,7 @@ class TimesheetsController < ApplicationController
 
     @user_auth = @user.has_authority_over
     @user_auth_id_ary = @user_auth.pluck(:id) || nil
+    #####
     @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
 
     if current_user.admin?
@@ -47,7 +48,7 @@ class TimesheetsController < ApplicationController
     @timesheets_all = TimesheetHour.group(:timesheet_id)
     @all_users_select = Hash.new
 
-    User.where(active: true).each do |usr|
+    User.where(active: true).order(:lname).each do |usr|
       @all_users_select[usr.full_name] = usr.id
     end
   end
@@ -97,7 +98,7 @@ class TimesheetsController < ApplicationController
 
     @timesheet_hours = Array.new
 
-    Weekday.all.each do |wd|
+    Weekday.all.order(:day_num).each do |wd|
       timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.day_num)
       @timesheet_hours << timesheet_hour
     end
