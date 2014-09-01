@@ -12,7 +12,7 @@ describe 'Timeoff Pages' do
     it "should have certain content" do
       should have_title 'Timeoff'
       should have_content 'Timeoff'
-      pending have_content 'timeoff remaining'
+      should have_table 'timeoff-table'
     end
   end
 
@@ -34,7 +34,6 @@ describe 'Timeoff Pages' do
     it "should have certain content" do
       should have_title 'Timeoff'
       should have_content 'Timeoff'
-      pending have_content 'timeoff remaining'
     end
   end
 end

@@ -27,7 +27,6 @@ class TimeoffController < ApplicationController
 
   def admin
     @title = "Timeoff"
-    @user = User.find(params[:user_id])
 
     @timeoff_hours = TimesheetHour.where.not(timeoff_hours: 0).group(:timesheet_id).to_a
   end
