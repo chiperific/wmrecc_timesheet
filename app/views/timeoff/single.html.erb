@@ -3,18 +3,38 @@
 <% if @user.annual_time_off > 0 %>
   <div class="well well-striped row">
     <div class="row">
-      <span class="col-xs-6">
-        Select year
-      </span>
-      <span class="col-xs-6">
-        Select pay period
-      </span>
+
+     <form accept-charset="UTF-8" method="get" >
+        <div class="col-xs-4 min-padding-both">
+          <div class="input-group" title='Year'>
+            <span class="input-group-addon">
+              <%= icon('calendar-o') %>
+            </span>
+            <input id="timeoff-calculator-year" name="year" type="integer" value="<%= @year %>" class="form-control datepicker" >
+          </div>
+        </div>
+        <div class="col-xs-4 min-padding-both">
+          <div class="input-group" title='Pay Period'>
+            <span class="input-group-addon">
+              $&nbsp<%= icon('calendar') %>
+            </span>
+            <input id="timeoff-calculator-pay-period" name="pay_period" value="<%= @pay_period %>" class="form-control datepicker" >
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary">
+            <%= FA_SUBMIT %>
+          </button>
+        </div>
+      </form>
+       
+
     </div>
     <%= render 'timeoff_calculator', year: @year, pay_period: @pay_period %>
   </div>
 <% end %>
 
-<div id="single-timeoff-table buffered-row">
+<div>
   <table class="table table-striped table-center" id="timeoff-single-table">
     <thead class="subtle">
       <tr>

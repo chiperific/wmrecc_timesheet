@@ -6,12 +6,11 @@ This product is a Time tracking application for the explicit use of West Michiga
 * create pay_period model (for app_default)
 * add start_date and end_date to user and implement
 * implement ruby-american_date gem
-
-## Next steps:
 * update static_pages_spec with it_email and start_month factories
 
+## Next steps:
 2. draft timeoff views
-  * \_single\_timeoff table done
+  * \_single\_timeoff table and well done
     * needs alert for denied timeoff
   * \_auth\_over\_timeoff and \_auth\_admin\_timeoff need tables
 3. timeoff views need sums:
@@ -29,6 +28,7 @@ This product is a Time tracking application for the explicit use of West Michiga
   2. http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
 
 ## Minor tweaks:
+* A user could over-run their timeoff hours per year w/o warning.
 * Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
 * Timesheet_controller#new and #edit - building weekdays and cats is not DRY
 

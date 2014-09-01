@@ -196,5 +196,6 @@ class TimesheetsController < ApplicationController
         ["Approved", true]
       end
     end
+
   #end private
 end

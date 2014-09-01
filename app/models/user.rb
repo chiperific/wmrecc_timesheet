@@ -67,6 +67,31 @@ class User < ActiveRecord::Base
     "#{self.fname} #{self.lname}"
   end
 
+  # for _timeoff_calculator
+  def timeoff_used_by_year(year)
+    if year.class == String
+      year = year.to_i
+    end
+    self.timesheet_hours.joins(:timesheet).where( timesheets: { year: year}).sum(:timeoff_hours).to_f
+  end
+
+  def timeoff_used_by_period(period, year)
+    m_d = period.split('-')
+    m = m_d[0].to_i
+    d = m_d[1].to_i
+    year = year.to_i
+    date = Date.new(year,m,d)
+    if date.cweek.even?
+      wk1 = (date - 7.days).cweek
+      wk2 = date.cweek
+    else
+      wk1 = date.cweek
+      wk2 = (date + 7.days).cweek
+    end
+    week_num_ary = [wk1, wk2]
+    self.timesheet_hours.joins(:timesheet).where( timesheets: { year: year, week_num: week_num_ary}).sum(:timeoff_hours).to_f
+  end
+
   private
 
     def create_remember_token

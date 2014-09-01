@@ -123,8 +123,3 @@ jQuery ->
     columnDefs: [
       targets: -1, sortable: false, searchable: false
     ]
-
-  $('#timeoff-single-table').dataTable
-    columnDefs: [
-      targets: -1, sortable: false, searchable: false
-    ]
