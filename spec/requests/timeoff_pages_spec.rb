@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Timeoff Pages' do
   let!(:user) { FactoryGirl.create(:user) }
+  let!(:timeoff_accrual) { FactoryGirl.create(:timeoff_accrual)}
   before { sign_in(user) }
 
   subject { page }
@@ -23,8 +24,6 @@ describe 'Timeoff Pages' do
       should have_title 'Timeoff'
       should have_content 'Timeoff'
       should have_button 'Submit'
-      should have_content 'hours off per year'
-      should have_content 'hours off earned per period'
       should have_table 'timeoff-single-table'
     end
   end

@@ -2,19 +2,19 @@
   <%= render 'shared/error_messages', object: f.object %>
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group">
-      <span class="input-group-addon"><%= icon('arrow-right') %></span>
+      <span class="input-group-addon"><%= fa_icon('arrow-right') %></span>
       <%= f.text_field :name, {class: "form-control", placeholder: "Name"} %>
     </div>
   </div>
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
-      <span class="input-group-addon addon-selector"><%= icon('cogs') %></span>
+      <span class="input-group-addon addon-selector"><%= fa_icon('cogs') %></span>
       <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_status ), {}, {class: "form-control selector"} %>
     </div>
   </div>
   <div class="row  col-xs-12 col-md-6">
     <div class="input-group input-selector">
-      <span class="input-group-addon addon-selector"><%= icon('sitemap') %></span>
+      <span class="input-group-addon addon-selector"><%= fa_icon('sitemap') %></span>
       <%= f.select :department_id, options_for_select(@dept_array, @category.department_id), {}, {class: "form-control selector" } %>
     </div>
   </div>

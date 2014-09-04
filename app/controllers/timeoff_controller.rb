@@ -22,6 +22,7 @@ class TimeoffController < ApplicationController
     @timeoff_earned_per_period = @timeoff_earned_per_period_exact.round(1)
 
     @timeoff_accrual_type = TimeoffAccrual.first.accrual_type
+
   end
 
   def supervisor

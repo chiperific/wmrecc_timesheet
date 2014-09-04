@@ -24,7 +24,7 @@
         </p>
         <a href='<%= user_timeoff_single_path(current_user) %>' >
           <div class="box-btn readonly-disguiser">
-            <%= icon('minus-square-o fa-3x') %>
+            <%= fa_icon('minus-square-o 3x') %>
             <p>Your timeoff</p>
           </div>
         </a>
@@ -38,7 +38,7 @@
         </p>
         <a href='<%= user_timesheets_single_path(current_user) %>' >
           <div class="box-btn readonly-disguiser">
-            <%= icon('clock-o fa-3x') %>
+            <%= fa_icon('clock-o 3x') %>
             <p>View past timesheets</p>
           </div>
         </a>
@@ -52,7 +52,7 @@
         </p>
         <a href='<%= user_timeoff_supervisor_path(current_user) %>' >
           <div class="box-btn readonly-disguiser">
-            <%= icon('check-square-o fa-3x') %>
+            <%= fa_icon('check-square-o 3x') %>
             <p>Your staff's timeoff</p>
           </div>
         </a>
@@ -66,7 +66,7 @@
         </p>
         <a href="<%= user_timesheets_supervisor_path(current_user) %>" >
           <div class="box-btn readonly-disguiser">
-            <%= icon('thumbs-o-up fa-3x') %>
+            <%= fa_icon('thumbs-o-up 3x') %>
             <p>Your staff's timesheets</p>
           </div>
         </a>
@@ -79,21 +79,21 @@
 <div class="row app-style">
   <a href="<%= new_user_timesheet_path(current_user) %>" class="<%= @col_width %>">
     <div class="box-btn">
-      <%= icon('clock-o fa-3x') %>
+      <%= fa_icon('clock-o 3x') %>
       <p>Submit timesheet</p>
     </div>
   </a>
   
   <a href='<%= user_timesheets_single_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn">
-      <%= icon('clock-o fa-3x') %>
+      <%= fa_icon('clock-o 3x') %>
       <p>View past timesheets</p>
     </div>
   </a>
 
   <a href='<%= user_timeoff_single_path(current_user) %>' class="<%= @col_width %>">
     <div class="box-btn readonly-disguiser">
-      <%= icon('minus-square-o fa-3x') %>
+      <%= fa_icon('minus-square-o 3x') %>
       <p>Your timeoff</p>
     </div>
   </a>
@@ -103,28 +103,28 @@
   <% if current_user.has_authority_over.any? %>
     <a href="<%= user_timesheets_supervisor_path(current_user) %>" class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('thumbs-o-up fa-3x') %>
+        <%= fa_icon('thumbs-o-up 3x') %>
         <p>Your staff's timesheets</p>
       </div>
     </a>
 
     <a href='<%= user_timeoff_supervisor_path(current_user) %>' class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('check-square-o fa-3x') %>
+        <%= fa_icon('check-square-o 3x') %>
         <p>Your staff's timeoff</p>
       </div>
     </a>
 
     <a href="#" class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('table fa-3x') %>
+        <%= fa_icon('table 3x') %>
         <p>Run reports</p>
       </div>
     </a>
 
     <a href="<%= user_path(current_user) %>" class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('users fa-3x') %>
+        <%= fa_icon('users 3x') %>
         <p>Manage your staff</p>
       </div>
     </a>
@@ -134,42 +134,42 @@
   <% if current_user.admin %> 
     <a href="<%= users_path %>" class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('users fa-3x') %>
+        <%= fa_icon('users 3x') %>
         <p>Manage all users</p>
       </div>
     </a>
 
     <a href="<%= user_timesheets_admin_path(current_user) %>" class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('thumbs-o-up fa-3x') %>
+        <%= fa_icon('thumbs-o-up 3x') %>
         <p>Manage all timesheets</p>
       </div>
     </a>
 
     <a href='<%= user_timeoff_admin_path(current_user) %>' class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('check-square-o fa-3x') %>
+        <%= fa_icon('check-square-o 3x') %>
         <p>Manage all timeoff</p>
       </div>
     </a>
 
     <a href="<%= departments_path %>" class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('sitemap fa-3x') %>
+        <%= fa_icon('sitemap 3x') %>
         <p class="small">Manage departments</p>
       </div>
     </a>
 
     <a href="<%= categories_path %>" class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('list fa-3x') %>
+        <%= fa_icon('list 3x') %>
         <p class="">Manage categories</p>
       </div>
     </a>
 
     <a href="<%= configure_path %>" class="<%= @col_width %>">
       <div class="box-btn">
-        <%= icon('cog fa-3x') %>
+        <%= fa_icon('cog 3x') %>
         <p class="small">Manage configuration</p>
       </div>
     </a>
@@ -178,21 +178,21 @@
 <!-- all user buttons 2 -->
   <a href="<%= edit_user_path(current_user) %>" class="<%= @col_width %>" data-method="get">
     <div class="box-btn">
-      <%= icon('sliders fa-3x') %>
+      <%= fa_icon('sliders 3x') %>
       <p>Edit your profile</p>
     </div>
   </a>
 
   <a href="<%= help_path %>" class="<%= @col_width %>">
     <div class="box-btn">
-      <%= icon('question fa-3x') %>
+      <%= fa_icon('question 3x') %>
       <p>Get help</p>
     </div>
   </a>
 
   <a href="<%= signout_path %>" data-method="delete" rel="nofollow" class="<%= @col_width %>">
     <div class="box-btn">
-      <%= icon('sign-out fa-3x') %>
+      <%= fa_icon('sign-out 3x') %>
       <p>Sign out</p>
     </div>
   </a>

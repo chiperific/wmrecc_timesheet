@@ -11,7 +11,8 @@ gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'therubyracer'
 gem 'less-rails'
-gem 'font-awesome-less'
+#gem 'font-awesome-less'
+gem 'font-awesome-rails'
 gem 'jquery-turbolinks'
 gem 'sass-rails', '4.0.1'
 gem 'uglifier', '2.1.1'
@@ -22,7 +23,6 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'will_paginate', '3.0.4'
 gem 'will_paginate-bootstrap'
-gem 'fiscali'
 
 gem 'jquery-datatables-rails'
 gem 'lodash-rails'
@@ -42,6 +42,10 @@ group :development, :test do
   gem 'childprocess', '0.3.6'
 
   gem 'seed_dump'
+end
+
+group :development do
+  gem 'rb-readline'
 end
 
 group :test do

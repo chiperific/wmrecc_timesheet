@@ -3,14 +3,14 @@
   <div class="row form-group">
     <div class="col-xs-6">
       <div class="input-group">
-        <span class="input-group-addon"><%= icon('calendar') %></span>
+        <span class="input-group-addon"><%= fa_icon('calendar') %></span>
         <%= text_field_tag "week_num_to_date_field", @timesheet_date.strftime("%m/%d"), { class: "form-control readonly-disguiser width-limiter", readonly: true } %>
       </div>
       <%= t_form.hidden_field :week_num, { value: @timesheet.week_num || @timesheet_date.cweek } %>
     </div>
     <div class="col-xs-6">
       <div class="input-group">
-        <span class="input-group-addon"><%= icon('calendar-o') %></span>
+        <span class="input-group-addon"><%= fa_icon('calendar-o') %></span>
         <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
       </div>
     </div>
@@ -29,11 +29,11 @@
           &nbsp
         </span>
         <span class="col-xs-5 expand-5-to-7 subtle" >
-          <i class='fa fa-clock-o fa-2x'></i><br>
+          <i class='fa fa-clock-o 2x'></i><br>
           Worked
         </span>
         <span class="col-xs-5 timeoff-hide subtle">
-          <i class='fa fa-minus-square-o fa-2x'></i><br>
+          <i class='fa fa-minus-square-o 2x'></i><br>
           Time off
         </span>
       </span>
@@ -48,11 +48,11 @@
           &nbsp
         </span>
         <span class="col-xs-5 visible-xs-block subtle">
-          <%= icon('clock-o fa-2x') %><br>
+          <%= fa_icon('clock-o 2x') %><br>
           Ttl Hrs
         </span>
         <span class="col-xs-5 hidden-xs subtle">
-          <%= icon('clock-o fa-2x') %><br>
+          <%= fa_icon('clock-o 2x') %><br>
           Total Hours
         </span>
       </span>

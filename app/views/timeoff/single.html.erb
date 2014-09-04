@@ -8,7 +8,7 @@
         <div class="col-xs-4 min-padding-both">
           <div class="input-group" title='Year'>
             <span class="input-group-addon">
-              <%= icon('calendar-o') %>
+              <%= fa_icon('calendar-o') %>
             </span>
             <input id="timeoff-calculator-year" name="year" type="integer" value="<%= @year %>" class="form-control datepicker" >
           </div>
@@ -16,7 +16,7 @@
         <div class="col-xs-4 min-padding-both">
           <div class="input-group" title='Pay Period'>
             <span class="input-group-addon">
-              $&nbsp<%= icon('calendar') %>
+              $&nbsp<%= fa_icon('calendar') %>
             </span>
             <input id="timeoff-calculator-pay-period" name="pay_period" value="<%= @pay_period %>" class="form-control datepicker" >
           </div>
@@ -39,19 +39,19 @@
     <thead class="subtle">
       <tr>
         <td>
-          <%= icon('calendar fa-2x') %>
+          <%= fa_icon('calendar 2x') %>
           <p>Date</p>
         </td>
         <td>
-          <%= icon('minus-square-o fa-2x') %>
+          <%= fa_icon('minus-square-o 2x') %>
           <p>Time off</p>
         </td>
         <td class="hidden-xs">
-          <%= icon('toggle-up fa-2x') %>
+          <%= fa_icon('toggle-up 2x') %>
           <p>Submitted</p>
         </td>
         <td>
-          <%= icon('check-square-o fa-2x') %>
+          <%= fa_icon('check-square-o 2x') %>
           <p>Approved</p>
         </td>
         <td></td>

@@ -87,7 +87,7 @@ class TimesheetsController < ApplicationController
     @title = "Edit Timesheet"
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
-    @timesheet_date = Date.parse @timesheet.week_num_to_date_obj
+    @timesheet_date = DateTime.parse @timesheet.week_num_to_date_obj
 
     @hours_reviewed = @timesheet.timesheet_hours.where(user_id: @user.id).first.reviewed?
     @hours_approved = @timesheet.timesheet_hours.where(user_id: @user.id).first.approved?

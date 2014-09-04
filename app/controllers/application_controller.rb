@@ -21,15 +21,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # create a fiscalweek based upon Config#StartMonths
-  class Date
-    def fweek
-      month_text = StartMonth.first.month
-      month_num = Date::MONTHNAMES.index(month_text)
-      cweek_as_month_fraction = self.cweek.to_f / 4.0
-    end
-  end
-
   # permission defs
   def deny_all
     flash[:error] = "There's nothing there."
