@@ -10,14 +10,11 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Timeoff views complete
 * Fix issue with timesheet timesheet_hour.status
 * move timesheets table to partial on sv and admin
+* draft timeoff views
+* timeoff single view has calculator
+* page refreshes on resize (for datatables)
 
 ## Next steps:
-2. draft timeoff views
-  * \_single\_timeoff table and well done
-    * needs alert for denied timeoff
-  * \_auth\_over\_timeoff and \_auth\_admin\_timeoff need tables
-3. timeoff views need sums:
-  * timeoff used && remaining between date ranges with 'only approved' || 'all submitted'
 4. UX validation of hours and cats
   * Progress bars:
     1. TH.hrs vs. user.standard_hours
@@ -32,6 +29,7 @@ This product is a Time tracking application for the explicit use of West Michiga
 
 ## Minor tweaks:
 * A user could over-run their timeoff hours per year w/o warning.
+* * page refreshes on resize (for datatables) because dataTables are not responsive (or at least not with search and display count functions)
 * Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
 * Timesheet_controller#new and #edit - building weekdays and cats is not DRY
 

@@ -26,7 +26,6 @@ gem 'will_paginate-bootstrap'
 
 gem 'jquery-datatables-rails'
 gem 'lodash-rails'
-#gem "squeel" #better sql interactivity.
 
 # so many cache errors in sass 3!
 gem 'sass', '3.2.13'
