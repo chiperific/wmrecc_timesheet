@@ -18,9 +18,6 @@ class TimeoffController < ApplicationController
     @year = params[:year] || Time.now.in_time_zone.year
     @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
 
-    @timeoff_earned_per_period_exact = @user.annual_time_off / 26
-    @timeoff_earned_per_period = @timeoff_earned_per_period_exact.round(1)
-
     @timeoff_accrual_type = TimeoffAccrual.first.accrual_type
 
   end

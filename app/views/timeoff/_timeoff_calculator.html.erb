@@ -2,22 +2,49 @@
   <hr class="thin hr-black">
 </div>
 
-<div class="row">
-  <div class="min-padding-both">
-    <% if @timeoff_accrual_type == "Annual" %>
+<div class="row row-fluid min-padding-both center">
+  <% if @timeoff_accrual_type == "Annual" %>
+    <span class="col-xs-12 col-sm-4 col-md-3 well well-adjusted well-sm">
       <p><%= @user.timeoff_accumulated(@pay_period, @year) %> hours off per year.</p>
+    </span>
+    <span class="col-xs-12 col-sm-4 col-md-3 well well-adjusted well-sm">
       <p><%= @user.timeoff_approved_by_year(@year) %> approved hours.</p>
-      
-      <% if @year.to_i == Time.now.in_time_zone.year %>
+    </span>
+    
+    <% if @year.to_i == Time.now.in_time_zone.year %>
+      <span class="col-xs-12 col-sm-4 col-md-3 well well-adjusted well-sm">
         <p><%= @user.timeoff_accumulated(@pay_period, @year) - @user.timeoff_approved_by_year(@year) %> hours remaining.</p>
-      <% end %>
-    <% else %>
-      <p>You earn timeoff on a <%= @timeoff_accrual_type.downcase %> basis</p>
-      <p><%= @timeoff_earned_per_period %> hours off earned per period.</p>
-      <p><%= @user.timeoff_accumulated(@pay_period, @year) %> earned this year.</p>
-      <p><%= @user.timeoff_used_by_period(@pay_period, @year) %> hours used this period.</p>
-      <p><%= @user.timeoff_used_to_period(@pay_period, @year) %> used this year.</p>
+      </span>
     <% end %>
-    <p>(<%= link_to @user.timeoff_unapproved_by_year(@year), user_timesheets_single_path(@user)  %> timeoff hours are pending.)</p>
-  </div>    
+
+  <% else %>
+    <span class="col-xs-12 col-sm-4 col-md-3 well well-adjusted well-sm">
+      <p><%= @user.timeoff_earned_per_period(@pay_period, @year) %> hours off earned <%= @timeoff_accrual_type.downcase %>.</p>
+    </span>
+
+    <span class="col-xs-12 col-sm-4 col-md-3 well well-adjusted well-sm">
+      <p><%= @user.timeoff_accumulated(@pay_period, @year) %> earned this year.</p>
+    </span>
+
+    <span class="col-xs-12 col-sm-4 col-md-3 well well-adjusted well-sm">
+      <p><%= @user.timeoff_used_by_period(@pay_period, @year) %> used this period.</p>
+    </span>
+
+    <span class="col-xs-12 col-sm-4 col-md-3 well well-adjusted well-sm">
+      <p><%= @user.timeoff_used_to_period(@pay_period, @year) %> used this year.</p>
+    </span>
+
+    <span class="col-xs-12 col-sm-4 col-md-3 well well-adjusted well-sm">
+      <p><%= @user.timeoff_accumulated(@pay_period, @year) - @user.timeoff_used_to_period(@pay_period, @year) %> remaining.</p>
+    </span>
+    
+  <% end %>
+
+  <% if @user.timeoff_unapproved_by_year(@year) > 0  %>
+    <span class="col-xs-12 col-sm-4 col-md-3 min-padding-both">
+      <a href="<%= user_timesheets_single_path(@user) %>"class="btn btn-warning">
+        <%= pluralize(@user.timsheets_w_timeoff_unapproved_by_year(@year), 'timesheet', 'timesheets') %> (<%= @user.timeoff_unapproved_by_year(@year) %> hours off) are not reviewed.
+      </a>
+    </span>
+  <% end %>    
 </div>
