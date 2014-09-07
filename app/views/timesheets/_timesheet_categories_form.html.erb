@@ -4,14 +4,14 @@
     <%= tc_form.hidden_field :timesheet_id %>
     <%= tc_form.hidden_field :user_id, { value: @user.id } %>
     <%= tc_form.hidden_field :category_id %>
-    <span class="form-group span-no-padding-both no-margin">
+    <span class="row form-group span-no-padding-both no-margin">
       <span class="col-xs-7">
         <span class="pull-right plus-r-padding wrapped-and-right">
-          <%= tc_form.object.category.name %>
+          <p><%= tc_form.object.category.name %></p>
         </span>
       </span>
       <span class="col-xs-5">
-        <%= tc_form.number_field :hours, { class: "form-control width-limiter", step: 'any' } %>
+        <%= tc_form.number_field :hours, { class: "form-control width-limiter progressbar-categories", step: 'any', min: 0 } %>
       </span>
     </span>
   <% end %>

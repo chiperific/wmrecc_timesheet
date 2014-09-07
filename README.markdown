@@ -1,18 +1,13 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ## Last completed step:
-* fix configure error handling
-* create timeoff_accrual model (for app_default)
-* create pay_period model (for app_default)
-* add start_date and end_date to user and implement
-* implement ruby-american_date gem
-* update static_pages_spec with it_email and start_month factories
 * Timeoff views complete
 * Fix issue with timesheet timesheet_hour.status
 * move timesheets table to partial on sv and admin
 * draft timeoff views
 * timeoff single view has calculator
 * page refreshes on resize (for datatables)
+* Reports: 1.0 Timeoff reports through 'users/#/timeoff/{level}'
 
 ## Next steps:
 4. UX validation of hours and cats
@@ -20,7 +15,6 @@ This product is a Time tracking application for the explicit use of West Michiga
     1. TH.hrs vs. user.standard_hours
     2. TC.hrs vs. TH.hrs
 5. Reports
-  1.0 Timeoff reports through 'users/#/timeoff/{level}'
   1.1 Timesheet reports through 'users/#/report/{level}'
     * Between dates - s, sv, ad
     * Staff selector - sv, ad

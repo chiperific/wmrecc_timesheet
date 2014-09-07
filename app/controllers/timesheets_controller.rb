@@ -46,7 +46,7 @@ class TimesheetsController < ApplicationController
     @user = User.find(params[:user_id])
     @page_title = "All Timesheets"
     @timesheets_all = TimesheetHour.group(:timesheet_id)
-    @all_users_select = Hash.new
+    @all_users_select = Hash.ne
 
     User.where(active: true).order(:lname).each do |usr|
       @all_users_select[usr.full_name] = usr.id
@@ -81,6 +81,9 @@ class TimesheetsController < ApplicationController
       @timesheet_categories << timesheet_category
     end
     session[:return_url] = back_uri
+
+    @hours_ttl = 0.0
+    @category_ttl = 0.0
   end
 
   def edit
@@ -111,6 +114,9 @@ class TimesheetsController < ApplicationController
       @timesheet_categories << timesheet_category
     end
     session[:return_url] = back_uri
+
+    @hours_ttl = @timesheet.timesheet_hours.sum(:hours) + @timesheet.timesheet_hours.sum(:timeoff_hours)
+    @category_ttl = @timesheet.timesheet_categories.sum(:hours)
   end
 
   def create

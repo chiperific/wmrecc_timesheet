@@ -2,13 +2,13 @@
   <%= render 'shared/error_messages', object: f.object %>
   <div class="row col-xs-12 col-md-6">
     <div class="input-group">
-      <span class="input-group-addon"><i class="fa fa-arrow-right"></i></span>
+      <span class="input-group-addon"><%= fa_icon "arrow-right" %></span>
       <%= f.text_field :name, {class: "form-control", placeholder: "Name"} %>
     </div>
   </div>
   <div class="row col-xs-12 col-md-6">
     <div class="input-group input-selector">
-      <span class="input-group-addon addon-selector"><i class="fa fa-cogs"></i></span>
+      <span class="input-group-addon addon-selector"><%= fa_icon "cogs" %></span>
       <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_status ), {}, {class: "form-control selector"} %>
     </div>
   </div>

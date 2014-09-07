@@ -107,10 +107,10 @@ jQuery ->
   calculateTotal('.hours-field', '#ttl-hours')
   calculateTotal('.timeoff-hours-field', '#ttl-timeoff-hours')
   
-  $('.hours-field').keyup ->
+  $('.hours-field').bind 'click keyup', (event) ->
     calculateTotal('.hours-field', '#ttl-hours')
 
-  $('.timeoff-hours-field').keyup ->
+  $('.timeoff-hours-field').bind 'click keyup', (event) ->
     calculateTotal('.timeoff-hours-field', '#ttl-timeoff-hours')
 
   $('#timesheet-admin-table').dataTable
