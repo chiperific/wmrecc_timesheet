@@ -1,3 +1,6 @@
+$.fn.removeClassMatch = (rexp) ->
+    this.removeClass (i, css) -> (c for c in css.split(' ') when c.match(rexp)).join(' ')
+
 calculateTotalVal = (input, ttl_field) ->
   sum = 0
   $(input).each ->
@@ -5,27 +8,41 @@ calculateTotalVal = (input, ttl_field) ->
       sum += parseFloat this.value
     $(ttl_field).val(sum.toFixed(1))
 
-setColors = (bar, now, max) ->
+setColor = (target, now, max) ->
+  $(target).removeClassMatch(/progress-bar-[a-zA-Z]*/g)
   if now > max
+    $(target).addClass('progress-bar-danger')
+  else if now == max
+    $(target).addClass('progress-bar-success')
+  else
+    $(target).addClass('progress-bar-warning')
 
 updateProgressBar = (bar) ->
   target = $(bar).children('.progress-bar')
-  min = target.attr('aria-valuemin')
-  max = target.attr('aria-valuemax')
-  now = $(bar).siblings('input').val()
-  siz = (now-min)*100/(max-min)
-  target.css('width', siz+'%')
-  target.html(now + "/" + max)
+  min_text = target.attr('aria-valuemin')
+  max_text = target.attr('aria-valuemax')
+  now_text = $(bar).siblings('input').val()
+  min = parseFloat min_text
+  max = parseFloat max_text
+  now = parseFloat now_text
+  size = (now-min)*100/(max-min)
+  target.css('width', size+'%')
+  target.html(now.toFixed(1) + "/" + max.toFixed(1))
+  setColor(target, now, max)
 
 jQuery ->
   #set initial bar values
   $('.progress-bar').each ->
-    min = $(this).attr('aria-valuemin')
-    max = $(this).attr('aria-valuemax')
-    now = $(this).attr('aria-valuenow')
-    siz = (now-min)*100/(max-min)
-    $(this).css('width', siz+'%')
-    $(this).html(now + "/" + max)
+    min_text = $(this).attr('aria-valuemin')
+    max_text = $(this).attr('aria-valuemax')
+    now_text = $(this).attr('aria-valuenow')
+    min = parseFloat min_text
+    max = parseFloat max_text
+    now = parseFloat now_text
+    size = (now-min)*100/(max-min)
+    $(this).css('width', size+'%')
+    $(this).html(now.toFixed(1) + "/" + max.toFixed(1))
+    setColor(this, now, max)
 
   # calculate total and update progress bar when hours-based fields are changed
   $('.progressbar-hours').bind 'click keyup', (event) ->
