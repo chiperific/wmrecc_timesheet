@@ -24,13 +24,7 @@
         <span class="small pull-right"> <%= link_to "(add timeoff)", "#", { id: 'show_timeoff_switch', class: 'btn btn-primary btn-xs'} %>
         </span>
       </legend>
-
-
-
       <%= render 'timesheet_visual', bar_id: "hours_progressbar", ttl_field: "hours_bar_ttl", ttl: @hours_ttl %>
-
-
-
       <span class="span-no-padding-both center">
         <span class="col-xs-2 expand-2-to-5" >
           &nbsp
@@ -50,13 +44,7 @@
     
     <fieldset class="col-xs-6" id="categories_fieldset">
       <legend class="subtle">Categories:</legend>
-
-
-
       <%= render 'timesheet_visual', bar_id: "categories_progressbar", ttl_field: "categories_bar_ttl", ttl: @category_ttl %>
-      
-
-
       <span class="span-no-padding-both center">
         <span class="col-xs-7">
           &nbsp

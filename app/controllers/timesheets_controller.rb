@@ -46,8 +46,8 @@ class TimesheetsController < ApplicationController
     @user = User.find(params[:user_id])
     @page_title = "All Timesheets"
     @timesheets_all = TimesheetHour.group(:timesheet_id)
-    @all_users_select = Hash.ne
-
+    
+    @all_users_select = Hash.new
     User.where(active: true).order(:lname).each do |usr|
       @all_users_select[usr.full_name] = usr.id
     end
