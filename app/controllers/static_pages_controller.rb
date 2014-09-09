@@ -3,10 +3,12 @@ class StaticPagesController < ApplicationController
   skip_before_action :require_login, only: [:home, :create, :destroy]
 
   before_action :require_admin, only: [:configure]
+
+  before_action :require_admin_or_unsupervised, only: [:payroll]
   
   def home
     @title = "Home"
-    @col_width = "col-xs-4 col-sm-2 col-md-2 col-lg-1"
+    @col_width = "app-center col-xs-4 col-sm-2 col-md-2 col-lg-1"
     @msg_col_width = "col-xs-6 col-sm-3"
 
     if current_user
@@ -53,6 +55,15 @@ class StaticPagesController < ApplicationController
     redirect_to root_path
   end
 
+  def payroll
+    @title = "Payroll"
+
+    @year = params[:year] || Time.now.in_time_zone.year
+    @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
+
+    @departments = departments_lkup
+  end
+
   def configure
     @title = "Configure"
     @app_default = AppDefault.first
@@ -91,6 +102,19 @@ class StaticPagesController < ApplicationController
   end
 
   private
+    def departments_lkup
+      active_depts = Department.where(active: true)
+
+      if active_depts.count > 1
+        depts = ["All Depts"]
+        active_depts.each do |d|
+          depts << d.name
+        end
+      else
+        depts = [active_depts.first.name]
+      end
+      depts
+    end
 
     def app_default_params
       params.require(:app_default).permit( :name,

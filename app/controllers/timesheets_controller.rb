@@ -8,9 +8,9 @@ class TimesheetsController < ApplicationController
     @title = "Timesheet"
     @user = User.find(params[:user_id])
     if current_user == @user
-      @page_title = "Your Timesheet"
+      @page_title = "Your Timesheets"
     else
-      @page_title = "#{@user.fname}'s Timesheet"
+      @page_title = "#{@user.fname}'s Timesheets"
     end
     @timesheet_hours = TimesheetHour.where(user_id: @user.id).group(:timesheet_id).to_a
   end

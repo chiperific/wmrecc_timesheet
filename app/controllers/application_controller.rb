@@ -47,6 +47,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_admin_or_unsupervised
+    unless current_user.admin || current_user.supervisor_id == nil
+      flash[:error] = "You need to be an Administrator."
+      redirect_to root_path
+    end
+  end
+
   def require_self_sv_or_admin(user)
     unless current_user.has_authority_over?(user) || current_user == user || current_user.admin
       flash[:error] = "You don't supervise that user."

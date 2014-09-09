@@ -21,11 +21,7 @@ WmreccTimesheet::Application.routes.draw do
 
   resources :categories, :departments
 
-  match "reports", to: 'reports#index', via: 'get'
-  get "reports/payroll"
-  get "reports/departments"
-  get "reports/users"
-  get "reports/categories"
+  match "payroll", to: 'static_pages#payroll', via: 'get'
 
   get "*path", to:  'static_pages#route_error'
   

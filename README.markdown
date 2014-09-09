@@ -1,22 +1,12 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ## Last completed step:
-* Timeoff views complete
-* Fix issue with timesheet timesheet_hour.status
-* move timesheets table to partial on sv and admin
-* draft timeoff views
-* timeoff single view has calculator
-* page refreshes on resize (for datatables)
 * Reports: 1.0 Timeoff reports through 'users/#/timeoff/{level}'
 * UX validation of hours and cats: progress bars
+* Center apps on page
 
 ## Next steps:
-5. Reports
-  5.1 Timesheet reports through 'users/#/report/{level}'
-    * Between dates - s, sv, ad
-    * Staff selector - sv, ad
-    * TS && TO
-  5.2 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+5 Payroll view
 
 ## Minor tweaks:
 * page refreshes on resize (for datatables) because dataTables are not responsive (or at least not with search and display count functions)

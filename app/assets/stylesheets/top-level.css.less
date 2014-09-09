@@ -25,6 +25,34 @@ h1, h2, h3, h4, h5, h6, p {
   line-height: 1;
 }
 
+
+#top-level-container {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.hidden {
+  display: none;
+}
+
+.hr-thin {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.expand {
+  width: 100%;
+}
+
+legend {
+  font-size: 1.25em;
+}
+
+.no-margin {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .subtle {
   color: rgb(109,110,112);
 }
@@ -92,43 +120,54 @@ a[class*="btn-"]:visited {
   height: inherit;
 }
 
+// app-like box styling
 #app-header {
   margin: 0px 0px 20px !important;
   padding: 0px !important;
 }
 
-#top-level-container {
-  margin-left: 1em;
-  margin-right: 1em;
+.box-btn {
+  text-align: center;
+  width: 6em;
+  height: 6em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #888888;
+  border-radius: 8px;
+  box-shadow: 4px 4px 1px #888888;
+  p, a, i {
+    padding: .1em;
+  }
 }
 
-.hidden {
-  display: none;
+.app-style {
+  text-align: center;
+  a:hover {
+    text-decoration: none;
+    .box-btn {
+      background-color: #dff0d8 !important;
+    }
+  }
+  a:visited {
+    color: #428bca;
+  }
 }
 
-.hr-thin {
-  margin-top: 0px;
-  margin-bottom: 10px;
-}
-
-.expand {
-  width: 100%;
-}
-
-legend {
-  font-size: 1.25em;
-}
-
-.no-margin {
-  margin-left: 0px;
-  margin-right: 0px;
+.app-center {
+  display: inline-block;
+  float: none !important;
+  margin-right: -4px; 
+  vertical-align: top;
 }
 
 // _timeoff_calculator
 .well-adjusted {
-  margin-bottom: 2px;
-  margin-left: 6px;
-  margin-right: 6px;
+  margin-bottom: 2px !important;
+  //margin-left: 6px;
+  //margin-right: 6px;
+  padding: 0.5em !important; 
   background-color: rgba(255,255,255,0.5);
 
   p {

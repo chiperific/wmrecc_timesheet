@@ -115,13 +115,6 @@
       </div>
     </a>
 
-    <a href="<%= reports_path %>" class="<%= @col_width %>">
-      <div class="box-btn">
-        <%= icon('table fa-3x') %>
-        <p>Run reports</p>
-      </div>
-    </a>
-
     <a href="<%= user_path(current_user) %>" class="<%= @col_width %>">
       <div class="box-btn">
         <%= icon('users fa-3x') %>
@@ -197,4 +190,14 @@
     </div>
   </a>
 
+<!-- only admins or those without a supervisor -->
+  <% if current_user.admin || current_user.supervisor_id == nil %>
+    <a href="<%= payroll_path %>" class="<%= @col_width %>">
+      <div class="box-btn">
+        <%= icon 'money fa-3x' %>
+        <p>Payroll</p>
+      </div>
+    </a>  
+  <% end %>
+    
 </div>

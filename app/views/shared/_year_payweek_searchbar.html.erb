@@ -1,0 +1,34 @@
+<form accept-charset="UTF-8" method="get" >
+  <div class="col-xs-4 min-padding-both">
+    <div class="input-group" title='Year'>
+      <span class="input-group-addon">
+        <%= icon('calendar-o') %>
+      </span>
+      <input id="timeoff-calculator-year" name="year" type="integer" value="<%= @year %>" class="form-control datepicker" >
+    </div>
+  </div>
+  <div class="col-xs-4 min-padding-both">
+    <div class="input-group" title='Pay Period'>
+      <span class="input-group-addon">
+        $&nbsp<%= icon('calendar') %>
+      </span>
+      <input id="timeoff-calculator-pay-period" name="pay_period" value="<%= @pay_period %>" class="form-control datepicker" >
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <button type="submit" class="btn btn-primary">
+      <%= FA_SUBMIT %>
+    </button>
+  </div>
+
+  <% if params[:action] == "payroll" %>
+    <div class="col-xs-12">
+      <div class="input-group" title="Department">
+        <span class="input-group-addon">
+          <%= icon "sitemap" %>
+        </span>
+        <%= select_tag 'dept', options_for_select(@departments) , class: "form-control" %>
+      </div>
+    </div>
+  <% end %>
+</form>
