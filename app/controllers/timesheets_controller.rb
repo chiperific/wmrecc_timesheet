@@ -22,7 +22,6 @@ class TimesheetsController < ApplicationController
 
     @user_auth = @user.has_authority_over
     @user_auth_id_ary = @user_auth.pluck(:id) || nil
-    #####
     @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
 
     if current_user.admin?
@@ -67,19 +66,10 @@ class TimesheetsController < ApplicationController
 
     @url = user_timesheets_path(@user.id)
 
-    @timesheet_hours = Array.new
+    @timesheet_hours = weekday_ary
 
-    Weekday.all.each do |wd|
-      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.day_num)
-      @timesheet_hours << timesheet_hour
-    end
+    @timesheet_categories = categories_ary
 
-    @timesheet_categories = Array.new
-
-    Category.where(department_id: @user.department_id).each do |cat|
-      timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
-      @timesheet_categories << timesheet_category
-    end
     session[:return_url] = back_uri
 
     @hours_ttl = 0.0
@@ -99,20 +89,10 @@ class TimesheetsController < ApplicationController
     
     @url = user_timesheet_path(@user.id, @timesheet.id)
 
-    @timesheet_hours = Array.new
+    @timesheet_hours = weekday_ary
 
-    Weekday.all.order(:day_num).each do |wd|
-      timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.day_num)
-      @timesheet_hours << timesheet_hour
-    end
+    @timesheet_categories = categories_ary
 
-
-    @timesheet_categories = Array.new
-
-    Category.where(department_id: @user.department_id).each do |cat|
-      timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
-      @timesheet_categories << timesheet_category
-    end
     session[:return_url] = back_uri
 
     @hours_ttl = @timesheet.timesheet_hours.sum(:hours) + @timesheet.timesheet_hours.sum(:timeoff_hours)
@@ -202,6 +182,26 @@ class TimesheetsController < ApplicationController
       else
         ["Approved", true]
       end
+    end
+
+    def weekday_ary
+      timesheet_hours = Array.new
+
+      Weekday.all.order(:day_num).each do |wd|
+        timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.day_num)
+        timesheet_hours << timesheet_hour
+      end
+      timesheet_hours
+    end
+
+    def categories_ary
+      timesheet_categories = Array.new
+
+      Category.where(department_id: @user.department_id).each do |cat|
+        timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
+        timesheet_categories << timesheet_category
+      end
+      timesheet_categories
     end
 
   #end private

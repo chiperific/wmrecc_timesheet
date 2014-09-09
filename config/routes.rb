@@ -1,5 +1,6 @@
 WmreccTimesheet::Application.routes.draw do
 
+  
   root 'static_pages#home'
   get 'help', to: 'static_pages#help'
   get 'configure', to: 'static_pages#configure'
@@ -19,6 +20,12 @@ WmreccTimesheet::Application.routes.draw do
   end
 
   resources :categories, :departments
+
+  match "reports", to: 'reports#index', via: 'get'
+  get "reports/payroll"
+  get "reports/departments"
+  get "reports/users"
+  get "reports/categories"
 
   get "*path", to:  'static_pages#route_error'
   

@@ -8,23 +8,18 @@ This product is a Time tracking application for the explicit use of West Michiga
 * timeoff single view has calculator
 * page refreshes on resize (for datatables)
 * Reports: 1.0 Timeoff reports through 'users/#/timeoff/{level}'
+* UX validation of hours and cats: progress bars
 
 ## Next steps:
-4. UX validation of hours and cats
-  * Progress bars:
-    1. TH.hrs vs. user.standard_hours
-    2. TC.hrs vs. TH.hrs
 5. Reports
-  1.1 Timesheet reports through 'users/#/report/{level}'
+  5.1 Timesheet reports through 'users/#/report/{level}'
     * Between dates - s, sv, ad
     * Staff selector - sv, ad
     * TS && TO
-  2. http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
+  5.2 http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects
 
 ## Minor tweaks:
-* A user could over-run their timeoff hours per year w/o warning.
-* * page refreshes on resize (for datatables) because dataTables are not responsive (or at least not with search and display count functions)
-* Timesheet#update redirects to the timesheet#index for the user from the params. Maybe an issue?
+* page refreshes on resize (for datatables) because dataTables are not responsive (or at least not with search and display count functions)
 * Timesheet_controller#new and #edit - building weekdays and cats is not DRY
 
 

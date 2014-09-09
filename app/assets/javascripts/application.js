@@ -14,8 +14,8 @@
 //= require jquery.turbolinks
 //= require jquery-ui/sortable
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require bootstrap-datepicker/core
-//= require bootstrap-sprockets
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require dataTables/extras/dataTables.responsive

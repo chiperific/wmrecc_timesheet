@@ -1,0 +1,31 @@
+<h2 class="subtle thin-top">Reports</h2>
+
+<div class="row app-style">
+  <a href="<%= reports_payroll_path %>" class="<%= @col_width %>">
+    <div class="box-btn">
+      <%= icon 'money fa-3x' %>
+      <p>Payroll</p>
+    </div>
+  </a>
+
+  <a href="<%= reports_users_path %>" class="<%= @col_width %>">
+    <div class="box-btn">
+      <%= icon('users fa-3x') %>
+      <p>Users</p>
+    </div>
+  </a>
+
+  <a href="<%= reports_departments_path %>" class="<%= @col_width %>">
+    <div class="box-btn">
+      <%= icon('sitemap fa-3x') %>
+      <p class="small">Departments</p>
+    </div>
+  </a>
+
+  <a href="<%= reports_categories_path %>" class="<%= @col_width %>">
+    <div class="box-btn">
+      <%= icon('list fa-3x') %>
+      <p>Categories</p>
+    </div>
+  </a>
+</div>

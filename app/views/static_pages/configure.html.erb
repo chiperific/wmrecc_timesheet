@@ -14,7 +14,7 @@
 <%= form_for @app_default, url: configure_update_path do |f| %>
   <div class="row form-group">
     <div class="col-xs-12 col-sm-6">
-      <h3 class="subtle">Weekdays <small>( <%= fa_icon('bars') %> to reorder, <%= fa_icon('times') %> to delete)</small></h3>
+      <h3 class="subtle">Weekdays <small>( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)</small></h3>
 
       <div class="form-group">
         <ul id="weekday_list_head">
@@ -45,7 +45,7 @@
         <%= render 'shared/error_messages', object: s_f.object %>
         <span class="form-controller">
           <div class="input-group" title="Start Year">
-            <span class="input-group-addon"><%= fa_icon('calendar') %></span>
+            <span class="input-group-addon"><%= icon('calendar') %></span>
             <%= s_f.select :month, options_for_select(@months, @start_month.month), {}, { class: "form-control" } %>
           </div>
         </span>
@@ -58,7 +58,7 @@
        <%= render 'shared/error_messages', object: t_f.object %>
         <span class="form-controller">
           <div class="input-group" title="Start Year">
-            <span class="input-group-addon"><%= fa_icon('minus-square-o') %></span>
+            <span class="input-group-addon"><%= icon('minus-square-o') %></span>
             <%= t_f.select :accrual_type, options_for_select(@accruals, @timeoff_accrual.accrual_type), {}, { class: "form-control" } %>
           </div>
         </span>
@@ -71,7 +71,7 @@
        <%= render 'shared/error_messages', object: p_f.object %>
         <span class="form-controller">
           <div class="input-group" title="Start Year">
-            <span class="input-group-addon"><%= fa_icon('money') %></span>
+            <span class="input-group-addon"><%= icon('money') %></span>
             <%= p_f.select :period_type, options_for_select(@periods, @pay_period.period_type), {}, { class: "form-control" } %>
           </div>
         </span>

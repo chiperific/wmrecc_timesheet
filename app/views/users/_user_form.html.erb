@@ -43,13 +43,13 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <div class="input-group input-selector" title="Supervisor">
-          <span class="input-group-addon addon-selector"><%= fa_icon('level-up') %></span>
+          <span class="input-group-addon addon-selector"><%= icon('level-up') %></span>
           <%= f.select  :supervisor_id, options_for_select(@super_array, @user.supervisor_id ), {}, { class: "form-control", disabled: @disabled } %>
         </div>
       </div>
       <div class="col-xs-12 col-sm-6">
         <div class="input-group input-selector" title="Department">
-          <span class="input-group-addon addon-selector"><%= fa_icon('sitemap') %></span>
+          <span class="input-group-addon addon-selector"><%= icon('sitemap') %></span>
           <%= f.select :department_id, options_for_select(@dept_array, @user.department_id), {}, {class: "form-control", disabled: @disabled } %>
         </div>
       </div>
@@ -62,7 +62,7 @@
     <div class="col-xs-12 col-md-6">
       <div class="input-group input-selector" title="Time Zone">
         <span class="input-group-addon addon-selector">
-          <%= fa_icon('globe') %>
+          <%= icon('globe') %>
         </span>
         <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { default: "UTC" }, { class: "form-control" } %>
       </div>
@@ -70,14 +70,14 @@
 
     <div class="col-xs-6 col-md-3">
       <div class="input-group" title="Default hours per week">
-        <span class="input-group-addon rate"><%= fa_icon('clock-o') %>/wk</span>
+        <span class="input-group-addon rate"><%= icon('clock-o') %>/wk</span>
         <%= f.number_field :standard_hours, {class: "form-control", placeholder: "Hrs Per Week", step: 'any', min: 0, disabled: @disabled } %>
       </div>
     </div>
 
     <div class="col-xs-6 col-md-3">
       <div class="input-group" title="Time off (in hours) per year">
-        <span class="input-group-addon rate"><%= fa_icon('minus-square-o') %>/yr</span>
+        <span class="input-group-addon rate"><%= icon('minus-square-o') %>/yr</span>
         <%= f.number_field :annual_time_off, {class: "form-control", placeholder: "Time Off", step: 'any', min: 0, disabled: @disabled } %>
       </div>
     </div>
@@ -85,21 +85,21 @@
     <div class="row">
       <div class="col-xs-4 col-sm-4 col-md-6">
         <div class="input-group" title="Pay Type">
-          <span class="input-group-addon"><%= fa_icon('money') %></span>
+          <span class="input-group-addon"><%= icon('money') %></span>
           <%= f.select :pay_type, options_for_select([["Salary"], ["Hourly"]], @active_def), {}, {class: "form-control selector", step: 'any', min: 0, disabled: @disabled } %>
         </div>
       </div>
 
       <div class="col-xs-4 col-sm-4 col-md-3">
         <div class="input-group" title="Annual Salary">
-          <span class="input-group-addon rate">$/<%= fa_icon('calendar') %></span>
+          <span class="input-group-addon rate">$/<%= icon('calendar') %></span>
           <%= f.number_field :salary_rate, {class: "form-control", placeholder: "Salary", step: 'any', min: 0, disabled: @disabled } %>
         </div>
       </div>
 
       <div class="col-xs-4 col-sm-4 col-md-3">
         <div class="input-group" title="Hourly Rate">
-          <span class="input-group-addon rate">$/<%= fa_icon('clock-o') %></span>
+          <span class="input-group-addon rate">$/<%= icon('clock-o') %></span>
           <%= f.number_field :hourly_rate, {class: "form-control", placeholder: "Hourly Rate", step: 'any', min: 0, disabled: @disabled } %>
         </div>
       </div>
@@ -107,14 +107,14 @@
 
     <div class="col-xs-6 col-md-3">
       <div class="input-group input-selector" title="Start Date">
-        <span class="input-group-addon addon-selector"><%= fa_icon('play') %>&nbsp<%= fa_icon('calendar') %></span>
+        <span class="input-group-addon addon-selector"><%= icon('play') %>&nbsp<%= icon('calendar') %></span>
         <%= f.text_field  :start_date, { class: "form-control datepicker #{@readonly_disguiser}", readonly: true, value: @user.start_date.try(:strftime, "%m/%d/%Y"), disabled: @disabled } %>
       </div>
     </div>
 
     <div class="col-xs-6 col-md-3">
       <div class="input-group input-selector" title="End Date">
-        <span class="input-group-addon addon-selector"><%= fa_icon('stop') %>&nbsp<%= fa_icon('calendar') %></span>
+        <span class="input-group-addon addon-selector"><%= icon('stop') %>&nbsp<%= icon('calendar') %></span>
         <%= f.text_field  :end_date, { class: "form-control datepicker #{@readonly_disguiser}", readonly: true, value: @user.end_date.try(:strftime, "%m/%d/%Y"), disabled: @disabled } %>
       </div>
     </div>
@@ -122,7 +122,7 @@
     <% if true %>
       <div class="col-xs-6 col-sm-6 col-md-3">
         <div class="input-group input-selector" title="Active or Inactive">
-          <span class="input-group-addon addon-selector"><%= fa_icon('cogs') %></span>
+          <span class="input-group-addon addon-selector"><%= icon('cogs') %></span>
           <%= f.select :active, options_for_select([["Active", true], ["Inactive", false]], @active_def), {}, {class: "form-control selector", disabled: if current_user == @user then true else @disabled end } %>
         </div>
       </div>
@@ -130,7 +130,7 @@
 
       <div class="col-xs-6 col-sm-6 col-md-3">
         <div class="input-group input-selector" title="Admin or User">
-          <span class="input-group-addon addon-selector"><%= fa_icon('bars') %></span>
+          <span class="input-group-addon addon-selector"><%= icon('bars') %></span>
           <%= f.select :admin, options_for_select([["User", false], ["Admin", true]], @user.admin? ), {}, {class: "form-control selector", disabled: if current_user.can_change_admin_status(@user) then false else true end } %>
         </div>
       </div>
@@ -153,13 +153,13 @@
     <div class="row">
       <div class="col-xs-12 col-md-6">
         <div class="input-group" title="Password">
-          <span class="input-group-addon"><%= fa_icon('key') %></span>
+          <span class="input-group-addon"><%= icon('key') %></span>
           <%= f.text_field :password, {class: "form-control", placeholder: @pw_lang} %>
         </div>
       </div>
       <div class="col-xs-12 col-md-6">
         <div class="input-group" title="Password Confirmation">
-          <span class="input-group-addon"><%= fa_icon('key') %></span>
+          <span class="input-group-addon"><%= icon('key') %></span>
           <%= f.text_field :password_confirmation, {class: "form-control", placeholder: "Re-Enter Password"} %>
         </div>
       </div>
