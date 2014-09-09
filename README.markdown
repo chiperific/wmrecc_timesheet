@@ -4,9 +4,23 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Reports: 1.0 Timeoff reports through 'users/#/timeoff/{level}'
 * UX validation of hours and cats: progress bars
 * Center apps on page
+* Frame out payroll view
+
 
 ## Next steps:
-5 Payroll view
+* Manage holidays through config page
+* show a message on timesheet view when holidays are present
+** config to disallow users to work on holidays?
+
+* Calculate workdays in a pay period with consideration for holidays
+
+* Users#edit: auto-hide hourly or salary based upon pay_type
+
+* Finish payroll view
+** how to handle unapproved hours?
+
+* Add specs to static_pages_spec#payroll
+
 
 ## Minor tweaks:
 * page refreshes on resize (for datatables) because dataTables are not responsive (or at least not with search and display count functions)

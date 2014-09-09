@@ -6,21 +6,57 @@
   </div>
 </div>
 
-<div class="row">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Dept.</th>
-        <th>Hours</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Name</td>
-        <td>Dept.</td>
-        <td>Hours</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="row buffered-row">
+  <fieldset>
+    <legend class="subtle">Staff:</legend>
+    <table class="table" id="payroll-user-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Dept.</th>
+          <th>Hours</th>
+          <th class="hidden-xs">$ Rate</th>
+          <th>$ Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <%= render 'payroll_users', user: user %>
+        <% end %>
+      </tbody>
+    </table>
+  </fieldset>
+</div>
+
+<div class="row buffered-row">
+  <fieldset>
+    <legend class="subtle">Categories:</legend>
+    <table class="table" id="payroll-category-table">
+      <thead>
+        <tr>
+          <th>Dept.</th>
+          <th>Category</th>
+          <th>Hours</th>
+          <th class="hidden-xs">Pay Rate</th>
+          <th>$ Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dept.</td>
+          <td>Category</td>
+          <td>Hours</td>
+          <td class="hidden-xs">$</td>
+          <td>$</td>
+        </tr>
+        <tr>
+          <td>Dept.</td>
+          <td>Category</td>
+          <td>Hours</td>
+          <td class="hidden-xs">$</td>
+          <td>$</td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
 </div>

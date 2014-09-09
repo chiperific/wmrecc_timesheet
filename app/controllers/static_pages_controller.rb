@@ -61,7 +61,9 @@ class StaticPagesController < ApplicationController
     @year = params[:year] || Time.now.in_time_zone.year
     @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
 
-    @departments = departments_lkup
+    @departments_lkup = departments_lkup
+
+    @users = payroll_active_users
   end
 
   def configure
@@ -114,6 +116,16 @@ class StaticPagesController < ApplicationController
         depts = [active_depts.first.name]
       end
       depts
+    end
+
+    def payroll_active_users
+      if !params[:dept].blank?
+        dept = Department.where(name: params[:dept])
+        usr = User.where(active: true).where(department_id: dept)
+      else
+        usr = User.where(active: true)
+      end
+      usr
     end
 
     def app_default_params

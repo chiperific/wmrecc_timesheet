@@ -183,13 +183,6 @@
     </div>
   </a>
 
-  <a href="<%= signout_path %>" data-method="delete" rel="nofollow" class="<%= @col_width %>">
-    <div class="box-btn">
-      <%= icon('sign-out fa-3x') %>
-      <p>Sign out</p>
-    </div>
-  </a>
-
 <!-- only admins or those without a supervisor -->
   <% if current_user.admin || current_user.supervisor_id == nil %>
     <a href="<%= payroll_path %>" class="<%= @col_width %>">
@@ -199,5 +192,12 @@
       </div>
     </a>  
   <% end %>
-    
+
+  <a href="<%= signout_path %>" data-method="delete" rel="nofollow" class="<%= @col_width %>">
+    <div class="box-btn">
+      <%= icon('sign-out fa-3x') %>
+      <p>Sign out</p>
+    </div>
+  </a>
+   
 </div>
