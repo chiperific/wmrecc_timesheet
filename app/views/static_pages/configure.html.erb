@@ -14,7 +14,11 @@
 <%= form_for @app_default, url: configure_update_path do |f| %>
   <div class="row form-group">
     <div class="col-xs-12 col-sm-6">
-      <h3 class="subtle">Weekdays <small>( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)</small></h3>
+      <h3 class="subtle">Weekdays 
+        <small>
+          ( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)
+        </small>
+      </h3>
 
       <div class="form-group">
         <ul id="weekday_list_head">
@@ -23,7 +27,6 @@
             <span class="col-xs-2">Order</span>
             <span class="col-xs-5">Day name</span>
             <span class="col-xs-3">Abbr.</span>
-            <span class="col-xs-1"></span>
           </li>
         </ul>
         <ul id="weekday_list">
@@ -91,7 +94,34 @@
       <% end %>
     </div>
 
+    <div class="col-xs-12">
+      <hr />
+      <div class="row">
+        <h3 class="col-xs-6 subtle">Holidays</h3>
+        <span id="holiday_float_instructions" class="col-xs-6 subtle">(floating instructions, <%= icon('times') %> to delete)</span>
+      </div>
+      
+      <ul id="weekday_list_head">
+        <li class="row">
+          <span class="col-xs-3">Name</span>
+          <span class="col-xs-1 small stray-left">Float?</span>
+          <span class="col-xs-2">Occurs</span>
+          <span class="col-xs-2">Month</span>
+          <span id="holiday_float_week" class="col-xs-2 hidden"><i>n</i>th Week</span>
+          <span class="col-xs-2">Day</span>
+        </li>
+      </ul>
+      <ul id="holiday_list">
+        <%= f.fields_for :holidays, @holidays do |h_f| %>
+          <%= render 'shared/error_messages', object: h_f.object %>
+          <%= render 'holidays_form', h_f: h_f %>
+        <% end %>
+
+      </ul>
+    </div>
+
   </div>
+
   <div class="row buffered-row">
     <%= f.submit "Update Configuration", { class: "btn btn-warning" } %>
     <%= link_to FA_CANCEL, root_path, { class: "pull-right btn btn-success" } %>

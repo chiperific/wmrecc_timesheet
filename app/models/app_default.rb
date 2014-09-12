@@ -6,7 +6,8 @@ class AppDefault < ActiveRecord::Base
   has_many :it_emails
   has_many :timeoff_accruals
   has_many :pay_periods
+  has_many :holidays
 
   accepts_nested_attributes_for :weekdays, allow_destroy: true
-  accepts_nested_attributes_for :start_months, :it_emails, :timeoff_accruals, :pay_periods
+  accepts_nested_attributes_for :start_months, :it_emails, :timeoff_accruals, :pay_periods, :holidays
 end

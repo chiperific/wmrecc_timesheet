@@ -21,6 +21,18 @@ class UpdateToSchema < ActiveRecord::Migration
       t.datetime "updated_at"
     end
 
+    create_table "holidays", force: true do |t|
+      t.string   "name"
+      t.integer  "month"
+      t.integer  "day"
+      t.integer  "app_default_id", default: 1
+      t.boolean  "floating",       default: false
+      t.integer  "float_week"
+      t.integer  "float_day"
+      t.datetime "created_at"
+      t.datetime "updated_at"
+    end
+
     create_table "it_emails", force: true do |t|
       t.string   "email"
       t.integer  "app_default_id", default: 1

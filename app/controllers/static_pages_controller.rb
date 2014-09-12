@@ -81,6 +81,8 @@ class StaticPagesController < ApplicationController
 
     @pay_period = @app_default.pay_periods.first || @app_default.pay_periods.new
     @periods = ["Bi-weekly", "Weekly", "Semi-monthly", "Monthly"]
+
+    @holidays = @app_default.holidays
   end
 
   def configure_update

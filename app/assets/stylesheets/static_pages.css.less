@@ -7,7 +7,9 @@
   right: 2px;
 }
 
-.remove_day {
+
+// weekday and holiday
+.remove_day, .remove_holiday {
   color: black !important;
 }
 
@@ -16,14 +18,10 @@
   padding-right: 5px !important;
 }
 
-#weekday_list, #weekday_list_head {
+#weekday_list, #weekday_list_head, #holiday_list, #holiday_list_head {
   list-style-type: none;
   padding: 0;
-}
-
-#weekday_list {
-  li {
-    
+  li {    
     span {
       i {
         padding-top: 10px;
@@ -32,10 +30,12 @@
   }
 }
 
+//weekday reorder cursor
 .row-resize {
   cursor: row-resize;
 }
 
+// weekday and holiday well-striped like styling
 .boxed {
   padding-top: 3px;
   padding-bottom: 3px;
@@ -44,4 +44,10 @@
   border: 1px solid gray;
   border-radius: 4px;
   background-image: url('/assets/grey-striped-background.png');
+}
+
+// move 'float?' left
+.stray-left {
+  margin-left: -1em;
+  margin-right: 1em;
 }

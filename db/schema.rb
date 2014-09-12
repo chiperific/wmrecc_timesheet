@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140907193935) do
+ActiveRecord::Schema.define(version: 20140912192745) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20140907193935) do
     t.boolean  "active",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "holidays", force: true do |t|
+    t.string   "name"
+    t.integer  "month"
+    t.integer  "day"
+    t.integer  "app_default_id", default: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "floating",       default: false
+    t.integer  "float_week"
+    t.integer  "float_day"
   end
 
   create_table "it_emails", force: true do |t|
