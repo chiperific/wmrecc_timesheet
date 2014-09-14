@@ -20,7 +20,7 @@
   <div class="holiday-sub-li-fixed hidden col-xs-12">
     <span class="col-xs-5"></span>
     <span class="col-xs-4 min-padding-both">
-      <%= h_f.select :month, @holiday_select_ary, {}, { class: "form-control" } %>
+      <%= h_f.select :month, @holiday_select_ary, {}, { class: "form-control month-fixed" } %>
     </span>
     <span class="col-xs-3 min-padding-both">
       <%= h_f.number_field :day, { class: "form-control", min: 0, max: 31 } %>
@@ -37,7 +37,7 @@
     </span>
     <span class="col-xs-1 min-padding-both top-padded">in</span>
     <span class="col-xs-3 min-padding-both">
-      <%= h_f.select :month, @holiday_select_ary, {}, { class: "form-control" } %>
+      <%= h_f.select :month, @holiday_select_ary, {}, { class: "form-control month-float" } %>
     </span>
   </div>
 </li>

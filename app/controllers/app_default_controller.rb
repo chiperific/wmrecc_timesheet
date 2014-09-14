@@ -8,8 +8,12 @@ class AppDefaultController < ApplicationController
 
     holidays = []
     Holiday.all.each do |h|
-      date = h.occurence(year)
-      holidays << { "name"=> h.name, "date"=> date.to_s }
+      #collect holidays for provided year, year before and year after
+      (-1..1).each do |i|
+        new_year = year + i
+        date = h.occurence(new_year)
+        holidays << { "name"=> h.name, "date"=> date.to_s }
+      end
     end
 
     render text: holidays.to_json

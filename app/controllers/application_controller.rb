@@ -13,10 +13,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-#  rescue_from 'NoMethodError' do
-#    flash[:error] = "That doesn't seem to exist."
-#    redirect_to root_path
-#  end
+  rescue_from 'NoMethodError' do
+    flash[:error] = "That doesn't seem to exist."
+    redirect_to root_path
+  end
 
   private
 
