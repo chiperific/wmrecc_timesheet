@@ -1,24 +1,43 @@
 <li class="row form-controller boxed holiday-li">
-  <span class="col-xs-3 min-padding-both">
-    <%= h_f.text_field :name, { class: "form-control small"} %>
+  <%= h_f.hidden_field :id %>
+  <span class="col-xs-1 top-padded min-padding-right">
+    <%= link_to icon('plus-square'), '#', { class: 'expand_holiday'} %>
   </span>
-  <span class="col-xs-1">
+  <span class="col-xs-6 min-padding-both">
+    <%= h_f.text_field :name, { class: "form-control"} %>
+  </span>
+  <span class="holiday-type col-xs-1 top-padded center min-padding-both">
     <%= h_f.check_box :floating %>
   </span>
-  <span class="col-xs-2 small">
+  <span class="col-xs-3 top-padded min-padding-both center">
     <%= h_f.object.occurence(Date.today.year) %>
   </span>
-  <span class="col-xs-2">
-    Month
-  </span>
-  <span id="holiday_float_week" class="col-xs-2 hidden">
-    <i>n</i>th Week
-  </span>
-  <span class="col-xs-2">
-    Day
-  </span>
-  <span class="times col-xs-1">
+  <span class="times col-xs-1 top-padded min-padding-both">
     <%= h_f.hidden_field :_destroy %>
     <%= link_to icon('times'), "#", { class: "remove_holiday" }  %>
   </span>
+
+  <div class="holiday-sub-li-fixed hidden col-xs-12">
+    <span class="col-xs-5"></span>
+    <span class="col-xs-4 min-padding-both">
+      <%= h_f.select :month, @holiday_select_ary, {}, { class: "form-control" } %>
+    </span>
+    <span class="col-xs-3 min-padding-both">
+      <%= h_f.number_field :day, { class: "form-control", min: 0, max: 31 } %>
+    </span>
+  </div>
+
+  <div class="holiday-sub-li-float hidden col-xs-12">
+    <span class='col-xs-2'></span>
+    <span class="col-xs-3 min-padding-both">
+      <%= h_f.select :float_week, @week_select_ary, {}, { class: "form-control"} %>
+    </span>
+    <span class="col-xs-3 min-padding-both">
+      <%= h_f.select :float_day, @day_select_ary, {}, { class: "form-control" } %>
+    </span>
+    <span class="col-xs-1 min-padding-both top-padded">in</span>
+    <span class="col-xs-3 min-padding-both">
+      <%= h_f.select :month, @holiday_select_ary, {}, { class: "form-control" } %>
+    </span>
+  </div>
 </li>

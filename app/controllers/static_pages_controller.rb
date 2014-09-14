@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
   before_action :require_admin, only: [:configure]
 
   before_action :require_admin_or_unsupervised, only: [:payroll]
-  
+
   def home
     @title = "Home"
     @col_width = "app-center col-xs-4 col-sm-2 col-md-2 col-lg-1"
@@ -83,6 +83,18 @@ class StaticPagesController < ApplicationController
     @periods = ["Bi-weekly", "Weekly", "Semi-monthly", "Monthly"]
 
     @holidays = @app_default.holidays
+
+    @holiday_select_ary = []
+    (1..12).each do |i|
+      @holiday_select_ary << [ Date::ABBR_MONTHNAMES[i], i ]
+    end
+
+    @day_select_ary = []
+    (0..6).each do |i|
+      @day_select_ary << [ Date::ABBR_DAYNAMES[i], i ]
+    end
+
+    @week_select_ary = [["1st", 1], ["2nd", 2], ["3rd", 3], ["4th", 4], ["5th", 5]]
   end
 
   def configure_update
@@ -138,7 +150,10 @@ class StaticPagesController < ApplicationController
         :start_months_attributes => [:id, :month],
         :it_emails_attributes => [:id, :email],
         :timeoff_accruals_attributes => [:id, :accrual_type],
-        :pay_periods_attributes => [:id, :period_type]
+        :pay_periods_attributes => [:id, :period_type],
+        :holidays_attributes => [
+          :id, :name, :month, :day, :floating, :float_week, :float_day, :app_default_id, :_destroy
+        ]
       )
     end
 end

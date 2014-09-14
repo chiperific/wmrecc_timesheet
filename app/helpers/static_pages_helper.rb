@@ -6,8 +6,6 @@ module StaticPagesHelper
     self.current_user = user    
   end
 
-
-
   def current_user=(user)
     @current_user = user
   end
@@ -34,6 +32,16 @@ module StaticPagesHelper
       render "weekdays_form", w_f: w_f
     end
     link_to("Add weekday", "#", class: "btn btn-success add_day", data: { id: id, fields: fields.gsub("\n", "")})
+  end
+
+  def link_to_add_holiday(f)
+    new_holiday = Holiday.new
+    id = new_holiday.object_id
+    fields = f.fields_for(:holidays, new_holiday, child_index: id ) do |h_f|
+      render "holidays_form", h_f: h_f
+    end
+    
+    link_to("Add holiday", "#", class: "btn btn-success add_holiday", data: { id: id, fields: fields.gsub("\n", "")})
   end
     
 end

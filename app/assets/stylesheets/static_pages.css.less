@@ -8,9 +8,14 @@
 }
 
 
-// weekday and holiday
+// weekday and holiday 'x' styling
 .remove_day, .remove_holiday {
   color: black !important;
+}
+
+// expand holiday '+' styling
+.expand_holiday, .expand_holiday_head {
+  color: #424242 !important;
 }
 
 .times {
@@ -18,15 +23,52 @@
   padding-right: 5px !important;
 }
 
-#weekday_list, #weekday_list_head, #holiday_list, #holiday_list_head {
+#weekday_list, #weekday_list_head {
   list-style-type: none;
   padding: 0;
+}
+
+#weekday_list {
   li {    
     span {
       i {
         padding-top: 10px;
       }
     }
+  }
+}
+
+#holiday_list_head {
+  margin-bottom: 0px;
+}
+
+#holiday_list, #holiday_list_head {
+  list-style-type: none;
+  padding: 0;
+}
+
+.top-padded {
+  padding-top: 8px;
+}
+
+@media ( min-width: 769px ) {
+  #holiday_block {
+    width: 60% !important;
+    margin-left: 20% !important;
+    margin-right: 20% !important;
+  }
+}
+
+.holiday-sub-li {
+  margin-top: 4px;
+}
+
+
+@media (max-width: 768px ) {
+  .shift-left {
+    padding-top: 3px;
+    margin-left: -12px !important;
+    margin-right: 12px !important;
   }
 }
 
@@ -44,10 +86,4 @@
   border: 1px solid gray;
   border-radius: 4px;
   background-image: url('/assets/grey-striped-background.png');
-}
-
-// move 'float?' left
-.stray-left {
-  margin-left: -1em;
-  margin-right: 1em;
 }

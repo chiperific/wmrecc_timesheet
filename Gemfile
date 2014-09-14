@@ -13,7 +13,6 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'less-rails-bootstrap'
 gem 'font-awesome-less'
-#gem 'font-awesome-rails'
 gem 'jquery-turbolinks'
 gem 'sass-rails', '4.0.1'
 gem 'uglifier', '2.1.1'
@@ -28,7 +27,7 @@ gem 'will_paginate-bootstrap'
 gem 'jquery-datatables-rails'
 gem 'lodash-rails'
 
-# so many cache errors in sass 3!
+# so many cache errors in sass 3.3!
 gem 'sass', '3.2.13'
 
 group :development, :test do

@@ -6,11 +6,10 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Center apps on page
 * Frame out payroll view
 * Create Holiday model
+* Manage holidays (fixed and floating) through config page
 
 
 ## Next steps:
-* Manage holidays through config page
-** How to handle floating holidays? https://github.com/mojombo/chronic
 * show a message on timesheet view when holidays are present
 ** config to disallow users to work on holidays?
 

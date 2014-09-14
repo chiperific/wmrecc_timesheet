@@ -32,7 +32,8 @@ jQuery ->
     axis: 'y'
     update: update_day_num
 
-  $('.remove_day').click ->
+  # weekday: hide and mark for deletion
+  $(document).on 'click', '.remove_day', ( ->
     a = confirm "Are you sure? This won't take efect until you click 'Update Configuration'."
     if a
       $(this).prev('input[type=hidden]').val('1')
@@ -41,7 +42,9 @@ jQuery ->
       show_add_weekday()
     event.preventDefault()
     false
+  )
 
+  # weekday: add new
   $('.add_day').click ->
     fields = $(this).data('fields')
     time = new Date().getTime()
@@ -57,3 +60,48 @@ jQuery ->
     event.preventDefault()
     false
 
+  # holiday: details show / hide
+  $(document).on 'click', '.expand_holiday', ( ->
+    parent = $(this).parent('span')
+    checkbox = $(parent).siblings('span.holiday-type').children('input[type="checkbox"]')
+    icon_closed = "fa fa-plus-square"
+    icon_open = "fa fa-minus-square"
+    if $(checkbox).is(':checked')
+      $(parent).siblings('div.holiday-sub-li-float').toggleClass('hidden')
+    else
+      $(parent).siblings('div.holiday-sub-li-fixed').toggleClass('hidden')
+    
+    $(this).children('i').toggleClass(icon_closed).toggleClass(icon_open)
+    event.preventDefault()
+    false
+  )
+
+  # holiday: if details are visible when checkbox is changed, switch visible div
+  $(document).on "click", 'input[type="checkbox"]', ( ->
+    parent = $(this).parent('span.holiday-type')
+    fixed = $(parent).siblings('div.holiday-sub-li-fixed')
+    float = $(parent).siblings('div.holiday-sub-li-float')
+    if !$(fixed).hasClass('hidden') || !$(float).hasClass('hidden')
+      $(fixed).toggleClass('hidden')
+      $(float).toggleClass('hidden')
+  )
+
+  # holiday: hide and mark for deletion
+  $(document).on "click", '.remove_holiday', ( ->
+    a = confirm "Are you sure? This won't take efect until you click 'Update Configuration'."
+    if a
+      $(this).prev('input[type=hidden]').val('1')
+      $(this).closest('li.boxed').hide()
+    event.preventDefault()
+    false
+  )
+
+  # holiday: add new
+  $('.add_holiday').click ->
+    fields = $(this).data('fields')
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    last_li = $('#holiday_list li[style!="display: none;"]').last()
+    last_li.after($(this).data('fields').replace(regexp, time))
+    event.preventDefault()
+    false
