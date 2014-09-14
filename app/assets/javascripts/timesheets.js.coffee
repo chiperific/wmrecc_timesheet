@@ -15,7 +15,7 @@ calculateTotal = (input, ttl_field) ->
 
 
 jQuery ->
-# _timesheet_form.html.erb:
+  # _timesheet_form.html.erb:
   $('#direct_report_chooser').click ->
     direct_report = $('#direct_report_select option:selected').val()
     if direct_report == ""
@@ -45,7 +45,7 @@ jQuery ->
     new_date = new_mm_dd + "/" + new_yy
     $('#timesheet_week_num').val(new Date(new_date).getWeek())
 
-  $('#timesheet_year').datepicker
+  $('.timesheet_year_field').datepicker
     format: "yyyy"
     minViewMode: 2
     autoclose: true

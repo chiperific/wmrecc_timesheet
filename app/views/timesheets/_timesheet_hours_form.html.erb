@@ -1,25 +1,26 @@
 <%= t_form.fields_for :timesheet_hours, @timesheet_hours do |th_form| %>
   <%= render 'shared/error_messages', object: th_form.object %>
-  <%= th_form.hidden_field :id %>
-  <%= th_form.hidden_field :timesheet_id %>
-  <%= th_form.hidden_field :user_id, { value: @user.id } %>
-  <%= th_form.hidden_field :weekday, { value: th_form.index+1 } %>
-  <%= th_form.hidden_field :reviewed, { class: "reviewed-field"} %>
-  <%= th_form.hidden_field :approved, { class: "approved-field"} %>
-  <%= th_form.hidden_field :timeoff_reviewed, { class: "timeoff-reviewed-field"} %>
-  <%= th_form.hidden_field :timeoff_approved, { class: "timeoff-approved-field"} %>
-
+  <span class="hidden">
+    <%= th_form.hidden_field :id %>
+    <%= th_form.hidden_field :timesheet_id %>
+    <%= th_form.hidden_field :user_id, { value: @user.id } %>
+    <%= th_form.hidden_field :weekday, { value: th_form.index+1 } %>
+    <%= th_form.hidden_field :reviewed, { class: "reviewed-field"} %>
+    <%= th_form.hidden_field :approved, { class: "approved-field"} %>
+    <%= th_form.hidden_field :timeoff_reviewed, { class: "timeoff-reviewed-field"} %>
+    <%= th_form.hidden_field :timeoff_approved, { class: "timeoff-approved-field"} %>
+  </span>
   <span class="row span-no-padding-both form-group no-margin">
     <span class="col-xs-2 expand-2-to-5">
-      <span class="visible-xs-block">
-        <span class="pull-right plus-r-padding timeoff-show" id="day_name_full">
+      <span class="visible-xs-only">
+        <span class="pull-right plus-r-padding timeoff-show" id="day_name_full_xs">
           <%= Weekday.where(day_num: th_form.index+1).first.name %>
         </span>
         <span class="pull-right plus-r-padding timeoff-hide" id="day_name_abbr">
           <%= Weekday.where(day_num: th_form.index+1).first.abbr %>
         </span>
       </span>
-      <span class="pull-right plus-r-padding hidden-xs" id="day_name_full">
+      <span class="pull-right plus-r-padding hidden-xs" id="day_name_full_lg">
         <%= Weekday.where(day_num: th_form.index+1).first.name %>
       </span>
     </span>

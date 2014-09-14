@@ -1,20 +1,31 @@
 <%= form_for [@user, @timesheet], { class: "form-inline"} do |t_form| %>
   <%= render 'shared/error_messages', object: t_form.object %>
-  <div class="row form-group">
+  <div class="row form-group" id='date_year_setter'>
     <div class="col-xs-6">
       <div class="input-group">
         <span class="input-group-addon"><%= icon('calendar') %></span>
-        <%= text_field_tag "week_num_to_date_field", @timesheet_date.strftime("%m/%d"), { class: "form-control readonly-disguiser width-limiter", readonly: true } %>
+        <% if action_name == "edit" %>
+          <%= text_field_tag "week_num_to_date_view", @timesheet_date.strftime("%m/%d"), { class: "form-control readonly-disguiser width-limiter", readonly: true } %>
+        <% else %>
+          <%= text_field_tag "week_num_to_date_field", @timesheet_date.strftime("%m/%d"), { class: "form-control readonly-disguiser width-limiter", readonly: true } %>  
+        <% end %>
+        
       </div>
       <%= t_form.hidden_field :week_num, { value: @timesheet.week_num || @timesheet_date.cweek } %>
     </div>
     <div class="col-xs-6">
       <div class="input-group">
         <span class="input-group-addon"><%= icon('calendar-o') %></span>
-        <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
+        <% if action_name == "edit" %>
+          <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter timesheet_year_view", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
+        <% else %>
+          <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter timesheet_year_field", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
+        <% end %>
       </div>
     </div>
   </div>
+
+  <div class="row well well-striped" id="holiday_reminder">Holiday Reminder</div>
 
   <div class="row">
 
@@ -49,7 +60,7 @@
         <span class="col-xs-7">
           &nbsp
         </span>
-        <span class="col-xs-5 visible-xs-block subtle">
+        <span class="col-xs-5 visible-xs-only subtle">
           <%= icon('clock-o fa-2x') %><br>
           Ttl Hrs
         </span>

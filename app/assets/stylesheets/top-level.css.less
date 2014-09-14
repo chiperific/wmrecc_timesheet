@@ -49,8 +49,9 @@ legend {
 }
 
 .no-margin {
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-bottom: 0px !important;
 }
 
 .subtle {
@@ -226,6 +227,13 @@ div.input-group {
 // Shrink text on mobile views only
 @media (max-width: 768px) {
   .small-when-small { font-size: .8em !important; }
+}
+
+// Make up for lack of visible-*-*
+@media (min-width: 768px) {
+  .visible-xs-only {
+    display: none;
+  }
 }
 
 // Remove padding applied by Bootstrap 'col-' class
