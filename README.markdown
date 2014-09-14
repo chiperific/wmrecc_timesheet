@@ -7,12 +7,10 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Frame out payroll view
 * Create Holiday model
 * Manage holidays (fixed and floating) through config page
+* show a message on timesheet view when holidays are present
 
 
 ## Next steps:
-* show a message on timesheet view when holidays are present
-** config to disallow users to work on holidays?
-
 * Calculate workdays in a pay period with consideration for holidays
 
 * Users#edit: auto-hide hourly or salary based upon pay_type
