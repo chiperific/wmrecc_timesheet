@@ -1,4 +1,15 @@
 # make a date Ruby can handle
+weekday_name = (n) ->
+  weekday = new Array(7)
+  weekday[0] =  "Sunday"
+  weekday[1] = "Monday"
+  weekday[2] = "Tuesday"
+  weekday[3] = "Wednesday"
+  weekday[4] = "Thursday"
+  weekday[5] = "Friday"
+  weekday[6] = "Saturday"
+  weekday[n]
+
 rubyReadyDate = ->
   n = new Date()
   y = n.getFullYear()
@@ -13,9 +24,55 @@ calculateTotal = (input, ttl_field) ->
       sum += parseFloat this.value
     $(ttl_field).html(sum)
 
+holiday_date_filter = (holiday) ->
+  string_date = holiday["date"]
+  date = new Date(string_date)
+  formatted_date = weekday_name(date.getDay())+", "+(date.getMonth()+1)+"/"+(date.getDate()+1)
+  name = "<li>"+holiday["name"]+" is "+formatted_date+"</li>"
+  first_string = $('#start_of_range').html()
+  first = new Date(first_string)
+  last_string = $('#end_of_range').html()
+  last = new Date(last_string)
+  if first <= date && date <= last
+    $('#holiday_reminder').removeClass('hidden')
+    $('#holidays_in_period').append(name)
+
+holiday_json = ->
+  $('#holidays_in_period').html("")
+  ary = $('#holiday_ary').html()
+  parsed = jQuery.parseJSON(ary)
+  holiday_date_filter holiday for holiday, i in parsed
+
+
+holiday_processor = ->
+  $('#holiday_reminder').addClass('hidden')
+  mm_dd = $('input.week_num_to_date').val()
+  mm = mm_dd.split("/")[0]
+  dd = mm_dd.split("/")[1]
+  yyyy = $('input#timesheet_year').val()
+
+  visible_date = new Date(mm+"/"+dd+"/"+yyyy)
+  day_start_of_wk = (visible_date.getDate() - visible_date.getDay())+1
+  start_of_wk = new Date(mm+"/"+day_start_of_wk+"/"+yyyy)
+  $('span#start_of_range').html(start_of_wk)
+
+  day_end_of_wk = day_start_of_wk + 6
+  end_of_wk = new Date(mm+"/"+day_end_of_wk+"/"+yyyy)
+  $('span#end_of_range').html(end_of_wk)
+  $.ajax(url: '/holidays/'+yyyy, type: 'get', success: (data)->
+    $('span#holiday_ary').html(data)
+    holiday_json()
+  )
 
 jQuery ->
   # _timesheet_form.html.erb:
+  #holiday_processor()
+
+
+  $(document).on 'changeDate', '.week_num_to_date', ( ->
+    holiday_processor()
+  )
+
   $('#direct_report_chooser').click ->
     direct_report = $('#direct_report_select option:selected').val()
     if direct_report == ""

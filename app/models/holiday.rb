@@ -13,19 +13,15 @@ class Holiday < ActiveRecord::Base
   end
 
   def occurence(year)
-    if !self.new_record?
-      if self.floating == false
-        date = Date.new(year, self.month, self.day)
-      else
-        options = self.all_instances_in_month(year)
-        selection = self.float_week - 1
-        day = options[selection]
-        date = Date.new(year, self.month, day)
-      end
-      date.strftime("%m/%d/%y")
+    if self.floating == false
+      date = Date.new(year, self.month, self.day)
     else
-      "new holiday"
+      options = self.all_instances_in_month(year)
+      selection = self.float_week - 1
+      day = options[selection]
+      date = Date.new(year, self.month, day)
     end
+    date
   end
 
 end

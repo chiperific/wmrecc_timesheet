@@ -10,7 +10,7 @@
     <%= h_f.check_box :floating %>
   </span>
   <span class="col-xs-3 top-padded min-padding-both center">
-    <%= h_f.object.occurence(Date.today.year) %>
+    <%= if !h_f.object.new_record? then h_f.object.occurence(Date.today.year).strftime("%m/%d/%y") else "new holiday" end %>
   </span>
   <span class="times col-xs-1 top-padded min-padding-both">
     <%= h_f.hidden_field :_destroy %>

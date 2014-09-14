@@ -5,9 +5,9 @@
       <div class="input-group">
         <span class="input-group-addon"><%= icon('calendar') %></span>
         <% if action_name == "edit" %>
-          <%= text_field_tag "week_num_to_date_view", @timesheet_date.strftime("%m/%d"), { class: "form-control readonly-disguiser width-limiter", readonly: true } %>
+          <%= text_field_tag "week_num_to_date_view", @timesheet_date.strftime("%m/%d"), { class: "week_num_to_date form-control readonly-disguiser width-limiter", readonly: true } %>
         <% else %>
-          <%= text_field_tag "week_num_to_date_field", @timesheet_date.strftime("%m/%d"), { class: "form-control readonly-disguiser width-limiter", readonly: true } %>  
+          <%= text_field_tag "week_num_to_date_field", @timesheet_date.strftime("%m/%d"), { class: "week_num_to_date form-control readonly-disguiser width-limiter", readonly: true } %>  
         <% end %>
         
       </div>
@@ -25,7 +25,13 @@
     </div>
   </div>
 
-  <div class="row well well-striped" id="holiday_reminder">Holiday Reminder</div>
+  <div class="row alert alert-success well-striped well-adjusted" id="holiday_reminder" role="alert">
+    <span class="hidden" id="start_of_range"></span>
+    <span class="hidden" id="end_of_range"></span>
+    <span class="hidden" id="holiday_ary"></span>
+    <h5>Heads up!</h5>
+    <ul class="list-unstyled" id="holidays_in_period"></ul>
+  </div>
 
   <div class="row">
 
