@@ -12,6 +12,12 @@ jQuery ->
       event.preventDefault()
       false
 
+    # user_form: show/hide salary or hourly field based upon paytype
+    $('#user_pay_type').change ->
+      $('#user_salary_div').toggleClass('hidden')
+      $('#user_hourly_div').toggleClass('hidden')
+
+    # self, supervisor and admin views
     $('.super-view-switch').click ->
       closed = "fa fa-caret-right"
       open = "fa fa-caret-down"
@@ -26,24 +32,19 @@ jQuery ->
       event.preventDefault()
       false
 
-    $('.datepicker').datepicker
+    # start and end date fields on show_form
+    $('.date_field').datepicker
       todayBtn: "linked"
       todayHighlight: true
 
-    
     $('#users-table').dataTable
       ordering: false
       columnDefs: [
-        targets: [0, -1], searchable: false, orderable: false
+        targets: [0, -1, -2], searchable: false, orderable: false
       ]
 
     $('#inactive-users-table').dataTable
       ordering: false
       columnDefs: [
         targets: [0, -1], searchable: false, orderable: false
-      ]
-
-    $('#users-show-table').dataTable
-      columnDefs: [
-        targets: -1, searchable: false, orderable: false
       ]

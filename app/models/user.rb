@@ -103,6 +103,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  ############ methods for timeoff views
   def timeoff_approved_by_year(year)
     if year.class == String
       year = year.to_i
@@ -148,8 +149,24 @@ class User < ActiveRecord::Base
     self.timesheet_hours.joins(:timesheet).where.not(timeoff_approved: nil).where( timesheets: { year: year, week_num: pay_period_ary}).sum(:timeoff_hours).to_f
   end
 
+  ############ methods for payroll_users
+  def val_from_period_type(period_string)
+    options = {
+      "Weekly" => 52,
+      "Bi-weekly" => 26,
+      "Semi-monthly" => 24,
+      "Monthly" => 12
+    }
+    options[period_string]
+  end
+
   def payroll_hours(year, cweek)
+    # only checks one timesheet
+    # doesn't check for user
+    # needs to look for every timesheet within the year_ary and cweek_ary
     timesheet = Timesheet.where(year: year).where(week_num: cweek).first
+    pay_period_type = AppDefault.first.pay_periods.first.period_type
+
 
     if !timesheet.nil?
       timesheet_hour = self.timesheet_hours.where(timesheet_id: timesheet.id)
@@ -158,6 +175,22 @@ class User < ActiveRecord::Base
       hours = 0
     end
     hours.to_f
+  end
+
+  def payroll_rate(year, cweek)
+    payroll_hours = self.payroll_hours(year, cweek)
+    pay_period = AppDefault.first.pay_periods.first.period_type
+    if self.pay_type == "Salary"
+      rate = self.salary_rate.to_f
+    else
+      rate = self.hourly_rate.to_f
+    end
+    rate
+  end
+
+  def payroll_gross
+    pay_period_type = AppDefault.first.pay_periods.first.period_type
+    val = val_from_period_type(pay_period_type)
   end
 
   private

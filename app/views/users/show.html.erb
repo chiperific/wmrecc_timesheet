@@ -1,59 +1,7 @@
 <h3 class="subtle"><%= @user.fname %>'s Staff</h3>
 
 <div id="active-users" class="bufffered-row">
-  <table class="table" id="users-show-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Dept.</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @active_users.sort_by { |u| u.fname }.sort_by { |u| u.lname}.each do |u| %>
-        <% @direct_reports = @supervised_active_users.where(supervisor_id: u.id) %>
-        <tr>
-          <td>
-          <% if @direct_reports.count > 0 %>
-            <%= link_to FA_RIGHT, "#", {class: "center super-view-switch", id: "super-list-#{u.id}"} %>
-          <% end %>
-            <%= u.fname + " " + u.lname %>
-          </td>
-          <td><%= u.department.name %></td>
-          <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
-        </tr>
-        <% @direct_reports.each do |s| %>
-          <tr class=<%= "super-list-#{u.id.to_s}".to_s %> >
-            <td class="hidden" colspan="2">&nbsp<%= s.fname + " " + s.lname %></td>
-            <td class="hidden"><%= link_to FA_EDIT, edit_user_path(s.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-<% if @inactive_users.count > 0 %>
-  <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right btn btn-primary btn-sm"} %>
-<% end %>
-<div class="hidden" id="inactive-users">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Inactive</th>
-        <th>Dept.</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @inactive_users.each do |u| %>
-        <tr>
-          <td><%= u.fname + " " + u.lname %></td>
-          <td><%= @departments.find_by(id: u.department_id).name unless @departments.find_by(id: u.department_id).blank? %></td>
-          <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render 'user_table' %>
 </div>
 <br />
 <% if current_user.admin %>

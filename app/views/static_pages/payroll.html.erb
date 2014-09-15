@@ -1,8 +1,14 @@
-<h3 class="subtle thin-top center">Payroll</h3>
+<h3 class="subtle thin-top center">Payroll <span class="pull-right">(<%= @pay_period_type %>)</span></h3>
 
 <div class="well well-striped row">
   <div class="row">
     <%= render 'shared/year_payweek_searchbar' %>
+  </div>
+  <div class="row">
+    <span class="col-xs-2">From:</span>
+    <span class="col-xs-4"><%= @payroll_start %></span>
+    <span class="col-xs-2">To:</span>
+    <span class="col-xs-4"><%= @payroll_end %></span>
   </div>
 </div>
 
@@ -16,7 +22,7 @@
           <th>Dept.</th>
           <th>Hours</th>
           <th class="hidden-xs">$ Rate</th>
-          <th>$ Total</th>
+          <th>Gross $</th>
         </tr>
       </thead>
       <tbody>

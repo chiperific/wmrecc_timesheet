@@ -14,3 +14,5 @@ FA_CANCEL = "<i class='fa fa-times'></i> Cancel".html_safe
 FA_RIGHT = "<i class='fa fa-caret-right'></i>".html_safe
 FA_LEFT = "<i class='fa fa-caret-left'></i>".html_safe
 FA_DOWN = "<i class='fa fa-caret-down'></i>".html_safe
+
+FA_DEDUCTIONS = "<i class='fa fa-sign-out'></i> Deductions".html_safe

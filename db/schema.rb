@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914174043) do
+ActiveRecord::Schema.define(version: 20140915203037) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"

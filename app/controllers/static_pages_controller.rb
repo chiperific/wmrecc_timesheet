@@ -58,8 +58,9 @@ class StaticPagesController < ApplicationController
   def payroll
     @title = "Payroll"
 
-    @year = params[:year] || Time.now.in_time_zone.year
-    @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
+    @pay_period_type = AppDefault.first.pay_periods.first.period_type
+    @payroll_start = payroll_start.strftime("%m/%d/%Y")
+    @payroll_end = payroll_end.strftime("%m/%d/%Y")
 
     @departments_lkup = departments_lkup
 
@@ -76,6 +77,8 @@ class StaticPagesController < ApplicationController
       @cweek = date.cweek
       @year = date.year
     end
+
+    @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
   end
 
   def configure
@@ -130,6 +133,77 @@ class StaticPagesController < ApplicationController
   end
 
   private
+
+    # turn 'mm-dd' and 'yyyy' into a date
+    def date_from_period_year(period, year)
+      m_d = period.split('-')
+      m = m_d[0].to_i
+      d = m_d[1].to_i
+      year = year.to_i
+      date = Date.new(year,m,d)
+    end
+
+    def payroll_start
+      pay_period_type = AppDefault.first.pay_periods.first.period_type
+      year = params[:year] || Time.now.in_time_zone.year
+      pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
+      date = date_from_period_year(pay_period, year)
+
+      if pay_period_type == "Weekly"
+        start = date.beginning_of_week
+      elsif pay_period_type == "Bi-weekly"
+        if date.cweek.odd?
+          start = date.beginning_of_week
+        else
+          start = (date.beginning_of_week - 1.week)
+        end
+      elsif pay_period_type == "Monthly"
+        start = date.beginning_of_month
+      else # Semi-monthly
+        start_of_fy_name = AppDefault.first.start_months.first.month
+        start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
+        period_first = Date.new(year, start_of_fy_num, 1)
+        period_second = (period_first + 6.months)
+        if date >= period_first
+          start = period_first
+        else
+          start = period_second
+        end
+      end
+      start
+    end
+
+    def payroll_end
+      pay_period_type = AppDefault.first.pay_periods.first.period_type
+      year = params[:year] || Time.now.in_time_zone.year
+      pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
+      date = date_from_period_year(pay_period, year)
+
+      if pay_period_type == "Weekly"
+        ender = date.end_of_week
+      elsif pay_period_type == "Bi-weekly"
+        if date.cweek.even?
+          ender = date.end_of_week
+        else
+          ender = (date.end_of_week + 1.week)
+        end
+      elsif pay_period_type == "Monthly"
+        ender = date.end_of_month
+      else # Semi-monthly
+        start_of_fy_name = AppDefault.first.start_months.first.month
+        start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
+        period_first = Date.new(year, start_of_fy_num, 1)
+        period_second = (period_first + 6.months)
+        if date >= period_first
+          ender = (period_second - 1.day)
+        else
+          ender = (period_first - 1.day)
+        end
+      end
+      ender
+    end
+
+    # for payroll action
     def departments_lkup
       active_depts = Department.where(active: true)
 

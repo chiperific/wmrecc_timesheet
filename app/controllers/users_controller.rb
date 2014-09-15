@@ -9,8 +9,8 @@ class UsersController < ApplicationController
   def index
     @title = "Users"
     @users = User.all
-    @active_users = User.where(active: true)
-    @inactive_users = User.where(active: false)
+    @active_users = User.where(active: true).order(:lname, :fname)
+    @inactive_users = User.where(active: false).order(:lname, :fname)
     @supervised_active_users = @active_users.where("supervisor_id IS NOT NULL")
 
     @departments = Department.where(active: true)
@@ -32,8 +32,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_staff = User.where(supervisor_id: @user.id)
     @users = User.all
-    @active_users = @user_staff.where(active: true)
-    @inactive_users = @user_staff.where(active: false)
+    @active_users = @user_staff.where(active: true).order(:lname, :fname)
+    @inactive_users = @user_staff.where(active: false).order(:lname, :fname)
     @supervised_active_users = User.where("supervisor_id IS NOT NULL")
     @departments = Department.where(active: true)
 
@@ -53,6 +53,9 @@ class UsersController < ApplicationController
     @dept_array = dept_array
     @pw_lang = "Create password"
     session[:return_url] = back_uri
+
+    @salary_hider = ""
+    @hourly_hider = "hidden"
   end
 
   def edit
@@ -80,6 +83,14 @@ class UsersController < ApplicationController
     @dept_array = dept_array
     @pw_lang = "Change password"
     session[:return_url] = back_uri
+
+    if @user.pay_type == "Salary"
+      @salary_hider = ""
+      @hourly_hider = "hidden"
+    else
+      @salary_hider = "hidden"
+      @hourly_hider = ""
+    end
   end
 
   def create

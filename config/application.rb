@@ -36,6 +36,7 @@ class Date
   end
 
   # create a fiscalweek based upon Config#StartMonths
+  # fweek is number of weeks a given Date object is into the Fiscal year
   def fweek
     month_text = StartMonth.first.month
     month_num = Date::MONTHNAMES.index(month_text)
