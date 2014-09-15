@@ -17,9 +17,9 @@
       <div class="input-group">
         <span class="input-group-addon"><%= icon('calendar-o') %></span>
         <% if action_name == "edit" %>
-          <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter timesheet_year_view", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
+          <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter timesheet_year_view timesheet_year", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
         <% else %>
-          <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter timesheet_year_field", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
+          <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter timesheet_year_field timesheet_year", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
         <% end %>
       </div>
     </div>

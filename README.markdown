@@ -7,12 +7,13 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Frame out payroll view
 * Create Holiday model
 * Manage holidays (fixed and floating) through config page
-* show a message on timesheet view when holidays are present
-
+* show a message on timesheet view when holidays are present in date range
+* refractor js files to only load if pathname is in pathAry
+* Payroll: calculate hours per payroll in user.rb
 
 ## Next steps:
-* Calculate workdays in a pay period with consideration for holidays
-
+* Payroll: calculate $ Total
+* wait, why? : * Calculate workdays in a pay period with consideration for holidays
 * Users#edit: auto-hide hourly or salary based upon pay_type
 
 * Finish payroll view

@@ -100,20 +100,20 @@ jQuery ->
     $('#direct_report_select').change ->
       $('#direct_report_error').addClass('hidden')
 
-    $('#week_num_to_date_field').datepicker
+    $('.week_num_to_date').datepicker
       todayBtn: "linked"
       format: 'mm/dd'
       calendarWeeks: true
       weekStart: 1
       autoclose: true
 
-    $('#week_num_to_date_field').change ->
+    $('.week_num_to_date').change ->
       new_mm_dd = $(this).val()
       new_yy = $('#timesheet_year').val()
       new_date = new_mm_dd + "/" + new_yy
       $('#timesheet_week_num').val(new Date(new_date).getWeek())
 
-    $('.timesheet_year_field').datepicker
+    $('.timesheet_year').datepicker
       format: "yyyy"
       minViewMode: 2
       autoclose: true

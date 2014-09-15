@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<div class="row buffered-row">
+<div class="row" id="payroll_users_head">
   <fieldset>
     <legend class="subtle">Staff:</legend>
     <table class="table" id="payroll-user-table">
@@ -28,7 +28,7 @@
   </fieldset>
 </div>
 
-<div class="row buffered-row">
+<div class="row" id="payroll_users_body">
   <fieldset>
     <legend class="subtle">Categories:</legend>
     <table class="table" id="payroll-category-table">
@@ -42,20 +42,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Dept.</td>
-          <td>Category</td>
-          <td>Hours</td>
-          <td class="hidden-xs">$</td>
-          <td>$</td>
-        </tr>
-        <tr>
-          <td>Dept.</td>
-          <td>Category</td>
-          <td>Hours</td>
-          <td class="hidden-xs">$</td>
-          <td>$</td>
-        </tr>
+        <% @categories.each do |category| %>
+          <%= render 'payroll_categories', category: category %>
+        <% end %>
       </tbody>
     </table>
   </fieldset>

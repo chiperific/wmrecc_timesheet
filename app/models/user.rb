@@ -148,6 +148,18 @@ class User < ActiveRecord::Base
     self.timesheet_hours.joins(:timesheet).where.not(timeoff_approved: nil).where( timesheets: { year: year, week_num: pay_period_ary}).sum(:timeoff_hours).to_f
   end
 
+  def payroll_hours(year, cweek)
+    timesheet = Timesheet.where(year: year).where(week_num: cweek).first
+
+    if !timesheet.nil?
+      timesheet_hour = self.timesheet_hours.where(timesheet_id: timesheet.id)
+      hours = timesheet_hour.sum(:hours)
+    else
+      hours = 0
+    end
+    hours.to_f
+  end
+
   private
 
     def create_remember_token

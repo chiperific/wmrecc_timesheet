@@ -64,6 +64,18 @@ class StaticPagesController < ApplicationController
     @departments_lkup = departments_lkup
 
     @users = payroll_active_users
+    @categories = payroll_active_cats
+
+    if !params[:year].blank?
+      @year = params[:year].to_i
+      month =  params[:pay_period].split("-")[0].to_i
+      day = params[:pay_period].split("-")[1].to_i
+      @cweek = Date.new(@year, month, day).cweek
+    else
+      date = Date.today
+      @cweek = date.cweek
+      @year = date.year
+    end
   end
 
   def configure
@@ -134,12 +146,22 @@ class StaticPagesController < ApplicationController
 
     def payroll_active_users
       if !params[:dept].blank?
-        dept = Department.where(name: params[:dept])
+        dept = Department.where(active: true).where(name: params[:dept]).first
         usr = User.where(active: true).where(department_id: dept)
       else
         usr = User.where(active: true)
       end
       usr
+    end
+
+    def payroll_active_cats
+      if !params[:dept].blank?
+        dept = Department.where(active: true).where(name: params[:dept]).first
+        cat = Category.where(active: true).where(department_id: dept.id)
+      else
+        cat = Category.where(active: true)
+      end
+      cat
     end
 
     def app_default_params

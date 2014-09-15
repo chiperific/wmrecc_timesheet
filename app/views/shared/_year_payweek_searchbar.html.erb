@@ -4,7 +4,7 @@
       <span class="input-group-addon">
         <%= icon('calendar-o') %>
       </span>
-      <input id="timeoff-calculator-year" name="year" type="integer" value="<%= @year %>" class="form-control datepicker" >
+      <input id="searchbar-calculator-year" name="year" type="integer" value="<%= @year %>" class="form-control datepicker" >
     </div>
   </div>
   <div class="col-xs-4 min-padding-both">
@@ -12,7 +12,7 @@
       <span class="input-group-addon">
         $&nbsp<%= icon('calendar') %>
       </span>
-      <input id="timeoff-calculator-pay-period" name="pay_period" value="<%= @pay_period %>" class="form-control datepicker" >
+      <input id="searchbar-calculator-pay-period" name="pay_period" value="<%= @pay_period %>" class="form-control datepicker" >
     </div>
   </div>
   <div class="col-xs-4">
@@ -22,7 +22,7 @@
   </div>
 
   <% if params[:action] == "payroll" %>
-    <div class="col-xs-12">
+    <div class="col-xs-12 min-padding-both">
       <div class="input-group" title="Department">
         <span class="input-group-addon">
           <%= icon "sitemap" %>
