@@ -1,7 +1,7 @@
 <tr>
   <td><%= user.full_name %></td>
   <td><%= user.department.name %></td>
-  <td><%= user.payroll_hours(@year, @cweek) %></td>
-  <td class="hidden-xs align-right">$ <%= user.payroll_rate(@year, @cweek) %></td>
-  <td class="align-right">$ <%= user.id %></td>
+  <td><%= user.payroll_hours(@payroll_start, @payroll_end) %></td>
+  <td class="hidden-xs align-right">$ <%= "rate" %></td>
+  <td class="align-right">$ <%= "gross" %></td>
 </tr>

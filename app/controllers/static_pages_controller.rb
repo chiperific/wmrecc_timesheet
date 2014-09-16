@@ -59,30 +59,27 @@ class StaticPagesController < ApplicationController
     @title = "Payroll"
 
     @pay_period_type = AppDefault.first.pay_periods.first.period_type
-    @payroll_start = payroll_start.strftime("%m/%d/%Y")
-    @payroll_end = payroll_end.strftime("%m/%d/%Y")
+    @payroll_start = payroll_start
+    @payroll_end = payroll_end
 
     @departments_lkup = departments_lkup
 
     @users = payroll_active_users
     @categories = payroll_active_cats
 
-    if !params[:year].blank?
-      @year = params[:year].to_i
-      month =  params[:pay_period].split("-")[0].to_i
-      day = params[:pay_period].split("-")[1].to_i
-      @cweek = Date.new(@year, month, day).cweek
-    else
-      date = Date.today
-      @cweek = date.cweek
-      @year = date.year
-    end
-
     @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
+    @year = params[:year] || Time.now.in_time_zone.year.to_s
   end
 
   def configure
     @title = "Configure"
+    @pay_period_dialog_text = {
+      "Weekly:" => "Process payroll weekly.",
+      "Bi-weekly:" => "Process payroll at the end of even calendar weeks.",
+      "Monthly:" => "Process payroll at the end of every month.",
+      "Semi-monthly:" => "Process payroll every 6 months from Start of Year.",
+      "Annually:" => "Process payroll at the end of every year from Start of Year"
+    }
     @app_default = AppDefault.first
     @weekdays = @app_default.weekdays.order( :day_num )
 
@@ -95,7 +92,7 @@ class StaticPagesController < ApplicationController
     @accruals = ["Annual", "Weekly", "Bi-weekly"]
 
     @pay_period = @app_default.pay_periods.first || @app_default.pay_periods.new
-    @periods = ["Bi-weekly", "Weekly", "Semi-monthly", "Monthly"]
+    @periods = ["Weekly","Bi-weekly","Monthly","Semi-monthly","Annually"]
 
     @holidays = @app_default.holidays
 
@@ -159,7 +156,7 @@ class StaticPagesController < ApplicationController
         end
       elsif pay_period_type == "Monthly"
         start = date.beginning_of_month
-      else # Semi-monthly
+      else # Bi-monthly
         start_of_fy_name = AppDefault.first.start_months.first.month
         start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
         period_first = Date.new(year, start_of_fy_num, 1)
@@ -189,7 +186,7 @@ class StaticPagesController < ApplicationController
         end
       elsif pay_period_type == "Monthly"
         ender = date.end_of_month
-      else # Semi-monthly
+      else # Bi-monthly
         start_of_fy_name = AppDefault.first.start_months.first.month
         start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
         period_first = Date.new(year, start_of_fy_num, 1)

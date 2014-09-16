@@ -6,9 +6,9 @@
   </div>
   <div class="row">
     <span class="col-xs-2">From:</span>
-    <span class="col-xs-4"><%= @payroll_start %></span>
+    <span class="col-xs-4"><%= @payroll_start.strftime("%m/%d/%Y") %></span>
     <span class="col-xs-2">To:</span>
-    <span class="col-xs-4"><%= @payroll_end %></span>
+    <span class="col-xs-4"><%= @payroll_end.strftime("%m/%d/%Y") %></span>
   </div>
 </div>
 

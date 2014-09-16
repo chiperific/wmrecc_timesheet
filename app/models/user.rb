@@ -150,38 +150,30 @@ class User < ActiveRecord::Base
   end
 
   ############ methods for payroll_users
-  def val_from_period_type(period_string)
+  def val_from_period_type
     options = {
       "Weekly" => 52,
       "Bi-weekly" => 26,
       "Semi-monthly" => 24,
       "Monthly" => 12
     }
-    options[period_string]
+    options[self.pay_type]
   end
 
-  def payroll_hours(year, cweek)
-    # only checks one timesheet
-    # doesn't check for user
-    # needs to look for every timesheet within the year_ary and cweek_ary
-    timesheet = Timesheet.where(year: year).where(week_num: cweek).first
-    pay_period_type = AppDefault.first.pay_periods.first.period_type
-
-
-    if !timesheet.nil?
-      timesheet_hour = self.timesheet_hours.where(timesheet_id: timesheet.id)
-      hours = timesheet_hour.sum(:hours)
-    else
-      hours = 0
-    end
-    hours.to_f
+  def payroll_hours(start_date, end_date)
+    #get an array of cweeks and years
+    year = (start_date.year..end_date.year).map { |y| y }
+    cweek = (start_date.cweek..end_date.cweek).map { |c| c }
+    timesheet_ids = Timesheet.where(year: year, week_num: cweek).map { |t| t.id }
+    summed_hsh = self.timesheet_hours.where(timesheet_id: timesheet_ids).group(:timesheet_id).sum(:hours)
+    summed_hsh.map { |k, v| v.to_f }.sum
   end
 
-  def payroll_rate(year, cweek)
-    payroll_hours = self.payroll_hours(year, cweek)
-    pay_period = AppDefault.first.pay_periods.first.period_type
+  def payroll_rate(start_date, end_date)
+    payroll_hours = self.payroll_hours(start_date, end_date)
+
     if self.pay_type == "Salary"
-      rate = self.salary_rate.to_f
+      by_period_type = self.salary_rate / self.val_from_period_type
     else
       rate = self.hourly_rate.to_f
     end

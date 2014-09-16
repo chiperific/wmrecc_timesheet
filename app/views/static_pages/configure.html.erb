@@ -15,7 +15,7 @@
   <div class="row form-group">
     <div class="col-xs-12 col-sm-6">
       <h3 class="subtle">Weekdays 
-        <small>
+        <small class="move-right">
           ( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)
         </small>
       </h3>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="col-xs-12 col-sm-6">
-      <h3 class="subtle">Start of year <small>(ex. fiscal or calendar)</small></h3>
+      <h3 class="subtle">Start of year <small class="move-right">(ex. fiscal or calendar)</small></h3>
       <%= f.fields_for :start_months do |s_f| %>
         <%= render 'shared/error_messages', object: s_f.object %>
         <span class="form-controller">
@@ -69,20 +69,25 @@
     </div>
 
     <div class="col-xs-12 col-sm-6">
-      <h3 class="subtle">Pay Period</h3>
+      <h3 class="subtle">Pay Period <%= link_to icon('question-circle'), "#", {id: "pay_period_q", class: "move-right"} %></h3>
       <%= f.fields_for :pay_periods do |p_f| %>
        <%= render 'shared/error_messages', object: p_f.object %>
         <span class="form-controller">
           <div class="input-group" title="Start Year">
             <span class="input-group-addon"><%= icon('money') %></span>
-            <%= p_f.select :period_type, options_for_select(@periods, @pay_period.period_type), {}, { class: "form-control" } %>
+            <%= p_f.select :period_type, options_for_select(@periods, @pay_period.period_type), {}, { class: "form-control period_type" } %>
           </div>
         </span>
       <% end %>
     </div>
+    <div id="pay_period_dialog" class="" title="Pay Period Helper">
+      <% @pay_period_dialog_text.each do |k,v| %>
+        <p><strong><%= k %></strong> <%= v %></p>
+      <% end %>
+    </div>
 
     <div class="col-xs-12 col-sm-6">
-      <h3 class="subtle">Contacting IT <small>(for help page)</small></h3>
+      <h3 class="subtle">Contacting IT <small class="move-right">(for help page)</small></h3>
       <%= f.fields_for :it_emails do |i_f| %>
         <%= render 'shared/error_messages', object: i_f.object %>
         <span class="form-controller">
@@ -98,7 +103,7 @@
       <div class="row holiday_head">
         <h3 class="subtle">
           Holidays
-          <small>
+          <small class="move-right">
             ( <%= icon('plus-square') %> for details, <%= icon('times') %> to delete)
           </small>
         </h3>

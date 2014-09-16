@@ -7,4 +7,4 @@ path = window.location.pathname.substring(1)
 ary = path.split("/")
 window.pathAry = ary
 
-# use as: if $.inArray("file-focus", pathAry) >= 0
+# Usage: if $.inArray("file-focus", pathAry) >= 0
