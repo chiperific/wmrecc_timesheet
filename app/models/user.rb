@@ -9,13 +9,17 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   before_create :create_remember_token
 
-  validates :fname, :lname, presence: true
+  validates :fname, :lname, :start_date, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
   validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
+
+  default_value_for :start_date do
+    Date.today
+  end
 
   def has_authority_over
     if User.where(supervisor_id: self.id, active: true).exists?
@@ -155,7 +159,8 @@ class User < ActiveRecord::Base
       "Weekly" => 52,
       "Bi-weekly" => 26,
       "Semi-monthly" => 24,
-      "Monthly" => 12
+      "Monthly" => 12,
+      "Annually" => 1
     }
     period_type = PayPeriod.first.period_type
     options[period_type]
@@ -164,10 +169,18 @@ class User < ActiveRecord::Base
   def payroll_hours(start_date, end_date)
     #get an array of cweeks and years
     year = (start_date.year..end_date.year).map { |y| y }
-    cweek = (start_date.cweek..end_date.cweek).map { |c| c }
+
+    # not working when breaks over a year
+    if year.count > 1
+      week_count = Date.new(start_date.year, 12, 28).cweek
+      cweek = (1..week_count).map { |n| n }
+    else
+      cweek = (start_date.cweek..end_date.cweek).map { |c| c }
+    end
     timesheet_ids = Timesheet.where(year: year, week_num: cweek).map { |t| t.id }
     summed_hsh = self.timesheet_hours.where(timesheet_id: timesheet_ids).group(:timesheet_id).sum(:hours)
-    summed_hsh.map { |k, v| v.to_f }.sum
+    summed_hsh.map { |k, v| v }.sum.to_f
+    #binding.pry
   end
 
   def payroll_rate

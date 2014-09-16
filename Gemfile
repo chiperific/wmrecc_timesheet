@@ -5,7 +5,6 @@ ruby '2.0.0'
 gem 'rails', '4.0.5'
 gem 'american_date'
 gem 'week_of_month'
-#gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'sprockets', '2.11.0'
@@ -24,12 +23,14 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'will_paginate', '3.0.4'
 gem 'will_paginate-bootstrap'
-
+gem 'squeel' # better ActiveRecord SQL
 gem 'jquery-datatables-rails'
 gem 'lodash-rails'
+gem "default_value_for"
 
 # so many cache errors in sass 3.3!
 gem 'sass', '3.2.13'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'

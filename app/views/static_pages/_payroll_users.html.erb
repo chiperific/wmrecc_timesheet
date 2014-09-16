@@ -1,12 +1,14 @@
 <tr>
-  <td><%= user.full_name %></td>
-  <td><%= user.department.name %></td>
   <td>
-    <%= user.payroll_hours(@payroll_start, @payroll_end) %>
+    <%= user.full_name %>
     <% if user.pay_type == "Salary" %>
       (s)
     <% end %>
   </td>
+  <td class="small-when-small"><%= user.department.name %></td>
+  <td class="center"><%= user.payroll_hours(@payroll_start, @payroll_end) %></td>
   <td class="hidden-xs align-right">$ <%= user.payroll_rate %></td>
-  <td class="align-right">$ <%= user.payroll_gross(@payroll_start, @payroll_end) %></td>
+  <td class="align-right">
+    $ <%= number_with_precision( user.payroll_gross(@payroll_start, @payroll_end), precision: 2 ) %>
+  </td>
 </tr>

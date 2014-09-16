@@ -1,6 +1,15 @@
 <tr>
-  <td><%= category.department.name %></td>
-  <td><%= category.name %></td>
-  <td><%= category.payroll_hours(@payroll_start, @payroll_end) %></td>
-  <td class="align-center">$</td>
+  <td class="small-when-small">
+    <%= category.department.name %>
+  </td>
+  <td class="small-when-small">
+    <%= category.name %>
+  </td>
+  <td>Staff</td>
+  <td class="align-center">
+    <%= category.payroll_hours(@payroll_start, @payroll_end) %>
+  </td>
+  <td class="align-right">
+    $ <%= number_with_precision( category.payroll_total(@payroll_start, @payroll_end, @pay_period, @year), precision: 2 ) %>
+  </td>
 </tr>

@@ -64,7 +64,7 @@ class StaticPagesController < ApplicationController
 
     @departments_lkup = departments_lkup
 
-    @users = payroll_active_users
+    @users = payroll_relevant_users(@payroll_start, @payroll_end)
     @categories = payroll_active_cats
 
     @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
@@ -130,112 +130,6 @@ class StaticPagesController < ApplicationController
   end
 
   private
-
-    # turn 'mm-dd' and 'yyyy' into a date
-    def date_from_period_year(period, year)
-      m_d = period.split('-')
-      m = m_d[0].to_i
-      d = m_d[1].to_i
-      year = year.to_i
-      date = Date.new(year,m,d)
-    end
-
-    def payroll_start
-      pay_period_type = AppDefault.first.pay_periods.first.period_type
-      year = params[:year] || Time.now.in_time_zone.year
-      pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
-      date = date_from_period_year(pay_period, year)
-
-      if pay_period_type == "Weekly"
-        start = date.beginning_of_week
-      elsif pay_period_type == "Bi-weekly"
-        if date.cweek.odd?
-          start = date.beginning_of_week
-        else
-          start = (date.beginning_of_week - 1.week)
-        end
-      elsif pay_period_type == "Monthly"
-        start = date.beginning_of_month
-      else # Bi-monthly
-        start_of_fy_name = AppDefault.first.start_months.first.month
-        start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
-        period_first = Date.new(year, start_of_fy_num, 1)
-        period_second = (period_first + 6.months)
-        if date >= period_first
-          start = period_first
-        else
-          start = period_second
-        end
-      end
-      start
-    end
-
-    def payroll_end
-      pay_period_type = AppDefault.first.pay_periods.first.period_type
-      year = params[:year] || Time.now.in_time_zone.year
-      pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
-      date = date_from_period_year(pay_period, year)
-
-      if pay_period_type == "Weekly"
-        ender = date.end_of_week
-      elsif pay_period_type == "Bi-weekly"
-        if date.cweek.even?
-          ender = date.end_of_week
-        else
-          ender = (date.end_of_week + 1.week)
-        end
-      elsif pay_period_type == "Monthly"
-        ender = date.end_of_month
-      else # Bi-monthly
-        start_of_fy_name = AppDefault.first.start_months.first.month
-        start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
-        period_first = Date.new(year, start_of_fy_num, 1)
-        period_second = (period_first + 6.months)
-        if date >= period_first
-          ender = (period_second - 1.day)
-        else
-          ender = (period_first - 1.day)
-        end
-      end
-      ender
-    end
-
-    # for payroll action
-    def departments_lkup
-      active_depts = Department.where(active: true)
-
-      if active_depts.count > 1
-        depts = ["All Depts"]
-        active_depts.each do |d|
-          depts << d.name
-        end
-      else
-        depts = [active_depts.first.name]
-      end
-      depts
-    end
-
-    def payroll_active_users
-      if !params[:dept].blank?
-        dept = Department.where(active: true).where(name: params[:dept]).first
-        usr = User.where(active: true).where(department_id: dept)
-      else
-        usr = User.where(active: true)
-      end
-      usr
-    end
-
-    def payroll_active_cats
-      if !params[:dept].nil? && params[:dept] != "All Depts"
-        dept_name = params[:dept]
-        dept = Department.find_by_name(dept_name)
-        cats = Category.where(active: true, department_id: dept.id)
-      else
-        cats = Category.where(active: true)
-      end
-      cats
-    end
-
     def app_default_params
       params.require(:app_default).permit( :name,
         :weekdays_attributes => [

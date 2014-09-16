@@ -2,9 +2,11 @@
                       root GET    /                                               static_pages#home
                       help GET    /help(.:format)                                 static_pages#help
                  configure GET    /configure(.:format)                            static_pages#configure
+                           GET    /holidays/:year(.:format)                       app_default#holidays
           configure_update PATCH  /configure_update(.:format)                     static_pages#configure_update
                     signin POST   /signin(.:format)                               static_pages#create
                    signout DELETE /signout(.:format)                              static_pages#destroy
+                   payroll GET    /payroll(.:format)                              static_pages#payroll
            user_timesheets GET    /users/:user_id/timesheets(.:format)            timesheets#index
                            POST   /users/:user_id/timesheets(.:format)            timesheets#create
         new_user_timesheet GET    /users/:user_id/timesheets/new(.:format)        timesheets#new
@@ -42,9 +44,4 @@ user_timesheets_supervisor GET    /users/:user_id/timesheets/supervisor(.:format
                            PATCH  /departments/:id(.:format)                      departments#update
                            PUT    /departments/:id(.:format)                      departments#update
                            DELETE /departments/:id(.:format)                      departments#destroy
-                   reports GET    /reports(.:format)                              reports#index
-           reports_payroll GET    /reports/payroll(.:format)                      reports#payroll
-        reports_department GET    /reports/department(.:format)                   reports#department
-              reports_user GET    /reports/user(.:format)                         reports#user
-           reports_program GET    /reports/program(.:format)                      reports#program
                            GET    /*path(.:format)                                static_pages#route_error

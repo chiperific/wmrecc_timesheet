@@ -27,6 +27,7 @@ FactoryGirl.define do
     password_confirmation "foobar"
     annual_time_off       158.5
     standard_hours        80
+    start_date            Date.new(2010, 1, 1)
   end
 
   factory :category do
@@ -90,6 +91,13 @@ FactoryGirl.define do
 
   factory :pay_period do
     period_type     "Bi-weekly"
+    app_default_id  1
+  end
+
+  factory :holiday do
+    name            "Best Chip Day"
+    month           1
+    day             "24"
     app_default_id  1
   end
 end

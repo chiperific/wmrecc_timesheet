@@ -17,7 +17,7 @@ describe "Departments Pages" do
         before { visit new_department_path }
 
         it "should not add a department" do
-          expect { click_button "Submit"}.not_to change(Department, :count)
+          expect { click_button "submit"}.not_to change(Department, :count)
         end
       end
 
@@ -29,7 +29,7 @@ describe "Departments Pages" do
         end
 
         it "should add a new department" do
-          expect { click_button "Submit" }.to change(Department, :count).by(1)
+          expect { click_button "submit" }.to change(Department, :count).by(1)
         end
       end
     end #when submitting
@@ -47,7 +47,7 @@ describe "Departments Pages" do
         let(:new_name) {"New Name"}
         before do
           fill_in "department[name]", with: new_name
-          click_button "Submit"
+          click_button "submit"
         end
 
         specify { expect(department.reload.name).to eq new_name }

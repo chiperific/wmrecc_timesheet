@@ -16,11 +16,14 @@ class Category < ActiveRecord::Base
     summed_hsh.map { |k, v| v.to_f }.sum
   end
 
-  def payroll_total(start_date, end_date)
+  def payroll_total(start_date, end_date, period, year)
     relevant_ts_cats = self.payroll_relevant_cats(start_date, end_date)
-    #use user.payroll_hourly_rate * user's contributed hours per user's timesheet_category
-    # create new ary with user's contributed total per relevant TimesheetCategory record?
-    # { user_cont_$ => TimesheetCategory.id }
+    usr_rate_x_hours_ary = []
+    relevant_ts_cats.each do |c|
+      user_rate = c.user.payroll_hourly_rate(period, year)
+      usr_rate_x_hours_ary << c.hours * user_rate
+    end
+    usr_rate_x_hours_ary.sum
   end
 
 end

@@ -26,7 +26,7 @@ describe "Categories Pages" do
         before { visit new_category_path }
 
         it "should not create category" do
-          expect { click_button "Submit"}.not_to change(Category, :count)
+          expect { click_button "submit"}.not_to change(Category, :count)
         end
       end
 

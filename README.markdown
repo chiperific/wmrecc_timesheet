@@ -1,23 +1,12 @@
 This product is a Time tracking application for the explicit use of West Michigan Refugee Education and Cultural Center. created 2014 by Chiperific.
 
 ## Last completed step:
-* Reports: 1.0 Timeoff reports through 'users/#/timeoff/{level}'
-* UX validation of hours and cats: progress bars
-* Center apps on page
-* Frame out payroll view
-* Create Holiday model
-* Manage holidays (fixed and floating) through config page
-* show a message on timesheet view when holidays are present in date range
-* refractor js files to only load if pathname is in pathAry
-* Payroll: calculate hours per payroll in user.rb
-* Users#edit: auto-hide hourly or salary based upon pay_type
 * Payroll: show start and end of pay_period based on AppDefault.start_months and AppDefault.pay_period
 * Payroll: calculate User Gross $
+* Payroll#user_tbl considers the start and end date of users
+* Payroll: calculate Category $ Total
 
 ## Next steps:
-* Payroll#user_tbl needs to consider the start and end date of users
-* Payroll: Categories_tbl#Total -- see notes in Category#payroll_total
-
 * Add specs to Holiday model
 * Add specs to static_pages_spec#payroll
 
@@ -35,7 +24,7 @@ This product is a Time tracking application for the explicit use of West Michiga
   * http://ruby-doc.org/stdlib-2.1.2/libdoc/date/rdoc/Date.html#method-c-commercial
 * Font Awesome submit buttons
   ```ruby
-    <button type="submit" class="btn btn-success">
+    <button type="submit" id="submit" class="btn btn-success">
       <%= FA_SUBMIT %>
     </button>
   ```

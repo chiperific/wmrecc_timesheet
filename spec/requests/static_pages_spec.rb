@@ -63,6 +63,7 @@ describe "Static pages" do
     let!(:app_default) { FactoryGirl.create(:app_default) }
     let!(:it_email) { FactoryGirl.create(:it_email) }
     let!(:start_month) { FactoryGirl.create(:start_month) }
+    let!(:holiday) { FactoryGirl.create(:holiday)}
     before do
       sign_in(user)
       visit configure_path
@@ -71,6 +72,36 @@ describe "Static pages" do
     it 'has all the elements' do
       should have_title('Configure')
       should have_content('System Configuration')
+      should have_content('Weekdays')
+      should have_content('Start of Year')
+      should have_content('Timeoff accrual')
+      should have_content('Pay Period')
+      should have_content('Contacting IT')
+      should have_content('Holidays')
+    end
+  end
+
+  describe "Payroll page" do
+    let!(:user) { FactoryGirl.create(:user) }
+    let!(:app_default) { FactoryGirl.create(:app_default) }
+    let!(:pay_period) { FactoryGirl.create(:pay_period) }
+    let!(:start_month) { FactoryGirl.create(:start_month) }
+    let!(:holiday) { FactoryGirl.create(:holiday) }
+    let!(:department) { FactoryGirl.create(:department) }
+    let!(:category) { FactoryGirl.create(:category) }
+    let!(:timesheet_hour) { FactoryGirl.create(:timesheet_hour) }
+    let!(:timesheet_category) { FactoryGirl.create(:timesheet_category) }
+
+    before do
+      sign_in(user)
+      visit payroll_path
+    end
+
+    it 'has all the elements' do
+      should have_title('Payroll')
+      should have_content('Payroll')
+      should have_content('Staff:')
+      should have_content('Categories:')
     end
   end
 

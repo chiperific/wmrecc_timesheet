@@ -20,32 +20,28 @@ describe "User Pages" do
 
     describe "when submitting with valid info" do
       describe "should update the user" do
-        let(:new_fname) {"New"}
-        let(:new_lname) {"Name"}
         before do
-          fill_in "user_fname", with: new_fname
-          fill_in "user_lname", with: new_lname
-          click_button "Submit"
+          fill_in "user_fname", with: "new_fname"
+          fill_in "user_lname", with: "new_lname" 
+          click_button "submit"
         end
 
-        specify { expect(user.reload.fname).to  eq new_fname }
-        specify { expect(user.reload.lname).to eq new_lname }
+        specify { expect(user.reload.fname).to  eq "new_fname" }
+        specify { expect(user.reload.lname).to eq "new_lname" }
 
       end
     end
 
     describe "when submitting with invalid info" do
       describe "should not update the user" do
-        let(:new_fname) {""}
-        let(:new_lname) {"Name"}
         before do
-          fill_in "user_fname", with: new_fname
-          fill_in "user_lname", with: new_lname
-          click_button "Submit"
+          fill_in "user_fname", with: ""
+          fill_in "user_lname", with: "new_lname"
+          click_button "submit"
         end
 
-        specify { expect(user.reload.fname).not_to eq new_fname }
-        specify { expect(user.reload.lname).not_to eq new_lname }
+        specify { expect(user.reload.fname).not_to eq "new_fname" }
+        specify { expect(user.reload.lname).not_to eq "new_lname" }
 
       end
     end
@@ -64,7 +60,7 @@ describe "User Pages" do
       before {visit new_user_path}
 
       it "should not create a user" do
-        expect {click_button "Submit" }.not_to change(User, :count)
+        expect {click_button "submit" }.not_to change(User, :count)
       end
     end
 
@@ -79,7 +75,7 @@ describe "User Pages" do
       end
 
       it "should create a user" do
-        expect { click_button "Submit" }.to change(User, :count).by(1)
+        expect { click_button "submit" }.to change(User, :count).by(1)
       end
     end
   end

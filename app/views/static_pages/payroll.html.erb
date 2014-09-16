@@ -1,11 +1,5 @@
 <h3 class="subtle thin-top center">Payroll <span class="pull-right">(<%= @pay_period_type %>)</span></h3>
 
-<h5>Days in year: <%= Date.new(@payroll_start.year, 12, 31).yday %></h5>
-<h5>Business Days: <%= @payroll_start.business_days_in_year %></h5>
-<h5>Days Off: <%= @payroll_start.days_off_in_year %></h5>
-<h5>Holidays: <%= Holiday.all.count %></h5>
-
-
 <div class="well well-striped row">
   <div class="row">
     <%= render 'shared/year_payweek_searchbar' %>
@@ -24,9 +18,12 @@
     <table class="table table-thin" id="payroll-user-table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>
+            Name
+            <%= link_to icon('question-circle'), "#", {id: 'hours_dialog_q', class: "move-right"} %>
+          </th>
           <th>Dept.</th>
-          <th>Hours <%= link_to icon('question-circle'), "#", {id: 'hours_dialog_q', class: "move-right"} %></th>
+          <th class="center">Hours</th>
           <th class="hidden-xs align-center">$ Rate</th>
           <th class="align-center">Gross $</th>
         </tr>
@@ -48,8 +45,12 @@
         <tr>
           <th>Dept.</th>
           <th>Category</th>
+          <th>Staff</th>
           <th>Hours</th>
-          <th>$ Total</th>
+          <th>
+            $ Total
+            <%= link_to icon('question-circle'), "#", {id: 'categories_dialog_q', class: "move-right"} %>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -62,7 +63,11 @@
 </div>
 
 <div id="hours_dialog" title="Hours Explained">
-  <p>A <b>(s)</b> in the <b>Hours</b> column indicates Salaried employees.</p>
+  <p>A <b>(s)</b> in the <b>Name</b> column indicates Salaried employees.</p>
   <p>Their <b>$ Rate</b> is their salary divided by the payroll cycle (<%= @pay_period_type %>).</p>
   <p>The <b>$ Rate</b> column is not visible on small screens.</p>
+</div>
+<div id="categories_dialog" title="Categories Explained">
+  <p>The <b>$ Total</b> column shows the total of applicable staff's hourly contributions towards the category.</p>
+  <p>The <b>Staff</b> column shows the number of staff who contributed hours during the pay period.</p>
 </div>

@@ -19,3 +19,17 @@ jQuery ->
       event.preventDefault
       false
 
+    $('#categories_dialog').dialog
+      dialogClass: "no-close",
+      autoOpen: false,
+      buttons: [{
+        text: "Ok"
+        click: ->
+          $(this).dialog("close")
+      }]
+
+    $('#categories_dialog_q').click ->
+      $('#categories_dialog').dialog("open")
+      event.preventDefault
+      false
+
