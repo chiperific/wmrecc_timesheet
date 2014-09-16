@@ -57,5 +57,36 @@ class Date
     fweek
   end
 
-  
+  def business_days_in_year
+    holiday_count = Holiday.all.count
+    weekend_ary = []
+    (1..12).each do |i|
+      weekend_ary.concat Date.new(self.year, i, 1).all_saturdays_in_month
+      weekend_ary.concat Date.new(self.year, i, 1).all_sundays_in_month
+    end
+    days_off = weekend_ary.count + holiday_count
+    days_in_year = Date.new(self.year, 12, 31).yday
+
+    business_days = days_in_year - days_off
+  end
+
+  def days_off_in_year
+    holiday_count = Holiday.all.count
+    weekend_ary = []
+    (1..12).each do |i|
+      weekend_ary.concat Date.new(self.year, i, 1).all_saturdays_in_month
+      weekend_ary.concat Date.new(self.year, i, 1).all_sundays_in_month
+    end
+    days_off = weekend_ary.count + holiday_count
+  end
+
+  def weekends_in_year
+    holiday_count = Holiday.all.count
+    weekend_ary = []
+    (1..12).each do |i|
+      weekend_ary.concat Date.new(self.year, i, 1).all_saturdays_in_month
+      weekend_ary.concat Date.new(self.year, i, 1).all_sundays_in_month
+    end
+    weekends = weekend_ary.count
+  end
 end

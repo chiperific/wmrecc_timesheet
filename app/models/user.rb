@@ -157,7 +157,8 @@ class User < ActiveRecord::Base
       "Semi-monthly" => 24,
       "Monthly" => 12
     }
-    options[self.pay_type]
+    period_type = PayPeriod.first.period_type
+    options[period_type]
   end
 
   def payroll_hours(start_date, end_date)
@@ -169,20 +170,36 @@ class User < ActiveRecord::Base
     summed_hsh.map { |k, v| v.to_f }.sum
   end
 
-  def payroll_rate(start_date, end_date)
-    payroll_hours = self.payroll_hours(start_date, end_date)
-
-    if self.pay_type == "Salary"
-      by_period_type = self.salary_rate / self.val_from_period_type
+  def payroll_rate
+    if self.pay_type == "Hourly"
+      rate = self.hourly_rate
     else
-      rate = self.hourly_rate.to_f
+      rate = self.salary_rate / self.val_from_period_type
     end
-    rate
+    rate.round(2)
   end
 
-  def payroll_gross
-    pay_period_type = AppDefault.first.pay_periods.first.period_type
-    val = val_from_period_type(pay_period_type)
+  def payroll_hourly_rate(period, year)
+    if self.pay_type == "Hourly"
+      rate = self.hourly_rate
+    else
+      date = date_from_period_year(period, year)
+      # Date.instance.business_days returns number of working days in year
+      # business_days * 8 give working hours in year
+      working_hours = date.business_days_in_year * 8
+      # divide working hours
+      rate = self.salary_rate / working_hours
+    end
+    rate.round(2)
+  end
+
+  def payroll_gross(start_date, end_date)
+    if self.pay_type == "Hourly"
+      rate = self.hourly_rate * self.payroll_hours(start_date, end_date)
+    else
+      rate = self.payroll_rate
+    end
+    rate.round(2)
   end
 
   private

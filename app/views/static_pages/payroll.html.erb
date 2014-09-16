@@ -1,5 +1,11 @@
 <h3 class="subtle thin-top center">Payroll <span class="pull-right">(<%= @pay_period_type %>)</span></h3>
 
+<h5>Days in year: <%= Date.new(@payroll_start.year, 12, 31).yday %></h5>
+<h5>Business Days: <%= @payroll_start.business_days_in_year %></h5>
+<h5>Days Off: <%= @payroll_start.days_off_in_year %></h5>
+<h5>Holidays: <%= Holiday.all.count %></h5>
+
+
 <div class="well well-striped row">
   <div class="row">
     <%= render 'shared/year_payweek_searchbar' %>
@@ -15,14 +21,14 @@
 <div class="row" id="payroll_users_head">
   <fieldset>
     <legend class="subtle">Staff:</legend>
-    <table class="table" id="payroll-user-table">
+    <table class="table table-thin" id="payroll-user-table">
       <thead>
         <tr>
           <th>Name</th>
           <th>Dept.</th>
-          <th>Hours</th>
-          <th class="hidden-xs">$ Rate</th>
-          <th>Gross $</th>
+          <th>Hours <%= link_to icon('question-circle'), "#", {id: 'hours_dialog_q', class: "move-right"} %></th>
+          <th class="hidden-xs align-center">$ Rate</th>
+          <th class="align-center">Gross $</th>
         </tr>
       </thead>
       <tbody>
@@ -43,7 +49,6 @@
           <th>Dept.</th>
           <th>Category</th>
           <th>Hours</th>
-          <th class="hidden-xs">Pay Rate</th>
           <th>$ Total</th>
         </tr>
       </thead>
@@ -54,4 +59,10 @@
       </tbody>
     </table>
   </fieldset>
+</div>
+
+<div id="hours_dialog" title="Hours Explained">
+  <p>A <b>(s)</b> in the <b>Hours</b> column indicates Salaried employees.</p>
+  <p>Their <b>$ Rate</b> is their salary divided by the payroll cycle (<%= @pay_period_type %>)</p>
+  <p>The <b>$ Rate</b> column is not visible on small screens.</p>
 </div>

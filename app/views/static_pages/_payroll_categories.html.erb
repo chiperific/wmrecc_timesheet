@@ -1,7 +1,6 @@
 <tr>
   <td><%= category.department.name %></td>
   <td><%= category.name %></td>
-  <td>Hours</td>
-  <td class="hidden-xs">$</td>
-  <td>$</td>
+  <td><%= category.payroll_hours(@payroll_start, @payroll_end) %></td>
+  <td class="align-center">$</td>
 </tr>
