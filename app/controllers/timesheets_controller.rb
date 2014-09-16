@@ -22,7 +22,7 @@ class TimesheetsController < ApplicationController
 
     @user_auth = @user.has_authority_over
     @user_auth_id_ary = @user_auth.pluck(:id) || nil
-    @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
+    @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(:timesheet_id, :user_id).to_a
 
     if current_user.admin?
       @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
@@ -31,12 +31,12 @@ class TimesheetsController < ApplicationController
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id).to_a
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(:timesheet_id, :user_id).to_a
     end
 
-    @direct_reports_select = Hash.new
+    @users_select = Hash.new
     @user_auth.each do |usr|
-      @direct_reports_select[usr.full_name] = usr.id
+      @users_select[usr.full_name] = usr.id
     end
   end
 
@@ -44,11 +44,11 @@ class TimesheetsController < ApplicationController
     @title = "Timesheet"
     @user = User.find(params[:user_id])
     @page_title = "All Timesheets"
-    @timesheets_all = TimesheetHour.group(:timesheet_id)
+    @timesheets_all = TimesheetHour.group(:timesheet_id, :user_id)
     
-    @all_users_select = Hash.new
+    @users_select = Hash.new
     User.where(active: true).order(:lname).each do |usr|
-      @all_users_select[usr.full_name] = usr.id
+      @users_select[usr.full_name] = usr.id
     end
   end
 

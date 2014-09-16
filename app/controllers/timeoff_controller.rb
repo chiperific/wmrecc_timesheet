@@ -26,13 +26,13 @@ class TimeoffController < ApplicationController
     @title = "Timeoff"
     @user = User.find(params[:user_id])
 
-    @timeoff_hours = TimesheetHour.where(user_id: @user.has_authority_over).where.not(timeoff_hours: 0).group(:timesheet_id).to_a
+    @timeoff_hours = TimesheetHour.where(user_id: @user.has_authority_over).where.not(timeoff_hours: 0).group(:timesheet_id, :user_id).to_a
   end
 
   def admin
     @title = "Timeoff"
 
-    @timeoff_hours = TimesheetHour.where.not(timeoff_hours: 0).group(:timesheet_id).to_a
+    @timeoff_hours = TimesheetHour.where.not(timeoff_hours: 0).group(:timesheet_id, :user_id).to_a
   end
 
   private

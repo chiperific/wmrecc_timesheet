@@ -13,7 +13,7 @@ weekday_name = (n) ->
 rubyReadyDate = ->
   n = new Date()
   y = n.getFullYear()
-  m = n.getMonth()
+  m = n.getMonth()+1
   d = n.getDate()
   y + '/' + m + '/' + d
 
@@ -100,24 +100,6 @@ jQuery ->
     $('#direct_report_select').change ->
       $('#direct_report_error').addClass('hidden')
 
-    $('.week_num_to_date').datepicker
-      todayBtn: "linked"
-      format: 'mm/dd'
-      calendarWeeks: true
-      weekStart: 1
-      autoclose: true
-
-    $('.week_num_to_date').change ->
-      new_mm_dd = $(this).val()
-      new_yy = $('#timesheet_year').val()
-      new_date = new_mm_dd + "/" + new_yy
-      $('#timesheet_week_num').val(new Date(new_date).getWeek())
-
-    $('.timesheet_year').datepicker
-      format: "yyyy"
-      minViewMode: 2
-      autoclose: true
-
     $('.timeoff-hide').hide()
     $('.timeoff-show').show()
     $('.expand-5-to-7').removeClass('col-xs-5').addClass('col-xs-7')
@@ -195,3 +177,22 @@ jQuery ->
       columnDefs: [
         targets: -1, sortable: false, searchable: false
       ]
+
+    if $.inArray("new", pathAry) >= 0
+      $('.week_num_to_date').datepicker
+        todayBtn: "linked"
+        format: 'mm/dd'
+        calendarWeeks: true
+        weekStart: 1
+        autoclose: true
+
+      $('.week_num_to_date').change ->
+        new_mm_dd = $(this).val()
+        new_yy = $('#timesheet_year').val()
+        new_date = new_mm_dd + "/" + new_yy
+        $('#timesheet_week_num').val(new Date(new_date).getWeek())
+
+      $('.timesheet_year').datepicker
+        format: "yyyy"
+        minViewMode: 2
+        autoclose: true

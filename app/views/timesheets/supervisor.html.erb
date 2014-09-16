@@ -4,22 +4,7 @@
    <%= render 'timesheet_table', timesheets_collection: @timesheets_for_user_auth %>
   </table>
 
-  <div class="row center">
-    <hr />
-  </div>
-
-  <div class="row buffered-row">
-    <div class="col-xs-4">
-      <%= link_to "Create for:", "#", { method: :get, class: "btn btn-primary", id: "direct_report_chooser"} %>
-    </div>
-    <div class="col-xs-8">
-      <%= select_tag "direct_reports", options_for_select(@direct_reports_select), { include_blank: true, class: "expand form-control", id: "direct_report_select" } %>
-    </div>
-  </div>
-
-  <div class="hidden pull-right" id="direct_report_error">
-    <code>Please select a name.</code>
-  </div>
+  <%= render 'create_for_user' %>
 
 </div>
 
