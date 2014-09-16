@@ -226,13 +226,14 @@ class StaticPagesController < ApplicationController
     end
 
     def payroll_active_cats
-      if !params[:dept].blank?
-        dept = Department.where(active: true).where(name: params[:dept]).first
-        cat = Category.where(active: true).where(department_id: dept.id)
+      if !params[:dept].nil? && params[:dept] != "All Depts"
+        dept_name = params[:dept]
+        dept = Department.find_by_name(dept_name)
+        cats = Category.where(active: true, department_id: dept.id)
       else
-        cat = Category.where(active: true)
+        cats = Category.where(active: true)
       end
-      cat
+      cats
     end
 
     def app_default_params

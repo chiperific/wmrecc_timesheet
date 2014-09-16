@@ -12,17 +12,14 @@ This product is a Time tracking application for the explicit use of West Michiga
 * Payroll: calculate hours per payroll in user.rb
 * Users#edit: auto-hide hourly or salary based upon pay_type
 * Payroll: show start and end of pay_period based on AppDefault.start_months and AppDefault.pay_period
+* Payroll: calculate User Gross $
 
 ## Next steps:
-* Payroll: calculate Gross $
-** needs to consider the start and end date of users
-** User#payroll_hours is flawed
-** Hourly - 
-** Calculate workdays in a pay period with consideration for holidays - for salary (instead of hourly). Why not just use salary/52?
+* Payroll#user_tbl needs to consider the start and end date of users
+* Payroll: Categories_tbl#Total -- see notes in Category#payroll_total
 
 * Add specs to Holiday model
 * Add specs to static_pages_spec#payroll
-
 
 ## Minor tweaks:
 * page refreshes on resize (for datatables) because dataTables are not responsive (or at least not with search and display count functions)
