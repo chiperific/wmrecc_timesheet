@@ -62,7 +62,6 @@ class StaticPagesController < ApplicationController
     @payroll_end = payroll_end
 
     @departments_lkup = departments_lkup
-    binding.pry
     @users = payroll_relevant_users(@payroll_start, @payroll_end)
     @categories = payroll_active_cats
 

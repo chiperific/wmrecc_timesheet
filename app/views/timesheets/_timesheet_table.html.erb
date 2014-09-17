@@ -34,7 +34,6 @@
     <tr>
       <th><%= if th.user.nil? then " " else th.user.full_name end %></th>
       <td><%= if t.nil? then " " else t.week_num_to_date end %></td>
-      <% binding.pry %>
       <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).sum(:hours) %></td>
       <td><%= t.timesheet_hours.where(user_id: th.user.id).sum(:timeoff_hours) %></td>
       <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
