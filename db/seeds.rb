@@ -22,7 +22,7 @@ Department.create!([
 ])
 
 User.create!([
-  {id: 3, fname: "Default", lname: "Admin", email: "default@admin.com", active: true, admin: true,  password: "defadmin1", password_confirmation: "defadmin1", time_zoone: "Eastern Time (US & Canada)" },
+  {id: 1, fname: "Default", lname: "Admin", email: "default@admin.com", active: true, admin: true,  password: "defadmin1", password_confirmation: "defadmin1", time_zone: "Eastern Time (US & Canada)" },
 ])
 
 AppDefault.create!([
@@ -31,10 +31,6 @@ AppDefault.create!([
 
 StartMonth.create!([
   {id: 1, month: "January", app_default_id: 1}
-])
-
-ItEmail.create!([
-  {id: 1, email: "it@email.com", app_default_id: 1}
 ])
 
 TimeoffAccrual.create!([
