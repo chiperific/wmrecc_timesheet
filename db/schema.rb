@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140617004130) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "app_defaults", force: true do |t|
     t.string "name"
   end
@@ -25,7 +28,7 @@ ActiveRecord::Schema.define(version: 20140617004130) do
     t.datetime "updated_at"
   end
 
-  add_index "categories", ["department_id"], name: "index_categories_on_department_id"
+  add_index "categories", ["department_id"], name: "index_categories_on_department_id", using: :btree
 
   create_table "departments", force: true do |t|
     t.string   "name"
@@ -79,9 +82,9 @@ ActiveRecord::Schema.define(version: 20140617004130) do
     t.datetime "updated_at"
   end
 
-  add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category"
-  add_index "timesheet_categories", ["timesheet_id"], name: "index_timesheet_categories_on_timesheet"
-  add_index "timesheet_categories", ["user_id"], name: "index_timesheet_categories_on_user"
+  add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category", using: :btree
+  add_index "timesheet_categories", ["timesheet_id"], name: "index_timesheet_categories_on_timesheet", using: :btree
+  add_index "timesheet_categories", ["user_id"], name: "index_timesheet_categories_on_user", using: :btree
 
   create_table "timesheet_hours", force: true do |t|
     t.integer  "timesheet_id"
@@ -97,8 +100,8 @@ ActiveRecord::Schema.define(version: 20140617004130) do
     t.datetime "updated_at"
   end
 
-  add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet"
-  add_index "timesheet_hours", ["user_id"], name: "index_timesheet_hours_on_user"
+  add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet", using: :btree
+  add_index "timesheet_hours", ["user_id"], name: "index_timesheet_hours_on_user", using: :btree
 
   create_table "timesheets", force: true do |t|
     t.integer "week_num"
@@ -127,8 +130,8 @@ ActiveRecord::Schema.define(version: 20140617004130) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "weekdays", force: true do |t|
     t.integer "app_default_id", default: 1
