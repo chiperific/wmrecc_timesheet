@@ -57,7 +57,7 @@ class StaticPagesController < ApplicationController
   def payroll
     @title = "Payroll"
 
-    @pay_period_type = AppDefault.first.pay_periods.first.period_type
+    @pay_period_type = PayPeriod.first.period_type
     @payroll_start = payroll_start
     @payroll_end = payroll_end
 
@@ -71,6 +71,8 @@ class StaticPagesController < ApplicationController
 
   def configure
     @title = "Configure"
+    @app_default = AppDefault.first
+    
     @pay_period_dialog_text = {
       "Weekly:" => "Process payroll weekly.",
       "Bi-weekly:" => "Process payroll at the end of even calendar weeks.",
@@ -78,21 +80,20 @@ class StaticPagesController < ApplicationController
       "Semi-monthly:" => "Process payroll every 6 months from Start of Year.",
       "Annually:" => "Process payroll at the end of every year from Start of Year"
     }
-    @app_default = AppDefault.first
-    @weekdays = @app_default.weekdays.order( :day_num )
+    @weekdays = Weekday.all.order( :day_num )
 
-    @start_month = @app_default.start_months.first
+    @start_month = StartMonth.first
     @months = Date::MONTHNAMES.dup.drop(1)
 
-    @it_email = @app_default.it_emails.first || @app_default.it_emails.new
+    @it_email = ItEmail.first || ItEmail.new
 
-    @timeoff_accrual = @app_default.timeoff_accruals.first || @app_default.timeoff_accruals.new
+    @timeoff_accrual = TimeoffAccrual.first || TimeoffAccrual.new
     @accruals = ["Annual", "Weekly", "Bi-weekly"]
 
-    @pay_period = @app_default.pay_periods.first || @app_default.pay_periods.new
+    @pay_period = PayPeriod.first || PayPeriod.new
     @periods = ["Weekly","Bi-weekly","Monthly","Semi-monthly","Annually"]
 
-    @holidays = @app_default.holidays
+    @holidays = Holiday.all
 
     @holiday_select_ary = []
     (1..12).each do |i|

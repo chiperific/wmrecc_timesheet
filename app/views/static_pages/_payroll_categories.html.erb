@@ -1,6 +1,8 @@
 <tr>
   <td class="small-when-small">
-    <%= category.department.name %>
+    <% if !category.department.nil? %>
+      <%= category.department.name %>
+    <% end %>
   </td>
   <td class="small-when-small">
     <%= category.name %>

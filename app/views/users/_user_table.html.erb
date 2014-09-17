@@ -24,7 +24,11 @@
         <td>
           <%= u.full_name %>
         </td>
-        <td class="hidden-xs"><%= u.department.name unless u.department_id.blank? %></td>
+        <td class="hidden-xs">
+          <% if !u.department.nil? %>
+            <%= u.department.name %>
+          <% end %>
+        </td>
         <% if @title == "Users" %>
           <td>
             <%= if @supervisor != nil then @supervisor.full_name else "(none)" end %>

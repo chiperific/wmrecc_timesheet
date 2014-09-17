@@ -12,7 +12,11 @@ class Category < ActiveRecord::Base
 
   def payroll_hours(start_date, end_date)
     relevant_ts_cats = self.payroll_relevant_cats(start_date, end_date)
-    summed_hsh = relevant_ts_cats.group_by(&:timesheet_id).sum(:hours)
+    if relevant_ts_cats.any?
+      summed_hsh = relevant_ts_cats.group_by(&:timesheet_id).sum(:hours)
+    else
+      summed_hsh = {}
+    end
     summed_hsh.map { |k, v| v.to_f }.sum
   end
 

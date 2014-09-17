@@ -52,17 +52,17 @@ module StaticPagesHelper
     m_d = period.split('-')
     m = m_d[0].to_i
     d = m_d[1].to_i
-    year = year.to_i
-    date = Date.new(year,m,d)
+    year_i = year.to_i
+    date = Date.new(year_i,m,d)
   end
 
   def payroll_start
-    pay_period_type = AppDefault.first.pay_periods.first.period_type
-    year = params[:year].to_i || Time.now.in_time_zone.year
+    pay_period_type = PayPeriod.first.period_type
+    year = params[:year] || Date.today.year.to_s
     pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
     date = date_from_period_year(pay_period, year)
 
-    start_of_fy_name = AppDefault.first.start_months.first.month
+    start_of_fy_name = StartMonth.first.month
     start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
     period_first = Date.new(year.to_i, start_of_fy_num, 1)
 
@@ -90,12 +90,12 @@ module StaticPagesHelper
   end
 
   def payroll_end
-    pay_period_type = AppDefault.first.pay_periods.first.period_type
-    year = params[:year] || Time.now.in_time_zone.year
+    pay_period_type = PayPeriod.first.period_type
+    year = params[:year] || Date.today.year.to_s
     pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
     date = date_from_period_year(pay_period, year)
 
-    start_of_fy_name = AppDefault.first.start_months.first.month
+    start_of_fy_name = StartMonth.first.month
     start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
     period_first = Date.new(year.to_i, start_of_fy_num, 1)
 
