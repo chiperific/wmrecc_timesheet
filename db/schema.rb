@@ -109,6 +109,8 @@ ActiveRecord::Schema.define(version: 20140617004130) do
     t.string   "fname"
     t.string   "lname"
     t.boolean  "active"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.integer  "department_id"
     t.integer  "supervisor_id"
     t.string   "email"

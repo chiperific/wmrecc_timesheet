@@ -1,44 +1,44 @@
 Weekday.create!([
-  {id: 1 ,day_num: 1, app_default_id: 1, name: "Monday",    abbr: "Mon" },
-  {id: 2 ,day_num: 2, app_default_id: 1, name: "Tuesday",   abbr: "Tues" }, 
-  {id: 3 ,day_num: 3, app_default_id: 1, name: "Wednesday", abbr: "Wed" }, 
-  {id: 4 ,day_num: 4, app_default_id: 1, name: "Thursday",  abbr: "Thurs" }, 
-  {id: 5 ,day_num: 5, app_default_id: 1, name: "Friday",    abbr: "Fri" }, 
-  {id: 6 ,day_num: 6, app_default_id: 1, name: "Saturday",  abbr: "Sat" }, 
-  {id: 7 ,day_num: 7, app_default_id: 1, name: "Sunday",    abbr: "Sun" }
+  { day_num: 1, app_default_id: 1, name: "Monday",    abbr: "Mon" },
+  { day_num: 2, app_default_id: 1, name: "Tuesday",   abbr: "Tues" }, 
+  { day_num: 3, app_default_id: 1, name: "Wednesday", abbr: "Wed" }, 
+  { day_num: 4, app_default_id: 1, name: "Thursday",  abbr: "Thurs" }, 
+  { day_num: 5, app_default_id: 1, name: "Friday",    abbr: "Fri" }, 
+  { day_num: 6, app_default_id: 1, name: "Saturday",  abbr: "Sat" }, 
+  { day_num: 7, app_default_id: 1, name: "Sunday",    abbr: "Sun" }
 ])
 
 Category.create!([
-  {id: 1, name: "Admin", department_id: 1, active: true},
-  {id: 2, name: "Vol Svcs", department_id: 1, active: true},
-  {id: 3, name: "Tutoring", department_id: 1, active: true},
-  {id: 4, name: "Peer Support", department_id: 1, active: true},
-  {id: 5, name: "Parent Engagement", department_id: 1, active: true},
-  {id: 6, name: "School Engagement", department_id: 1, active: true}
+  { name: "Admin", department_id: 1, active: true},
+  { name: "Vol Svcs", department_id: 1, active: true},
+  { name: "Tutoring", department_id: 1, active: true},
+  { name: "Peer Support", department_id: 1, active: true},
+  { name: "Parent Engagement", department_id: 1, active: true},
+  { name: "School Engagement", department_id: 1, active: true}
 ])
 
 Department.create!([
-  {id: 1, name: "All", active: true},
+  { name: "All", active: true},
 ])
 
 User.create!([
-  {id: 1, fname: "Default", lname: "Admin", email: "default@admin.com", active: true, admin: true,  password: "defadmin1", password_confirmation: "defadmin1", time_zone: "Eastern Time (US & Canada)", start_date: "2014/01/01" },
+  { fname: "Default", lname: "Admin", email: "default@admin.com", active: true, admin: true,  password: "defadmin1", password_confirmation: "defadmin1", time_zone: "Eastern Time (US & Canada)", start_date: "2014/01/01" },
 ])
 
 AppDefault.create!([
-  {id: 1, name: "Default"}
+  { name: "Default"}
 ])
 
 StartMonth.create!([
-  {id: 1, month: "January", app_default_id: 1}
+  { month: "January", app_default_id: 1}
 ])
 
 TimeoffAccrual.create!([
-  {id: 1, accrual_type: "Annual", app_default_id: 1}
+  { accrual_type: "Annual", app_default_id: 1}
 ])
 
 PayPeriod.create!([
-  {id: 1, period_type: "Bi-weekly", app_default_id: 1}
+  { period_type: "Bi-weekly", app_default_id: 1}
 ])
 
 Holiday.create!([
