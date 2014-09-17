@@ -13,8 +13,9 @@ describe "Timesheet Pages" do
 
   describe "Single" do
     before { visit user_timesheets_single_path(user) }
-    it { should have_content("Timesheet") }
 
+    it { should have_content("Timesheet") }
+    
   end
 
   describe "Supervisor" do

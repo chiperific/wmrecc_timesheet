@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :user do
-    id                    1
     fname                 "Factory"
     lname                 "User"
     email                 "chip@kragt.com"
@@ -15,7 +14,6 @@ FactoryGirl.define do
   end
 
   factory :users_staff, class: User do
-    id                    2
     fname                 "Factory"
     lname                 "User2"
     email                 "active@user.com"
@@ -43,13 +41,11 @@ FactoryGirl.define do
 
 
   factory :timesheet do
-    id              1
     week_num        26
     year            2014
   end
 
   factory :timesheet_hour do
-    timesheet_id            1
     user_id                 1
     weekday                 2
     hours                   7

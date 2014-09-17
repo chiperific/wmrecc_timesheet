@@ -126,7 +126,7 @@ class User < ActiveRecord::Base
     if year.class == String
       year = year.to_i
     end
-    self.timesheet_hours.joins(:timesheet).where( timesheets: { year: year}).where(timeoff_approved: nil).group(:timesheet_id).map { |a| a.id }.count
+    self.timesheet_hours.joins(:timesheet).where( timesheets: { year: year}).where(timeoff_approved: nil).group_by(&:timesheet_id).map { |a| a.id }.count
   end
 
   def timeoff_used_by_period(period, year)
@@ -178,7 +178,7 @@ class User < ActiveRecord::Base
       cweek = (start_date.cweek..end_date.cweek).map { |c| c }
     end
     timesheet_ids = Timesheet.where(year: year, week_num: cweek).map { |t| t.id }
-    summed_hsh = self.timesheet_hours.where(timesheet_id: timesheet_ids).group(:timesheet_id).sum(:hours)
+    summed_hsh = self.timesheet_hours.where(timesheet_id: timesheet_ids).group_by(&:timesheet_id).sum(:hours)
     summed_hsh.map { |k, v| v }.sum.to_f
     #binding.pry
   end
