@@ -30,10 +30,10 @@ gem "default_value_for"
 
 # so many cache errors in sass 3.3!
 gem 'sass', '3.2.13'
-
+gem 'pg'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.8'
+  #gem 'sqlite3', '1.3.8'
   gem 'pry'
   gem 'pry-doc'
   gem 'launchy'
@@ -66,7 +66,7 @@ group :doc do
 end
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
   gem 'rails_12factor'
   gem 'unicorn'
 end
