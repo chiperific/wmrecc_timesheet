@@ -24,6 +24,8 @@ describe User do
     should respond_to(:hourly_rate)
     should respond_to(:pay_type)
     should respond_to(:time_zone)
+    should respond_to(:start_date)
+    should respond_to(:end_date)
   end
 
   it { should be_valid }

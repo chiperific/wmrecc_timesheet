@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140915203037) do
+ActiveRecord::Schema.define(version: 20140617004130) do
 
   create_table "app_defaults", force: true do |t|
     t.string "name"
@@ -39,11 +39,11 @@ ActiveRecord::Schema.define(version: 20140915203037) do
     t.integer  "month"
     t.integer  "day"
     t.integer  "app_default_id", default: 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.boolean  "floating",       default: false
     t.integer  "float_week"
     t.integer  "float_day"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "it_emails", force: true do |t|
@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(version: 20140915203037) do
 
   create_table "start_months", force: true do |t|
     t.string   "month",          default: "January"
+    t.integer  "app_default_id", default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "app_default_id", default: 1
   end
 
   create_table "timeoff_accruals", force: true do |t|
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 20140915203037) do
     t.integer  "timesheet_id"
     t.integer  "user_id"
     t.integer  "category_id"
+    t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
   end
 
   add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category"
@@ -88,13 +88,13 @@ ActiveRecord::Schema.define(version: 20140915203037) do
     t.integer  "user_id"
     t.integer  "weekday"
     t.decimal  "hours",            precision: 4, scale: 2, default: 0.0
+    t.datetime "reviewed"
     t.datetime "approved"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "timeoff_approved"
     t.decimal  "timeoff_hours",    precision: 4, scale: 2, default: 0.0
     t.datetime "timeoff_reviewed"
-    t.datetime "reviewed"
+    t.datetime "timeoff_approved"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet"
@@ -112,29 +112,27 @@ ActiveRecord::Schema.define(version: 20140915203037) do
     t.integer  "department_id"
     t.integer  "supervisor_id"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "password_digest"
     t.boolean  "admin",                                    default: false
-    t.string   "remember_token"
     t.decimal  "annual_time_off", precision: 6,  scale: 2, default: 0.0
     t.decimal  "standard_hours",  precision: 6,  scale: 2, default: 40.0
     t.decimal  "salary_rate",     precision: 10, scale: 2
     t.decimal  "hourly_rate",     precision: 6,  scale: 2
     t.string   "pay_type",                                 default: "Salary"
     t.string   "time_zone",                                default: "UTC"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.string   "remember_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
   create_table "weekdays", force: true do |t|
+    t.integer "app_default_id", default: 1
     t.string  "name"
     t.string  "abbr"
     t.integer "day_num"
-    t.integer "app_default_id", default: 1
   end
 
 end

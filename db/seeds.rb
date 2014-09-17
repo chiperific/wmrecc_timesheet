@@ -22,7 +22,7 @@ Department.create!([
 ])
 
 User.create!([
-  {id: 1, fname: "Default", lname: "Admin", email: "default@admin.com", active: true, admin: true,  password: "defadmin1", password_confirmation: "defadmin1", time_zone: "Eastern Time (US & Canada)" },
+  {id: 1, fname: "Default", lname: "Admin", email: "default@admin.com", active: true, admin: true,  password: "defadmin1", password_confirmation: "defadmin1", time_zone: "Eastern Time (US & Canada)", start_date: "2014/01/01" },
 ])
 
 AppDefault.create!([
