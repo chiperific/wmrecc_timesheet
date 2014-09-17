@@ -18,8 +18,8 @@ class StaticPagesController < ApplicationController
       if current_user.has_authority_over.any?
         @user_auth = current_user.has_authority_over
         @user_auth_id_ary = @user_auth.pluck(:id)
-        @unapproved_timesheets = TimesheetHour.where(user_id: @user_auth_id_ary, approved: nil, reviewed: nil).group(['timesheet_id','user_id']).to_a
-        @unapproved_timeoffs = TimesheetHour.where(user_id: @user_auth_id_ary, timeoff_approved: nil, timeoff_reviewed: nil).group(['timesheet_id','user_id']).to_a
+        @unapproved_timesheets = TimesheetHour.where(user_id: @user_auth_id_ary, approved: nil, reviewed: nil).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+        @unapproved_timeoffs = TimesheetHour.where(user_id: @user_auth_id_ary, timeoff_approved: nil, timeoff_reviewed: nil).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
       end
 
       if @denied_timeoffs.any? || @denied_timesheets.any? || !@unapproved_timeoffs.nil? || !@unapproved_timesheets.nil?
@@ -63,7 +63,7 @@ class StaticPagesController < ApplicationController
     @payroll_end = payroll_end
 
     @departments_lkup = departments_lkup
-
+    binding.pry
     @users = payroll_relevant_users(@payroll_start, @payroll_end)
     @categories = payroll_active_cats
 

@@ -20,12 +20,14 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
+  timeout: 5000
 
 development:
   adapter: postgresql
   encoding: unicode
   database: wmrecc_timesheet_development
   pool: 5
+  timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -35,6 +37,7 @@ test:
   encoding: unicode
   database: wmrecc_timesheet_test
   pool: 5
+  timeout: 5000
 
 production:
   adapter: postgresql

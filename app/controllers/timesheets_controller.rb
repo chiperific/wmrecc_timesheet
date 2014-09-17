@@ -21,8 +21,12 @@ class TimesheetsController < ApplicationController
     @page_title = "Your Team's Timesheets"
 
     @user_auth = @user.has_authority_over
-    @user_auth_id_ary = @user_auth.pluck(:id) || nil
-    @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).group(['timesheet_id','user_id']).to_a
+    if !@user_auth.empty?
+      @user_auth_id_ary = @user_auth.pluck(:id)
+    else
+      @user_auth_id_ary = []
+    end
+    @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
 
     if current_user.admin?
       @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group_by(&:timesheet_id).to_a
@@ -31,7 +35,7 @@ class TimesheetsController < ApplicationController
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(['timesheet_id','user_id']).to_a
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
     end
 
     @users_select = Hash.new
@@ -44,7 +48,7 @@ class TimesheetsController < ApplicationController
     @title = "Timesheet"
     @user = User.find(params[:user_id])
     @page_title = "All Timesheets"
-    @timesheets_all = TimesheetHour.select(:timesheet_id,:user_id).group(:timesheet_id,:user_id)
+    @timesheets_all = TimesheetHour.select('timesheet_id, user_id').group(:timesheet_id,:user_id)
     
     @users_select = Hash.new
     User.where(active: true).order(:lname).each do |usr|
@@ -81,11 +85,18 @@ class TimesheetsController < ApplicationController
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
     @timesheet_date = DateTime.parse @timesheet.week_num_to_date_obj
-
-    @hours_reviewed = @timesheet.timesheet_hours.where(user_id: @user.id).first.reviewed?
-    @hours_approved = @timesheet.timesheet_hours.where(user_id: @user.id).first.approved?
-    @timeoff_hours_reviewed = @timesheet.timesheet_hours.where(user_id: @user.id).first.timeoff_reviewed?
-    @timeoff_hours_approved = @timesheet.timesheet_hours.where(user_id: @user.id).first.timeoff_approved?
+    @hours = @timesheet.timesheet_hours.where(user_id: @user.id).first
+    if !@hours.nil?
+      @hours_approved = @hours.approved?
+      @hours_reviewed = @hours.reviewed?
+      @timeoff_hours_reviewed = @hours.timeoff_reviewed?
+      @timeoff_hours_approved = @hours.timeoff_approved?
+    else
+      @hours_approved = false
+      @hours_reviewed = false
+      @timeoff_hours_reviewed = false
+      @timeoff_hours_approved = false
+    end
     
     @url = user_timesheet_path(@user.id, @timesheet.id)
 

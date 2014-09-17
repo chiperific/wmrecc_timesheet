@@ -180,7 +180,6 @@ class User < ActiveRecord::Base
     timesheet_ids = Timesheet.where(year: year, week_num: cweek).map { |t| t.id }
     summed_hsh = self.timesheet_hours.where(timesheet_id: timesheet_ids).group_by(&:timesheet_id).sum(:hours)
     summed_hsh.map { |k, v| v }.sum.to_f
-    #binding.pry
   end
 
   def payroll_rate

@@ -16,13 +16,13 @@ class UsersController < ApplicationController
     @departments = Department.where(active: true)
 
     if current_user.admin?
-      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group(['timesheet_id','user_id']).to_a
+      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
     end
 
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(['timesheet_id','user_id']).to_a
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
     end
 
   end
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).group(['timesheet_id','user_id']).to_a
+      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
     end
   end
 
