@@ -31,25 +31,25 @@ updateProgressBar = (bar) ->
   setColor(target, now, max)
 
 jQuery ->
-  if $.inArray("timesheets", pathAry) >= 0
+  #if $.inArray("timesheets", pathAry) >= 0
     #set initial bar values
-    $('.progress-bar').each ->
-      min_text = $(this).attr('aria-valuemin')
-      max_text = $(this).attr('aria-valuemax')
-      now_text = $(this).attr('aria-valuenow')
-      min = parseFloat min_text
-      max = parseFloat max_text
-      now = parseFloat now_text
-      size = (now-min)*100/(max-min)
-      $(this).css('width', size+'%')
-      $(this).html(now.toFixed(1) + "/" + max.toFixed(1))
-      setColor(this, now, max)
+  $('.progress-bar').each ->
+    min_text = $(this).attr('aria-valuemin')
+    max_text = $(this).attr('aria-valuemax')
+    now_text = $(this).attr('aria-valuenow')
+    min = parseFloat min_text
+    max = parseFloat max_text
+    now = parseFloat now_text
+    size = (now-min)*100/(max-min)
+    $(this).css('width', size+'%')
+    $(this).html(now.toFixed(1) + "/" + max.toFixed(1))
+    setColor(this, now, max)
 
-    # calculate total and update progress bar when hours-based fields are changed
-    $('.progressbar-hours').bind 'click keyup', (event) ->
-      calculateTotalVal('.progressbar-hours', '#hours_bar_ttl')
-      updateProgressBar('#hours_progressbar')
+  # calculate total and update progress bar when hours-based fields are changed
+  $('.progressbar-hours').bind 'click keyup', (event) ->
+    calculateTotalVal('.progressbar-hours', '#hours_bar_ttl')
+    updateProgressBar('#hours_progressbar')
 
-    $('.progressbar-categories').bind 'click keyup', (event) ->
-      calculateTotalVal('.progressbar-categories', '#categories_bar_ttl')
-      updateProgressBar('#categories_progressbar')
+  $('.progressbar-categories').bind 'click keyup', (event) ->
+    calculateTotalVal('.progressbar-categories', '#categories_bar_ttl')
+    updateProgressBar('#categories_progressbar')

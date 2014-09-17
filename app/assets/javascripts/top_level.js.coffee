@@ -3,8 +3,8 @@
 
 # set the pageIdentifyer variable
 # allowing me to specify with JS gets loaded per page
-path = window.location.pathname.substring(1)
-ary = path.split("/")
-window.pathAry = ary
+# path = window.location.pathname.substring(1)
+# ary = path.split("/")
+# window.pathAry = ary
 
-# Usage: if $.inArray("file-focus", pathAry) >= 0
+# Usage: #if $.inArray("file-focus", pathAry) >= 0
