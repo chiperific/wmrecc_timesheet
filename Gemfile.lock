@@ -288,7 +288,7 @@ DEPENDENCIES
   less-rails
   less-rails-bootstrap
   lodash-rails
-  pg (= 0.15.1)
+  pg
   pry
   pry-doc
   pry-rails
