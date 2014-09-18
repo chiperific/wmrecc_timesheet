@@ -22,7 +22,7 @@ class StaticPagesController < ApplicationController
         @unapproved_timeoffs = TimesheetHour.where(user_id: @user_auth_id_ary, timeoff_approved: nil, timeoff_reviewed: nil).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
       end
 
-      if !@denied_timeoffs.nil? || !@denied_timesheets.nil? || !@unapproved_timeoffs.nil? || !@unapproved_timesheets.nil?
+      if !@denied_timeoffs.empty? || !@denied_timesheets.empty? || !@unapproved_timeoffs.empty? || !@unapproved_timesheets.empty?
         @message_board = true
       else
         @message_board = false
