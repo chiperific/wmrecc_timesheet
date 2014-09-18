@@ -1,9 +1,9 @@
 <div class="row">
   <ul>
-    <li>Denied TO: <%= !@denied_timeoffs.nil? %></li>
-    <li>Denied TS: <%= !@denied_timesheets.nil? %></li>
-    <li>Unapproved TO: <%= !@unapproved_timeoffs.nil? %></li>
-    <li>Unapproved TS: <%= !@unapproved_timesheets.nil? %></li>
+    <li>Denied TO: <%= @denied_timeoffs.blank? %></li>
+    <li>Denied TS: <%= @denied_timesheets.blank? %></li>
+    <li>Unapproved TO: <%= @unapproved_timeoffs.blank? %></li>
+    <li>Unapproved TS: <%= @unapproved_timesheets.blank? %></li>
   </ul>
 </div>
 
