@@ -64,7 +64,6 @@ class StaticPagesController < ApplicationController
     @departments_lkup = departments_lkup
     @users = payroll_relevant_users(@payroll_start, @payroll_end)
     @categories = payroll_active_cats
-
     @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
     @year = params[:year] || Time.now.in_time_zone.year.to_s
   end

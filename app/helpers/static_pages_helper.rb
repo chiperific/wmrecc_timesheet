@@ -141,15 +141,30 @@ module StaticPagesHelper
       if !params[:dept].blank?
         dept = Department.where(active: true).where(name: params[:dept]).first
         usr_ary = User.where(department_id: dept)
+
       else
         usr_ary = User.all
       end
       # only users active in the payroll period: usr.start_date < end_date && usr.end_date > start_date
-      usr_ary.where{ 
-        |usr| 
-        (usr.start_date < end_date) & 
-        ((usr.end_date || 20.years.from_now) > start_date) 
-      }
+      # result = usr_ary.where{ 
+      #   |usr| 
+      #   (usr.start_date < end_date) && 
+      #   ((usr.end_date || 20.years.from_now) > start_date) 
+      # }
+
+      result = []
+      usr_ary.each do |usr|
+        if usr.start_date < end_date
+          if usr.end_date.blank?
+            result << usr
+          else
+            if user.end_date > start_date
+              result << usr
+            end
+          end
+        end
+      end
+      result
     end
 
     def payroll_active_cats

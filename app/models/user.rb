@@ -170,17 +170,11 @@ class User < ActiveRecord::Base
   def payroll_hours(start_date, end_date)
     #get an array of cweeks and years
     year = (start_date.year..end_date.year).map { |y| y }
+    cweek = (start_date..end_date).map { |d| d.cweek }.uniq
 
-    # not working when breaks over a year
-    if year.count > 1
-      week_count = Date.new(start_date.year, 12, 28).cweek
-      cweek = (1..week_count).map { |n| n }
-    else
-      cweek = (start_date.cweek..end_date.cweek).map { |c| c }
-    end
     timesheet_ids = Timesheet.where(year: year, week_num: cweek).map { |t| t.id }
-    summed_hsh = self.timesheet_hours.where(timesheet_id: timesheet_ids).group_by(&:timesheet_id).sum(:hours)
-    summed_hsh.map { |k, v| v }.sum.to_f
+    summed_hsh = self.timesheet_hours.where(timesheet_id: timesheet_ids).group(:timesheet_id).sum(:hours)
+    summed_hsh.map { |k, v| v.to_f }.sum
   end
 
   def payroll_rate
@@ -194,14 +188,22 @@ class User < ActiveRecord::Base
 
   def payroll_hourly_rate(period, year)
     if self.pay_type == "Hourly"
-      rate = self.hourly_rate
+      if self.hourly_rate != nil
+        rate = self.hourly_rate
+      else
+        rate = 0.0
+      end
     else
-      date = date_from_period_year(period, year)
-      # Date.instance.business_days returns number of working days in year
-      # business_days * 8 give working hours in year
-      working_hours = date.business_days_in_year * 8
-      # divide working hours
-      rate = self.salary_rate / working_hours
+      if self.salary_rate != nil
+        date = date_from_period_year(period, year)
+        # Date.instance.business_days returns number of working days in year
+        # business_days * 8 give working hours in year
+        working_hours = date.business_days_in_year * 8
+        # divide working hours
+        rate = self.salary_rate / working_hours
+      else
+        rate = 0.0
+      end
     end
     rate.round(2)
   end
