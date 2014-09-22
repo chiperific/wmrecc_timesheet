@@ -179,9 +179,17 @@ class User < ActiveRecord::Base
 
   def payroll_rate
     if self.pay_type == "Hourly"
-      rate = self.hourly_rate
+      if self.hourly_rate != nil
+        rate = self.hourly_rate
+      else
+        rate = 0.0
+      end
     else
-      rate = self.salary_rate / self.val_from_period_type
+      if self.salary_rate != nil
+        rate = self.salary_rate / self.val_from_period_type
+      else
+        rate = 0.0
+      end
     end
     rate.round(2)
   end

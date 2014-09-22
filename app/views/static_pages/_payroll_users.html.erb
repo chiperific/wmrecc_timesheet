@@ -5,7 +5,11 @@
       (s)
     <% end %>
   </td>
-  <td class="small-when-small"><%= user.department.name %></td>
+  <td class="small-when-small">
+    <% if user.department %>
+      <%= user.department.name %>
+    <% end %>
+  </td>
   <td class="center"><%= user.payroll_hours(@payroll_start, @payroll_end) %></td>
   <td class="hidden-xs align-right">$ <%= user.payroll_rate %></td>
   <td class="align-right">
