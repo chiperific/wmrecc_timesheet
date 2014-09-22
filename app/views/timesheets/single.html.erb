@@ -28,8 +28,8 @@
       </tr>
     </thead>
     <tbody>
-      <% @timesheet_hours.each do |th| %>
-        <% t = th.timesheet %>
+      <% @timesheet.each do |t| %>
+        <% th = t.timesheet_hours.first %>
         <tr>
           <td><%= t.week_num_to_date %></td>
           <td><%= t.timesheet_hours.where(user_id: th.user.id).sum(:hours) %></td>

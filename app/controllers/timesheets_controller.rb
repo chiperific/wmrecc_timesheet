@@ -12,7 +12,7 @@ class TimesheetsController < ApplicationController
     else
       @page_title = "#{@user.fname}'s Timesheets"
     end
-    @timesheet_hours = TimesheetHour.where(user_id: @user.id).group_by(&:timesheet_id).to_a
+    @timesheet = Timesheet.joins(:timesheet_hours).where( timesheet_hours: { user_id: @user.id }).uniq
   end
 
   def supervisor
@@ -22,20 +22,9 @@ class TimesheetsController < ApplicationController
 
     @user_auth = @user.has_authority_over
     if !@user_auth.empty?
-      @user_auth_id_ary = @user_auth.pluck(:id)
+      @user_id_ary = @user_auth.pluck(:id)
     else
-      @user_auth_id_ary = []
-    end
-    @timesheets_for_user_auth = TimesheetHour.where(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
-
-    if current_user.admin?
-      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).group_by(&:timesheet_id).to_a
-    end
-
-    if current_user.has_authority_over.any?
-      @user_auth = current_user.has_authority_over
-      @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+      @user_id_ary = []
     end
 
     @users_select = Hash.new
@@ -48,7 +37,7 @@ class TimesheetsController < ApplicationController
     @title = "Timesheet"
     @user = User.find(params[:user_id])
     @page_title = "All Timesheets"
-    @timesheets_all = TimesheetHour.select('timesheet_id, user_id').group(:timesheet_id,:user_id)
+    @user_id_ary = User.all.map { |u| u.id }
     
     @users_select = Hash.new
     User.where(active: true).order(:lname).each do |usr|

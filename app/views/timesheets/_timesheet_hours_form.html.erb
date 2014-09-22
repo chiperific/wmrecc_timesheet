@@ -1,5 +1,4 @@
 <%= t_form.fields_for :timesheet_hours, @timesheet_hours do |th_form| %>
-  <%= render 'shared/error_messages', object: th_form.object %>
   <span class="hidden">
     <%= th_form.hidden_field :id %>
     <%= th_form.hidden_field :timesheet_id %>

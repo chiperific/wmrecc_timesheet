@@ -1,6 +1,7 @@
 class Timesheet < ActiveRecord::Base
   has_many :timesheet_hours
   has_many :timesheet_categories
+  has_many :users, through: :timesheet_hours
 
   accepts_nested_attributes_for :timesheet_hours, :timesheet_categories
 

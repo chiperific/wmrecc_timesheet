@@ -8,12 +8,3 @@
 
 </div>
 
-<% if !@timesheets_needing_review.nil? %>
-  <div class="row center">
-    <hr />
-    <%= "There are " + @timesheets_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_needing_review.count) + " for review." %>
-    <%= link_to "Review as Admin", user_timesheets_admin_path(current_user), { method: :get, class: "btn btn-success"} %>
-    <hr />
-  </div>
-<% end %>
-

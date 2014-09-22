@@ -29,18 +29,21 @@
   </tr>
 </thead>
 <tbody>
-  <% timesheets_collection.each do |th| %>
-    <% t = th.timesheet %>
+  <% Timesheet.all.each do |t| %>
     <% if !t.nil? %>
-      <tr>
-        <th><%= th.user.full_name %></th>
-        <td><%= t.week_num_to_date %></td>
-        <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).sum(:hours) %></td>
-        <td><%= t.timesheet_hours.where(user_id: th.user.id).sum(:timeoff_hours) %></td>
-        <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
-        <td><%= th.status %></td>
-        <td><%= link_to FA_GO, edit_user_timesheet_path( th.user_id, t.id ), { method: :get, class: "btn btn-success btn-sm" } %></td>
-      </tr>
+      <% t.users.where(id: @user_id_ary).group(:id).each do |u| %>
+        <% th = t.timesheet_hours.first %>
+        <tr>
+          <th><%= u.full_name %></th>
+          <td><%= t.week_num_to_date %></td>
+          <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: th.user.id).sum(:hours) %></td>
+
+          <td><%= t.timesheet_hours.where(user_id: th.user.id).sum(:timeoff_hours) %></td>
+          <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
+          <td><%= th.status %></td>
+          <td><%= link_to FA_GO, edit_user_timesheet_path( u.id, t.id ), { method: :get, class: "btn btn-success btn-sm" } %></td>
+        </tr>
+      <% end %>
     <% end %>
   <% end %>
 </tbody>
