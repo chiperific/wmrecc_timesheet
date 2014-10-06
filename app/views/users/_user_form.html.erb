@@ -86,7 +86,7 @@
       <div class="col-xs-6">
         <div class="input-group" title="Pay Type">
           <span class="input-group-addon"><%= icon('money') %></span>
-          <%= f.select :pay_type, options_for_select([["Salary"], ["Hourly"]], @active_def), {}, {class: "form-control selector", step: 'any', min: 0, disabled: @disabled } %>
+          <%= f.select :pay_type, options_for_select([["Salary"], ["Hourly"]], @salary_def), {}, {class: "form-control selector", step: 'any', min: 0, disabled: @disabled } %>
         </div>
       </div>
 
