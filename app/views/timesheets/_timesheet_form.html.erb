@@ -41,7 +41,7 @@
         <span class="small pull-right"> <%= link_to "(add timeoff)", "#", { id: 'show_timeoff_switch', class: 'btn btn-primary btn-xs'} %>
         </span>
       </legend>
-      <%= render 'timesheet_visual', bar_id: "hours_progressbar", ttl_field: "hours_bar_ttl", ttl: @hours_ttl %>
+      <%= render 'timesheet_visual', bar_id: "hours_progressbar", ttl_field: "hours_bar_ttl", ttl: @hours_ttl.to_f %>
       <span class="span-no-padding-both center">
         <span class="col-xs-2 expand-2-to-5" >
           &nbsp

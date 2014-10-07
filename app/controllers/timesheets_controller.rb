@@ -95,7 +95,9 @@ class TimesheetsController < ApplicationController
 
     session[:return_url] = back_uri
 
-    @hours_ttl = @timesheet.timesheet_hours.sum(:hours) + @timesheet.timesheet_hours.sum(:timeoff_hours)
+    @ts_collection = @timesheet.timesheet_hours.where(user_id: @user.id)
+
+    @hours_ttl = @ts_collection.sum(:hours) + @ts_collection.sum(:timeoff_hours)
     @category_ttl = @timesheet.timesheet_categories.sum(:hours)
   end
 
