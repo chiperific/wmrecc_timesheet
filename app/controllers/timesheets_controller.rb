@@ -111,13 +111,46 @@ class TimesheetsController < ApplicationController
       @timesheet_ary = Timesheet.where( week_num: params[:timesheet][:week_num], year: params[:timesheet][:year])
       @timesheet = @timesheet_ary.first
 
-      if @timesheet.update_attributes(timesheet_params)
-        flash[:success] = "Timesheet updated"
-        redirect_to session[:return_url]
-      else
-        flash[:error] = "Failed to submit"
-        render 'new'
+      # If the each Timesheet Hour already exists, update it, else, create it.
+      params['timesheet']['timesheet_hours_attributes'].each do |th_a|
+        th = th_a.second
+        th.delete("id")
+        th['timesheet_id'] = @timesheet.id
+        if TimesheetHour.where( user_id: @user.id, timesheet_id: @timesheet.id, weekday: th['weekday'] ).exists?
+          # update
+          th_r = TimesheetHour.where( user_id: @user.id, timesheet_id: @timesheet.id, weekday: th['weekday'] ).first
+          th_r.update(th)
+        else
+          # create
+          TimesheetHour.create(th)
+        end
       end
+
+      # If the each Timesheet Category already exists, update it, else, create it.
+      params['timesheet']['timesheet_categories_attributes'].each do |tc_a|
+        tc = tc_a.second
+        tc.delete("id")
+        tc['timesheet_id'] = @timesheet.id
+        if TimesheetCategory.where( user_id: @user.id, timesheet_id: @timesheet.id, category_id: tc['category_id'] ).exists?
+          # update
+          tc_r = TimesheetCategory.where( user_id: @user.id, timesheet_id: @timesheet.id, category_id: tc['category_id'] ).first
+          tc_r.update(tc)
+        else
+          # create
+          TimesheetCategory.create(tc)
+        end
+      end
+
+      # if @timesheet.update_attributes(timesheet_params)
+      #   flash[:success] = "Timesheet updated"
+      #   redirect_to session[:return_url]
+      # else
+      #   flash[:error] = "Failed to submit"
+      #   render 'new'
+      # end
+
+      flash[:success] = "Timesheet updated"
+      redirect_to session[:return_url]
 
     else
       @timesheet = Timesheet.new(timesheet_params)
@@ -150,6 +183,12 @@ class TimesheetsController < ApplicationController
       params.require(:timesheet).permit(:week_num, :year,
         :timesheet_hours_attributes =>      [:id, :timesheet_id, :user_id, :weekday, :hours, :reviewed, :approved, :timeoff_hours, :timeoff_reviewed, :timeoff_approved],
         :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :hours, :category_id]
+      )
+    end
+
+    def timesheet_hour_params
+      params.require(:timesheet_hours_attributes).permit(
+        :id, :timesheet_id, :user_id, :weekday, :hours, :reviewed, :approved, :timeoff_hours, :timeoff_reviewed, :timeoff_approved
       )
     end
 
