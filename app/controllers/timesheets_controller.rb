@@ -98,7 +98,7 @@ class TimesheetsController < ApplicationController
     @ts_collection = @timesheet.timesheet_hours.where(user_id: @user.id)
 
     @hours_ttl = @ts_collection.sum(:hours) + @ts_collection.sum(:timeoff_hours)
-    @category_ttl = @timesheet.timesheet_categories.sum(:hours)
+    @category_ttl = @timesheet.timesheet_categories.where(user_id: @user.id).sum(:hours)
   end
 
   def create
