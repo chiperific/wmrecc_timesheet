@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery-ui/sortable
 //= require jquery-ui/dialog
+//= require jquery-ui/effect-pulsate
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-datepicker/core

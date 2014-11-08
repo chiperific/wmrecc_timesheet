@@ -73,16 +73,13 @@ holiday_processor = ->
   )
 
 jQuery ->
-  # _timesheet_form.html.erb:
-  #if $.inArray("timesheets", pathAry) >= 0
-    
-  # holiday handling (new and edit pages only)
-  #if $.inArray("new", pathAry) >= 0 || $.inArray("edit", pathAry) >= 0
+  $("#week_num_to_date_field").css( "border", "2px solid #f0ad4e" )
+  $('#week_num_to_date_field').effect( "pulsate", {times:3}, 2000 )
   holiday_processor()
 
   $(document).on 'changeDate', '.week_num_to_date', ( ->
     holiday_processor()
-  )
+  ) 
 
   $('#direct_report_chooser').click ->
     direct_report = $('#direct_report_select option:selected').val()

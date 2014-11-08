@@ -14,3 +14,6 @@ jQuery ->
     calendarWeeks: true
     weekStart: 1
     autoclose: true
+
+  $('.input-group-addon').click ->
+    $(this).next("input").focus()
