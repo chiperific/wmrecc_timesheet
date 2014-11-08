@@ -1,17 +1,17 @@
 <h3 class="subtle"><%= @user.fname %>'s Staff</h3>
 
-<div id="active-users" class="bufffered-row">
+<div id="active-users" class="bufffered-row row">
   <%= render 'user_table' %>
 </div>
 <br />
 <% if current_user.admin %>
-  <div class="row">
+  <div class="row buffered-row">
     <%= link_to FA_NEW, new_user_path, { method: :get, class: "btn btn-success"} %>
   </div>  
 <% end %>
 
 
-<div class="row center">
+<div class="row buffered-row center">
   <% if @timesheets_from_user_auth_needing_review %>
     <hr />
     <%= "Your staff have "+ @timesheets_from_user_auth_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_from_user_auth_needing_review.count) + " for review." %>

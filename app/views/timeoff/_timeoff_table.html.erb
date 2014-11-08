@@ -26,15 +26,15 @@
       </tr>
     </thead>
     <tbody>
-      <% @timeoff_hours.each do |th| %>
-        <% t = th.timesheet %>
+      <% @timeoff_hours.each do |toh| %>
+        <% t = toh.timesheet %>
         <tr>
-          <td><%= th.user.full_name %></td>
+          <td><%= toh.user.full_name %></td>
           <td><%= t.week_num_to_date %></td>
-          <td><%= t.timesheet_hours.where(user_id: th.user.id).sum(:timeoff_hours) %></td>
-          <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
-          <td><%= th.status %></td>
-          <td><%= link_to FA_EDIT, edit_user_timesheet_path( th.user.id, t.id), class: "btn btn-primary btn-sm" %></td>
+          <td><%= t.timesheet_hours.where(user_id: toh.user.id).sum(:timeoff_hours) %></td>
+          <td class="hidden-xs"><%= toh.created_at.strftime("%m/%d/%Y") %></td>
+          <td><%= toh.status %></td>
+          <td><%= link_to FA_EDIT, edit_user_timesheet_path( toh.user.id, t.id), class: "btn btn-primary btn-sm" %></td>
         </tr>
       <% end %>
     </tbody>

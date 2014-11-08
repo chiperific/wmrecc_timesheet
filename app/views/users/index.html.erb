@@ -1,10 +1,10 @@
 <h3 class="subtle">Current users</h3>
-<div id="active-users" class="row">
+<div id="active-users" class="buffered-row row">
   <%= render 'user_table' %>
 </div>
-<p><%= link_to "Add new user", new_user_path, { method: :get, class: "btn btn-success"} %></p>
+<p class="buffered-row row"><%= link_to "Add new user", new_user_path, { method: :get, class: "btn btn-success"} %></p>
 
-<div class="row center">
+<div class="buffered-row row center">
   <% if @timesheets_needing_review %>
     <hr />
     <%= "There are " + @timesheets_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_needing_review.count) + " for review." %>
