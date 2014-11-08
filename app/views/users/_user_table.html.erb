@@ -27,6 +27,8 @@
         <td class="hidden-xs">
           <% if !u.department.nil? %>
             <%= u.department.name %>
+          <% else %>
+            (no department)
           <% end %>
         </td>
         <% if @title == "Users" %>
@@ -74,7 +76,14 @@
           <% @inactive_super = @users.find_by( id: u.supervisor_id ) %>
           <tr>
             <td><%= u.fname + " " + u.lname %></td>
-            <td><%= u.department.name %></td>
+            <td>
+              <% if u.department.nil? %>
+                (no department)
+              <% else %>
+                <%= u.department.name %>
+              <% end %>
+              
+            </td>
             <td><%= @inactive_super.full_name %></td>
             <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
           </tr>
