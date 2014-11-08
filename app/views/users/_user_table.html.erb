@@ -55,30 +55,31 @@
 </div>
 
 <% if @inactive_users.count > 0 %>
-<%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
+  <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
+  <div class="hidden row buffered-row" id="inactive-users">
+    <div class="row">
+      <hr />
+    </div> 
+    <table class="table" id="inactive-users-table">
+      <thead>
+        <tr>
+          <th>Inactive</th>
+          <th>Dept.</th>
+          <th>Supervisor</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @inactive_users.each do |u| %>
+          <% @inactive_super = @users.find_by( id: u.supervisor_id ) %>
+          <tr>
+            <td><%= u.fname + " " + u.lname %></td>
+            <td><%= u.department.name %></td>
+            <td><%= @inactive_super.full_name %></td>
+            <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
-<div class="hidden row buffered-row" id="inactive-users">
-<div class="row">
-  <hr />
-</div> 
-<table class="table" id="inactive-users-table">
-  <thead>
-    <tr>
-      <th>Inactive</th>
-      <th>Dept.</th>
-      <th>Supervisor</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @inactive_users.each do |u| %>
-      <% @inactive_super = @users.find_by( id: u.supervisor_id ) %>
-      <tr>
-        <td><%= u.fname + " " + u.lname %></td>
-        <td><%= u.department.name %></td>
-        <td><%= @inactive_super.full_name %></td>
-        <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
