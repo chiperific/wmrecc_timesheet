@@ -5,6 +5,7 @@ Adjustments from 10/5/14:
 * Clicking input-group-addons moves the focus to the next "input"
 * fixed error when accessing /users
 * "Choose any date within the payperiod" message below payroll_date select
+* fix issue with session[:return_url]
 
 ##
 Issues:
@@ -12,12 +13,3 @@ Issues:
 # Issue with Reviewed, Unapproved showing up with an approved date
 # Show only unapproved && unreviewed timesheets -- maybe a separate button (for SV and Admin)
 # Payroll - Category - breakdown of staff contributions to category in a modal view
-
-
-
-# Issue in timeoff (on host/users/1/timeoff/admin):
-toh = TimesheetHour.where(user_id: 1).where.not(timeoff_hours: 0).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
-
-is returning [... id: nil ...] -- but why?
-
-th = TimesheetHour.where(timesheet_id = t.id, user_id = u.id )
