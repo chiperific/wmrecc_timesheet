@@ -1,3 +1,4 @@
+<%= session[:return_url] %>
 <%= form_for [@user, @timesheet], { class: "form-inline"} do |t_form| %>
   <%= render 'shared/error_messages', object: t_form.object %>
   <div class="row form-group" id='date_year_setter'>
