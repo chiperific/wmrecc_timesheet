@@ -34,12 +34,14 @@
     </thead>
     <tbody>
       <% @timeoff_hours.each do |toh| %>
-        <% t = toh.timesheet %>
+        <% t = Timesheet.find(toh.timesheet_id) %>
+        <% u = User.find(toh.user_id) %>
+        <% th = TimesheetHour.where(timesheet_id: t.id, user_id: u.id ) %>
         <tr>
           <td><%= t.week_num_to_date %></td>
-          <td><%= t.timesheet_hours.where(user_id: toh.user.id).sum(:timeoff_hours) %></td>
-          <td class="hidden-xs"><%= toh.created_at.strftime("%m/%d/%Y") %></td>
-          <td><%= toh.status %></td>
+          <td><%= th.sum(:timeoff_hours) %></td>
+          <td class="hidden-xs"><%= th.first.created_at.strftime("%m/%d/%Y") %></td>
+          <td><%= th.first.status %></td>
           <td><%= link_to FA_EDIT, edit_user_timesheet_path( toh.user.id, t.id), class: "btn btn-primary btn-sm" %></td>
         </tr>
       <% end %>
