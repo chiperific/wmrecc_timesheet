@@ -62,8 +62,12 @@ class ApplicationController < ActionController::Base
   end
 
   def back_uri
-    path = request.referer || root_path
-    URI(path).path
+    if request.fullpath == URI(request.referer).path
+      back = root_path
+    else
+      back = request.referer
+    end
+    URI(back).path
   end
 
   def user_time_zone(&block)
