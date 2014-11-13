@@ -12,5 +12,8 @@ Adjustments from 10/5/14:
 # Fix issue with Reviewed, Unapproved in _timesheet_table and timesheet/single
 
 ##
+Issues:
+# _timesheet_table is still showing approved timesheets
+
 v2:
 # Payroll - Category - breakdown of staff contributions to category in a modal view
