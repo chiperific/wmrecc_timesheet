@@ -1,73 +1,74 @@
-<h3 class="subtle thin-top center">Payroll <span class="pull-right">(<%= @pay_period_type %>)</span></h3>
+<div class="buffered-row">
+  <h3 class="subtle thin-top center">Payroll <span class="pull-right">(<%= @pay_period_type %>)</span></h3>
 
-<div class="well well-striped row">
-  <div class="row">
-    <%= render 'shared/year_payweek_searchbar' %>
+  <div class="well well-striped row">
+    <div class="row">
+      <%= render 'shared/year_payweek_searchbar' %>
+    </div>
+    <div class="row">
+      <span class="col-xs-2">From:</span>
+      <span class="col-xs-4"><%= @payroll_start.strftime("%m/%d/%Y") %></span>
+      <span class="col-xs-2">To:</span>
+      <span class="col-xs-4"><%= @payroll_end.strftime("%m/%d/%Y") %></span>
+    </div>
   </div>
-  <div class="row">
-    <span class="col-xs-2">From:</span>
-    <span class="col-xs-4"><%= @payroll_start.strftime("%m/%d/%Y") %></span>
-    <span class="col-xs-2">To:</span>
-    <span class="col-xs-4"><%= @payroll_end.strftime("%m/%d/%Y") %></span>
+
+  <div class="row" id="payroll_users_head">
+    <fieldset>
+      <legend class="subtle">Staff:</legend>
+      <table class="table table-thin" id="payroll-user-table">
+        <thead>
+          <tr>
+            <th>
+              Name
+              <%= link_to icon('question-circle'), "#", {id: 'hours_dialog_q', class: "move-right"} %>
+            </th>
+            <th>Dept.</th>
+            <th class="center">Hours</th>
+            <th class="hidden-xs align-center">$ Rate</th>
+            <th class="align-center">Gross $</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <%= render 'payroll_users', user: user %>
+          <% end %>
+        </tbody>
+      </table>
+    </fieldset>
   </div>
-</div>
 
-<div class="row" id="payroll_users_head">
-  <fieldset>
-    <legend class="subtle">Staff:</legend>
-    <table class="table table-thin" id="payroll-user-table">
-      <thead>
-        <tr>
-          <th>
-            Name
-            <%= link_to icon('question-circle'), "#", {id: 'hours_dialog_q', class: "move-right"} %>
-          </th>
-          <th>Dept.</th>
-          <th class="center">Hours</th>
-          <th class="hidden-xs align-center">$ Rate</th>
-          <th class="align-center">Gross $</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <%= render 'payroll_users', user: user %>
-        <% end %>
-      </tbody>
-    </table>
-  </fieldset>
-</div>
+  <div class="row" id="payroll_users_body">
+    <fieldset>
+      <legend class="subtle">Categories:</legend>
+      <table class="table" id="payroll-category-table">
+        <thead>
+          <tr>
+            <th>Dept.</th>
+            <th>Category</th>
+            <th>Hours</th>
+            <th>
+              $ Total
+              <%= link_to icon('question-circle'), "#", {id: 'categories_dialog_q', class: "move-right"} %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @categories.each do |category| %>
+            <%= render 'payroll_categories', category: category %>
+          <% end %>
+        </tbody>
+      </table>
+    </fieldset>
+  </div>
 
-<div class="row" id="payroll_users_body">
-  <fieldset>
-    <legend class="subtle">Categories:</legend>
-    <table class="table" id="payroll-category-table">
-      <thead>
-        <tr>
-          <th>Dept.</th>
-          <th>Category</th>
-          <th>Staff</th>
-          <th>Hours</th>
-          <th>
-            $ Total
-            <%= link_to icon('question-circle'), "#", {id: 'categories_dialog_q', class: "move-right"} %>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @categories.each do |category| %>
-          <%= render 'payroll_categories', category: category %>
-        <% end %>
-      </tbody>
-    </table>
-  </fieldset>
-</div>
-
-<div id="hours_dialog" title="Hours Explained">
-  <p>A <b>(s)</b> in the <b>Name</b> column indicates Salaried employees.</p>
-  <p>Their <b>$ Rate</b> is their salary divided by the payroll cycle (<%= @pay_period_type %>).</p>
-  <p>The <b>$ Rate</b> column is not visible on small screens.</p>
-</div>
-<div id="categories_dialog" title="Categories Explained">
-  <p>The <b>$ Total</b> column shows the total of applicable staff's hourly contributions towards the category.</p>
-  <p>The <b>Staff</b> column shows the number of staff who contributed hours during the pay period.</p>
+  <div id="hours_dialog" title="Hours Explained">
+    <p>A <b>(s)</b> in the <b>Name</b> column indicates Salaried employees.</p>
+    <p>Their <b>$ Rate</b> is their salary divided by the payroll cycle (<%= @pay_period_type %>).</p>
+    <p>The <b>$ Rate</b> column is not visible on small screens.</p>
+  </div>
+  <div id="categories_dialog" title="Categories Explained">
+    <p>The <b>$ Total</b> column shows the total of applicable staff's hourly contributions towards the category.</p>
+    <p>The <b>Staff</b> column shows the number of staff who contributed hours during the pay period.</p>
+  </div>
 </div>

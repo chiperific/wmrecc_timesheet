@@ -1,5 +1,4 @@
 jQuery ->
-  #if $.inArray("payroll", pathAry) >= 0
   $('#payroll-user-table').dataTable()
 
   $('#payroll-category-table').dataTable()
@@ -31,4 +30,10 @@ jQuery ->
     $('#categories_dialog').dialog("open")
     event.preventDefault
     false
+
+  $('.cat_users_dialog_link').click ->
+    $('#category_users_dialog').html("")
+    $('#category_users_dialog').html(
+      "<%= escape_javascript(render 'category_users_dialog') %>"
+    )
 

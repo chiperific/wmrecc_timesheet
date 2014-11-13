@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 
-  before_action :require_admin
+  before_action :require_admin, except: :payroll_users
   
   def index
     @title = "Categories"
@@ -48,9 +48,6 @@ class CategoriesController < ApplicationController
       @dept_array = dept_array
       render 'edit'
     end
-  end
-
-  def destroy
   end
 
   def dept_array
