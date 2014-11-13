@@ -29,7 +29,7 @@
   </tr>
 </thead>
 <tbody>
-  <% Timesheet.all.each do |t| %>
+  <% Timesheet.includes(:timesheet_hours).where("timesheet_hours.approved IS NULL").references(:timesheet_hours).each do |t| %>
     <% if !t.nil? %>
       <% t.users.where(id: @user_id_ary).group(:id).each do |u| %>
         <% th = t.timesheet_hours.first %>

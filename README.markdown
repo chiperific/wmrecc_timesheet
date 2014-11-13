@@ -7,10 +7,11 @@ Adjustments from 10/5/14:
 * "Choose any date within the payperiod" message below payroll_date select
 * fix issue with session[:return_url]
 * fix issue with :sum on _timesheet_table
+# Show only unapproved && unreviewed timesheets
 
 ##
 Issues:
-# showing inactive employees on payroll?
+# Message board is not appearing
 # Issue with Reviewed, Unapproved showing up with an approved date
-# Show only unapproved && unreviewed timesheets -- maybe a separate button (for SV and Admin)
+
 # Payroll - Category - breakdown of staff contributions to category in a modal view

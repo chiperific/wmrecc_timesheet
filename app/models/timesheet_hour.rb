@@ -7,9 +7,9 @@ class TimesheetHour < ActiveRecord::Base
   validates :hours, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 24 }
 
   def status
-    if self.approved
+    if self.approved.present?
       self.approved.strftime("%m/%d/%Y")
-    elsif self.reviewed
+    elsif self.reviewed.present?
       "Denied"
     else
       "Unreviewed"
