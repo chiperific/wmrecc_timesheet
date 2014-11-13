@@ -9,9 +9,8 @@ Adjustments from 10/5/14:
 * fix issue with :sum on _timesheet_table
 # Show only unapproved && unreviewed timesheets
 # Message board logic fixed
+# Fix issue with Reviewed, Unapproved in _timesheet_table and timesheet/single
 
 ##
-Issues:
-# Issue with Reviewed, Unapproved showing up with an approved date
-
+v2:
 # Payroll - Category - breakdown of staff contributions to category in a modal view
