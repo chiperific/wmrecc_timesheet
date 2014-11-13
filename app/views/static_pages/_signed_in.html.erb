@@ -17,7 +17,7 @@
   <div class="row message-board well well-striped app-style" id="message-board" style="display : none">
     <legend class="msg-legend">Messages for you:</legend>
 
-    <% if @denied_timeoffs.any? %>
+    <% if @denied_timeoffs.present? %>
       <span class="<%= @msg_col_width %> center">
         <p class="msg-text">
           <%= 'You have ' + @denied_timeoffs.count.to_s + ' denied timeoff ' + 'request'.pluralize(@denied_timeoffs.count) + '.' %>
@@ -31,7 +31,7 @@
       </span>
     <% end %>
 
-    <% if @denied_timesheets.any? %>
+    <% if @denied_timesheets.present? %>
       <span class="<%= @msg_col_width %> center">
         <p class="msg-text">
           <%= 'You have ' + @denied_timesheets.count.to_s + ' denied ' 'timesheet'.pluralize(@denied_timesheets.count) + '.' %>
@@ -45,7 +45,7 @@
       </span>
     <% end %>
 
-    <% if !@unapproved_timeoffs.nil? %>
+    <% if @unapproved_timeoffs.present? %>
       <span class="<%= @msg_col_width %> center">
         <p class="msg-text">
           <%= 'You have ' + @unapproved_timeoffs.count.to_s + ' timeoff ' + 'request'.pluralize(@unapproved_timeoffs.count) + ' to review.' %>
@@ -59,7 +59,7 @@
       </span>
     <% end %>
 
-    <% if !@unapproved_timesheets.nil? %>
+    <% if @unapproved_timesheets.present? %>
       <span class="<%= @msg_col_width %> center">
         <p class="msg-text">
           <%= 'You have ' + @unapproved_timesheets.count.to_s + ' ' + 'timesheet'.pluralize(@unapproved_timesheets.count) + ' to review.' %>

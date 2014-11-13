@@ -8,10 +8,10 @@ Adjustments from 10/5/14:
 * fix issue with session[:return_url]
 * fix issue with :sum on _timesheet_table
 # Show only unapproved && unreviewed timesheets
+# Message board logic fixed
 
 ##
 Issues:
-# Message board is not appearing
 # Issue with Reviewed, Unapproved showing up with an approved date
 
 # Payroll - Category - breakdown of staff contributions to category in a modal view

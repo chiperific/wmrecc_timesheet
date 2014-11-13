@@ -12,17 +12,17 @@ class StaticPagesController < ApplicationController
     @msg_col_width = "col-xs-6 col-sm-3"
 
     if current_user
-      @denied_timesheets = TimesheetHour.where(user_id: current_user.id, approved: nil).where.not(reviewed: nil).group_by(&:timesheet_id).to_a
-      @denied_timeoffs = TimesheetHour.where(user_id: current_user.id, timeoff_approved: nil).where.not(timeoff_reviewed: nil).group_by(&:timesheet_id).to_a
+      @denied_timesheets  = current_user.timesheet_hours.where(approved: nil).where.not(reviewed: nil).map { |th| th.timesheet_id }.uniq
+      @denied_timeoffs    = current_user.timesheet_hours.where(timeoff_approved: nil).where.not(timeoff_reviewed: nil).map { |th| th.timesheet_id }.uniq
 
       if current_user.has_authority_over.any?
-        @user_auth = current_user.has_authority_over
-        @user_auth_id_ary = @user_auth.pluck(:id)
-        @unapproved_timesheets = TimesheetHour.where(user_id: @user_auth_id_ary, approved: nil, reviewed: nil).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
-        @unapproved_timeoffs = TimesheetHour.where(user_id: @user_auth_id_ary, timeoff_approved: nil, timeoff_reviewed: nil).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+        @user_auth_id_ary = current_user.has_authority_over.pluck(:id)
+
+        @unapproved_timesheets  = TimesheetHour.where(user_id: @user_auth_id_ary, approved: nil, reviewed: nil).map { |th| th.timesheet_id }.uniq
+        @unapproved_timeoffs    = TimesheetHour.where(user_id: @user_auth_id_ary, timeoff_approved: nil, timeoff_reviewed: nil).map { |th| th.timesheet_id }.uniq
       end
 
-      if @denied_timeoffs.blank? || @denied_timesheets.blank? || @unapproved_timeoffs.blank? || @unapproved_timesheets.blank?
+      if @denied_timeoffs.blank? && @denied_timesheets.blank? && @unapproved_timeoffs.blank? && @unapproved_timesheets.blank?
         @message_board = false
       else
         @message_board = true
