@@ -32,7 +32,7 @@
   <% Timesheet.includes(:timesheet_hours).where("timesheet_hours.approved IS NULL").references(:timesheet_hours).each do |t| %>
     <% if !t.nil? %>
       <% t.users.where(id: @user_id_ary).group(:id).each do |u| %>
-        <% th = t.timesheet_hours.first %>
+        <% th = t.timesheet_hours.where(user_id: u.id).first %>
         <tr>
           <th><%= u.full_name %></th>
           <td><%= t.week_num_to_date %></td>
