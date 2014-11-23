@@ -16,6 +16,7 @@ class TimesheetsController < ApplicationController
   end
 
   def supervisor
+    @timesheets = Timesheet.unapproved
     @title = "Timesheet"
     @user = User.find(params[:user_id])
     @page_title = "Your Team's Timesheets"
@@ -34,6 +35,7 @@ class TimesheetsController < ApplicationController
   end
 
   def admin
+    @timesheets = Timesheet.unapproved
     @title = "Timesheet"
     @user = User.find(params[:user_id])
     @page_title = "All Timesheets"

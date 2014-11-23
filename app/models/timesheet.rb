@@ -17,4 +17,9 @@ class Timesheet < ActiveRecord::Base
     Date.commercial(self.year, self.week_num, 1).strftime("%Y/%m/%d")
   end
 
+  def self.unapproved
+    self.includes(:timesheet_hours).where("timesheet_hours.approved IS NULL").references(:timesheet_hours)
+  end
+
+
 end
