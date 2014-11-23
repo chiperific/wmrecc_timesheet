@@ -62,10 +62,14 @@ class ApplicationController < ActionController::Base
   end
 
   def back_uri
-    if request.fullpath == URI(request.referer).path
-      back = root_path
+    if !request.referer.nil?
+      if request.fullpath == URI(request.referer).path
+        back = root_path
+      else
+        back = request.referer
+      end
     else
-      back = request.referer
+      back = root_path
     end
     URI(back).path
   end
