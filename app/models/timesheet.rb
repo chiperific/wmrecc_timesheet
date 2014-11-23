@@ -21,5 +21,7 @@ class Timesheet < ActiveRecord::Base
     self.includes(:timesheet_hours).where("timesheet_hours.approved IS NULL").references(:timesheet_hours)
   end
 
-
+  def self.approved
+    self.includes(:timesheet_hours).where("timesheet_hours.approved IS NOT NULL").references(:timesheet_hours)
+  end
 end

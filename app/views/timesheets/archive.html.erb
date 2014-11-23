@@ -1,0 +1,56 @@
+<h3 class="center subtle">All Users' Timesheets</h3>
+<div id="admin-timesheets">
+  <table class="table table-striped table-center" id="timesheet-archive-table">
+    <thead class="subtle">
+      <tr>
+        <td>
+          <%= icon('user fa-2x') %>
+          <p>User</p>
+        </td>
+        <td>
+          <%= icon('calendar fa-2x') %>
+          <p>Date</p>
+        </td>
+        <td class="hidden-xs">
+          <%= icon('clock-o fa-2x') %>
+          <p>Hours</p>
+        </td>
+        <td>
+          <%= icon('minus-square-o fa-2x') %>
+          <p class='hidden-xs'>Time off</p>
+          <p class='visible-xs-block'>Off</p>
+        </td>
+        <td class="hidden-xs">
+          <%= icon('toggle-up fa-2x') %>
+          <p>Submitted</p>
+        </td>
+        <td>
+          <%= icon('check-square-o fa-2x') %>
+          <p>Approved</p>
+        </td>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @timesheets.each do |t| %>
+        <% if !t.nil? %>
+          <% t.users.where(id: @user_id_ary).group(:id).each do |u| %>
+            <% th = t.timesheet_hours.where(user_id: u.id).first %>
+            <% if th.approved %>
+              <tr>
+                <th><%= u.full_name %></th>
+                <td><%= t.week_num_to_date %></td>
+                <td class="hidden-xs"><%= t.timesheet_hours.where(user_id: u.id).sum(:hours).to_f %></td>
+
+                <td><%= t.timesheet_hours.where(user_id: u.id).sum(:timeoff_hours).to_f %></td>
+                <td class="hidden-xs"><%= th.created_at.strftime("%m/%d/%Y") %></td>
+                <td><%= th.status %></td>
+                <td><%= link_to FA_GO, edit_user_timesheet_path( u.id, t.id ), { method: :get, class: "btn btn-success btn-sm" } %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

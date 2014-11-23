@@ -47,6 +47,25 @@ class TimesheetsController < ApplicationController
     end
   end
 
+  def archive
+    @timesheets = Timesheet.approved
+    @title = "Timesheet archive"
+    @user = User.find(params[:user_id])
+    @page_title = "All Timesheets"
+    @user_id_ary = User.all.map { |u| u.id }
+
+    @users_select = Hash.new
+    if @user.admin
+      User.where(active: true).order(:lname).each do |usr|
+        @users_select[usr.full_name] = usr.id
+      end
+    else
+      @user_auth.each do |usr|
+        @users_select[usr.full_name] = usr.id
+      end
+    end
+  end
+
   def new
     @title = "New Timesheet"
     @user = User.find(params[:user_id])

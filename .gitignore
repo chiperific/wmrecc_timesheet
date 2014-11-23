@@ -16,6 +16,9 @@
 /tmp
 .env
 
+# Ignore PG dump files
+.dump
+
 # Compiled source #
 ###################
 *.com

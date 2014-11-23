@@ -175,6 +175,11 @@ jQuery ->
       targets: -1, sortable: false, searchable: false
     ]
 
+  $('#timesheet-archive-table').dataTable
+    columnDefs: [
+      targets: -1, sortable: false, searchable: false
+    ]
+
   #if $.inArray("new", pathAry) >= 0
   $('.week_num_to_date').datepicker
     todayBtn: "linked"

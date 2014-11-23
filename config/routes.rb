@@ -20,6 +20,8 @@ WmreccTimesheet::Application.routes.draw do
     get 'timesheets/supervisor', to: 'timesheets#supervisor'
     get 'timesheets/admin', to: 'timesheets#admin'
 
+    get 'timesheets/archive', to: 'timesheets#archive'
+
     get 'timeoff/single',     to: 'timeoff#single'
     get 'timeoff/supervisor', to: 'timeoff#supervisor'
     get 'timeoff/admin',      to: 'timeoff#admin'

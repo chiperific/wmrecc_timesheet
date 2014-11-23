@@ -190,7 +190,14 @@
         <%= icon 'money fa-3x' %>
         <p>Payroll</p>
       </div>
-    </a>  
+    </a>
+
+    <a href="<%= user_timesheets_archive_path(current_user) %>" class="<%= @col_width %>">
+      <div class="box-btn">
+        <%= icon 'archive fa-3x' %>
+        <p>Timesheet Archive</p>
+      </div>
+    </a>
   <% end %>
 
   <a href="<%= signout_path %>" data-method="delete" rel="nofollow" class="<%= @col_width %>">
