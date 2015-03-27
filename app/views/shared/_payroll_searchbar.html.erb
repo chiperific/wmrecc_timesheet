@@ -1,0 +1,42 @@
+<form accept-charset="UTF-8" method="get" id="payroll_searchbar_form">
+  <div class="row buffered-row-bottom">
+    <div class="col-xs-6 col-sm-4 min-padding-both">
+      <div class="input-group" title='Year'>
+        <span class="input-group-addon">
+          <%= icon('calendar') %>
+        </span>
+        <input id="searchbar_start" name="date_start" type="integer" value="<%= @date_start %>" class="form-control start_date_picker" >
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-4 min-padding-both">
+      <div class="input-group" title='Pay Period'>
+        <span class="input-group-addon">
+          <%= icon('calendar') %>
+        </span>
+        <input id="searchbar_end" name="date_end" value="<%= @date_end %>" class="form-control end_date_picker" >
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-2 text-center">
+      <button type="submit" id="submit" class="btn btn-primary">
+        <%= FA_SUBMIT %>
+      </button>
+    </div>
+
+    <div class="col-xs-6 col-sm-2 text-center">
+      <%= link_to FA_CLEAR, request.path, class: "btn btn-success" %>
+    </div>
+  </div>
+    
+  <div class="row buffered-row-bottom">
+    <div class="col-xs-12 min-padding-both">
+      <div class="input-group" title="Department">
+        <span class="input-group-addon">
+          <%= icon "sitemap" %>
+        </span>
+        <%= select_tag 'dept', options_for_select(@departments_lkup) , class: "form-control" %>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,26 @@
+<form accept-charset="UTF-8" method="get" id="timeoff_searchbar_form">
+  <div class="row buffered-row-bottom">
+    <div class="col-xs-6 col-sm-3 min-padding-both">
+      <div class="input-group" title='Date'>
+        <span class="input-group-addon">
+          <%= icon('calendar') %>
+        </span>
+        <input id="searchbar_date" name="date" type="integer" value="<%= @visible_date %>" class="form-control start_date_picker" >
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-3 text-center">
+      <h5>Change the date to see your usage and accruals during different pay periods.</h5>
+    </div>
+
+    <div class="col-xs-3 text-center">
+      <button type="submit" id="submit" class="btn btn-primary">
+        <%= FA_SUBMIT %>
+      </button>
+    </div>
+
+    <div class="col-xs-3 text-center">
+      <%= link_to FA_CLEAR, request.path, class: "btn btn-success" %>
+    </div>
+  </div>
+</form>
