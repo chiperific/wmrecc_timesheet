@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Timekeeper | <%= @title %></title>
+  <title>TimeShift | <%= @title %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -13,11 +13,26 @@
 </head>
 <body>
   <div class="container-fluid" id="top-level-container" name="data-no-turbolink">
-    <div class="row page-header" id="app-header">
-      <a href="/" id="logo-home-link">
-        <i class="col-xs-4 col-md-2"><%= image_tag('WMRECC_Logo.png', { id: "logo"}) %></i>
-        <h2 class="col-xs-8 col-md-8">The Refugee Center Timekeeper</h2>
-      </a>
+    <div class="page-header lt-blue-bg" id="app-header">
+      <div class="row">
+        <div class="col-xs-2">
+          <a href="/" id="logo-home-link">
+            <%= image_tag('WMRECC_logo.png', { id: "logo"}) %>
+          </a>
+        </div>
+        <div class="col-xs-10">
+          <h1 class="jumbo-font white-text">TimeShift</h1>
+          <h3>Space-age time tracking for The Refugee Center.</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-9 text-right">
+          <% if params[:action] != "home" %>
+            <%= link_to FA_HOME, root_path, class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="row flasher">
       <% flash.each do |key, value| %>
@@ -31,8 +46,7 @@
       <hr />
         <%= debug(params) if Rails.env.development? %>
       <hr />
-      <span class="small">&copy 2014 The Refugee Center</span>
-      <span class="pull-right small">Created by <%= link_to 'Chiperific', "http://www.chiperific.com", target: 'blank' %></span>
+      <span class="small">&copy 2014 <%= link_to 'Chiperific', "http://www.chiperific.com", target: 'blank' %> under the MIT License</span>
     </footer>
   </div>
 </body>

@@ -6,8 +6,8 @@ def sign_in(user, options={})
     user.update_attribute(:remember_token, User.digest(remember_token))
   else
     visit root_path
-    fill_in "Email", with: "chip@kragt.com"
-    fill_in "Password", with: "foobar"
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
     click_button "Sign in"
   end
 end

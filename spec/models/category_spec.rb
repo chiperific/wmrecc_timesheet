@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 
-describe Category do
-  let!(:category) { FactoryGirl.create(:category) }
+RSpec.describe Category do
+  category = FactoryGirl.build(:category)
   subject { category }
 
   it "has all the fields" do

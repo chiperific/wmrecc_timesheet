@@ -27,6 +27,8 @@ module StaticPagesHelper
     self.current_user = nil
   end
 
+  ############## app_default methods
+
   def link_to_add_weekday(f)
     new_weekday = Weekday.new
     id = new_weekday.object_id
@@ -48,79 +50,79 @@ module StaticPagesHelper
 
   ############## payroll methods
   # turn 'mm-dd' and 'yyyy' into a date
-  def date_from_period_year(period, year)
-    m_d = period.split('-')
-    m = m_d[0].to_i
-    d = m_d[1].to_i
-    year_i = year.to_i
-    date = Date.new(year_i,m,d)
-  end
+  # def date_from_period_year(period, year)
+  #   m_d = period.split('-')
+  #   m = m_d[0].to_i
+  #   d = m_d[1].to_i
+  #   year_i = year.to_i
+  #   date = Date.new(year_i,m,d)
+  # end
 
-  def payroll_start
-    pay_period_type = PayPeriod.first.period_type
-    year = params[:year] || Date.today.year.to_s
-    pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
-    date = date_from_period_year(pay_period, year)
+  # def payroll_start
+  #   pay_period_type = PayPeriod.first.period_type
+  #   year = params[:year] || Date.today.year.to_s
+  #   pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
+  #   date = date_from_period_year(pay_period, year)
 
-    start_of_fy_name = StartMonth.first.month
-    start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
-    period_first = Date.new(year.to_i, start_of_fy_num, 1)
+  #   start_of_fy_name = StartMonth.first.month
+  #   start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
+  #   period_first = Date.new(year.to_i, start_of_fy_num, 1)
 
-    if pay_period_type == "Weekly"
-      start = date.beginning_of_week
-    elsif pay_period_type == "Bi-weekly"
-      if date.cweek.odd?
-        start = date.beginning_of_week
-      else
-        start = (date.beginning_of_week - 1.week)
-      end
-    elsif pay_period_type == "Monthly"
-      start = date.beginning_of_month
-    elsif pay_period_type == "Semi-monthly"
-      period_second = (period_first + 6.months)
-      if date >= period_first
-        start = period_first
-      else
-        start = period_second
-      end
-    else # Annually
-      start = period_first
-    end
-    start + 1.day
-  end
+  #   if pay_period_type == "Weekly"
+  #     start = date.beginning_of_week
+  #   elsif pay_period_type == "Bi-weekly"
+  #     if date.cweek.odd?
+  #       start = date.beginning_of_week
+  #     else
+  #       start = (date.beginning_of_week - 1.week)
+  #     end
+  #   elsif pay_period_type == "Monthly"
+  #     start = date.beginning_of_month
+  #   elsif pay_period_type == "Semi-monthly"
+  #     period_second = (period_first + 6.months)
+  #     if date >= period_first
+  #       start = period_first
+  #     else
+  #       start = period_second
+  #     end
+  #   else # Annually
+  #     start = period_first
+  #   end
+  #   start + 1.day
+  # end
 
-  def payroll_end
-    pay_period_type = PayPeriod.first.period_type
-    year = params[:year] || Date.today.year.to_s
-    pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
-    date = date_from_period_year(pay_period, year)
+  # def payroll_end
+  #   pay_period_type = PayPeriod.first.period_type
+  #   year = params[:year] || Date.today.year.to_s
+  #   pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
+  #   date = date_from_period_year(pay_period, year)
 
-    start_of_fy_name = StartMonth.first.month
-    start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
-    period_first = Date.new(year.to_i, start_of_fy_num, 1)
+  #   start_of_fy_name = StartMonth.first.month
+  #   start_of_fy_num = Date::MONTHNAMES.index(start_of_fy_name)
+  #   period_first = Date.new(year.to_i, start_of_fy_num, 1)
 
-    if pay_period_type == "Weekly"
-      ender = date.end_of_week
-    elsif pay_period_type == "Bi-weekly"
-      if date.cweek.even?
-        ender = date.end_of_week
-      else
-        ender = (date.end_of_week + 1.week)
-      end
-    elsif pay_period_type == "Monthly"
-      ender = date.end_of_month
-    elsif pay_period_type == "Semi-monthly"
-      period_second = (period_first + 6.months)
-      if date >= period_first
-        ender = (period_second - 1.day)
-      else
-        ender = (period_first - 1.day)
-      end
-    else # Annually
-      ender = period_first - 1.day + 1.year
-    end
-    ender + 1.day
-  end
+  #   if pay_period_type == "Weekly"
+  #     ender = date.end_of_week
+  #   elsif pay_period_type == "Bi-weekly"
+  #     if date.cweek.even?
+  #       ender = date.end_of_week
+  #     else
+  #       ender = (date.end_of_week + 1.week)
+  #     end
+  #   elsif pay_period_type == "Monthly"
+  #     ender = date.end_of_month
+  #   elsif pay_period_type == "Semi-monthly"
+  #     period_second = (period_first + 6.months)
+  #     if date >= period_first
+  #       ender = (period_second - 1.day)
+  #     else
+  #       ender = (period_first - 1.day)
+  #     end
+  #   else # Annually
+  #     ender = period_first - 1.day + 1.year
+  #   end
+  #   ender + 1.day
+  # end
 
     # for payroll action
     def departments_lkup
@@ -141,24 +143,17 @@ module StaticPagesHelper
       if !params[:dept].blank?
         dept = Department.where(active: true).where(name: params[:dept]).first
         usr_ary = User.where(department_id: dept)
-
       else
         usr_ary = User.all
       end
       # only users active in the payroll period: usr.start_date < end_date && usr.end_date > start_date
-      # result = usr_ary.where{ 
-      #   |usr| 
-      #   (usr.start_date < end_date) && 
-      #   ((usr.end_date || 20.years.from_now) > start_date) 
-      # }
-
       result = []
       usr_ary.each do |usr|
         if usr.start_date < end_date
           if usr.end_date.blank?
             result << usr
           else
-            if user.end_date > start_date
+            if usr.end_date > start_date
               result << usr
             end
           end

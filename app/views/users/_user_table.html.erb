@@ -4,17 +4,16 @@
       <th></th>
       <th>Name</th>
       <th class="hidden-xs">Dept.</th>
-      <% if @title == "Users" %>
-        <th>Supervisor</th>
-      <% end %>
+      <th>Supervisor</th>
       <th class="hidden-xs">Role</th>
+      <th class="hidden-xs">Dates</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @active_users.each do |u| %>
       <% @direct_reports = @supervised_active_users.where(supervisor_id: u.id) %>
-      <% @supervisor = @active_users.find_by( id: u.supervisor_id ) %>
+      <% @supervisor = @active_users.find_by_id( u.supervisor_id ) %>
       <tr>
         <td class="pull-right">
           <% if @direct_reports.count > 0 %>
@@ -25,38 +24,45 @@
           <%= u.full_name %>
         </td>
         <td class="hidden-xs">
-          <% if !u.department.nil? %>
-            <%= u.department.name %>
-          <% else %>
-            (no department)
-          <% end %>
+          <%= u.department.present? ? u.department.name : "(none)" %>
         </td>
-        <% if @title == "Users" %>
-          <td>
-            <%= if @supervisor != nil then @supervisor.full_name else "(none)" end %>
-          </td>
-        <% end %>
-        <td class="hidden-xs"><%= if u.admin then "Admin" else "User" end %></td>
+        <td>
+          <%= if @supervisor != nil then @supervisor.full_name else "(none)" end %>
+        </td>
+        <td class="hidden-xs">
+          <%= if u.admin then "Admin" else "User" end %>
+        </td>
+        <td class="hidden-xs">
+          <%= u.start_date.strftime('%m/%d/%Y') + " - " + u.end_date_string %>
+        </td>
         <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
       </tr>
       <% @direct_reports.each do |s| %>
         <tr class=<%= "super-list-#{u.id.to_s}".to_s %> >
           <td class="hidden"></td>
-          <td class="hidden"><%= s.full_name %></td>
-          <td class="hidden hidden-xs"></td>
-          <% if @title == "Users" %>
-            <td class="hidden"></td>
-          <% end %>
-          <td class="hidden hidden-xs"></td>
-          <td class="hidden"><%= link_to FA_EDIT, edit_user_path(s.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
+          <td class="hidden">
+            <%= s.full_name %>
+          </td>
+          <td class="hidden hidden-xs">
+            <%= s.department.present? ? s.department.name : "(none)" %>
+          </td>
+          <td class="hidden"></td>
+          <td class="hidden hidden-xs">
+            <%= if s.admin then "Admin" else "User" end %>
+          </td>
+          <td class="hidden hidden-xs">
+            <%= u.start_date.strftime('%m/%d/%Y') + " - " + u.end_date_string %>
+          </td>
+          <td class="hidden">
+            <%= link_to FA_EDIT, edit_user_path(s.id), { method: :get, class: "btn btn-primary btn-sm"} %>
+          </td>
         </tr>
       <% end %>
     <% end %>
   </tbody>
 </table>
-</div>
 
-<% if @inactive_users.count > 0 %>
+<% if @inactive_users.any? %>
   <%= link_to "View inactive users", "#", {id: "user-view-switch", class: "pull-right btn btn-primary btn-xs"} %>
   <div class="hidden row buffered-row" id="inactive-users">
     <div class="row">
@@ -68,6 +74,7 @@
           <th>Inactive</th>
           <th>Dept.</th>
           <th>Supervisor</th>
+          <th class="hidden-xs">Dates</th>
           <th></th>
         </tr>
       </thead>
@@ -75,7 +82,7 @@
         <% @inactive_users.each do |u| %>
           <% @inactive_super = @users.find_by( id: u.supervisor_id ) %>
           <tr>
-            <td><%= u.fname + " " + u.lname %></td>
+            <td><%= u.full_name %></td>
             <td>
               <% if u.department.nil? %>
                 (no department)
@@ -85,6 +92,9 @@
               
             </td>
             <td><%= @inactive_super.full_name %></td>
+            <td class="hidden-xs">
+              <%= u.start_date.strftime('%m/%d/%Y') + " - " + u.end_date_string %>
+            </td>
             <td><%= link_to FA_EDIT, edit_user_path(u.id), { method: :get, class: "btn btn-primary btn-sm"} %></td>
           </tr>
         <% end %>

@@ -1,6 +1,6 @@
 <h3 class="subtle"><%= @user.fname %>'s Staff</h3>
 
-<div id="active-users" class="bufffered-row row">
+<div id="active-users" class="bufffered-row row datatable-div">
   <%= render 'user_table' %>
 </div>
 <br />
@@ -12,9 +12,9 @@
 
 
 <div class="row buffered-row center">
-  <% if @timesheets_from_user_auth_needing_review %>
+  <% if @timesheets_from_user_auth_needing_review.any? %>
     <hr />
-    <%= "Your staff have "+ @timesheets_from_user_auth_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_from_user_auth_needing_review.count) + " for review." %>
+    <%= "Your team has "+ @timesheets_from_user_auth_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_from_user_auth_needing_review.count) + " for review." %>
     <%= link_to "Review now", user_timesheets_supervisor_path(current_user), { method: :get, class: "btn btn-success"} %>
   <% end %>
 </div>

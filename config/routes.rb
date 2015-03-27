@@ -4,8 +4,8 @@ WmreccTimesheet::Application.routes.draw do
   get 'help', to: 'static_pages#help'
   get 'configure', to: 'static_pages#configure'
 
-  get '/holidays/:year', to: 'app_default#holidays'
-
+  get '/holidays/:year', to: 'app_default#holidays' #ajax call
+  get '/payroll_cats_users/:cat_id/:payroll_start/:payroll_end', to: 'categories#payroll_users'
 
   match 'configure_update', to: 'static_pages#configure_update', via: 'patch'
 

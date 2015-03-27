@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe StartMonth do
-  let!(:start_month) { FactoryGirl.create(:start_month) }
+RSpec.describe StartMonth do
+  start_month = FactoryGirl.build(:start_month)
 
   subject { start_month }
 

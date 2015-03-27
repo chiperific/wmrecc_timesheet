@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Department do
-  let!(:department) { FactoryGirl.create(:department)}
+RSpec.describe Department do
+  department = FactoryGirl.build(:department)
 
   subject { department }
 

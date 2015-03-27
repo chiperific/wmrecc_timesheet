@@ -1,13 +1,10 @@
 class AppDefaultController < ApplicationController
 
   def holidays
+    holidays_sorted = Holiday.all.order(:month, :day, :float_day)
     year = params[:year].to_i || Date.today.year
-
-    # holidays = Holiday.all.as_json
-
-
     holidays = []
-    Holiday.all.each do |h|
+    holidays_sorted.each do |h|
       #collect holidays for provided year, year before and year after
       (-1..1).each do |i|
         new_year = year + i

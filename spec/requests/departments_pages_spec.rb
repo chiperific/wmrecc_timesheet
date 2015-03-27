@@ -1,16 +1,19 @@
 require 'spec_helper'
+require 'support/utilities'
 
-describe "Departments Pages" do
+RSpec.describe "Departments Pages" do
   subject { page }
-  let!(:user) { FactoryGirl.create(:user) }
+  user = FactoryGirl.build(:user)
   before { sign_in(user) }
 
   describe "New" do
     before { visit new_department_path }
 
-    it { should have_content('Add new department')}
-    it { should have_button('Submit')}
-    it { should have_link('Cancel')}
+    it "should have certain content" do
+      should have_content('Add new department')
+      should have_button('Submit')
+      should have_link('Cancel')
+    end
 
     describe "when submitting" do
       describe "with invalid info" do
@@ -25,7 +28,6 @@ describe "Departments Pages" do
         before do 
           visit new_department_path
           fill_in "department[name]", with: "new dept"
-          select "Active",                from: "department[active]"
         end
 
         it "should add a new department" do
@@ -36,7 +38,7 @@ describe "Departments Pages" do
   end #New
 
   describe "Edit" do
-    let(:department) { FactoryGirl.create(:department)}
+    department = FactoryGirl.build(:department)
     before { visit edit_department_path(department)}
 
     it { should have_button('Submit')}

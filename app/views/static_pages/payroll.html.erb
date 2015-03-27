@@ -2,18 +2,18 @@
   <h3 class="subtle thin-top center">Payroll <span class="pull-right">(<%= @pay_period_type %>)</span></h3>
 
   <div class="well well-striped row">
-    <div class="row">
-      <%= render 'shared/year_payweek_searchbar' %>
+    <div class="col-xs-12">
+      <%= render 'payroll_searchbar' %>
     </div>
-    <div class="row">
+    <div class="col-xs-12">
       <span class="col-xs-2">From:</span>
-      <span class="col-xs-4"><%= @payroll_start.strftime("%m/%d/%Y") %></span>
+      <span class="col-xs-4" id="start_date"><%= @date_start %></span>
       <span class="col-xs-2">To:</span>
-      <span class="col-xs-4"><%= @payroll_end.strftime("%m/%d/%Y") %></span>
+      <span class="col-xs-4" id="end_date"><%= @date_end %></span>
     </div>
   </div>
 
-  <div class="row" id="payroll_users_head">
+  <div class="row datatable-div" id="payroll_users_head">
     <fieldset>
       <legend class="subtle">Staff:</legend>
       <table class="table table-thin" id="payroll-user-table">
@@ -38,7 +38,7 @@
     </fieldset>
   </div>
 
-  <div class="row" id="payroll_users_body">
+  <div class="row datatable-div" id="payroll_users_body">
     <fieldset>
       <legend class="subtle">Categories:</legend>
       <table class="table" id="payroll-category-table">
@@ -46,8 +46,9 @@
           <tr>
             <th>Dept.</th>
             <th>Category</th>
-            <th>Hours</th>
-            <th>
+            <th class="text-center">Hours</th>
+            <th class="text-center">Staff</th>
+            <th class="text-center">
               $ Total
               <%= link_to icon('question-circle'), "#", {id: 'categories_dialog_q', class: "move-right"} %>
             </th>
@@ -70,5 +71,19 @@
   <div id="categories_dialog" title="Categories Explained">
     <p>The <b>$ Total</b> column shows the total of applicable staff's hourly contributions towards the category.</p>
     <p>The <b>Staff</b> column shows the number of staff who contributed hours during the pay period.</p>
+  </div>
+  <div id="category_users_dialog" title="Staff Hours by Category">
+    <table id="category_users_table" class="table">
+      <thead>
+        <tr>
+          <th>Staff</th>
+          <th>Hours</th>
+          <th>Rate</th>
+          <th>Sub Ttl</th>
+        </tr>
+      </thead>
+      <tbody id="category_users_tbody">
+      </tbody>
+    </table>
   </div>
 </div>

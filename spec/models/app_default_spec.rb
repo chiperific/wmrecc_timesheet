@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe AppDefault do
-  let!(:app_default) { FactoryGirl.create(:app_default) }
+RSpec.describe AppDefault do
+  app_default = FactoryGirl.build(:app_default)
   subject { app_default }
 
   it { should respond_to :name }

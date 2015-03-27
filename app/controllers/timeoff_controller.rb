@@ -12,27 +12,30 @@ class TimeoffController < ApplicationController
     else
       @page_title = "#{@user.fname}'s Timeoff"
     end
-    @timeoff_hours = TimesheetHour.where(user_id: @user.id).where.not(timeoff_hours: 0).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+    @timeoff_hours = Timesheet.where(user_id: @user.id).includes(:timesheet_hours).where("timesheet_hours.timeoff_hours > 0").references(:timesheet_hours)
 
-    @user_start_year = if @user.start_date.nil? then @user.created_at.year else @user.start_date.year end 
-    @year = params[:year] || Time.now.in_time_zone.year
-    @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
+    @user_start_year = if @user.start_date.nil? then @user.created_at.year else @user.start_date.year end
 
     @timeoff_accrual_type = TimeoffAccrual.first.accrual_type
-
+    if !params[:date]
+      @date = Date.today.start_of_period
+    else
+      @date = params[:date].to_date
+    end
+    @visible_date = @date.strftime("%m/%d/%y")
   end
 
   def supervisor
     @title = "Timeoff"
     @user = User.find(params[:user_id])
 
-    @timeoff_hours = TimesheetHour.where(user_id: @user.has_authority_over).where.not(timeoff_hours: 0).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+    @timeoff_hours = Timesheet.where(user_id: @user.has_authority_over).includes(:timesheet_hours).where("timesheet_hours.timeoff_hours > 0").references(:timesheet_hours)
   end
 
   def admin
     @title = "Timeoff"
 
-    @timeoff_hours = TimesheetHour.where.not(timeoff_hours: 0).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+    @timeoff_hours = Timesheet.includes(:timesheet_hours).where("timesheet_hours.timeoff_hours > 0").references(:timesheet_hours)
   end
 
   private

@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 
   before_action :require_admin, except: :payroll_users
-  
+
   def index
     @title = "Categories"
     @cats_active = Category.where(active: true)
@@ -48,6 +48,24 @@ class CategoriesController < ApplicationController
       @dept_array = dept_array
       render 'edit'
     end
+  end
+
+  def payroll_users #json the users by category
+    category = Category.find(params[:cat_id])
+    payroll_start = params[:payroll_start].gsub("-","/").to_date
+    payroll_end = params[:payroll_end].gsub("-","/").to_date
+    timesheet_ids = Timesheet.where{ (start_date <= payroll_end) & (end_date >= payroll_start) }.map { |t| t.id } # thanks Squeel!!
+    relevant_ts_cats = TimesheetCategory.where(timesheet_id: timesheet_ids, category_id: category.id).includes(:timesheet => :user).order('users.lname')
+    ary = []
+    relevant_ts_cats.each do |c|
+      if c.hours > 0
+        hours = number_with_precision(c.hours.round(2), precision: 2)
+        rate = number_to_currency(c.timesheet.user.payroll_hourly_rate(payroll_start))
+        subttl = number_to_currency(c.hours.to_f * c.timesheet.user.payroll_hourly_rate(payroll_start).to_f)
+        ary << { "staff"=> c.timesheet.user.full_name, "hours"=> hours, "rate"=> rate, "subttl"=> subttl }
+      end
+    end
+    render text: ary.to_json
   end
 
   def dept_array

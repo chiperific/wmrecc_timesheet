@@ -4,6 +4,13 @@
 //Medium devices Desktops (≥992px)  
 //Large devices Desktops (≥1200px)
 
+//COLOR SCHEME (in Hex colors):
+// Beige:     #F4F5E7
+// Grey-blue: #87A7CE
+// Grey:      #718CA0
+// Lt blue:   #BDCFE4
+// Orange:    #F89F15
+// Purple:    #484C8B
 
 html {
   overflow-y: scroll;
@@ -11,6 +18,12 @@ html {
 
 body {
   padding-top: 1em;
+  font-family: 'Voltaire', sans-serif !important;
+}
+
+.lt-blue-bg {
+  background-color: #BDCFE4;
+  border-radius: 6px;
 }
 
 section {
@@ -23,8 +36,16 @@ textarea {
 
 h1, h2, h3, h4, h5, h6, p {
   line-height: 1;
+  
 }
 
+.black-text {
+  color: black !important;
+}
+
+.jumbo-font {
+  font-size: 72px !important;
+}
 
 #top-level-container {
   margin-left: 1em;
@@ -33,6 +54,12 @@ h1, h2, h3, h4, h5, h6, p {
 
 .hidden {
   display: none;
+}
+
+// make readonly fields not look editable
+.readonly-shower {
+  background-color: white !important;
+  cursor: default !important;
 }
 
 .align-right {
@@ -107,6 +134,10 @@ legend {
   margin-bottom: 1em;
 }
 
+.buffered-row-bottom {
+  margin-bottom: 1em;
+}
+
 a:hover > div > i, a:hover > div > p {
   background-color: transparent;
   color: #246DAC;
@@ -131,8 +162,9 @@ a[class*="btn-"]:visited {
   color: #333333;
 }
 
-.logo {
-  height: inherit;
+#logo {
+  //height: inherit;
+  width: 250px;
 }
 
 // app-like box styling
@@ -143,6 +175,7 @@ a[class*="btn-"]:visited {
 
 .box-btn {
   text-align: center;
+  background-color: #F4F5E7;
   width: 6em;
   height: 6em;
   margin-top: .5em;
@@ -162,7 +195,6 @@ a[class*="btn-"]:visited {
   a:hover {
     text-decoration: none;
     .box-btn {
-      background-color: #dff0d8 !important;
     }
   }
   a:visited {
@@ -179,9 +211,9 @@ a[class*="btn-"]:visited {
 
 // _timeoff_calculator
 .well-adjusted {
-  margin-bottom: 2px !important;
-  //margin-left: 6px;
-  //margin-right: 6px;
+  margin-bottom: 1em !important;
+  margin-left: 2em !important;
+  margin-right: 2em !important;
   padding: 0.5em !important; 
   background-color: rgba(255,255,255,0.5);
 
@@ -193,6 +225,14 @@ a[class*="btn-"]:visited {
 }
 
 // universal table styling
+
+// add some margins to the datatables on anything wider than 768px
+@media (min-width: 768px ) {
+ div.datatable-div {
+    margin-left: 6em !important;
+    margin-right: 6em !important;
+  } 
+}
 
 // set configure#pay_period and payroll#hours question link
 .move-right {
@@ -227,6 +267,12 @@ tr[class*='-list-'] > td {
 
 .width-limiter {
   max-width: 10em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.width-limiter-14 {
+  max-width: 14em;
   margin-left: auto;
   margin-right: auto;
 }
@@ -275,11 +321,6 @@ div.input-group {
 
 .plus-r-padding {
   padding-right: 10px;
-}
-
-.readonly-disguiser {
-  background-color: white !important;
-  cursor: pointer !important;
 }
 
 .min-padding-both {

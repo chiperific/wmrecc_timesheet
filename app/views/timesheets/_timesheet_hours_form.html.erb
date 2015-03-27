@@ -1,14 +1,7 @@
 <%= t_form.fields_for :timesheet_hours, @timesheet_hours do |th_form| %>
-  <span class="hidden">
-    <%= th_form.hidden_field :id %>
-    <%= th_form.hidden_field :timesheet_id %>
-    <%= th_form.hidden_field :user_id, { value: @user.id } %>
-    <%= th_form.hidden_field :weekday, { value: th_form.index+1 } %>
-    <%= th_form.hidden_field :reviewed, { class: "reviewed-field"} %>
-    <%= th_form.hidden_field :approved, { class: "approved-field"} %>
-    <%= th_form.hidden_field :timeoff_reviewed, { class: "timeoff-reviewed-field"} %>
-    <%= th_form.hidden_field :timeoff_approved, { class: "timeoff-approved-field"} %>
-  </span>
+  <%= th_form.hidden_field :id %>
+  <%= th_form.hidden_field :timesheet_id %>
+  <%= th_form.hidden_field :day_num, { value: th_form.index+1 } %>
   <span class="row span-no-padding-both form-group no-margin">
     <span class="col-xs-2 expand-2-to-5">
       <span class="visible-xs-only">

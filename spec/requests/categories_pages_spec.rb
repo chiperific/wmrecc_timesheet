@@ -1,23 +1,29 @@
 require 'spec_helper'
+require 'support/utilities'
 
-describe "Categories Pages" do
+RSpec.describe "Categories Pages" do
   subject { page }
-  let!(:user) { FactoryGirl.create(:user) }
+  #let!(:user) { create(:user) }
+  user = FactoryGirl.build(:user)
+
   before { sign_in(user) }
 
   describe "Index" do
     before { visit categories_path }
+    
 
-    it { should have_content('Categories')}
     it { should have_link('Add New')}
+
   end
 
   describe "New" do
     before { visit new_category_path }
 
-    it { should have_content('Add Category')}
-    it { should have_button('Submit')}
-    it { should have_link('Cancel')}
+    it "should have certain content" do
+      should have_content('Add Category')
+      should have_button('Submit')
+      should have_link('Cancel')
+    end
 
     describe "when submitting" do
       before { visit new_category_path }
@@ -34,7 +40,7 @@ describe "Categories Pages" do
   end #New
 
   describe "Edit" do
-    let(:category) { FactoryGirl.create(:category)}
+    category = FactoryGirl.build(:category)
     before do
       visit edit_category_path(category)
     end

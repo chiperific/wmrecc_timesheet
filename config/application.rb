@@ -69,4 +69,44 @@ class Date
 
     business_days = days_in_year - days_off
   end
+
+  def start_of_period
+    pay_period_type = PayPeriod.first.period_type
+    case pay_period_type
+    when "Weekly"
+      sop = Date.commercial(self.year, self.cweek, 1)
+    when "Bi-weekly"
+      if self.cweek.odd?
+        sop = Date.commercial(self.year, self.cweek, 1)
+      else
+        sop = Date.commercial(self.year, self.cweek - 1, 1)
+      end
+    when "Monthly"
+      sop = Date.new(self.year, self.month, 1)
+    else #Annually and Semi-monthly both start the same
+      start_month = Date::MONTHNAMES.index(StartMonth.first.month)
+      sop = Date.new(self.year, start_month, 1)
+    end
+  end
+
+  def end_of_period
+    pay_period_type = PayPeriod.first.period_type
+    case pay_period_type
+    when "Weekly"
+      eop = Date.commercial(self.year, self.cweek, 7)
+    when "Bi-weekly"
+      if self.cweek.even?
+        eop = Date.commercial(self.year, self.cweek, 7)
+      else
+        eop = Date.commercial(self.year, self.cweek + 1, 7)
+      end
+    when "Monthly"
+      eop = Date.new(self.year, self.month, -1)
+    when "Semi-monthly"
+      start_month = Date::MONTHNAMES.index(StartMonth.first.month)
+      eop = Date.new(self.year, start_month + 5, -1)
+    else #Annually
+      eop = Date.new(self.year, 12, -1)
+    end
+  end
 end

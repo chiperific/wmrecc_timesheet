@@ -1,11 +1,11 @@
 <h3 class="subtle">Current users</h3>
-<div id="active-users" class="buffered-row row">
+<div id="active-users" class="buffered-row row datatable-div">
   <%= render 'user_table' %>
 </div>
 <p class="buffered-row row"><%= link_to "Add new user", new_user_path, { method: :get, class: "btn btn-success"} %></p>
 
 <div class="buffered-row row center">
-  <% if @timesheets_needing_review %>
+  <% if @timesheets_needing_review.count > 0 %>
     <hr />
     <%= "There are " + @timesheets_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_needing_review.count) + " for review." %>
     <%= link_to "Review as Admin", user_timesheets_admin_path(current_user), { class: "btn btn-success"} %>

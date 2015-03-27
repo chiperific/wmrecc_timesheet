@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'support/utilities'
 
-describe "Static pages" do
+RSpec.describe "Static pages" do
   subject { page }
 
   describe "Home" do
@@ -8,15 +9,13 @@ describe "Static pages" do
 
     it 'has page elements' do
       should have_title('Home')
-      should have_content('Timekeeper')
     end
 
     context "When not signed in" do
       it { should have_content 'Sign in to continue'}
 
       describe "should allow you to login" do
-        let!(:user) { FactoryGirl.create(:user) }
-        let!(:current_user) {user}
+        user = FactoryGirl.build(:user)
         before do
           fill_in 'static_page_email', with: user.email
           fill_in 'static_page_password', with: user.password
@@ -28,7 +27,7 @@ describe "Static pages" do
     end
 
     context "When signed in" do
-      let!(:user) { FactoryGirl.create(:user) }
+      user = FactoryGirl.build(:user)
       before { sign_in(user) }
 
       it 'has page elements' do
@@ -44,11 +43,10 @@ describe "Static pages" do
       end
     end
 
-  end #describe 'Home'
+  end #RSpec.describe 'Home'
 
   describe "Help page" do
-    let!(:user) { FactoryGirl.create(:user) }
-    let!(:it_email) { FactoryGirl.create(:it_email) }
+    user = FactoryGirl.build(:user)
     before do
       sign_in(user)
       visit help_path
@@ -59,11 +57,7 @@ describe "Static pages" do
   end
 
   describe "Configure page" do
-    let!(:user) { FactoryGirl.create(:user) }
-    let!(:app_default) { FactoryGirl.create(:app_default) }
-    let!(:it_email) { FactoryGirl.create(:it_email) }
-    let!(:start_month) { FactoryGirl.create(:start_month) }
-    let!(:holiday) { FactoryGirl.create(:holiday)}
+    user = FactoryGirl.build(:user)
     before do
       sign_in(user)
       visit configure_path
@@ -82,16 +76,7 @@ describe "Static pages" do
   end
 
   describe "Payroll page" do
-    let!(:user) { FactoryGirl.create(:user) }
-    let!(:app_default) { FactoryGirl.create(:app_default) }
-    let!(:pay_period) { FactoryGirl.create(:pay_period) }
-    let!(:start_month) { FactoryGirl.create(:start_month) }
-    let!(:holiday) { FactoryGirl.create(:holiday) }
-    let!(:department) { FactoryGirl.create(:department) }
-    let!(:category) { FactoryGirl.create(:category) }
-    let!(:timesheet_hour) { FactoryGirl.create(:timesheet_hour) }
-    let!(:timesheet_category) { FactoryGirl.create(:timesheet_category) }
-
+    user = FactoryGirl.build(:user)
     before do
       sign_in(user)
       visit payroll_path

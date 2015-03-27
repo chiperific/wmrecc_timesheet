@@ -12,14 +12,14 @@ class StaticPagesController < ApplicationController
     @msg_col_width = "col-xs-6 col-sm-3"
 
     if current_user
-      @denied_timesheets  = current_user.timesheet_hours.where(approved: nil).where.not(reviewed: nil).map { |th| th.timesheet_id }.uniq
-      @denied_timeoffs    = current_user.timesheet_hours.where(timeoff_approved: nil).where.not(timeoff_reviewed: nil).map { |th| th.timesheet_id }.uniq
+      @denied_hours = current_user.timesheets.where(hours_approved: nil).where.not(hours_reviewed: nil)
+      @denied_timeoffs = current_user.timesheets.where(timeoff_approved: nil).where.not(timeoff_reviewed: nil)
 
       if current_user.has_authority_over.any?
         @user_auth_id_ary = current_user.has_authority_over.pluck(:id)
 
-        @unapproved_timesheets  = TimesheetHour.where(user_id: @user_auth_id_ary, approved: nil, reviewed: nil).map { |th| th.timesheet_id }.uniq
-        @unapproved_timeoffs    = TimesheetHour.where(user_id: @user_auth_id_ary, timeoff_approved: nil, timeoff_reviewed: nil).map { |th| th.timesheet_id }.uniq
+        @unapproved_timesheets  = Timesheet.where(user_id: @user_auth_id_ary, hours_approved: nil, hours_reviewed: nil)
+        @unapproved_timeoffs    = Timesheet.where(user_id: @user_auth_id_ary, timeoff_approved: nil, timeoff_reviewed: nil)
       end
 
       if @denied_timeoffs.blank? && @denied_timesheets.blank? && @unapproved_timeoffs.blank? && @unapproved_timesheets.blank?
@@ -58,14 +58,21 @@ class StaticPagesController < ApplicationController
     @title = "Payroll"
 
     @pay_period_type = PayPeriod.first.period_type
-    @payroll_start = payroll_start
-    @payroll_end = payroll_end
+    
+    if !params[:date_start]
+      @payroll_start = Date.today.start_of_period
+      @payroll_end = Date.today.end_of_period
+    else
+      @payroll_start = params[:date_start].to_date
+      @payroll_end = params[:date_end].to_date
+    end
 
     @departments_lkup = departments_lkup
     @users = payroll_relevant_users(@payroll_start, @payroll_end)
     @categories = payroll_active_cats
-    @pay_period = params[:pay_period] || Time.now.in_time_zone.strftime("%m-%d")
-    @year = params[:year] || Time.now.in_time_zone.year.to_s
+
+    @date_start = @payroll_start.strftime("%m/%d/%Y")
+    @date_end = @payroll_end.strftime("%m/%d/%Y")
   end
 
   def configure

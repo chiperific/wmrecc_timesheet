@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Holiday do
-  let!(:holiday) { FactoryGirl.create(:holiday) }
+RSpec.describe Holiday do
+  holiday = FactoryGirl.build(:holiday)
 
   subject { holiday }
 

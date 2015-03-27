@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe ItEmail do
-  let!(:it_email) { FactoryGirl.create(:it_email) }
+RSpec.describe ItEmail do
+  it_email = FactoryGirl.build_stubbed(:it_email)
 
   subject { it_email }
 
@@ -34,6 +34,7 @@ describe ItEmail do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
         it_email.email = valid_address
+        it_email.app_default_id = 1
         expect(it_email).to be_valid
       end
     end

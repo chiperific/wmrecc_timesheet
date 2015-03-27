@@ -19,11 +19,13 @@ var factory = function( $, DataTable ) {
 
 /* Set the defaults for DataTables initialisation */
 $.extend( true, $.fn.dataTable.defaults, {
+  responsive: true,
+  autoWidth: false,
   dom:
     "<'row'<'col-xs-6'l><'col-xs-6'f>r>"+
     "t"+
     "<'row'<'col-xs-6'i><'col-xs-6'p>>",
-  renderer: 'bootstrap'
+  renderer: 'bootstrap',
 } );
 
 

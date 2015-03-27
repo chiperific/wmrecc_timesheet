@@ -11,18 +11,18 @@ class UsersController < ApplicationController
     @users = User.all
     @active_users = User.where(active: true).order(:lname, :fname)
     @inactive_users = User.where(active: false).order(:lname, :fname)
-    @supervised_active_users = @active_users.where("supervisor_id IS NOT NULL")
+    @supervised_active_users = @active_users.where.not(supervisor_id: nil)
 
     @departments = Department.where(active: true)
 
     if current_user.admin?
-      @timesheets_needing_review = TimesheetHour.where(reviewed: nil).where.not(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+      @timesheets_needing_review = Timesheet.where(hours_reviewed: nil).where.not(user_id: @user_auth_id_ary)
     end
 
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+      @timesheets_from_user_auth_needing_review = Timesheet.where(hours_reviewed: nil).where(user_id: @user_auth_id_ary)
     end
 
   end
@@ -34,13 +34,13 @@ class UsersController < ApplicationController
     @users = User.all
     @active_users = @user_staff.where(active: true).order(:lname, :fname)
     @inactive_users = @user_staff.where(active: false).order(:lname, :fname)
-    @supervised_active_users = User.where("supervisor_id IS NOT NULL")
+    @supervised_active_users = @user_staff.where(active: true).order(:lname, :fname)
     @departments = Department.where(active: true)
 
     if current_user.has_authority_over.any?
       @user_auth = current_user.has_authority_over
       @user_auth_id_ary = @user_auth.pluck(:id)
-      @timesheets_from_user_auth_needing_review = TimesheetHour.where(reviewed: nil).where(user_id: @user_auth_id_ary).select('timesheet_id, user_id').group(:timesheet_id, :user_id).to_a
+      @timesheets_from_user_auth_needing_review = Timesheet.where(hours_reviewed: nil).where(user_id: @user_auth_id_ary)
     end
   end
 
@@ -56,6 +56,9 @@ class UsersController < ApplicationController
 
     @salary_hider = ""
     @hourly_hider = "hidden"
+
+    @disabled = false
+    @readonly_shower = "readonly-shower"
   end
 
   def edit
@@ -71,10 +74,10 @@ class UsersController < ApplicationController
 
     if current_user.can_approve_this?(@user)
       @disabled = false
-      @readonly_disguiser = "readonly-disguiser"
+      @readonly_shower = "readonly-shower"
     else
       @disabled = true
-      @readonly_disguiser = ""
+      @readonly_shower = ""
     end
 
     @active_def = @user.active

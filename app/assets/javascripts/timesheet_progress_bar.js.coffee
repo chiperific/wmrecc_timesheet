@@ -31,8 +31,6 @@ updateProgressBar = (bar) ->
   setColor(target, now, max)
 
 jQuery ->
-  #if $.inArray("timesheets", pathAry) >= 0
-    #set initial bar values
   $('.progress-bar').each ->
     min_text = $(this).attr('aria-valuemin')
     max_text = $(this).attr('aria-valuemax')

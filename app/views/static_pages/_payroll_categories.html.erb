@@ -7,10 +7,18 @@
   <td class="small-when-small">
     <%= category.name %>
   </td>
-  <td class="align-center">
+  <td class="text-center">
     <%= category.payroll_hours(@payroll_start, @payroll_end) %>
   </td>
-  <td class="align-right">
-    $ <%= number_with_precision( category.payroll_total(@payroll_start, @payroll_end, @pay_period, @year), precision: 2 ) %>
+  <td class="text-center">
+    <% if category.payroll_staff_count(@payroll_start, @payroll_end) > 0 %>
+      <%= link_to category.payroll_staff_count(@payroll_start, @payroll_end).to_s, "#", name: category.id.to_s, class: "cat_users_dialog_link" %>
+    <% else %>
+      0
+    <% end %>
+    
+  </td>
+  <td class="text-right">
+    $ <%= number_with_precision( category.payroll_total(@payroll_start, @payroll_end), precision: 2 ) %>
   </td>
 </tr>

@@ -23,7 +23,7 @@
           <%= 'You have ' + @denied_timeoffs.count.to_s + ' denied timeoff ' + 'request'.pluralize(@denied_timeoffs.count) + '.' %>
         </p>
         <a href='<%= user_timeoff_single_path(current_user) %>' >
-          <div class="box-btn readonly-disguiser">
+          <div class="box-btn">
             <%= icon('minus-square-o fa-3x') %>
             <p>Your timeoff</p>
           </div>
@@ -37,7 +37,7 @@
           <%= 'You have ' + @denied_timesheets.count.to_s + ' denied ' 'timesheet'.pluralize(@denied_timesheets.count) + '.' %>
         </p>
         <a href='<%= user_timesheets_single_path(current_user) %>' >
-          <div class="box-btn readonly-disguiser">
+          <div class="box-btn">
             <%= icon('clock-o fa-3x') %>
             <p>Your timesheets</p>
           </div>
@@ -51,7 +51,7 @@
           <%= 'You have ' + @unapproved_timeoffs.count.to_s + ' timeoff ' + 'request'.pluralize(@unapproved_timeoffs.count) + ' to review.' %>
         </p>
         <a href='<%= user_timeoff_supervisor_path(current_user) %>' >
-          <div class="box-btn readonly-disguiser">
+          <div class="box-btn">
             <%= icon('check-square-o fa-3x') %>
             <p>Your staff's timeoff</p>
           </div>
@@ -65,7 +65,7 @@
           <%= 'You have ' + @unapproved_timesheets.count.to_s + ' ' + 'timesheet'.pluralize(@unapproved_timesheets.count) + ' to review.' %>
         </p>
         <a href="<%= user_timesheets_supervisor_path(current_user) %>" >
-          <div class="box-btn readonly-disguiser">
+          <div class="box-btn">
             <%= icon('thumbs-o-up fa-3x') %>
             <p>Your staff's timesheets</p>
           </div>
@@ -92,12 +92,12 @@
   </a>
 
   <a href='<%= user_timeoff_single_path(current_user) %>' class="<%= @col_width %>">
-    <div class="box-btn readonly-disguiser">
+    <div class="box-btn">
       <%= icon('minus-square-o fa-3x') %>
       <p>Your timeoff</p>
     </div>
   </a>
-
+  <br />
 
 <!-- Supervisor buttons -->
   <% if current_user.has_authority_over.any? %>
@@ -121,17 +121,10 @@
         <p>Manage your staff</p>
       </div>
     </a>
+    <br />
   <% end %> 
 
 <!-- Admin buttons -->
-  <% if current_user.admin %> 
-    <a href="<%= users_path %>" class="<%= @col_width %>">
-      <div class="box-btn">
-        <%= icon('users fa-3x') %>
-        <p>Manage all users</p>
-      </div>
-    </a>
-
     <a href="<%= user_timesheets_admin_path(current_user) %>" class="<%= @col_width %>">
       <div class="box-btn">
         <%= icon('thumbs-o-up fa-3x') %>
@@ -145,6 +138,15 @@
         <p>Manage all timeoff</p>
       </div>
     </a>
+
+    <% if current_user.admin %> 
+    <a href="<%= users_path %>" class="<%= @col_width %>">
+      <div class="box-btn">
+        <%= icon('users fa-3x') %>
+        <p>Manage all users</p>
+      </div>
+    </a>
+    <br />
 
     <a href="<%= departments_path %>" class="<%= @col_width %>">
       <div class="box-btn">
@@ -166,6 +168,7 @@
         <p class="small">Manage configuration</p>
       </div>
     </a>
+    <br />
   <% end %>
 
 <!-- all user buttons 2 -->
@@ -183,6 +186,14 @@
     </div>
   </a>
 
+  <a href="<%= signout_path %>" data-method="delete" rel="nofollow" class="<%= @col_width %>">
+    <div class="box-btn">
+      <%= icon('sign-out fa-3x') %>
+      <p>Sign out</p>
+    </div>
+  </a>
+  <br />
+
 <!-- only admins or those without a supervisor -->
   <% if current_user.admin || current_user.supervisor_id == nil %>
     <a href="<%= payroll_path %>" class="<%= @col_width %>">
@@ -199,12 +210,5 @@
       </div>
     </a>
   <% end %>
-
-  <a href="<%= signout_path %>" data-method="delete" rel="nofollow" class="<%= @col_width %>">
-    <div class="box-btn">
-      <%= icon('sign-out fa-3x') %>
-      <p>Sign out</p>
-    </div>
-  </a>
    
 </div>

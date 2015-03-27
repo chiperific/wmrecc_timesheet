@@ -1,7 +1,7 @@
 <%= form_for @user do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <span class="form-controller">
-
+    <%= f.hidden_field :id %>
     <div class="row">
       <div class="col-xs-6">
         <div class="input-group" title="First Name">
@@ -64,7 +64,7 @@
         <span class="input-group-addon addon-selector">
           <%= icon('globe') %>
         </span>
-        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { default: "UTC" }, { class: "form-control" } %>
+        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, { class: "form-control" } %>
       </div>
     </div>
 
@@ -108,14 +108,14 @@
     <div class="col-xs-6 col-md-3">
       <div class="input-group input-selector" title="Start Date">
         <span class="input-group-addon addon-selector"><%= icon('play') %>&nbsp<%= icon('calendar') %></span>
-        <%= f.text_field  :start_date, { class: "form-control date_field #{@readonly_disguiser}", readonly: true, value: @user.start_date.try(:strftime, "%m/%d/%Y"), disabled: @disabled } %>
+        <%= f.text_field  :start_date, { class: "form-control open_date_picker #{@readonly_shower}", readonly: true, value: @user.start_date.try(:strftime, "%m/%d/%Y"), disabled: @disabled } %>
       </div>
     </div>
 
     <div class="col-xs-6 col-md-3">
       <div class="input-group input-selector" title="End Date">
         <span class="input-group-addon addon-selector"><%= icon('stop') %>&nbsp<%= icon('calendar') %></span>
-        <%= f.text_field  :end_date, { class: "form-control date_field #{@readonly_disguiser} fix-shrink", readonly: true, value: @user.end_date.try(:strftime, "%m/%d/%Y"), disabled: @disabled } %>
+        <%= f.text_field  :end_date, { class: "form-control open_date_picker #{@readonly_shower} fix-shrink", readonly: true, value: @user.end_date.try(:strftime, "%m/%d/%Y"), disabled: @disabled } %>
       </div>
     </div>
 

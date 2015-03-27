@@ -1,7 +1,7 @@
 <h3 class="center subtle">Your Team's Timesheets</h3>
-<div id="recent-timesheets">
+<div id="recent-timesheets" class="datatable-div">
   <table class="table table-striped table-center" id="timesheet-over-table">
-   <%= render 'timesheet_table', timesheets_collection: @timesheets_for_user_auth %>
+   <%= render 'timesheet_table' %>
   </table>
 
   <%= render 'create_for_user' %>

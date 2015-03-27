@@ -1,8 +1,9 @@
 require 'spec_helper'
+require 'support/utilities'
 
-describe 'Timeoff Pages' do
-  let!(:user) { FactoryGirl.create(:user) }
-  let!(:timeoff_accrual) { FactoryGirl.create(:timeoff_accrual)}
+RSpec.describe 'Timeoff Pages' do
+  user = FactoryGirl.build(:user)
+  FactoryGirl.build(:timeoff_accrual)
   before { sign_in(user) }
 
   subject { page }
@@ -13,7 +14,7 @@ describe 'Timeoff Pages' do
     it "should have certain content" do
       should have_title 'Timeoff'
       should have_content 'Timeoff'
-      should have_table 'timeoff-table'
+      should have_table 'timeoff_table'
     end
   end
 
@@ -24,7 +25,7 @@ describe 'Timeoff Pages' do
       should have_title 'Timeoff'
       should have_content 'Timeoff'
       should have_button 'Submit'
-      should have_table 'timeoff-single-table'
+      should have_table 'timeoff_table'
     end
   end
 
@@ -33,6 +34,7 @@ describe 'Timeoff Pages' do
 
     it "should have certain content" do
       should have_title 'Timeoff'
+      should have_table 'timeoff_table'
       should have_content 'Timeoff'
     end
   end

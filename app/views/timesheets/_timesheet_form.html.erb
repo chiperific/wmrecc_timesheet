@@ -1,35 +1,55 @@
 <%= form_for [@user, @timesheet], { class: "form-inline"} do |t_form| %>
   <%= render 'shared/error_messages', object: t_form.object %>
+  <%= t_form.hidden_field :user_id, value: @user.id %>
+  <%= t_form.hidden_field :id, value: @timesheet.id %>
+  <%= t_form.hidden_field :hours_reviewed, { class: "reviewed-field"} %>
+  <%= t_form.hidden_field :hours_approved, { class: "approved-field"} %>
+  <%= t_form.hidden_field :timeoff_reviewed, { class: "timeoff-reviewed-field"} %>
+  <%= t_form.hidden_field :timeoff_approved, { class: "timeoff-approved-field"} %>
   <div class="row form-group" id='date_year_setter'>
     <div class="col-xs-6">
+      <p>Start date:</p>
       <div class="input-group">
         <span class="input-group-addon"><%= icon('calendar') %></span>
-        <% if action_name == "edit" %>
-          <%= text_field_tag "week_num_to_date_view", @timesheet_date.strftime("%m/%d"), { class: "week_num_to_date form-control readonly-disguiser width-limiter", readonly: true } %>
-        <% else %>
-          <%= text_field_tag "week_num_to_date_field", @timesheet_date.strftime("%m/%d"), { class: "week_num_to_date form-control readonly-disguiser width-limiter", readonly: true } %>  
-        <% end %>
-        
+        <%= text_field_tag "start_field", @human_start_date, { class: "form-control width-limiter #{if action_name != "edit" then "start_date_picker readonly-shower" end}", readonly: true, id: "form_start_date" } %>
       </div>
-      <%= t_form.hidden_field :week_num, { value: @timesheet.week_num || @timesheet_date.cweek } %>
+      <%= t_form.hidden_field :start_date, { value: @ruby_start_date, id: "ruby_start_date" } %>
+      <p id="date_warning" class="alert alert-warning width-limiter-14">Please select a Monday!</p>
     </div>
+
     <div class="col-xs-6">
+      <p>End date:</p>
       <div class="input-group">
-        <span class="input-group-addon"><%= icon('calendar-o') %></span>
-        <% if action_name == "edit" %>
-          <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter timesheet_year_view timesheet_year", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
-        <% else %>
-          <%= t_form.number_field :year, { class: "form-control readonly-disguiser width-limiter timesheet_year_field timesheet_year", value: @timesheet.year || @timesheet_date.strftime('%Y'), readonly: true } %>
-        <% end %>
+        <span class="input-group-addon"><%= icon('calendar') %></span>
+        <%= text_field_tag "end_field", @human_end_date, { class: "form-control width-limiter", readonly: true, id: "form_end_date" } %>
       </div>
+      <%= t_form.hidden_field :end_date, { value: @ruby_end_date, id: "ruby_end_date" } %>
     </div>
   </div>
 
+    
+  <% if @timesheet.new_record? %>
+    <div class="row alert alert-danger well-adjusted" id="timesheet_overwrite_warning" role="alert">
+      <span class="hidden" id="timesheets_ary">
+          <%= @timesheets_json %>
+      </span>
+      <div class="text-right no-height">
+        <a href="#" id="dismiss_timesheet_overwrite_warning" class="btn btn-xs btn-danger">X</a>
+      </div>
+      <h3 class="no-margin-top">Warning!</h3>
+      <h4>The <u>start date</u> you've selected already has a submitted timesheet.</h4>
+      <p>If you proceed, you'll overwrite that timesheet with new data.</p>
+      <p>Otherwise, you can <a href="" id="timesheet_overwrite_link">go to the original timesheet</a>.</p>
+    </div>
+  <% end %>
+    
+
   <div class="row alert alert-success well-striped well-adjusted" id="holiday_reminder" role="alert">
-    <span class="hidden" id="start_of_range"></span>
-    <span class="hidden" id="end_of_range"></span>
     <span class="hidden" id="holiday_ary"></span>
-    <h5>Heads up!</h5>
+    <div class="text-right no-height">
+      <a href="#" id="dismiss_holiday_reminder" class="btn btn-xs btn-success">X</a>
+    </div>
+    <h3 class="no-margin-top">Heads up!</h3>
     <ul class="list-unstyled" id="holidays_in_period"></ul>
   </div>
 
@@ -41,7 +61,7 @@
         <span class="small pull-right"> <%= link_to "(add timeoff)", "#", { id: 'show_timeoff_switch', class: 'btn btn-primary btn-xs'} %>
         </span>
       </legend>
-      <%= render 'timesheet_visual', bar_id: "hours_progressbar", ttl_field: "hours_bar_ttl", ttl: @hours_ttl.to_f %>
+      <%= render 'timesheet_visual', bar_id: "hours_progressbar", ttl_field: "hours_bar_ttl", ttl: @hours_ttl %>
       <span class="span-no-padding-both center">
         <span class="col-xs-2 expand-2-to-5" >
           &nbsp
@@ -61,7 +81,7 @@
     
     <fieldset class="col-xs-6" id="categories_fieldset">
       <legend class="subtle">Categories:</legend>
-      <%= render 'timesheet_visual', bar_id: "categories_progressbar", ttl_field: "categories_bar_ttl", ttl: @category_ttl.to_f %>
+      <%= render 'timesheet_visual', bar_id: "categories_progressbar", ttl_field: "categories_bar_ttl", ttl: @category_ttl %>
       <span class="span-no-padding-both center">
         <span class="col-xs-7">
           &nbsp
@@ -77,7 +97,7 @@
       </span>
       <%= render 'timesheet_categories_form', t_form: t_form %>
     </fieldset>
-  
+
   </div>
   <% if current_user.can_approve_this?(@user) %>
     <div class="row buffered-row">

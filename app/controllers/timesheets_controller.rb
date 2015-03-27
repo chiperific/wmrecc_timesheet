@@ -12,21 +12,23 @@ class TimesheetsController < ApplicationController
     else
       @page_title = "#{@user.fname}'s Timesheets"
     end
-    @timesheet = Timesheet.joins(:timesheet_hours).where( timesheet_hours: { user_id: @user.id }).uniq
+    @timesheets = Timesheet.where(user_id: @user.id).order(:start_date)
   end
 
   def supervisor
-    @timesheets = Timesheet.unapproved
     @title = "Timesheet"
     @user = User.find(params[:user_id])
     @page_title = "Your Team's Timesheets"
 
+    
     @user_auth = @user.has_authority_over
     if !@user_auth.empty?
       @user_id_ary = @user_auth.pluck(:id)
     else
       @user_id_ary = []
     end
+
+    @timesheets = Timesheet.where(hours_approved: nil, user_id: @user_id_ary).includes(:user).order('users.lname', 'users.fname').references(:users)
 
     @users_select = Hash.new
     @user_auth.each do |usr|
@@ -35,12 +37,12 @@ class TimesheetsController < ApplicationController
   end
 
   def admin
-    @timesheets = Timesheet.unapproved
     @title = "Timesheet"
     @user = User.find(params[:user_id])
     @page_title = "All Timesheets"
+
+    @timesheets = Timesheet.where(hours_approved: nil).includes(:user).order('users.lname', 'users.fname').references(:users)
     @user_id_ary = User.all.map { |u| u.id }
-    
     @users_select = Hash.new
     User.where(active: true).order(:lname).each do |usr|
       @users_select[usr.full_name] = usr.id
@@ -48,10 +50,11 @@ class TimesheetsController < ApplicationController
   end
 
   def archive
-    @timesheets = Timesheet.approved
     @title = "Timesheet archive"
     @user = User.find(params[:user_id])
     @page_title = "All Timesheets"
+
+    @timesheets = Timesheet.where.not(hours_approved: nil).includes(:user).order('users.lname', 'users.fname').references(:users)
     @user_id_ary = User.all.map { |u| u.id }
 
     @users_select = Hash.new
@@ -69,16 +72,13 @@ class TimesheetsController < ApplicationController
   def new
     @title = "New Timesheet"
     @user = User.find(params[:user_id])
+
     @timesheet = Timesheet.new
-    @timesheet_date = Date.today
 
     @hours_reviewed = ["Unreviewed", false]
     @hours_approved = ["Unapproved", false]
     @timeoff_hours_reviewed = ["Unreviewed", false]
     @timeoff_hours_approved = ["Unapproved", false]
-
-
-    @url = user_timesheets_path(@user.id)
 
     @timesheet_hours = weekday_ary
 
@@ -88,100 +88,90 @@ class TimesheetsController < ApplicationController
 
     @hours_ttl = 0.0
     @category_ttl = 0.0
+    if @user.standard_hours == 0
+      @standard_hours = 40
+    else
+      @standard_hours = @user.standard_hours.to_f
+    end
+
+    start_date = Date.commercial(Date.today.year, Date.today.cweek, 1)
+    end_date = Date.commercial(Date.today.year, Date.today.cweek, 7)
+
+    @human_start_date = start_date.strftime("%m/%d/%Y")
+    @human_end_date = end_date.strftime("%m/%d/%Y")
+
+    @ruby_start_date = start_date.strftime("%Y/%m/%d")
+    @ruby_end_date = end_date.strftime("%Y/%m/%d")
+
+    #for timesheet_finder timesheet_ary -- warns when overwritting an existing record
+    @timesheets_json = Timesheet.where(user_id: @user.id).select('id, start_date, user_id').to_json
+
   end
 
   def edit
     @title = "Edit Timesheet"
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
-    @timesheet_date = DateTime.parse @timesheet.week_num_to_date_obj
-    @hours = @timesheet.timesheet_hours.where(user_id: @user.id).first
-    if !@hours.nil?
-      @hours_approved = @hours.approved?
-      @hours_reviewed = @hours.reviewed?
-      @timeoff_hours_reviewed = @hours.timeoff_reviewed?
-      @timeoff_hours_approved = @hours.timeoff_approved?
-    else
-      @hours_approved = false
-      @hours_reviewed = false
-      @timeoff_hours_reviewed = false
-      @timeoff_hours_approved = false
-    end
-    
-    @url = user_timesheet_path(@user.id, @timesheet.id)
 
+    start_date = @timesheet.start_date
+    end_date = @timesheet.end_date
+
+    @human_start_date = start_date.strftime("%m/%d/%Y")
+    @human_end_date = end_date.strftime("%m/%d/%Y")
+
+    @ruby_start_date = start_date.strftime("%Y/%m/%d")
+    @ruby_end_date = end_date.strftime("%Y/%m/%d")
+
+    @hours_approved = @timesheet.hours_approved.present?
+    @hours_reviewed = @timesheet.hours_reviewed.present?
+    @timeoff_hours_reviewed = @timesheet.timeoff_reviewed.present?
+    @timeoff_hours_approved = @timesheet.timeoff_approved.present?
+    
     @timesheet_hours = weekday_ary
 
     @timesheet_categories = categories_ary
 
+    @hours_ttl = @timesheet.timesheet_hours.sum(:hours).to_f
+    @category_ttl = @timesheet.timesheet_categories.sum(:hours).to_f
+    if @user.standard_hours == 0
+      @standard_hours = 40
+    else
+      @standard_hours = @user.standard_hours.to_f
+    end
+
     session[:return_url] = back_uri
 
-    @ts_collection = @timesheet.timesheet_hours.where(user_id: @user.id)
-
-    @hours_ttl = @ts_collection.sum(:hours) + @ts_collection.sum(:timeoff_hours)
-    @category_ttl = @timesheet.timesheet_categories.where(user_id: @user.id).sum(:hours)
+    #for timesheet_finder timesheet_ary -- warns when overwritting an existing record
+    @timesheets_json = Timesheet.where(user_id: @user.id).select('id, start_date, user_id').to_json
   end
 
   def create
     @user = User.find(params[:user_id])
-    @timesheet_date = Date.today
+    @start_date = Date.parse(params[:timesheet][:start_date])
 
     # If the timesheet already exists, update it
-    if Timesheet.where( week_num: params[:timesheet][:week_num], year: params[:timesheet][:year]).exists?
+    @timesheet = Timesheet.find_or_initialize_by_start_date_and_user_id(@start_date, @user.id)
 
-      @timesheet_ary = Timesheet.where( week_num: params[:timesheet][:week_num], year: params[:timesheet][:year])
-      @timesheet = @timesheet_ary.first
-
-      # If the each Timesheet Hour already exists, update it, else, create it.
-      params['timesheet']['timesheet_hours_attributes'].each do |th_a|
-        th = th_a.second
-        th.delete("id")
-        th['timesheet_id'] = @timesheet.id
-        if TimesheetHour.where( user_id: @user.id, timesheet_id: @timesheet.id, weekday: th['weekday'] ).exists?
-          # update
-          th_r = TimesheetHour.where( user_id: @user.id, timesheet_id: @timesheet.id, weekday: th['weekday'] ).first
-          th_r.update(th)
-        else
-          # create
-          TimesheetHour.create(th)
-        end
-      end
-
-      # If the each Timesheet Category already exists, update it, else, create it.
-      params['timesheet']['timesheet_categories_attributes'].each do |tc_a|
-        tc = tc_a.second
-        tc.delete("id")
-        tc['timesheet_id'] = @timesheet.id
-        if TimesheetCategory.where( user_id: @user.id, timesheet_id: @timesheet.id, category_id: tc['category_id'] ).exists?
-          # update
-          tc_r = TimesheetCategory.where( user_id: @user.id, timesheet_id: @timesheet.id, category_id: tc['category_id'] ).first
-          tc_r.update(tc)
-        else
-          # create
-          TimesheetCategory.create(tc)
-        end
-      end
-
-      # if @timesheet.update_attributes(timesheet_params)
-      #   flash[:success] = "Timesheet updated"
-      #   redirect_to session[:return_url]
-      # else
-      #   flash[:error] = "Failed to submit"
-      #   render 'new'
-      # end
-
-      flash[:success] = "Timesheet updated"
-      redirect_to session[:return_url]
-
+    if @timesheet.new_record?
+      @timesheet.update_attributes(timesheet_params)
     else
-      @timesheet = Timesheet.new(timesheet_params)
-      if @timesheet.save
-        flash[:success] = "Timesheet submitted"
-        redirect_to session[:return_url]
-      else
-        flash[:error] = "Failed to submit"
-        render 'new'
+      @timesheet.timesheet_hours.order(:day_num).each_with_index do |th, index|
+        th.hours = params['timesheet']['timesheet_hours_attributes'][index.to_s]['hours']
+        th.timeoff_hours = params['timesheet']['timesheet_hours_attributes'][index.to_s]['timeoff_hours']
+        th.save
       end
+      @timesheet.timesheet_categories.order(:category_id).each_with_index do |tc, index|
+        tc.hours = params['timesheet']['timesheet_categories_attributes'][index.to_s]['hours']
+        tc.save
+      end
+    end
+
+    if @timesheet.save
+      flash[:success] = "Timesheet submitted"
+      redirect_to session[:return_url]
+    else
+      flash.now[:error] = "Failed to submit"
+      render 'new'
     end
   end
 
@@ -193,7 +183,7 @@ class TimesheetsController < ApplicationController
       flash[:success] = "Timesheet updated"
       redirect_to session[:return_url]
     else
-      flash[:error] = "Failed to update"
+      flash.now[:error] = "Failed to update"
       render 'edit'
     end
   end
@@ -201,21 +191,16 @@ class TimesheetsController < ApplicationController
   private
 
     def timesheet_params
-      params.require(:timesheet).permit(:week_num, :year,
-        :timesheet_hours_attributes =>      [:id, :timesheet_id, :user_id, :weekday, :hours, :reviewed, :approved, :timeoff_hours, :timeoff_reviewed, :timeoff_approved],
-        :timesheet_categories_attributes => [:id, :timesheet_id, :user_id, :hours, :category_id]
+      params.require(:timesheet).permit(
+        :start_date, :end_date, :user_id, :hours_approved, :hours_reviewed, :timeoff_approved, :timeoff_reviewed,
+        :timesheet_hours_attributes =>      [:id, :timesheet_id, :day_num, :hours, :timeoff_hours],
+        :timesheet_categories_attributes => [:id, :timesheet_id, :hours, :category_id]
       )
     end
 
-    def timesheet_hour_params
-      params.require(:timesheet_hours_attributes).permit(
-        :id, :timesheet_id, :user_id, :weekday, :hours, :reviewed, :approved, :timeoff_hours, :timeoff_reviewed, :timeoff_approved
-      )
-    end
-
-    # for defaul select_tag values on _timesheet_approval_form
+    # for default select_tag values on _timesheet_approval_form
     def reviewed?
-      if self.reviewed.blank?
+      if self.hours_reviewed.blank?
         ["Unreviewed", false]
       else
         ["Reviewed", true]
@@ -223,7 +208,7 @@ class TimesheetsController < ApplicationController
     end
 
     def approved?
-      if self.approved.blank?
+      if self.hours_approved.blank?
         ["Unapproved", false]
       else
         ["Approved", true]
@@ -250,7 +235,7 @@ class TimesheetsController < ApplicationController
       timesheet_hours = Array.new
 
       Weekday.all.order(:day_num).each do |wd|
-        timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(user_id: @user.id, weekday: wd.day_num)
+        timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(day_num: wd.day_num)
         timesheet_hours << timesheet_hour
       end
       timesheet_hours
@@ -260,7 +245,7 @@ class TimesheetsController < ApplicationController
       timesheet_categories = Array.new
 
       Category.where(department_id: @user.department_id).each do |cat|
-        timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(user_id: @user.id, category_id: cat.id)
+        timesheet_category = @timesheet.timesheet_categories.find_or_initialize_by(category_id: cat.id)
         timesheet_categories << timesheet_category
       end
       timesheet_categories

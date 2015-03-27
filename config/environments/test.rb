@@ -38,5 +38,5 @@ WmreccTimesheet::Application.configure do
   ActiveModel::SecurePassword.min_cost = true
 
   # increase packet size for launchy
-  DRb::DRbServer.default_load_limit 90214400
+  #DRb::DRbServer.default_load_limit 90214400
 end

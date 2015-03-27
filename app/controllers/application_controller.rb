@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  require 'action_view'
+  include ActionView::Helpers::NumberHelper
+  
   protect_from_forgery with: :exception
   include StaticPagesHelper
 

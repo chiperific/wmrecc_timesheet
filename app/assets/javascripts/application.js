@@ -31,6 +31,8 @@ Date.prototype.getWeek = function() {
 }
 
 $.extend( true, $.fn.dataTable.defaults, {
+  responsive: true,
+  autoWidth: false,
   order: [[0, "desc"]],
   pagingType: "full_numbers",
   lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
@@ -48,14 +50,3 @@ $.extend( true, $.fn.dataTable.defaults, {
     }
   }
 } );
-
-jQuery(function($){
-var windowWidth = $(window).width();
-
-  $(window).resize(function() {
-      if(windowWidth != $(window).width()){
-      location.reload();
-      return;
-      }
-  });
-});

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617004130) do
+ActiveRecord::Schema.define(version: 20150215134320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 20140617004130) do
 
   create_table "timesheet_categories", force: true do |t|
     t.integer  "timesheet_id"
-    t.integer  "user_id"
     t.integer  "category_id"
     t.decimal  "hours",        precision: 4, scale: 2, default: 0.0
     t.datetime "created_at"
@@ -84,36 +83,36 @@ ActiveRecord::Schema.define(version: 20140617004130) do
 
   add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category", using: :btree
   add_index "timesheet_categories", ["timesheet_id"], name: "index_timesheet_categories_on_timesheet", using: :btree
-  add_index "timesheet_categories", ["user_id"], name: "index_timesheet_categories_on_user", using: :btree
 
   create_table "timesheet_hours", force: true do |t|
     t.integer  "timesheet_id"
-    t.integer  "user_id"
-    t.integer  "weekday"
-    t.decimal  "hours",            precision: 4, scale: 2, default: 0.0
-    t.datetime "reviewed"
-    t.datetime "approved"
-    t.decimal  "timeoff_hours",    precision: 4, scale: 2, default: 0.0
-    t.datetime "timeoff_reviewed"
-    t.datetime "timeoff_approved"
+    t.integer  "day_num"
+    t.decimal  "hours",         precision: 4, scale: 2, default: 0.0
+    t.decimal  "timeoff_hours", precision: 4, scale: 2, default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet", using: :btree
-  add_index "timesheet_hours", ["user_id"], name: "index_timesheet_hours_on_user", using: :btree
 
   create_table "timesheets", force: true do |t|
-    t.integer "week_num"
-    t.integer "year"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "user_id"
+    t.date     "hours_approved"
+    t.date     "timeoff_approved"
+    t.date     "hours_reviewed"
+    t.date     "timeoff_reviewed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
     t.string   "fname"
     t.string   "lname"
-    t.boolean  "active"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.boolean  "active",                                   default: true
+    t.date     "start_date"
+    t.date     "end_date"
     t.integer  "department_id"
     t.integer  "supervisor_id"
     t.string   "email"
@@ -124,7 +123,7 @@ ActiveRecord::Schema.define(version: 20140617004130) do
     t.decimal  "salary_rate",     precision: 10, scale: 2
     t.decimal  "hourly_rate",     precision: 6,  scale: 2
     t.string   "pay_type",                                 default: "Salary"
-    t.string   "time_zone",                                default: "UTC"
+    t.string   "time_zone",                                default: "Eastern Time (US & Canada)"
     t.string   "remember_token"
     t.datetime "created_at"
     t.datetime "updated_at"

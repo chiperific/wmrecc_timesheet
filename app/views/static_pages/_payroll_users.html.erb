@@ -11,8 +11,8 @@
     <% end %>
   </td>
   <td class="center"><%= user.payroll_hours(@payroll_start, @payroll_end) %></td>
-  <td class="hidden-xs align-right">$ <%= user.payroll_rate %></td>
+  <td class="hidden-xs align-right"><%= number_to_currency user.payroll_rate %></td>
   <td class="align-right">
-    $ <%= number_with_precision( user.payroll_gross(@payroll_start, @payroll_end), precision: 2 ) %>
+    <%= number_to_currency user.payroll_gross(@payroll_start, @payroll_end) %>
   </td>
 </tr>

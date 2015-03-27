@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe TimeoffAccrual do
-  let!(:timeoff_accrual) { FactoryGirl.create(:timeoff_accrual)}
+RSpec.describe TimeoffAccrual do
+  timeoff_accrual = FactoryGirl.build_stubbed(:timeoff_accrual)
 
   subject { timeoff_accrual }
 
@@ -21,7 +21,10 @@ describe TimeoffAccrual do
   end
 
   describe "when accrual_type is on the list" do
-    before { timeoff_accrual.accrual_type = "Weekly" }
+    before { 
+      timeoff_accrual.accrual_type = "Weekly"
+      timeoff_accrual.app_default_id = 1
+    }
     it { should be_valid }
   end
 

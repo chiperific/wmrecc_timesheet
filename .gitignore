@@ -17,7 +17,7 @@
 .env
 
 # Ignore PG dump files
-/.dump
+.dump
 
 # Compiled source #
 ###################

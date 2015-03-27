@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe PayPeriod do
-  let!(:pay_period) { FactoryGirl.create(:pay_period) }
+RSpec.describe PayPeriod do
+  pay_period = FactoryGirl.build(:pay_period)
   subject { pay_period }
 
   it "has all the fields" do
@@ -20,7 +20,10 @@ describe PayPeriod do
   end
 
   describe "when period_type is on the list" do
-    before { pay_period.period_type = "Weekly" }
+    before { 
+      pay_period.period_type = "Weekly"
+      pay_period.app_default_id = 1
+    }
     it { should be_valid }
   end
 
