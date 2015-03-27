@@ -4,9 +4,8 @@
 }
 
 #name_banner {
-  margin-left: auto;
-  margin-right: auto;
-  width: 55%;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 #logo-home-link {
@@ -20,6 +19,29 @@
 
 .jumbo-font {
   font-size: 48px !important;
+}
+
+// Make the app-header stuff smaller on small screens
+@media (max-width: 400px ) {
+  #logo {
+    width: 75px;
+  }
+
+  .jumbo-font {
+    font-size: 24px !important;
+  }
+
+  .mini-jumbo-font {
+    display: none;
+  }
+
+  #app-header {
+    margin-bottom: 0px !important;
+  }
+
+  #home_btn_div {
+    margin-top: -2em;
+  }
 }
 
 // home#_signed_in.html styling to make app-style buttons.

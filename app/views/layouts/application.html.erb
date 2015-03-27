@@ -14,6 +14,7 @@
 <body>
   <div class="container-fluid" id="top-level-container" name="data-no-turbolink">
     <div class="page-header lt-blue-bg" id="app-header">
+
       <div class="row" id="name_banner">
         <div class="col-xs-2">
           <a href="/" id="logo-home-link">
@@ -22,18 +23,19 @@
         </div>
         <div class="col-xs-10">
           <h1 class="jumbo-font white-text">TimeShift</h1>
-          <h3 class="no-margin-top">Space-age time tracking for The Refugee Center.</h3>
+          <h3 class="no-margin-top mini-jumbo-font">Space-age time tracking for The Refugee Center.</h3>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-xs-3 col-xs-offset-9 text-right">
+        <div class="col-xs-3 col-xs-offset-9 text-right" id="home_btn_div">
           <% if params[:action] != "home" %>
-            <%= link_to FA_HOME, root_path, class: "btn btn-success" %>
+            <%= link_to FA_HOME, root_path, class: "btn btn-success btn-sm" %>
           <% end %>
         </div>
       </div>
     </div>
+
     <div class="row flasher">
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %> center"><%= value %></div>
