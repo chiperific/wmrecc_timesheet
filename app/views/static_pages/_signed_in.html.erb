@@ -125,6 +125,7 @@
   <% end %> 
 
 <!-- Admin buttons -->
+  <% if current_user.admin %> 
     <a href="<%= user_timesheets_admin_path(current_user) %>" class="<%= @col_width %>">
       <div class="box-btn">
         <%= icon('thumbs-o-up fa-3x') %>
@@ -139,7 +140,7 @@
       </div>
     </a>
 
-    <% if current_user.admin %> 
+    
     <a href="<%= users_path %>" class="<%= @col_width %>">
       <div class="box-btn">
         <%= icon('users fa-3x') %>
