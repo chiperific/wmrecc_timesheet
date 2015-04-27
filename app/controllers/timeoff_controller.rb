@@ -22,7 +22,7 @@ class TimeoffController < ApplicationController
     else
       @date = params[:date].to_date
     end
-    @visible_date = @date.strftime("%m/%d/%y")
+    @visible_date = @date.strftime("%m/%d/%Y")
   end
 
   def supervisor
@@ -30,12 +30,30 @@ class TimeoffController < ApplicationController
     @user = User.find(params[:user_id])
 
     @timeoff_hours = Timesheet.where(user_id: @user.has_authority_over).includes(:timesheet_hours).where("timesheet_hours.timeoff_hours > 0").references(:timesheet_hours)
+
+    if !params[:date]
+      @date = Date.today.start_of_period
+    else
+      @date = params[:date].to_date
+    end
+    @visible_date = @date.strftime("%m/%d/%Y")
+
+    @users = @user.has_authority_over
   end
 
   def admin
     @title = "Timeoff"
 
     @timeoff_hours = Timesheet.includes(:timesheet_hours).where("timesheet_hours.timeoff_hours > 0").references(:timesheet_hours)
+
+    if !params[:date]
+      @date = Date.today.start_of_period
+    else
+      @date = params[:date].to_date
+    end
+    @visible_date = @date.strftime("%m/%d/%Y")
+
+    @users = User.where(active: true).order(:lname, :fname)
   end
 
   private

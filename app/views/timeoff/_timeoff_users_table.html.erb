@@ -1,0 +1,43 @@
+<div class="datatable-div">
+  <table class="table table-striped" id="timeoff_users_table">
+    <thead class="subtle">
+      <tr>
+        <td style="display: none;"></td>
+        <td style="display: none;"></td>
+        <td>
+          <%= icon('user fa-2x') %>
+          <p>User</p>
+        </td>
+        <td>
+          <%= icon('plus-square-o fa-2x') %>
+          <p>Accumulated</p>
+        </td>
+        <td>
+          <%= icon('plus-square-o fa-2x') %>
+          <p>Carried over</p>
+        </td>
+        <td>
+          <%= icon('minus-square-o fa-2x') %>
+          <p>Used</p>
+        </td>
+        <td>
+          <%= icon('check-square-o fa-2x') %>
+          <p>Balance</p>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |u| %>
+        <tr>
+          <td style="display: none;"><%= u.lname %></td>
+          <td style="display: none;"><%= u.fname %></td>
+          <td><%= u.full_name %></td>
+          <td><%= u.timeoff_accumulated(@date) %></td>
+          <td><%= u.timeoff_carryover %></td>
+          <td><%= u.timeoff_used_to_period(@date) %></td>
+          <td><%= u.timeoff_remaining(@date) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

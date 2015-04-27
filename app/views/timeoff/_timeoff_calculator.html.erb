@@ -4,62 +4,72 @@
 
 <div class="row row-fluid min-padding-both center">
   <% if @timeoff_accrual_type == "Annual" %>
-    <div class="col-xs-6 col-sm-4">
+    <div class="col-xs-4 col-sm-3">
       <div class="well well-adjusted">
-        <p><%= @user.timeoff_accumulated(@date) %> hours off per year.</p>
+        <p><%= target.timeoff_accumulated(@date) %> hours off per year.</p>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-4">
+    <div class="col-xs-4 col-sm-3">
       <div class="well well-adjusted">
-        <p><%= @user.timeoff_approved_by_year(@date) %> approved hours.</p>
+        <p><%= target.timeoff_carryover.to_f %> hours carried from last year.</p>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-3">
+      <div class="well well-adjusted">
+        <p><%= target.timeoff_approved_by_year(@date) %> approved hours.</p>
       </div>
     </div>
     
     <% if @date.year.to_i == Time.now.in_time_zone.year %>
-      <div class="col-xs-6 col-sm-4">
+      <div class="col-xs-4 col-sm-3">
         <div class="well well-adjusted">
-          <p><%= @user.timeoff_accumulated(@date) - @user.timeoff_approved_by_year(@date) %> hours remaining.</p>
+          <p><%= target.timeoff_accumulated(@date) - target.timeoff_approved_by_year(@date) + target.timeoff_carryover %> hours remaining.</p>
         </div>
       </div>
     <% end %>
 
   <% else %>
-    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="col-xs-4 col-sm-4 col-md-3">
       <div class="well well-adjusted">
-        <p><%= @user.timeoff_earned_per_period(@date) %> earned <%= @timeoff_accrual_type.downcase %>.</p>
+        <p><%= target.timeoff_earned_per_period(@date) %> earned <%= @timeoff_accrual_type.downcase %>.</p>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="col-xs-4 col-sm-4 col-md-3">
       <div class="well well-adjusted">
-        <p><%= @user.timeoff_accumulated(@date) %> earned this year.</p>
+        <p><%= target.timeoff_accumulated(@date) %> earned this year.</p>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="col-xs-4 col-sm-4 col-md-3">
       <div class="well well-adjusted">
-        <p><%= @user.timeoff_used_by_period(@date) %> used this pay period.</p>
+        <p><%= target.timeoff_carryover.to_f %> hours carried from last year.</p>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="col-xs-4 col-sm-4 col-md-3">
       <div class="well well-adjusted">
-        <p><%= @user.timeoff_used_to_period(@date) %> used this year.</p>
+        <p><%= target.timeoff_used_by_period(@date) %> used this pay period.</p>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="col-xs-4 col-sm-4 col-md-3">
       <div class="well well-adjusted">
-        <p><%= @user.timeoff_accumulated(@date) - @user.timeoff_used_to_period(@date) %> remaining.</p>
+        <p><%= target.timeoff_used_to_period(@date) %> used this year.</p>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-3">
+      <div class="well well-adjusted">
+        <p><%= target.timeoff_accumulated(@date) - target.timeoff_used_to_period(@date) + target.timeoff_carryover %> remaining.</p>
       </div>
     </div>
   <% end %>
 
-  <% if @user.timeoff_unapproved_by_year(@date) > 0  %>
+  <% if target.timeoff_unapproved_by_year(@date) > 0  %>
     <div class="col-xs-12 min-padding-both">
-      <a href="<%= user_timesheets_single_path(@user) %>"class="btn btn-warning black-text">
+      <a href="<%= user_timesheets_single_path(target) %>"class="btn btn-warning black-text">
         <%= 
-          pluralize( @user.timsheets_w_timeoff_unapproved_by_year(@date), 'timesheet', 'timesheets') +
+          pluralize( target.timsheets_w_timeoff_unapproved_by_year(@date), 'timesheet', 'timesheets') +
           " (which has " + 
-          pluralize( @user.timeoff_unapproved_by_year(@date).to_s, 'hour', 'hours' ) + 
+          pluralize( target.timeoff_unapproved_by_year(@date).to_s, 'hour', 'hours' ) + 
           " off) " +
-          "is".pluralize(@user.timsheets_w_timeoff_unapproved_by_year(@date)) + 
+          "is".pluralize(target.timsheets_w_timeoff_unapproved_by_year(@date)) + 
           " not approved."
         %>
       </a>

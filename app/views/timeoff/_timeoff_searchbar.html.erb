@@ -1,16 +1,16 @@
 <form accept-charset="UTF-8" method="get" id="timeoff_searchbar_form">
   <div class="row buffered-row-bottom">
-    <div class="col-xs-6 col-sm-3 min-padding-both">
+    <div class="col-xs-4 min-padding-both">
       <div class="input-group" title='Date'>
         <span class="input-group-addon">
           <%= icon('calendar') %>
         </span>
-        <input id="searchbar_date" name="date" type="integer" value="<%= @visible_date %>" class="form-control start_date_picker" >
+        <input id="searchbar_date" name="date" type="integer" value="<%= @visible_date %>" class="form-control open_date_picker" >
       </div>
     </div>
 
-    <div class="col-xs-6 col-sm-3 text-center">
-      <h5>Change the date to see your usage and accruals during different pay periods.</h5>
+    <div class="col-xs-2 text-center">
+      <p>Change the date to see different accruals.</p>
     </div>
 
     <div class="col-xs-3 text-center">

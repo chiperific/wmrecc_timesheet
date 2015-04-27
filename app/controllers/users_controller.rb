@@ -134,7 +134,7 @@ class UsersController < ApplicationController
         :fname, :lname, :active, 
         :department_id, :supervisor_id, :time_zone,
         :email, :password, :password_confirmation, :admin, :time_zone, :start_date, :end_date,
-        :annual_time_off, :standard_hours, :salary_rate, :hourly_rate, :pay_type)
+        :annual_time_off, :timeoff_carryover, :standard_hours, :salary_rate, :hourly_rate, :pay_type)
     end
 
     # for _user_form select field

@@ -16,4 +16,14 @@ class Timesheet < ActiveRecord::Base
       "Unreviewed"
     end
   end
+
+  def status_to
+    if self.timeoff_approved.present?
+      self.timeoff_approved.strftime("%m/%d/%Y")
+    elsif self.timeoff_reviewed.present?
+      "Denied"
+    else
+      "Unreviewed"
+    end
+  end
 end

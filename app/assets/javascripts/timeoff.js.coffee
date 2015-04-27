@@ -17,3 +17,25 @@ jQuery ->
     rubyDate = year+"-"+month+"-"+day
     $('#searchbar_date').val(rubyDate)
     true
+
+  $('#timeoff_users_table').dataTable
+    order: [[0,"asc"],[1,"asc"]],
+    responsive: true,
+    autoWidth: false,
+    columnDefs: [
+      targets: [0,1], sortable: false, searchable: false
+    ]
+
+  # Toggle visibility of _timeoff_searchbar and _timeoff_users_table on admin and supervisor views
+  $('#toggle_timeoff_users_partials').click ->
+    $('.timeoff_users_toggle').slideToggle()
+    $(this).toggleClass('on')
+    $(this).toggleClass('off')
+    $("a#toggle_timeoff_users_partials.on").html(
+      "<i class='fa fa-minus'></i> Hide User Summary"
+      )
+    $("a#toggle_timeoff_users_partials.off").html(
+      "<i class='fa fa-plus'></i> Show User Summary"
+      )
+    event.preventDefault
+    false

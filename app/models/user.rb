@@ -79,6 +79,17 @@ class User < ActiveRecord::Base
   end
 
   ############ methods for _timeoff_calculator
+  # accrual_type: ["Annual", "Weekly", "Bi-weekly"]
+  def timeoff_earned_per_period(date)
+    if TimeoffAccrual.first.accrual_type == "Weekly"
+      earned = ((self.annual_time_off / 52.0 ).to_f).round(2)
+    elsif TimeoffAccrual.first.accrual_type == "Bi-weekly"
+      earned = ((self.annual_time_off / 26.0 ).to_f).round(2)
+    else
+      earned = self.annual_time_off
+    end
+  end
+
   # return the amount of timeoff accumulated to this date based upon accrual_type: ["Annual", "Weekly", "Bi-weekly"]
   def timeoff_accumulated(date)
     if TimeoffAccrual.first.accrual_type == "Weekly"
@@ -93,19 +104,6 @@ class User < ActiveRecord::Base
     accumulated
   end
 
-  # accrual_type: ["Annual", "Weekly", "Bi-weekly"]
-  def timeoff_earned_per_period(date)
-    date = date_from_period_year(period, year)
-    if TimeoffAccrual.first.accrual_type == "Weekly"
-      earned = ((self.annual_time_off / 52.0 ).to_f).round(2)
-    elsif TimeoffAccrual.first.accrual_type == "Bi-weekly"
-      earned = ((self.annual_time_off / 26.0 ).to_f).round(2)
-    else
-      earned = self.annual_time_off
-    end
-  end
-
-  ############ methods for timeoff views
   def timeoff_approved_by_year(date)
     timesheets = self.timesheets.where("extract(year from start_date) = ?", date.year).where.not(timeoff_approved: nil)
     if timesheets.any? 
@@ -169,6 +167,11 @@ class User < ActiveRecord::Base
       0
     end
   end
+
+  def timeoff_remaining(date)
+    self.timeoff_accumulated(date).to_f + self.timeoff_carryover.to_f - self.timeoff_used_to_period(date).to_f
+  end
+
 
   ############ methods for payroll_users
   def payroll_hours(payroll_start, payroll_end)

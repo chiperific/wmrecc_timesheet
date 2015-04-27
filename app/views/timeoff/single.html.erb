@@ -6,7 +6,7 @@
       <%= render 'timeoff_searchbar' %>
     </div>
     <div class="col-xs-12">
-      <%= render 'timeoff_calculator' %>
+      <%= render 'timeoff_calculator', target: @user %>
     </div>
     
   </div>
@@ -16,6 +16,9 @@
 
   <div class="buffered-row">
     <%= link_to FA_NEW, new_user_timesheet_path(@user.id), { class: "btn btn-success"} %>
+    &nbsp Request timeoff by creating a future timesheet.
+    
+
   </div>
 
 </div>

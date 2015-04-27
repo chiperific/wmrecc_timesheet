@@ -32,7 +32,7 @@
           <td><%= t.start_date.strftime("%m/%d/%Y") %></td>
           <td><%= t.timesheet_hours.sum(:timeoff_hours) %></td>
           <td class="hidden-xs"><%= t.updated_at.strftime("%m/%d/%Y") %></td>
-          <td><%= t.status %></td>
+          <td><%= t.status_to %></td>
           <td><%= link_to FA_EDIT, edit_user_timesheet_path( t.user.id, t.id), class: "btn btn-primary btn-sm" %></td>
         </tr>
       <% end %>

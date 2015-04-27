@@ -5,6 +5,7 @@ jQuery ->
   $('.open_date_picker').datepicker
     todayBtn: "linked"
     format: 'mm/dd/yyyy'
+    altFormat: 'yyyy-mm-dd'
     calendarWeeks: true
     weekStart: 1
     autoclose: true
@@ -15,6 +16,7 @@ jQuery ->
     daysOfWeekDisabled: "0,2,3,4,5,6"
     todayBtn: "linked"
     format: 'mm/dd/yyyy'
+    altFormat: 'yyyy-mm-dd'
     calendarWeeks: true
     weekStart: 1
     autoclose: true
@@ -25,6 +27,7 @@ jQuery ->
     daysOfWeekDisabled: "1,2,3,4,5,6"
     todayBtn: "linked"
     format: 'mm/dd/yyyy'
+    altFormat: 'yyyy-mm-dd'
     calendarWeeks: true
     weekStart: 1
     autoclose: true

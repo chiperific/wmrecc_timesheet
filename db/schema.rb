@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406165901) do
+ActiveRecord::Schema.define(version: 20150426212248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,23 +110,24 @@ ActiveRecord::Schema.define(version: 20150406165901) do
   create_table "users", force: true do |t|
     t.string   "fname"
     t.string   "lname"
-    t.boolean  "active",                                   default: true
+    t.boolean  "active",                                     default: true
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "department_id"
     t.integer  "supervisor_id"
     t.string   "email"
     t.string   "password_digest"
-    t.boolean  "admin",                                    default: false
-    t.decimal  "annual_time_off", precision: 6,  scale: 2, default: 0.0
-    t.decimal  "standard_hours",  precision: 6,  scale: 2, default: 40.0
-    t.decimal  "salary_rate",     precision: 10, scale: 2
-    t.decimal  "hourly_rate",     precision: 6,  scale: 2
-    t.string   "pay_type",                                 default: "Salary"
-    t.string   "time_zone",                                default: "Eastern Time (US & Canada)"
+    t.boolean  "admin",                                      default: false
+    t.decimal  "annual_time_off",   precision: 6,  scale: 2, default: 0.0
+    t.decimal  "standard_hours",    precision: 6,  scale: 2, default: 40.0
+    t.decimal  "salary_rate",       precision: 10, scale: 2
+    t.decimal  "hourly_rate",       precision: 6,  scale: 2
+    t.string   "pay_type",                                   default: "Salary"
+    t.string   "time_zone",                                  default: "Eastern Time (US & Canada)"
     t.string   "remember_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "timeoff_carryover", precision: 5,  scale: 2, default: 0.0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

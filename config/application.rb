@@ -98,7 +98,7 @@ class Date
       if self.cweek.even?
         eop = Date.commercial(self.year, self.cweek, 7)
       else
-        eop = Date.commercial(self.year, self.cweek + 1, 7)
+        eop = Date.commercial(self.year, self.cweek, 7) + 7.days
       end
     when "Monthly"
       eop = Date.new(self.year, self.month, -1)

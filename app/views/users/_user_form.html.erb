@@ -59,48 +59,58 @@
       <hr class="hr-thin">
     </div>
 
-    <div class="col-xs-12 col-md-6">
-      <div class="input-group input-selector" title="Time Zone">
-        <span class="input-group-addon addon-selector">
-          <%= icon('globe') %>
-        </span>
-        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, { class: "form-control" } %>
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <div class="input-group input-selector" title="Time Zone">
+          <span class="input-group-addon addon-selector">
+            <%= icon('globe') %>
+          </span>
+          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, { class: "form-control" } %>
+        </div>
       </div>
-    </div>
 
-    <div class="col-xs-6 col-md-3">
-      <div class="input-group" title="Default hours per week">
-        <span class="input-group-addon rate"><%= icon('clock-o') %>/wk</span>
-        <%= f.number_field :standard_hours, {class: "form-control", placeholder: "Hrs Per Week", step: 'any', min: 0, disabled: @disabled } %>
+      <div class="col-xs-6 col-md-3">
+        <div class="input-group" title="Default hours per week">
+          <span class="input-group-addon rate"><%= icon('clock-o') %>/wk</span>
+          <%= f.number_field :standard_hours, {class: "form-control", placeholder: "Hrs Per Week", step: 'any', min: 0, disabled: @disabled } %>
+        </div>
       </div>
-    </div>
 
-    <div class="col-xs-6 col-md-3">
-      <div class="input-group" title="Time off (in hours) per year">
-        <span class="input-group-addon rate"><%= icon('minus-square-o') %>/yr</span>
-        <%= f.number_field :annual_time_off, {class: "form-control fix-shrink", placeholder: "Time Off", step: 'any', min: 0, disabled: @disabled } %>
+      <div class="col-xs-6 col-md-3">
+        <div class="input-group" title="Time off (in hours) per year">
+          <span class="input-group-addon rate"><%= icon('minus-square-o') %>/yr</span>
+          <%= f.number_field :annual_time_off, {class: "form-control fix-shrink", placeholder: "Time Off", step: 'any', min: 0, disabled: @disabled } %>
+        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-12 col-md-6">
         <div class="input-group" title="Pay Type">
           <span class="input-group-addon"><%= icon('money') %></span>
           <%= f.select :pay_type, options_for_select([["Salary"], ["Hourly"]], @salary_def), {}, {class: "form-control selector", step: 'any', min: 0, disabled: @disabled } %>
         </div>
       </div>
 
-      <div id="user_salary_div" class="col-xs-6 <%= @salary_hider %>">
+      <!-- One of these next 2 divs gets hidden based upon f.select :pay_type -->
+      <div id="user_salary_div" class="col-xs-6 col-md-3 <%= @salary_hider %>">
         <div class="input-group" title="Annual Salary">
           <span class="input-group-addon rate">$</span>
-          <%= f.number_field :salary_rate, {class: "form-control fix-shrink input-number", placeholder: "Salary", step: 'any', min: 0, disabled: @disabled } %>
+          <%= f.number_field :salary_rate, {class: "form-control input-number", placeholder: "Salary", step: 'any', min: 0, disabled: @disabled } %>
         </div>
       </div>
 
-      <div id="user_hourly_div" class="col-xs-6 <%= @hourly_hider %>">
+      <div id="user_hourly_div" class="col-xs-6 col-md-3 <%= @hourly_hider %>">
         <div class="input-group" title="Hourly Rate">
           <span class="input-group-addon rate">$</span>
-          <%= f.number_field :hourly_rate, {class: "form-control fix-shrink input-number", placeholder: "Hourly Rate", step: 'any', min: 0, disabled: @disabled } %>
+          <%= f.number_field :hourly_rate, {class: "form-control input-number", placeholder: "Hourly Rate", step: 'any', min: 0, disabled: @disabled } %>
+        </div>
+      </div>
+
+      <div id="user_timeoff_carryover_div" class="col-xs-6 col-md-3">
+        <div class="input-group" title="Timeoff Carryover from last year">
+          <span class="input-group-addon"><%= icon('minus-square-o') %> co</span>
+          <%= f.number_field :timeoff_carryover, { class: "form-control fix-shrink input-number", step: 'any', min: 0, disabled: @disabled } %>
         </div>
       </div>
     </div>
