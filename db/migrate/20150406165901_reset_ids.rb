@@ -4,5 +4,6 @@ class ResetIds < ActiveRecord::Migration
     ActiveRecord::Base.connection.reset_pk_sequence!('timesheets')
     ActiveRecord::Base.connection.reset_pk_sequence!('timesheet_hours')
     ActiveRecord::Base.connection.reset_pk_sequence!('timesheet_categories')
+    ActiveRecord::Base.connection.reset_pk_sequence!('users')
   end
 end
