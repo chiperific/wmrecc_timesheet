@@ -1,11 +1,12 @@
-WmreccTimesheet::Application.routes.draw do
-
+Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  #
   root 'static_pages#home'
   get 'help', to: 'static_pages#help'
   get 'configure', to: 'static_pages#configure'
 
-  get '/holidays/:year', to: 'app_default#holidays' #ajax call
-  get '/payroll_cats_users/:cat_id/:payroll_start/:payroll_end', to: 'categories#payroll_users'
+  get '/holidays/:year', to: 'app_default#holidays'
+
 
   match 'configure_update', to: 'static_pages#configure_update', via: 'patch'
 
@@ -30,5 +31,4 @@ WmreccTimesheet::Application.routes.draw do
   resources :categories, :departments
 
   get "*path", to:  'static_pages#route_error'
-  
 end
