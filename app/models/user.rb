@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include StaticPagesHelper
 
-  belongs_to :department 
+  belongs_to :department
   has_many :categories, through: :department
   has_many :timesheets
 
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :fname, :lname, :start_date, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
-  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
+  validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.us_zones.map(&:name)
 
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_blank: true
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   def has_authority_over?(user)
     if self.has_authority_over.any?
       @users_ary = self.has_authority_over
-      
+
       if @users_ary.where(id: user.id).exists?
         true
       else
@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
 
   def timeoff_approved_by_year(date)
     timesheets = self.timesheets.where("extract(year from start_date) = ?", date.year).where.not(timeoff_approved: nil)
-    if timesheets.any? 
+    if timesheets.any?
       ary = []
       timesheets.each do |t|
         ary << t.timesheet_hours.sum(:timeoff_hours).to_f
@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
 
   def timeoff_unapproved_by_year(date)
     timesheets = self.timesheets.where("extract(year from start_date) = ?", date.year).where(timeoff_approved: nil)
-    if timesheets.any? 
+    if timesheets.any?
       ary = []
       timesheets.each do |t|
         ary << t.timesheet_hours.sum(:timeoff_hours).to_f
@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
   def timeoff_used_by_period(date)
     date_ary = [date.start_of_period..date.end_of_period]
     timesheets = self.timesheets.where.not(timeoff_approved: nil).where( start_date: date_ary)
-    if timesheets.any? 
+    if timesheets.any?
       ary = []
       timesheets.each do |t|
         ary << t.timesheet_hours.sum(:timeoff_hours).to_f
@@ -157,7 +157,7 @@ class User < ActiveRecord::Base
     start_of_year = Date.new(date.year, 1, 1)
     date_ary = [start_of_year..date.end_of_period]
     timesheets = self.timesheets.where.not(timeoff_approved: nil).where( start_date: date_ary)
-    if timesheets.any? 
+    if timesheets.any?
       ary = []
       timesheets.each do |t|
         ary << t.timesheet_hours.sum(:timeoff_hours).to_f
@@ -178,12 +178,12 @@ class User < ActiveRecord::Base
     timesheets = self.timesheets.where{ (start_date <= payroll_end) & (end_date >= payroll_start) } # thanks Squeel!!
     if timesheets.any?
       hours = []
-      timesheets.each do |t| 
+      timesheets.each do |t|
         hours << t.timesheet_hours.sum(:hours)
       end
       hours.inject(:+)
-    else 
-      0 
+    else
+      0
     end
   end
 

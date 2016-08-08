@@ -32,6 +32,6 @@ jQuery ->
   $('#users-table').dataTable
     ordering: false
     iDisplayLength: 50
-    
+
   $('#inactive-users-table').dataTable
     ordering: false

@@ -291,7 +291,7 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   launchy
-  less-rails
+  less-rails (~> 2.7.0)
   less-rails-bootstrap
   lodash-rails
   pg

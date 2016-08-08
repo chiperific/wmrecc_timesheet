@@ -20,7 +20,7 @@ class TimesheetsController < ApplicationController
     @user = User.find(params[:user_id])
     @page_title = "Your Team's Timesheets"
 
-    
+
     @user_auth = @user.has_authority_over
     if !@user_auth.empty?
       @user_id_ary = @user_auth.pluck(:id)
@@ -126,7 +126,7 @@ class TimesheetsController < ApplicationController
     @hours_reviewed = @timesheet.hours_reviewed.present?
     @timeoff_hours_reviewed = @timesheet.timeoff_reviewed.present?
     @timeoff_hours_approved = @timesheet.timeoff_approved.present?
-    
+
     @timesheet_hours = weekday_ary
 
     @timesheet_categories = categories_ary
@@ -150,7 +150,7 @@ class TimesheetsController < ApplicationController
     @start_date = Date.parse(params[:timesheet][:start_date])
 
     # If the timesheet already exists, update it
-    @timesheet = Timesheet.find_or_initialize_by_start_date_and_user_id(@start_date, @user.id)
+    @timesheet = Timesheet.find_or_initialize_by(start_date: @start_date, user_id: @user.id)
 
     if @timesheet.new_record?
       @timesheet.update_attributes(timesheet_params)
