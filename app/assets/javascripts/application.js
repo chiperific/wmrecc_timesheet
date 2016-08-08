@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require jquery_ujs
 //= require jquery-ui/sortable
 //= require jquery-ui/dialog
 //= require jquery-ui/effect-pulsate
-//= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker/core
@@ -24,7 +24,6 @@
 //= require dataTables/extras/dataTables.responsive
 //= require turbolinks
 //= require_tree .
-
 Date.prototype.getWeek = function() {
   var onejan = new Date(this.getFullYear(),0,1);
   return Math.ceil((((this - onejan) / 86400000) + onejan.getDay())/7);
