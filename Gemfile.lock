@@ -43,6 +43,8 @@ GEM
     arel (7.1.1)
     autoprefixer-rails (6.4.0.1)
       execjs
+    baby_squeel (0.3.1)
+      activerecord (>= 4.0.0)
     bcrypt (3.1.11)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
@@ -273,6 +275,7 @@ PLATFORMS
 DEPENDENCIES
   american_date
   autoprefixer-rails
+  baby_squeel
   bcrypt-ruby
   better_errors
   binding_of_caller

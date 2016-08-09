@@ -175,7 +175,7 @@ class User < ActiveRecord::Base
 
   ############ methods for payroll_users
   def payroll_hours(payroll_start, payroll_end)
-    timesheets = self.timesheets.where{ (start_date <= payroll_end) & (end_date >= payroll_start) } # thanks Squeel!!
+    timesheets = self.timesheets.where.has { (start_date <= payroll_end) & (end_date >= payroll_start) } # thanks baby_squeel!!
     if timesheets.any?
       hours = []
       timesheets.each do |t|

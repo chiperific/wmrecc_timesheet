@@ -54,7 +54,7 @@ class CategoriesController < ApplicationController
     category = Category.find(params[:cat_id])
     payroll_start = params[:payroll_start].gsub("-","/").to_date
     payroll_end = params[:payroll_end].gsub("-","/").to_date
-    timesheet_ids = Timesheet.where{ (start_date <= payroll_end) & (end_date >= payroll_start) }.map { |t| t.id } # thanks Squeel!!
+    timesheet_ids = Timesheet.where.has { (start_date <= payroll_end) & (end_date >= payroll_start) }.map { |t| t.id } # thanks baby_squeel!!
     relevant_ts_cats = TimesheetCategory.where(timesheet_id: timesheet_ids, category_id: category.id).includes(:timesheet => :user).order('users.lname')
     ary = []
     relevant_ts_cats.each do |c|

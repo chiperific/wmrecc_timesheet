@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
   validates :name, :department_id, :active, presence: true
 
   def payroll_relevant_cats(payroll_start, payroll_end)
-    timesheet_ids = Timesheet.where{ (start_date <= payroll_end) & (end_date >= payroll_start) }.map { |t| t.id } # thanks Squeel!!
+    timesheet_ids = Timesheet.where.has { (start_date <= payroll_end) & (end_date >= payroll_start) }.map { |t| t.id } # thanks baby_squeel!!
     TimesheetCategory.where(timesheet_id: timesheet_ids, category_id: self.id)
   end
 
@@ -20,7 +20,7 @@ class Category < ActiveRecord::Base
 
   def payroll_staff_count(payroll_start, payroll_end)
     relevant_ts_cats = self.payroll_relevant_cats(payroll_start, payroll_end)
-    
+
     staff_ct = 0
     relevant_ts_cats.each do |c|
       if c.hours.to_f > 0

@@ -5,6 +5,9 @@
 #
 # Configure Using Gemfile
 #
+# Heroku backup scheduler:
+# heroku pg:backups schedule DATABASE_URL --at '02:00 America/New_York' --app timetracker-wmrecc
+#
 default: &default
   adapter: postgresql
   encoding: unicode

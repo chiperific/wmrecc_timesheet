@@ -24,7 +24,8 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-#gem 'squeel' # better ActiveRecord SQL
+#gem 'squeel' # Rails 5 says no
+gem 'baby_squeel'
 gem 'jquery-datatables-rails'
 gem 'lodash-rails'
 gem "default_value_for"
