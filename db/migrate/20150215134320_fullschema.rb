@@ -1,6 +1,6 @@
 class Fullschema < ActiveRecord::Migration
   def change
-    
+
     create_table "users", force: true do |t|
       t.string   "fname"
       t.string   "lname"
@@ -15,8 +15,8 @@ class Fullschema < ActiveRecord::Migration
       t.decimal  "annual_time_off", precision: 6,  scale: 2, default: 0.0
       t.decimal  "timeoff_carryover", precision: 5, scale: 2, default: 0.0
       t.decimal  "standard_hours",  precision: 6,  scale: 2, default: 40.0
-      t.decimal  "salary_rate",     precision: 10, scale: 2
-      t.decimal  "hourly_rate",     precision: 6,  scale: 2
+      t.decimal  "salary_rate",     precision: 10, scale: 2, default: 0.0
+      t.decimal  "hourly_rate",     precision: 6,  scale: 2, default: 0.0
       t.string   "pay_type",                                 default: "Salary"
       t.string   "time_zone",                                default: "Eastern Time (US & Canada)"
       t.string   "remember_token"
@@ -67,7 +67,7 @@ class Fullschema < ActiveRecord::Migration
     end
 
     add_index "timesheet_hours", ["timesheet_id"], name: "index_timesheet_hours_on_timesheet"
-    
+
 
     create_table "timesheet_categories", force: true do |t|
       t.integer  "timesheet_id"
@@ -79,7 +79,7 @@ class Fullschema < ActiveRecord::Migration
 
     add_index "timesheet_categories", ["category_id"], name: "index_timesheet_categories_on_category"
     add_index "timesheet_categories", ["timesheet_id"], name: "index_timesheet_categories_on_timesheet"
-    
+
 
     #App Default tables:
     create_table "app_defaults", force: true do |t|

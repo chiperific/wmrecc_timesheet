@@ -99,6 +99,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    @user.salary_rate == 0.0 if @user.salary_rate.nil?
+    @user.hourly_rate == 0.0 if @user.hourly_rate.nil?
+
     if @user.save
       flash[:success] = "User created"
       redirect_to session[:return_url]
@@ -111,6 +114,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+
+    @user.salary_rate == 0.0 if @user.salary_rate.nil?
+    @user.hourly_rate == 0.0 if @user.hourly_rate.nil?
 
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
@@ -131,7 +137,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(
-        :fname, :lname, :active, 
+        :fname, :lname, :active,
         :department_id, :supervisor_id, :time_zone,
         :email, :password, :password_confirmation, :admin, :time_zone, :start_date, :end_date,
         :annual_time_off, :timeoff_carryover, :standard_hours, :salary_rate, :hourly_rate, :pay_type)

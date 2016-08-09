@@ -5,7 +5,13 @@ class User < ActiveRecord::Base
   has_many :categories, through: :department
   has_many :timesheets
 
-  before_save { self.email = email.downcase }
+  before_validation do
+    self.email = email.downcase
+    self.salary_rate = 0.0 if self.salary_rate.nil?
+    self.hourly_rate = 0.0 if self.hourly_rate.nil?
+  end
+
+
   before_create :create_remember_token
 
   validates :fname, :lname, :start_date, presence: true
@@ -18,6 +24,14 @@ class User < ActiveRecord::Base
 
   default_value_for :start_date do
     Date.today
+  end
+
+  default_value_for :salary_rate do
+    0.0
+  end
+
+  default_value_for :hourly_rate do
+    0.0
   end
 
   def has_authority_over

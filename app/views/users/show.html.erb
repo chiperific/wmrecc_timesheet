@@ -7,12 +7,12 @@
 <% if current_user.admin %>
   <div class="row buffered-row">
     <%= link_to FA_NEW, new_user_path, { method: :get, class: "btn btn-success"} %>
-  </div>  
+  </div>
 <% end %>
 
 
 <div class="row buffered-row center">
-  <% if @timesheets_from_user_auth_needing_review.any? %>
+  <% if current_user.has_authority_over.any? %>
     <hr />
     <%= "Your team has "+ @timesheets_from_user_auth_needing_review.count.to_s + " " + "timesheet".pluralize(@timesheets_from_user_auth_needing_review.count) + " for review." %>
     <%= link_to "Review now", user_timesheets_supervisor_path(current_user), { method: :get, class: "btn btn-success"} %>

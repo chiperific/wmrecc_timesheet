@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= user.full_name %>
+    <%= link_to user.full_name, edit_user_path(user.id) %>
     <% if user.pay_type == "Salary" %>
       (s)
     <% end %>
