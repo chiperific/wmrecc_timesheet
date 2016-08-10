@@ -1,4 +1,4 @@
-<%= form_for @user do |f| %>
+<%= form_for( @user, remote: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <span class="form-controller">
     <%= f.hidden_field :id %>
@@ -31,7 +31,7 @@
               <p style="color: #ababab; text-align: center">(Timestaps)</p>
             <% else %>
               <small>
-                <%= @user.created_at.strftime("Added: %m/%d/%Y") %>&nbsp&nbsp|&nbsp 
+                <%= @user.created_at.strftime("Added: %m/%d/%Y") %>&nbsp&nbsp|&nbsp
                 <%= @user.updated_at.strftime("Updated: %m/%d/%Y") %>
               </small>
             <% end %>

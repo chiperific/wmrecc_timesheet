@@ -5,16 +5,16 @@
     <button type="button" class="close" data-dismiss="alert" id="close-button">&times;</button>
     <strong>Warning!</strong>
     <br>Changing items on this page has
-    <br><strong>permanent consequences</strong>. 
-    <br>Removing items will delete data. 
+    <br><strong>permanent consequences</strong>.
+    <br>Removing items will delete data.
     <br>Most items are for initial setup.
   </div>
 </div>
 
-<%= form_for @app_default, url: configure_update_path do |f| %>
+<%= form_for( @app_default, url: configure_update_path, remote: true ) do |f| %>
   <div class="row form-group">
     <div class="col-xs-12 col-sm-6">
-      <h3 class="subtle">Weekdays 
+      <h3 class="subtle">Weekdays
         <small class="move-right">
           ( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)
         </small>
@@ -108,7 +108,7 @@
           </small>
         </h3>
       </div>
-      
+
       <ul id="holiday_list_head">
         <li class="row">
           <span class="col-xs-1 expand_holiday_head min-padding-right"><%= icon('plus-square-o') %></span>

@@ -1,7 +1,7 @@
 //BOOSTRAP GRID SIZES:
-// Extra small devices Phones (<768px)  
-//Small devices Tablets (≥768px)  
-//Medium devices Desktops (≥992px)  
+// Extra small devices Phones (<768px)
+//Small devices Tablets (≥768px)
+//Medium devices Desktops (≥992px)
 //Large devices Desktops (≥1200px)
 
 //COLOR SCHEME (in Hex colors):
@@ -36,7 +36,7 @@ textarea {
 
 h1, h2, h3, h4, h5, h6, p {
   line-height: 1;
-  
+
 }
 
 .black-text {
@@ -45,6 +45,57 @@ h1, h2, h3, h4, h5, h6, p {
 
 .hidden {
   display: none;
+}
+
+.no-overflow {
+  overflow: hidden;
+}
+
+// All-screens header stuff
+top-level-container {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#name_banner {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#logo-home-link {
+  color: #333333;
+}
+
+#logo {
+  //height: inherit;
+  width: 175px;
+}
+
+.jumbo-font {
+  font-size: 48px !important;
+}
+
+// Make the app-header stuff smaller on small screens
+@media only screen and (max-device-width : 400px ) {
+  #logo {
+    width: 75px;
+  }
+
+  .jumbo-font {
+    font-size: 24px !important;
+  }
+
+  .mini-jumbo-font {
+    display: none;
+  }
+
+  #app-header {
+    margin-bottom: 0px !important;
+  }
+
+  #home_btn_div {
+    margin-top: -2em;
+  }
 }
 
 // make readonly fields not look editable
@@ -193,7 +244,7 @@ a[class*="btn-"]:visited {
 .app-center {
   display: inline-block;
   float: none !important;
-  margin-right: -4px; 
+  margin-right: -4px;
   vertical-align: top;
 }
 
@@ -202,7 +253,7 @@ a[class*="btn-"]:visited {
   margin-bottom: 1em !important;
   margin-left: 2em !important;
   margin-right: 2em !important;
-  padding: 0.5em !important; 
+  padding: 0.5em !important;
   background-color: rgba(255,255,255,0.5);
 
   p {
@@ -219,7 +270,7 @@ a[class*="btn-"]:visited {
  div.datatable-div {
     margin-left: 6em !important;
     margin-right: 6em !important;
-  } 
+  }
 }
 
 // set configure#pay_period and payroll#hours question link
@@ -378,15 +429,15 @@ ul {
   }
 
   :-moz-placeholder { /* Firefox 18- */
-     color: #b8817f;  
+     color: #b8817f;
   }
 
   ::-moz-placeholder {  /* Firefox 19+ */
-     color: #b8817f;  
+     color: #b8817f;
   }
 
-  :-ms-input-placeholder {  
-     color: #b8817f;  
+  :-ms-input-placeholder {
+     color: #b8817f;
   }
 
 }
