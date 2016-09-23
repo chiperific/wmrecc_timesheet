@@ -1,4 +1,11 @@
 <h3 class="center subtle">All Users' Timesheets</h3>
+
+<% if current_user.admin? %>
+  <div class="row" id="export_btn">
+    <%= link_to 'Export Records', export_path, class: "move-right btn btn-primary" %>
+  </div>
+<% end %>
+
 <div id="admin-timesheets" class="datatable-div">
   <table class="table table-striped table-center" id="timesheet-archive-table">
     <%= render 'timesheet_table' %>

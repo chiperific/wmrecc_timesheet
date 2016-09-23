@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'help', to: 'static_pages#help'
   get 'configure', to: 'static_pages#configure'
+  get 'export', to: 'static_pages#export'
 
   get '/holidays/:year', to: 'app_default#holidays'
 

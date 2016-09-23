@@ -1,0 +1,52 @@
+<div class="row">
+  <h5 class="col-xs-12 align-center">Active</h5>
+  <% if @users_active.count != 0 %>
+    <% @users_active.each do |usr| %>
+      <% if usr.department == nil then @usr_dept = "All Depts" else @usr_dept = usr.department.name end %>
+      <% if @usr_dept == dept || dept == "All Depts" %>
+        <% @checked = true %>
+      <% else %>
+        <% @checked = false %>
+      <% end %>
+      <div class="col-xs-2">
+        <%= check_box_tag usr.id, usr.id, @checked, class: "export-searchbar-usr-check" %>
+        &nbsp;
+        <%= usr.full_name %>
+        <span class="hidden export-searchbar-usr-dept" data-department="<%= @usr_dept %>">
+          <%= @usr_dept %>
+        </span>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No active people</p>
+  <% end %>
+</div>
+
+<hr class="row hr-thin" />
+
+<div class="row">
+  <h5 class="col-xs-12 align-center">Inactive</h5>
+  <% if @users_inactive.count != 0 %>
+    <% @users_inactive.each do |usr| %>
+      <% if usr.department == nil then @usr_dept = "All Depts" else @usr_dept = usr.department.name end %>
+      <% if @usr_dept == dept || dept == "All Depts" %>
+        <% @checked = true %>
+      <% else %>
+        <% @checked = false %>
+      <% end %>
+      <div class="col-xs-2">
+        <%= check_box_tag usr.id, usr.id, @checked, class: "export-searchbar-usr-check" %>
+        &nbsp;
+        <%= usr.full_name %>
+        <span class="hidden export-searchbar-usr-dept" data-department="<%= @usr_dept %>">
+          <%= @usr_dept %>
+        </span>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No inactive people</p>
+  <% end %>
+</div>
+
+<%= text_field_tag 'usr_ary', @user_ary %>
+<p><%= @user_ary %></p>

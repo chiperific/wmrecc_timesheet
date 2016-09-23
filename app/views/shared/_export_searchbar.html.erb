@@ -1,20 +1,20 @@
-<form accept-charset="UTF-8" method="get" id="payroll_searchbar_form">
+<form accept-charset="UTF-8" method="get" id="export_searchbar_form">
   <div class="row buffered-row-bottom">
     <div class="col-xs-6 col-sm-4 min-padding-both">
-      <div class="input-group" title='Year'>
+      <div class="input-group" title='Start Date'>
         <span class="input-group-addon">
           <%= icon('calendar') %>
         </span>
-        <input id="searchbar_start" name="date_start" type="integer" value="<%= @date_start %>" class="form-control start_date_picker" >
+        <input id="searchbar_start" name="date_start" value="<%= @date_start %>" class="form-control open_date_picker" >
       </div>
     </div>
 
     <div class="col-xs-6 col-sm-4 min-padding-both">
-      <div class="input-group" title='Pay Period'>
+      <div class="input-group" title='End Date'>
         <span class="input-group-addon">
           <%= icon('calendar') %>
         </span>
-        <input id="searchbar_end" name="date_end" value="<%= @date_end %>" class="form-control end_date_picker" >
+        <input id="searchbar_end" name="date_end" value="<%= @date_end %>" class="form-control open_date_picker" >
       </div>
     </div>
 
@@ -28,15 +28,25 @@
       <%= link_to FA_CLEAR, request.path, class: "btn btn-success" %>
     </div>
   </div>
-    
+
   <div class="row buffered-row-bottom">
     <div class="col-xs-12 min-padding-both">
       <div class="input-group" title="Department">
         <span class="input-group-addon">
           <%= icon "sitemap" %>
         </span>
-        <%= select_tag 'dept', options_for_select(@departments_lkup) , class: "form-control" %>
+        <%= select_tag 'dept', options_for_select(@departments_lkup) , class: "form-control", id: "export_input_department" %>
       </div>
     </div>
   </div>
+<!-- Can't easily pass an array of user id's to the URL, so scrapped it
+  <div class="row buffered-row-bottom">
+    <div class="col-xs-12 min-padding-both">
+      <h4>People:</h4>
+    </div>
+    <div class="col-xs-12 min-padding-both">
+      <%= #render 'shared/export_searchbar_people', dept: @dept
+      %>
+    </div>
+  </div> -->
 </form>

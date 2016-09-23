@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
 
   skip_before_action :require_login, only: [:home, :create, :destroy]
 
-  before_action :require_admin, only: [:configure]
+  before_action :require_admin, only: [:configure, :export]
 
   before_action :require_admin_or_unsupervised, only: [:payroll]
 
@@ -58,7 +58,7 @@ class StaticPagesController < ApplicationController
     @title = "Payroll"
 
     @pay_period_type = PayPeriod.first.period_type
-    
+
     if !params[:date_start]
       @payroll_start = Date.today.start_of_period
       @payroll_end = Date.today.end_of_period
@@ -75,10 +75,43 @@ class StaticPagesController < ApplicationController
     @date_end = @payroll_end.strftime("%m/%d/%Y")
   end
 
+  def export
+    @title = "Export"
+    @departments_lkup = departments_lkup
+    @users_active = User.where(active: true)
+    @users_inactive = User.where(active: false)
+
+    if params[:date_start]
+      @export_start = params[:date_start].to_date
+    else
+      @export_start = Timesheet.all.min_by { |t| t.start_date }.start_date
+    end
+
+    if params[:date_end]
+      @export_end = params[:date_end].to_date
+    else
+      @export_end = Date.today
+    end
+
+    if params[:dept]
+      @dept = params[:dept]
+    else
+      @dept = "All Depts"
+    end
+
+    @date_start = @export_start.strftime("%m/%d/%Y")
+    @date_end = @export_end.strftime("%m/%d/%Y")
+
+    export_start = @export_start
+    export_end = @export_end
+    @timesheets = Timesheet.where.has { (start_date >= export_start) & (end_date <= export_end) }
+
+  end
+
   def configure
     @title = "Configure"
     @app_default = AppDefault.first
-    
+
     @pay_period_dialog_text = {
       "Weekly:" => "Process payroll weekly.",
       "Bi-weekly:" => "Process payroll at the end of even calendar weeks.",
