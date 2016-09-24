@@ -46,7 +46,9 @@
               <%= if t.timeoff_approved then t.timeoff_approved.strftime("%m/%d/%Y") else "Not Approved" end %>
             <% end %>
             </td>
-          <td></td>
+          <td>
+            <%= t.timesheet_categories.map { |tc| [tc.category.name, tc.hours.to_s] }.to_h.reject { |k,v| v == "0.0" }.map { |k,v| "#{k}: #{v}"}.join(", ") %>
+          </td>
         </tr>
       <% end %>
     </tbody>

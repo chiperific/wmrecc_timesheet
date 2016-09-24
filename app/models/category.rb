@@ -1,5 +1,8 @@
 class Category < ActiveRecord::Base
   belongs_to :department
+  has_many :timesheet_categories
+  has_many :timesheets, through: :timesheet_categories
+
 
   validates :name, :department_id, :active, presence: true
 

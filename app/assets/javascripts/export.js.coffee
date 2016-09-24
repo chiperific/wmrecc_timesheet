@@ -1,6 +1,11 @@
 # scripts for the Export page
 
 jQuery ->
+  $('#export_table').dataTable
+    columnDefs: [
+      width: "20%", targets: -1
+    ]
+
   # Change the dates on the form before submission, for a cleaner URL
   $('#export_searchbar_form').submit ->
     humanDateStart = $('#searchbar_start').val()

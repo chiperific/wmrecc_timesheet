@@ -1,5 +1,6 @@
 class TimesheetHour < ActiveRecord::Base
   belongs_to :timesheet
+  has_one :user, through: :timesheet
 
   validates :day_num, presence: true
   validates :day_num, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 7 }
