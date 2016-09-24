@@ -4,6 +4,18 @@
   <title>TimeShift | <%= @title %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+  <!-- dataTables Buttons CDNs -->
+  <%= stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/css/bootstrap.css", media: "all" %>
+  <%= stylesheet_link_tag "https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap4.min.css", media: "all" %>
+  <%= stylesheet_link_tag "https://cdn.datatables.net/buttons/1.2.2/css/buttons.bootstrap4.min.css", media: "all" %>
+
+  <%= javascript_include_tag "https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js" %>
+  <%= javascript_include_tag "https://cdn.datatables.net/buttons/1.2.2/js/buttons.bootstrap4.min.js" %>
+  <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js" %>
+  <%= javascript_include_tag "//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js" %>
+  <%= javascript_include_tag "//cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js" %>
+
   <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

@@ -17,18 +17,6 @@ var factory = function( $, DataTable ) {
 "use strict";
 
 
-/* Set the defaults for DataTables initialisation */
-$.extend( true, $.fn.dataTable.defaults, {
-  responsive: true,
-  autoWidth: false,
-  dom:
-    "<'row'<'col-xs-6'l><'col-xs-6'f>r>"+
-    "t"+
-    "<'row'<'col-xs-6'i><'col-xs-6'p>>",
-  renderer: 'bootstrap',
-} );
-
-
 /* Default class modification */
 $.extend( DataTable.ext.classes, {
   sWrapper:      "dataTables_wrapper form-inline dt-bootstrap",

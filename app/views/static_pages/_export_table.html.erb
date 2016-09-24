@@ -30,26 +30,28 @@
     </thead>
     <tbody>
       <% @timesheets.each do |t| %>
-        <tr>
-          <td><%= t.user.full_name %></td>
-          <td><%= t.start_date.strftime("%m/%d/%Y") %></td>
-          <td><%= t.end_date.strftime("%m/%d/%Y") %></td>
-          <td><%= t.timesheet_hours.sum(:hours) %></td>
-          <td>
-            <% if t.timesheet_hours.sum(:hours) != 0 %>
-              <%= if t.hours_approved then t.hours_approved.strftime("%m/%d/%Y") else "Not Approved" end %>
-            <% end %>
-          </td>
-          <td><%= t.timesheet_hours.sum(:timeoff_hours) %></td>
-          <td>
-            <% if t.timesheet_hours.sum(:timeoff_hours) !=0 %>
-              <%= if t.timeoff_approved then t.timeoff_approved.strftime("%m/%d/%Y") else "Not Approved" end %>
-            <% end %>
+        <% if t.user.department.name == @dept || @dept == "All Depts" %>
+          <tr>
+            <td><%= t.user.full_name %></td>
+            <td><%= t.start_date.strftime("%m/%d/%Y") %></td>
+            <td><%= t.end_date.strftime("%m/%d/%Y") %></td>
+            <td><%= t.timesheet_hours.sum(:hours) %></td>
+            <td>
+              <% if t.timesheet_hours.sum(:hours) != 0 %>
+                <%= if t.hours_approved then t.hours_approved.strftime("%m/%d/%Y") else "Not Approved" end %>
+              <% end %>
             </td>
-          <td>
-            <%= t.timesheet_categories.map { |tc| [tc.category.name, tc.hours.to_s] }.to_h.reject { |k,v| v == "0.0" }.map { |k,v| "#{k}: #{v}"}.join(", ") %>
-          </td>
-        </tr>
+            <td><%= t.timesheet_hours.sum(:timeoff_hours) %></td>
+            <td>
+              <% if t.timesheet_hours.sum(:timeoff_hours) !=0 %>
+                <%= if t.timeoff_approved then t.timeoff_approved.strftime("%m/%d/%Y") else "Not Approved" end %>
+              <% end %>
+              </td>
+            <td>
+              <%= t.timesheet_categories.map { |tc| [tc.category.name, tc.hours.to_s] }.to_h.reject { |k,v| v == "0.0" }.map { |k,v| "#{k}: #{v}"}.join(", ") %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

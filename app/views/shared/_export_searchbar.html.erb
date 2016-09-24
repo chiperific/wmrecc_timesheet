@@ -35,7 +35,7 @@
         <span class="input-group-addon">
           <%= icon "sitemap" %>
         </span>
-        <%= select_tag 'dept', options_for_select(@departments_lkup) , class: "form-control", id: "export_input_department" %>
+        <%= select_tag 'dept', options_for_select(@departments_lkup, @dept) , class: "form-control", id: "export_input_department" %>
       </div>
     </div>
   </div>

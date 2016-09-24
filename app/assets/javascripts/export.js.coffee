@@ -6,6 +6,7 @@ jQuery ->
       width: "20%", targets: -1
     ]
 
+
   # Change the dates on the form before submission, for a cleaner URL
   $('#export_searchbar_form').submit ->
     humanDateStart = $('#searchbar_start').val()
@@ -30,15 +31,3 @@ jQuery ->
     $(this).toggleClass('fa-plus')
     event.preventDefault()
     false
-
-  # $('#export_input_department').change ->
-  #   dept = this.value
-  #   $('.export-searchbar-usr-check').prop("checked",false)
-  #   $('#usr_ary').attr("value", "")
-  #   $('.export-searchbar-usr-dept').each ->
-  #     if $(this).attr("data-department") == dept
-  #       $(this).siblings('.export-searchbar-usr-check').prop("checked", true)
-  #       usrId = $(this).siblings('.export-searchbar-usr-check').attr("id")
-  #       $('#usr_ary').attr("value", $(this).attr("value") + usrID + " ")
-  #   event.preventDefault()
-  #   false

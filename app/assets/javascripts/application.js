@@ -38,9 +38,17 @@ $.extend( true, $.fn.dataTable.defaults, {
   lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
   info: false,
   dom:
-    "<'row'<'col-xs-4 no-overflow'l><'col-xs-8 no-overflow'f>r>"+
+    "<'row'"+
+      "<'col-xs-12 no-overflow center' B>"+
+      "<'col-xs-4 no-overflow'l>"+
+      "<'col-xs-8 no-overflow'f>"+
+    "r>"+
     "t"+
-    "<'row'<'col-xs-8'p>>",
+    "<'row'"+
+    "<'col-xs-8'p>"+
+    "<'col-xs-12 no-overflow center' B>"+
+    ">",
+  buttons: [ 'copy', 'csv', 'excel', 'print' ],
   language: {
     paginate: {
       first: "&#8676",

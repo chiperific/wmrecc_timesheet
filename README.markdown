@@ -7,6 +7,4 @@
 
 
 To Do:
-* Add dept to Timesheet.where.has
-* Collect categories with ";"
 * Implement CSV download: https://gorails.com/episodes/export-to-csv

@@ -12,15 +12,6 @@
   </div>
 </div>
 
-<div class="row well-adjusted" id="export_btn_div">
-  <div class="col-xs-6">
-    <h4><%= @timesheets.count %> Records displayed</h4>
-  </div>
-  <div class="col-xs-6">
-    <%= link_to 'Export to CSV', export_path, class: "move-right btn btn-primary" %>
-  </div>
-</div>
-
 <div id="export-data" class="datatable-div">
   <table class="table table-striped table-center" id="export-table">
     <%= render 'export_table' %>

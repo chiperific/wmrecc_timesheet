@@ -106,7 +106,7 @@ class StaticPagesController < ApplicationController
 
     export_start = @export_start
     export_end = @export_end
-    @timesheets = Timesheet.where.has { (start_date >= export_start) & (end_date <= export_end) }
+    @timesheets = Timesheet.where.has { (end_date >= export_start) || (start_date <= export_end) }
 
   end
 
