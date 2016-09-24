@@ -35,6 +35,8 @@ gem 'sass', '3.2.13'
 gem 'pg'
 gem 'unicorn' #app server
 
+#gem 'delayed_job_active_record' #for _export_table categories map
+
 group :development, :test do
   gem 'pry'
   gem 'pry-doc'

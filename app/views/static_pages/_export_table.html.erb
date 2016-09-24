@@ -48,7 +48,7 @@
               <% end %>
               </td>
             <td>
-              <%= t.timesheet_categories.map { |tc| [tc.category.name, tc.hours.to_s] }.to_h.reject { |k,v| v == "0.0" }.map { |k,v| "#{k}: #{v}"}.join(", ") %>
+              <%= t.timesheet_categories.where("hours != ?", 0).map { |tc| "#{tc.category.name}: #{tc.hours.to_s}" }.join(", ") %>
             </td>
           </tr>
         <% end %>
