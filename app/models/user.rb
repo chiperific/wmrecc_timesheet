@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   belongs_to :department
   has_many :categories, through: :department
-  has_many :timesheets
+  has_many :timesheets, dependent: :destroy
 
   before_validation do
     self.email = email.downcase

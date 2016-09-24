@@ -1,12 +1,12 @@
 class Timesheet < ActiveRecord::Base
-  has_many :timesheet_hours, inverse_of: :timesheet
-  has_many :timesheet_categories, inverse_of: :timesheet
+  has_many :timesheet_hours, inverse_of: :timesheet, dependent: :destroy
+  has_many :timesheet_categories, inverse_of: :timesheet, dependent: :destroy
   has_many :categories, through: :timesheet_categories
   belongs_to :user
 
   accepts_nested_attributes_for :timesheet_hours, :timesheet_categories, allow_destroy: true
 
-  validates :start_date, :end_date, presence: true
+  validates :start_date, :end_date, :user_id, presence: true
 
   def status
     if self.hours_approved.present?

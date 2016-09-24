@@ -3,6 +3,7 @@ class TimesheetsController < ApplicationController
   before_action do
     require_self_sv_or_admin(User.find(params[:user_id]))
   end
+  before_action :require_admin, only: :destroy
 
   def single
     @title = "Timesheet"
