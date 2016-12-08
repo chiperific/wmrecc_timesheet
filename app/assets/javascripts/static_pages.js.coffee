@@ -2,12 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-show_add_weekday= ->
-  if $('#weekday_list li[style!="display: none;"]').length < 7
-    $('#add_weekday_div').show()
-  else
-   $('#add_weekday_div').hide()
-
 update_day_num= ->
   $('.weekday-li').each (index)->
     new_val = index+1
@@ -15,9 +9,9 @@ update_day_num= ->
     $(this).find('.day-num').html(new_val)
 
 jQuery ->
-  # Configure page scripts
-  #if $.inArray("configure", pathAry) >= 0
-  show_add_weekday()
+  $('#admin-table').dataTable
+    ordering: false
+    paging: false
 
   $('#msg-board-hider').click ->
     $('#message-board').slideToggle("fast")
@@ -26,42 +20,7 @@ jQuery ->
     event.preventDefault()
     false
 
-  $('#admin-table').dataTable
-    ordering: false
-    paging: false
-
-  $('#weekday_list').sortable
-    axis: 'y'
-    update: update_day_num
-
-  # weekday: hide and mark for deletion
-  $(document).on 'click', '.remove_day', ( ->
-    a = confirm "Are you sure? This won't take efect until you click 'Update Configuration'."
-    if a
-      $(this).prev('input[type=hidden]').val('1')
-      $(this).closest('li.boxed').appendTo('ul#weekday_list').hide()
-      update_day_num()
-      show_add_weekday()
-    event.preventDefault()
-    false
-  )
-
-  # weekday: add new
-  $('.add_day').click ->
-    fields = $(this).data('fields')
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    last_li = $('#weekday_list li[style!="display: none;"]').last()
-    last_li.after($(this).data('fields').replace(regexp, time))
-    new_record_day_num = "app_default_weekdays_attributes_"+time+"_day_num"
-    li_count = $('#weekday_list li[style!="display: none;"]').length
-    new_record = $('#'+new_record_day_num)
-    new_record.val(li_count)
-    new_record.next('span.day-num').html(li_count)
-    show_add_weekday()
-    event.preventDefault()
-    false
-
+  ################## Configure page scripts
   # holiday: details show / hide
   $(document).on 'click', '.expand_holiday', ( ->
     parent = $(this).parent('span')
@@ -72,7 +31,7 @@ jQuery ->
       $(parent).siblings('div.holiday-sub-li-float').toggleClass('hidden')
     else
       $(parent).siblings('div.holiday-sub-li-fixed').toggleClass('hidden')
-    
+
     $(this).children('i').toggleClass(icon_closed).toggleClass(icon_open)
     event.preventDefault()
     false
@@ -121,7 +80,17 @@ jQuery ->
     fields = $(this).data('fields')
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    last_li = $('#holiday_list li[style!="display: none;"]').last()
+    last_li = $('#holiday_list_body li[style!="display: none;"]').last()
+    last_li.after($(this).data('fields').replace(regexp, time))
+    event.preventDefault()
+    false
+
+  # grant: add new
+  $('.add_grant').click ->
+    fields = $(this).data('fields')
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    last_li = $('#grant_list_body li[style!="display: none;"]').last()
     last_li.after($(this).data('fields').replace(regexp, time))
     event.preventDefault()
     false

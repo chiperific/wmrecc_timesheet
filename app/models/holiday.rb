@@ -1,5 +1,6 @@
 class Holiday < ActiveRecord::Base
-  validates :name, :month, presence: true
+  validates_presence_of :name, :month
+
   belongs_to :app_default, validate: true
 
   def all_instances_in_month(year)

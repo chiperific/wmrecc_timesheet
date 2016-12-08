@@ -13,23 +13,22 @@
 
 <%= form_for( @app_default, url: configure_update_path, remote: true ) do |f| %>
   <div class="row form-group">
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-12 col-sm-6" id="weekday_block">
       <h3 class="subtle">Weekdays
         <small class="move-right">
-          ( <%= icon('bars') %> to reorder, <%= icon('times') %> to delete)
+          ( <%= icon('check-square') %> means active and visible to users)
         </small>
       </h3>
 
       <div class="form-group">
         <ul id="weekday_list_head">
           <li class="row">
-            <span class="col-xs-1"></span>
             <span class="col-xs-2">Order</span>
-            <span class="col-xs-5">Day name</span>
+            <span class="col-xs-6">Day name</span>
             <span class="col-xs-3">Abbr.</span>
           </li>
         </ul>
-        <ul id="weekday_list">
+        <ul id="weekday_list_body">
           <%= f.fields_for :weekdays, @weekdays do |w_f| %>
             <%= render 'shared/error_messages', object: w_f.object %>
             <%= render "weekdays_form", w_f: w_f %>
@@ -37,9 +36,6 @@
         </ul>
       </div>
 
-      <div class="row center" id="add_weekday_div" >
-        <%= link_to_add_weekday(f) %>
-      </div>
     </div>
 
     <div class="col-xs-12 col-sm-6">
@@ -98,40 +94,66 @@
         </span>
       <% end %>
     </div>
+  </div>
 
-    <div class="col-xs-12" id="holiday_block">
-      <div class="row holiday_head">
-        <h3 class="subtle">
-          Holidays
-          <small class="move-right">
-            ( <%= icon('plus-square') %> for details, <%= icon('times') %> to delete)
-          </small>
-        </h3>
+  <div class="row form-group">
+
+    <div class="col-xs-12 col-sm-6" id="holiday_block">
+      <h3 class="subtle">Holidays
+        <small class="move-right">
+          ( <%= icon('plus-square') %> for details, <%= icon('times') %> to delete)
+        </small>
+      </h3>
+      <div class="form-group">
+        <ul id="holiday_list_head">
+          <li class="row">
+            <span class="col-xs-1 expand_holiday_head min-padding-right"><%= icon('plus-square-o') %></span>
+            <span class="col-xs-6 center">Name</span>
+            <span class="col-xs-1 small shift-left min-padding-both center">Floating?</span>
+            <span class="col-xs-3 center">Occurs</span>
+          </li>
+        </ul>
+        <ul id="holiday_list_body">
+          <%= f.fields_for :holidays, @holidays do |h_f| %>
+            <%= render 'shared/error_messages', object: h_f.object %>
+            <%= render 'holidays_form', h_f: h_f %>
+          <% end %>
+        </ul>
       </div>
-
-      <ul id="holiday_list_head">
-        <li class="row">
-          <span class="col-xs-1 expand_holiday_head min-padding-right"><%= icon('plus-square-o') %></span>
-          <span class="col-xs-6 center">Name</span>
-          <span class="col-xs-1 small shift-left min-padding-both center">Floating?</span>
-          <span class="col-xs-3 center">Occurs</span>
-        </li>
-      </ul>
-      <ul id="holiday_list">
-        <%= f.fields_for :holidays, @holidays do |h_f| %>
-          <%= render 'shared/error_messages', object: h_f.object %>
-          <%= render 'holidays_form', h_f: h_f %>
-        <% end %>
-      </ul>
       <div class="row pull-right" id="add_holiday_div" >
         <%= link_to_add_holiday(f) %>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6" id="grant_block">
+      <h3 class="subtle">Grants
+        <small class="move-right">
+          ( <%= icon('check-square') %> means active and visible to users)
+        </small>
+      </h3>
+      <div class="form-group">
+        <ul id="grant_list_head">
+          <li class="row">
+            <span class="col-xs-10 center">Name</span>
+            <span class="col-xs-2 small shift-left min-padding-both center">Active?</span>
+          </li>
+        </ul>
+        <ul id="grant_list_body">
+          <%= f.fields_for :grants, @grants do |g_f| %>
+            <%= render 'shared/error_messages', object: g_f.object %>
+            <%= render 'grants_form', g_f: g_f %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="row pull-right" id="add_holiday_div" >
+        <%= link_to_add_grant(f) %>
       </div>
     </div>
 
   </div>
 
   <div class="row buffered-row">
-    <%= f.submit "Update Configuration", { class: "btn btn-warning" } %>
+    <%= f.submit "Update", { class: "btn btn-warning" } %>
     <%= link_to FA_CANCEL, root_path, { class: "pull-right btn btn-success" } %>
   </div>
 <% end %>

@@ -55,7 +55,7 @@
 
   <div class="row">
 
-    <fieldset class="col-xs-6 span-no-padding-both" id="hours_fieldset">
+    <fieldset class="col-xs-12 col-sm-6 span-no-padding-both" id="hours_fieldset">
       <legend class="subtle">
         Hours:
         <span class="small pull-right"> <%= link_to "(add timeoff)", "#", { id: 'show_timeoff_switch', class: 'btn btn-primary btn-xs'} %>
@@ -79,7 +79,7 @@
       <%= render 'timesheet_hours_form', t_form: t_form %>
     </fieldset>
 
-    <fieldset class="col-xs-6" id="categories_fieldset">
+    <fieldset class="col-xs-12 col-sm-6" id="categories_fieldset">
       <legend class="subtle">Categories:</legend>
       <%= render 'timesheet_visual', bar_id: "categories_progressbar", ttl_field: "categories_bar_ttl", ttl: @category_ttl %>
       <span class="span-no-padding-both center">

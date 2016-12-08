@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
 
   def home
     @title = "Home"
-    @col_width = "app-center col-xs-4 col-sm-2 col-md-2 col-lg-1"
+    @col_width = "app-center col-xs-4 col-sm-3 col-md-2 col-lg-1"
     @msg_col_width = "col-xs-6 col-sm-3"
 
     if current_user
@@ -134,7 +134,7 @@ class StaticPagesController < ApplicationController
     @pay_period = PayPeriod.first || PayPeriod.new
     @periods = ["Weekly","Bi-weekly","Monthly","Semi-monthly","Annually"]
 
-    @holidays = Holiday.all
+    @holidays = @app_default.holidays.order(:month, :day, :float_day)
 
     @holiday_select_ary = []
     (1..12).each do |i|
@@ -147,6 +147,8 @@ class StaticPagesController < ApplicationController
     end
 
     @week_select_ary = [["1st", 1], ["2nd", 2], ["3rd", 3], ["4th", 4], ["5th", 5]]
+
+    @grants = @app_default.grants.order(:name)
   end
 
   def configure_update
@@ -173,7 +175,7 @@ class StaticPagesController < ApplicationController
     def app_default_params
       params.require(:app_default).permit( :name,
         :weekdays_attributes => [
-          :id, :name, :abbr, :day_num, :app_default_id, :_destroy
+          :id, :name, :abbr, :day_num, :app_default_id
         ],
         :start_months_attributes => [:id, :month],
         :it_emails_attributes => [:id, :email],
@@ -181,7 +183,8 @@ class StaticPagesController < ApplicationController
         :pay_periods_attributes => [:id, :period_type],
         :holidays_attributes => [
           :id, :name, :month, :day, :floating, :float_week, :float_day, :app_default_id, :_destroy
-        ]
+        ],
+        :grants_attributes => [:id, :name, :active, :app_default_id]
       )
     end
 end

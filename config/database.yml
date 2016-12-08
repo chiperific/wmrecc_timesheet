@@ -19,7 +19,7 @@ default: &default
 development:
   adapter: postgresql
   encoding: unicode
-  database: wmrecc_timesheet_development
+  database: wmrecc_timesheet_development2
   pool: 5
   timeout: 5000
 

@@ -28,24 +28,22 @@ module StaticPagesHelper
   end
 
   ############## app_default methods
-
-  def link_to_add_weekday(f)
-    new_weekday = Weekday.new
-    id = new_weekday.object_id
-    fields = f.fields_for(:weekdays, new_weekday, child_index: id) do |w_f|
-      render "weekdays_form", w_f: w_f
-    end
-    link_to("Add weekday", "#", class: "btn btn-success add_day", data: { id: id, fields: fields.gsub("\n", "")})
-  end
-
   def link_to_add_holiday(f)
     new_holiday = Holiday.new
     id = new_holiday.object_id
     fields = f.fields_for(:holidays, new_holiday, child_index: id ) do |h_f|
       render "holidays_form", h_f: h_f
     end
-
     link_to("Add holiday", "#", class: "btn btn-success add_holiday", data: { id: id, fields: fields.gsub("\n", "")})
+  end
+
+  def link_to_add_grant(f)
+    new_grant = Grant.new
+    id = new_grant.object_id
+    fields = f.fields_for(:grants, new_grant, child_index: id) do |g_f|
+      render "grants_form", g_f: g_f
+    end
+    link_to("Add grant", "#", class: "btn btn-success add_grant", data: { id: id, fields: fields.gsub("\n", "")})
   end
 
   # for payroll action

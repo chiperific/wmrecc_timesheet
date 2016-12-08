@@ -1,22 +1,15 @@
 <li class="row form-controller boxed weekday-li">
-  <span class="col-xs-1 min-padding-both">
-    <%= icon('bars row-resize') %>
-  </span>
   <span class="col-xs-2 min-padding-both">
-    <%= w_f.hidden_field :day_num, class: 'day-num-hidden disabled-field-faker' %>
-    <span class="form-control day-num disabled-field-faker" >
-      <%= w_f.object.day_num %>
-    </span>
+    <%= w_f.object.day_num %>
   </span>
-  <span class="col-xs-5 min-padding-both">
+  <span class="col-xs-6 min-padding-both">
     <%= w_f.text_field :name, { class: "form-control"} %>
   </span>
   <span class="col-xs-3 min-padding-both">
     <%= w_f.text_field :abbr, { class: "form-control"} %>
   </span>
   <span class="times col-xs-1">
-    <%= w_f.hidden_field :_destroy %>
-    <%= link_to icon('times'), "#", { class: "remove_day" }  %>
+    <%= w_f.check_box :active %>
   </span>
 </li>
-  
+

@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // configure page warning message
-#close-button { 
+#close-button {
   right: 2px;
 }
 small.move-right {
@@ -11,7 +11,7 @@ small.move-right {
 }
 
 // weekday and holiday 'x' styling
-.remove_day, .remove_holiday {
+.remove_day, .remove_holiday, .remove_grant {
   color: black !important;
 }
 
@@ -31,7 +31,7 @@ small.move-right {
 }
 
 #weekday_list {
-  li {    
+  li {
     span {
       i {
         padding-top: 10px;
@@ -40,26 +40,31 @@ small.move-right {
   }
 }
 
-#holiday_list_head {
+ul[id*="_list_head"] {
   margin-bottom: 0px;
 }
 
-#holiday_list, #holiday_list_head {
+ul[id*="_list_body"], ul[id*="_list_head"] {
   list-style-type: none;
-  padding: 0;
+  padding-left: 0;
+}
+
+.form-group div, div[class*="-head"] {
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .top-padded {
   padding-top: 8px;
 }
 
-@media ( min-width: 769px ) {
-  #holiday_block {
-    width: 60% !important;
-    margin-left: 20% !important;
-    margin-right: 20% !important;
-  }
-}
+// @media ( min-width: 769px ) {
+//   .centered-block {
+//     width: 60% !important;
+//     margin-left: 20% !important;
+//     margin-right: 20% !important;
+//   }
+// }
 
 .holiday-sub-li {
   margin-top: 4px;

@@ -10,37 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406165901) do
+ActiveRecord::Schema.define(version: 20161208033345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "app_defaults", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 255
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",          limit: 255
     t.integer  "department_id"
-    t.boolean  "active",        default: true
+    t.boolean  "active",                    default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["department_id"], name: "index_categories_on_department_id", using: :btree
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string   "name"
-    t.boolean  "active",     default: true
+    t.string   "name",       limit: 255
+    t.boolean  "active",                 default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "holidays", force: :cascade do |t|
+  create_table "grants", force: :cascade do |t|
     t.string   "name"
+    t.boolean  "active",         default: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "app_default_id", default: 1
+  end
+
+  create_table "holidays", force: :cascade do |t|
+    t.string   "name",           limit: 255
     t.integer  "month"
     t.integer  "day"
-    t.integer  "app_default_id", default: 1
-    t.boolean  "floating",       default: false
+    t.integer  "app_default_id",             default: 1
+    t.boolean  "floating",                   default: false
     t.integer  "float_week"
     t.integer  "float_day"
     t.datetime "created_at"
@@ -48,27 +56,27 @@ ActiveRecord::Schema.define(version: 20150406165901) do
   end
 
   create_table "it_emails", force: :cascade do |t|
-    t.string   "email"
-    t.integer  "app_default_id", default: 1
+    t.string   "email",          limit: 255
+    t.integer  "app_default_id",             default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "pay_periods", force: :cascade do |t|
-    t.string  "period_type",    default: "Bi-weekly"
-    t.integer "app_default_id", default: 1
+    t.string  "period_type",    limit: 255, default: "Bi-weekly"
+    t.integer "app_default_id",             default: 1
   end
 
   create_table "start_months", force: :cascade do |t|
-    t.string   "month",          default: "January"
-    t.integer  "app_default_id", default: 1
+    t.string   "month",          limit: 255, default: "January"
+    t.integer  "app_default_id",             default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "timeoff_accruals", force: :cascade do |t|
-    t.string  "accrual_type",   default: "Annual"
-    t.integer "app_default_id", default: 1
+    t.string  "accrual_type",   limit: 255, default: "Annual"
+    t.integer "app_default_id",             default: 1
   end
 
   create_table "timesheet_categories", force: :cascade do |t|
@@ -104,35 +112,36 @@ ActiveRecord::Schema.define(version: 20150406165901) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "fname"
-    t.string   "lname"
-    t.boolean  "active",                                     default: true
+    t.string   "fname",             limit: 255
+    t.string   "lname",             limit: 255
+    t.boolean  "active",                                                 default: true
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "department_id"
     t.integer  "supervisor_id"
-    t.string   "email"
-    t.string   "password_digest"
-    t.boolean  "admin",                                      default: false
-    t.decimal  "annual_time_off",   precision: 6,  scale: 2, default: "0.0"
-    t.decimal  "timeoff_carryover", precision: 5,  scale: 2, default: "0.0"
-    t.decimal  "standard_hours",    precision: 6,  scale: 2, default: "40.0"
-    t.decimal  "salary_rate",       precision: 10, scale: 2
-    t.decimal  "hourly_rate",       precision: 6,  scale: 2
-    t.string   "pay_type",                                   default: "Salary"
-    t.string   "time_zone",                                  default: "Eastern Time (US & Canada)"
-    t.string   "remember_token"
+    t.string   "email",             limit: 255
+    t.string   "password_digest",   limit: 255
+    t.boolean  "admin",                                                  default: false
+    t.decimal  "annual_time_off",               precision: 6,  scale: 2, default: "0.0"
+    t.decimal  "standard_hours",                precision: 6,  scale: 2, default: "40.0"
+    t.decimal  "salary_rate",                   precision: 10, scale: 2
+    t.decimal  "hourly_rate",                   precision: 6,  scale: 2
+    t.string   "pay_type",          limit: 255,                          default: "Salary"
+    t.string   "time_zone",         limit: 255,                          default: "Eastern Time (US & Canada)"
+    t.string   "remember_token",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "timeoff_carryover",             precision: 5,  scale: 2, default: "0.0"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
   create_table "weekdays", force: :cascade do |t|
-    t.integer "app_default_id", default: 1
-    t.string  "name"
-    t.string  "abbr"
+    t.integer "app_default_id",             default: 1
+    t.string  "name",           limit: 255
+    t.string  "abbr",           limit: 255
     t.integer "day_num"
+    t.boolean "active",                     default: true
   end
 
 end
