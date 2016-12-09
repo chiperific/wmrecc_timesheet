@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208033345) do
+ActiveRecord::Schema.define(version: 20161209044004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,16 @@ ActiveRecord::Schema.define(version: 20161208033345) do
     t.index ["timesheet_id"], name: "index_timesheet_categories_on_timesheet", using: :btree
   end
 
+  create_table "timesheet_grants", force: :cascade do |t|
+    t.integer  "timesheet_id"
+    t.integer  "grant_id"
+    t.decimal  "hours"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["grant_id"], name: "index_timesheet_grants_on_grant_id", using: :btree
+    t.index ["timesheet_id"], name: "index_timesheet_grants_on_timesheet_id", using: :btree
+  end
+
   create_table "timesheet_hours", force: :cascade do |t|
     t.integer  "timesheet_id"
     t.integer  "day_num"
@@ -109,6 +119,17 @@ ActiveRecord::Schema.define(version: 20161208033345) do
     t.date     "timeoff_reviewed"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "usergrants", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "grant_id"
+    t.boolean  "active",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.decimal  "percent"
+    t.index ["grant_id"], name: "index_usergrants_on_grant_id", using: :btree
+    t.index ["user_id"], name: "index_usergrants_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

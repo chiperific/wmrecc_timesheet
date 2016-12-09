@@ -41,7 +41,7 @@ module StaticPagesHelper
     new_grant = Grant.new
     id = new_grant.object_id
     fields = f.fields_for(:grants, new_grant, child_index: id) do |g_f|
-      render "grants_form", g_f: g_f
+      render "grants_config_form", g_f: g_f
     end
     link_to("Add grant", "#", class: "btn btn-success add_grant", data: { id: id, fields: fields.gsub("\n", "")})
   end

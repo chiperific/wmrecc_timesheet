@@ -141,7 +141,7 @@
         <ul id="grant_list_body">
           <%= f.fields_for :grants, @grants do |g_f| %>
             <%= render 'shared/error_messages', object: g_f.object %>
-            <%= render 'grants_form', g_f: g_f %>
+            <%= render 'grants_config_form', g_f: g_f %>
           <% end %>
         </ul>
       </div>

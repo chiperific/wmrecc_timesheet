@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :categories, through: :department
   has_many :timesheets, dependent: :destroy
 
+  has_many :usergrants
+  has_many :grants, through: :usergrants
+
   before_validation do
     self.email = email.downcase
     self.salary_rate = 0.0 if self.salary_rate.nil?

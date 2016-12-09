@@ -8,9 +8,7 @@
 
 To Do:
 * Grant time tracking:
-0 Create relationships between Grant && User, Grant && Timesheet (timsheet_grants?)
-1. Add VISIBLE grants to user profiles
-1.1 Create ability to set default %s for grants
+1. Add VISIBLE grants to user profiles (not saving)
 2. Add VISIBLE grants to timesheets
 2.1 Handle progress bar for grant hours? At least warning message when grant hours > hours worked
 3. Add VISIBLE grants to payroll
@@ -21,5 +19,5 @@ To Do:
 3. Trim to VISIBLE workdays in ???
 
 * Update Prod env
-1. Force use of current schema (>heroku run rake db:migrate >heroku run rake db:schema:load)
+1. Force use of current schema (>heroku run rake db:migrate)
 2. Check the Config page to make sure holidays and grants are correct
