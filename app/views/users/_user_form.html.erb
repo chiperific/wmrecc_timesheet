@@ -191,7 +191,8 @@
             </span>
           </li>
             <% @grants.each do |grant| %>
-              <%= f.fields_for :usergrant, @user.usergrants.find_or_initialize_by(user: @user, grant: grant) do |ug| %>
+              <%= f.fields_for :usergrants, @user.usergrants.find_or_initialize_by(grant: grant) do |ug| %>
+                <%= render 'shared/error_messages', object: ug.object %>
                 <%= render "grants_users_form", user: @user, grant: grant, ug: ug %>
               <% end %>
             <% end %>

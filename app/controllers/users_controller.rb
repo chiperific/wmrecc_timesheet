@@ -65,7 +65,6 @@ class UsersController < ApplicationController
     @title = "Edit User"
 
     @user = User.find(params[:id])
-
     @grants = Grant.all.where(active: true)
 
     if current_user == @user
@@ -100,6 +99,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @grants = Grant.all.where(active: true)
 
     @user.salary_rate == 0.0 if @user.salary_rate.nil?
     @user.hourly_rate == 0.0 if @user.hourly_rate.nil?
@@ -116,6 +116,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @grants = Grant.all.where(active: true)
 
     @user.salary_rate == 0.0 if @user.salary_rate.nil?
     @user.hourly_rate == 0.0 if @user.hourly_rate.nil?
@@ -128,7 +129,6 @@ class UsersController < ApplicationController
       @super_array = super_array
       render 'edit'
     end
-
   end
 
 
@@ -136,11 +136,11 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(
-        :fname, :lname, :active,
+        :id, :fname, :lname, :active,
         :department_id, :supervisor_id, :time_zone,
         :email, :password, :password_confirmation, :admin, :time_zone, :start_date, :end_date,
         :annual_time_off, :timeoff_carryover, :standard_hours, :salary_rate, :hourly_rate, :pay_type,
-        :usergrants_attributes => [:id, :user_id, :grant_id, :active])
+        :usergrants_attributes => [:id, :user_id, :grant_id, :active, :percent])
     end
 
     # for _user_form select field

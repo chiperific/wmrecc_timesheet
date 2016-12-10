@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :usergrants
   has_many :grants, through: :usergrants
 
+  accepts_nested_attributes_for :usergrants, allow_destroy: true
+
   before_validation do
     self.email = email.downcase
     self.salary_rate = 0.0 if self.salary_rate.nil?

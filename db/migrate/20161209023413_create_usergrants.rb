@@ -4,7 +4,7 @@ class CreateUsergrants < ActiveRecord::Migration[5.0]
       t.belongs_to :user
       t.belongs_to :grant
       t.boolean :active, default: false
-      t.decimal :percent
+      t.decimal :percent, default: 0
       t.timestamps
     end
   end
