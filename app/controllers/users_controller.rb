@@ -47,6 +47,9 @@ class UsersController < ApplicationController
   def new
     @title = "Add User"
     @user = User.new
+    @grants = Grant.all.where(active: true)
+    @grants_visible = require_self_sv_or_admin(@user)
+
     @active_def = true
     @salary_def = true
     @super_array = super_array
@@ -63,9 +66,9 @@ class UsersController < ApplicationController
 
   def edit
     @title = "Edit User"
-
     @user = User.find(params[:id])
     @grants = Grant.all.where(active: true)
+    @grants_visible = require_self_sv_or_admin(@user)
 
     if current_user == @user
       @page_title = "Edit your profile"
@@ -98,8 +101,10 @@ class UsersController < ApplicationController
   end
 
   def create
+    @title = "Add User"
     @user = User.new(user_params)
     @grants = Grant.all.where(active: true)
+    @grants_visible = require_self_sv_or_admin(@user)
 
     @user.salary_rate == 0.0 if @user.salary_rate.nil?
     @user.hourly_rate == 0.0 if @user.hourly_rate.nil?
@@ -115,8 +120,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    @title = "Edit User"
     @user = User.find(params[:id])
     @grants = Grant.all.where(active: true)
+    @grants_visible = require_self_sv_or_admin(@user)
 
     @user.salary_rate == 0.0 if @user.salary_rate.nil?
     @user.hourly_rate == 0.0 if @user.hourly_rate.nil?
@@ -157,5 +164,13 @@ class UsersController < ApplicationController
       sorted_arry.delete(@user)
       @super_arry += sorted_arry.map { |u| [u.fname+" "+u.lname, u.id]}
       @super_arry
+    end
+
+    def require_self_sv_or_admin(user)
+      if current_user.has_authority_over?(user) || current_user == user || current_user.admin
+        true
+      else
+        false
+      end
     end
 end

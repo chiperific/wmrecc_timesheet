@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   require 'action_view'
   include ActionView::Helpers::NumberHelper
-  
+
   protect_from_forgery with: :exception
   include StaticPagesHelper
 
@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   before_action :require_active_user, if: :current_user
 
-  around_filter :user_time_zone, if: :current_user
+  around_action :user_time_zone, if: :current_user
 
   rescue_from 'ActiveRecord::RecordNotFound' do
     flash[:error] = "That doesn't seem to exist."

@@ -1,14 +1,16 @@
 <li class="row">
-  <%= ug.hidden_field :id %>
-  <%= ug.hidden_field :user_id, value: user.id %>
-  <%= ug.hidden_field :grant_id, value: grant.id %>
-  <span class="col-xs-4">
-    <%= grant.name %>
-  </span>
-  <span class="col-xs-2">
-    <%= ug.check_box :active %>
-  </span>
-  <span class="col-xs-2">
-    <%= ug.number_field :percent %> %
-  </span>
+  <div class="form-inline">
+    <%= ug.hidden_field :id %>
+    <%= ug.hidden_field :user_id, value: user.id %>
+    <%= ug.hidden_field :grant_id, value: grant.id %>
+    <span class="col-xs-4">
+      <%= grant.name %>
+    </span>
+    <span class="col-xs-2">
+      <%= ug.check_box :active %>
+    </span>
+    <span class="col-xs-2">
+      <%= ug.number_field :percent, class: "form-control align-right" %> %
+    </span>
+  </div>
 </li>

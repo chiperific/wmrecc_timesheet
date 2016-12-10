@@ -175,10 +175,10 @@
       </div>
     </div>
 
-    <div class="row center buffered-row">
-      <div class="col-xs-12">
+    <% if @grants_visible %>
+      <div class="row center buffered-row">
         <h4 class="center subtle">Grants</h4>
-        <ul class="user-grant-list form-group">
+        <ul class="user-grant-list form-inline">
           <li class="user-grant-head row">
             <span class="col-xs-4">
               Name
@@ -196,9 +196,9 @@
                 <%= render "grants_users_form", user: @user, grant: grant, ug: ug %>
               <% end %>
             <% end %>
-        </ul>
+          </ul>
       </div>
-    </div>
+    <% end %>
 
     <div class="row center buffered-row">
       <div class="col-xs-6">
