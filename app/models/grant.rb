@@ -5,4 +5,7 @@ class Grant < ApplicationRecord
 
   has_many :usergrants
   has_many :users, through: :usergrants
+
+  has_many :timesheet_grants
+  has_many :timesheets, through: :timesheet_grants
 end

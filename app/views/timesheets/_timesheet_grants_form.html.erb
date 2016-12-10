@@ -1,0 +1,18 @@
+<%= t_form.fields_for :timesheet_grants, @timesheet_grants do |tg_form| %>
+  <%= tg_form.hidden_field :id %>
+  <%= tg_form.hidden_field :timesheet_id %>
+  <%= tg_form.hidden_field :grant_id %>
+  <span class="row form-group span-no-padding-both no-margin">
+      <span class="col-xs-7">
+        <span class="pull-right plus-r-padding wrapped-and-right">
+          <p><%= tg_form.object.grant.name %></p>
+        </span>
+      </span>
+      <span class="col-xs-5">
+        <% if @percent = tg_form.object.grant.usergrants.where(user_id: @user.id).first.percent %>
+          <% @calc_grant_hr = @standard_hours * (@percent / 100) %>
+        <% end %>
+        <%= tg_form.number_field :hours, { value: @calc_grant_hr, class: "form-control width-limiter progressbar-grants", step: 'any', min: 0 } %>
+      </span>
+    </span>
+<% end %>

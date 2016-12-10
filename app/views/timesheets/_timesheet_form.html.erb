@@ -98,6 +98,25 @@
       <%= render 'timesheet_categories_form', t_form: t_form %>
     </fieldset>
 
+    <fieldset class="col-xs-12 col-sm-6" id="grants_fieldset">
+      <legend class="subtle">Grants:</legend>
+      <%= render 'timesheet_visual', bar_id: "grants_progressbar", ttl_field: "grants_bar_ttl", ttl: @grant_ttl %>
+      <span class="span-no-padding-both center">
+        <span class="col-xs-7">
+          &nbsp
+        </span>
+        <span class="col-xs-5 visible-xs-only subtle">
+          <%= icon('clock-o fa-2x') %><br>
+          Ttl Hrs
+        </span>
+        <span class="col-xs-5 hidden-xs subtle">
+          <%= icon('clock-o fa-2x') %><br>
+          Total Hours
+        </span>
+      </span>
+      <%= render 'timesheet_grants_form', t_form: t_form %>
+    </fieldset>
+
   </div>
   <% if current_user.can_approve_this?(@user) %>
     <div class="row buffered-row">

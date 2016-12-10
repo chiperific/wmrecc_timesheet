@@ -82,13 +82,15 @@ class TimesheetsController < ApplicationController
     @timeoff_hours_approved = ["Unapproved", false]
 
     @timesheet_hours = weekday_ary
-
     @timesheet_categories = categories_ary
+    @timesheet_grants = grants_ary(@user)
 
     session[:return_url] = back_uri
 
     @hours_ttl = 0.0
     @category_ttl = 0.0
+    @grant_ttl = 0.0
+
     if @user.standard_hours == 0
       @standard_hours = 40
     else
@@ -129,8 +131,8 @@ class TimesheetsController < ApplicationController
     @timeoff_hours_approved = @timesheet.timeoff_approved.present?
 
     @timesheet_hours = weekday_ary
-
     @timesheet_categories = categories_ary
+    @timesheet_grants = grants_ary(@user)
 
     @hours_ttl = @timesheet.timesheet_hours.sum(:hours).to_f
     @category_ttl = @timesheet.timesheet_categories.sum(:hours).to_f
@@ -250,6 +252,16 @@ class TimesheetsController < ApplicationController
         timesheet_categories << timesheet_category
       end
       timesheet_categories
+    end
+
+    def grants_ary(user)
+      timesheet_grants = Array.new
+
+      user.grants.where(active: true).each do |grant|
+        timesheet_grant = @timesheet.timesheet_grants.find_or_initialize_by(grant_id: grant.id)
+        timesheet_grants << timesheet_grant
+      end
+      timesheet_grants
     end
 
   #end private
