@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="row datatable-div" id="payroll_users_head">
+  <div class="row datatable-div" id="payroll_users">
     <fieldset>
       <legend class="subtle">Staff:</legend>
       <table class="table table-thin" id="payroll-user-table">
@@ -38,7 +38,7 @@
     </fieldset>
   </div>
 
-  <div class="row datatable-div" id="payroll_users_body">
+  <div class="row datatable-div" id="payroll_categories">
     <fieldset>
       <legend class="subtle">Categories:</legend>
       <table class="table" id="payroll-category-table">
@@ -63,12 +63,40 @@
     </fieldset>
   </div>
 
+  <div class="row datatable-div" id="payroll_grants">
+    <fieldset>
+      <legend class="subtle">Grants:</legend>
+      <table class="table" id="payroll-grant-table">
+        <thead>
+          <tr>
+            <th>Grant</th>
+            <th class="text-center">Hours</th>
+            <th class="text-center">Staff</th>
+            <th class="text-center">
+              $ Total
+              <%= link_to icon('question-circle'), "#", {id: 'grant_dialog_q', class: "move-right"} %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @grants.each do |grant| %>
+            <%= render 'payroll_grants', grant: grant %>
+          <% end %>
+        </tbody>
+      </table>
+    </fieldset>
+  </div>
+
   <div id="hours_dialog" title="Hours Explained">
     <p>A <b>(s)</b> in the <b>Name</b> column indicates Salaried employees.</p>
     <p>Their <b>$ Rate</b> is their salary divided by the payroll cycle (<%= @pay_period_type %>).</p>
     <p>The <b>$ Rate</b> column is not visible on small screens.</p>
   </div>
   <div id="categories_dialog" title="Categories Explained">
+    <p>The <b>$ Total</b> column shows the total of applicable staff's hourly contributions towards the category.</p>
+    <p>The <b>Staff</b> column shows the number of staff who contributed hours during the pay period.</p>
+  </div>
+  <div id="grants_dialog" title="Grants Explained">
     <p>The <b>$ Total</b> column shows the total of applicable staff's hourly contributions towards the category.</p>
     <p>The <b>Staff</b> column shows the number of staff who contributed hours during the pay period.</p>
   </div>
@@ -83,6 +111,21 @@
         </tr>
       </thead>
       <tbody id="category_users_tbody">
+      </tbody>
+    </table>
+  </div>
+</div>
+  <div id="grant_users_dialog" title="Staff Hours by Grant">
+    <table id="grant_users_table" class="table">
+      <thead>
+        <tr>
+          <th>Staff</th>
+          <th>Hours</th>
+          <th>Rate</th>
+          <th>Sub Ttl</th>
+        </tr>
+      </thead>
+      <tbody id="grant_users_tbody">
       </tbody>
     </table>
   </div>

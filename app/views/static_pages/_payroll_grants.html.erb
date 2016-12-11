@@ -1,0 +1,19 @@
+<tr>
+  <td class="small-when-small">
+    <%= grant.name %>
+  </td>
+  <td class="text-center">
+    <%= grant.payroll_hours(@payroll_start, @payroll_end) %>
+  </td>
+  <td class="text-center">
+    <% if grant.payroll_staff_count(@payroll_start, @payroll_end) > 0 %>
+      <%= link_to grant.payroll_staff_count(@payroll_start, @payroll_end).to_s, "#", name: grant.id.to_s, class: "grant_users_dialog_link" %>
+    <% else %>
+      0
+    <% end %>
+
+  </td>
+  <td class="text-right">
+    $ <%= number_with_precision( grant.payroll_total(@payroll_start, @payroll_end), precision: 2 ) %>
+  </td>
+</tr>

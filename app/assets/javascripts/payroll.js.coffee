@@ -3,6 +3,8 @@ jQuery ->
 
   $('#payroll-category-table').dataTable()
 
+  $('#payroll-grant-table').dataTable()
+
   $('#hours_dialog').dialog
     dialogClass: "no-close",
     autoOpen: false,
@@ -31,8 +33,32 @@ jQuery ->
     event.preventDefault
     false
 
+  $('#grants_dialog').dialog
+    dialogClass: "no-close",
+    autoOpen: false,
+    buttons: [{
+      text: "Ok"
+      click: ->
+        $(this).dialog("close")
+    }]
+
+  $('#grants_dialog_q').click ->
+    $('#categories_dialog').dialog("open")
+    event.preventDefault
+    false
+
 
   $('#category_users_dialog').dialog
+    dialogClass: "no-close",
+    autoOpen: false,
+    width: "auto",
+    buttons: [{
+      text: "Ok"
+      click: ->
+        $(this).dialog("close")
+    }]
+
+  $('#grant_users_dialog').dialog
     dialogClass: "no-close",
     autoOpen: false,
     width: "auto",
@@ -66,6 +92,34 @@ jQuery ->
     end_date = $('#end_date').html().replace(replace,"-")
     $.ajax( url: "/payroll_cats_users/"+cat_id+"/"+start_date+"/"+end_date, type: 'get', success: (data) ->
       cat_user_json(data)
+    )
+    event.preventDefault
+    false
+
+  # create a div for showing the users by grant tbl
+  grant_user_tbl = (user) ->
+    name = user["staff"]
+    hours = user["hours"]
+    rate = user["rate"]
+    subttl = user["subttl"]
+    html = "<tr><td>"+name+"</td><td class='text-center'>"+hours+"</td><td class='text-right'>"+rate+"</td><td class='text-right'>"+subttl+"</td></tr>"
+    $("#grant_users_tbody").append(html)
+
+  grant_user_json = (data) ->
+    ary = data
+    if (typeof ary != 'undefined')
+      parsed = jQuery.parseJSON(ary)
+      grant_user_tbl user for user, i in parsed
+    $('#grant_users_dialog').dialog("open")
+
+  $('.grant_users_dialog_link').click ->
+    $('#grant_users_tbody').empty()
+    grant_id = $(this).attr("name")
+    replace = new RegExp('/', 'g')
+    start_date = $('#start_date').html().replace(replace,"-")
+    end_date = $('#end_date').html().replace(replace,"-")
+    $.ajax( url: "/payroll_grants_users/"+grant_id+"/"+start_date+"/"+end_date, type: 'get', success: (data) ->
+      grant_user_json(data)
     )
     event.preventDefault
     false

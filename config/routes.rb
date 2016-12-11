@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   get 'configure', to: 'static_pages#configure'
   get 'export', to: 'static_pages#export'
 
+  #json calls
   get '/holidays/:year', to: 'app_default#holidays'
   get '/payroll_cats_users/:cat_id/:payroll_start/:payroll_end', to: 'categories#payroll_users'
+  get '/payroll_grants_users/:grant_id/:payroll_start/:payroll_end', to: 'grants#payroll_users'
 
 
   match 'configure_update', to: 'static_pages#configure_update', via: 'patch'

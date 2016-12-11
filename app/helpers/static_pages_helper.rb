@@ -96,4 +96,22 @@ module StaticPagesHelper
     cats
   end
 
+  def payroll_active_grants(start_date, end_date)
+    ts = Timesheet.where.has { |timesheet| (timesheet.start_date <= end_date) & (timesheet.end_date >= start_date) }
+
+    results = []
+
+    if ts.any?
+      ts.each do |t|
+        if t.grants.any?
+          t.grants.each do |g|
+            results << g
+          end
+        end
+      end
+    end
+    results
+  end
+
+
 end

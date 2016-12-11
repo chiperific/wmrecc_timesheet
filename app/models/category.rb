@@ -3,7 +3,6 @@ class Category < ActiveRecord::Base
   has_many :timesheet_categories
   has_many :timesheets, through: :timesheet_categories
 
-
   validates :name, :department_id, :active, presence: true
 
   def payroll_relevant_cats(payroll_start, payroll_end)

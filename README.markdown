@@ -8,9 +8,9 @@
 
 To Do:
 * Grant time tracking:
-2. Add VISIBLE grants to timesheets
-2.1 Handle progress bar for grant hours? At least warning message when grant hours > hours worked
-3. Add VISIBLE grants to payroll
+1.1 CHANGE TO "ACCOUNT"
+1.2 Make Account come before Category in _user_form (and deal with col-* horizontal collapse (wrap in row))
+1.3 Delete bad Categories
 
 * Protecting weekdays:
 1. Trim to VISIBLE workdays in timesheets

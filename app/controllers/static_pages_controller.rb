@@ -70,6 +70,7 @@ class StaticPagesController < ApplicationController
     @departments_lkup = departments_lkup
     @users = payroll_relevant_users(@payroll_start, @payroll_end)
     @categories = payroll_active_cats
+    @grants = payroll_active_grants(@payroll_start, @payroll_end)
 
     @date_start = @payroll_start.strftime("%m/%d/%Y")
     @date_end = @payroll_end.strftime("%m/%d/%Y")
