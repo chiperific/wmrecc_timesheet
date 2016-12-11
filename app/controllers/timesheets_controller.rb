@@ -73,7 +73,6 @@ class TimesheetsController < ApplicationController
   def new
     @title = "New Timesheet"
     @user = User.find(params[:user_id])
-
     @timesheet = Timesheet.new
 
     @hours_reviewed = ["Unreviewed", false]
@@ -85,16 +84,19 @@ class TimesheetsController < ApplicationController
     @timesheet_categories = categories_ary
     @timesheet_grants = grants_ary(@user)
 
-    session[:return_url] = back_uri
-
     @hours_ttl = 0.0
     @category_ttl = 0.0
-    @grant_ttl = 0.0
 
     if @user.standard_hours == 0
       @standard_hours = 40
     else
       @standard_hours = @user.standard_hours.to_f
+    end
+
+    if @user.usergrants.map { |ug| ug.percent }.sum > 1
+      @grant_ttl = @standard_hours * ( @user.usergrants.map { |ug| ug.percent }.sum / 100 )
+    else
+      @grant_ttl = @standard_hours
     end
 
     start_date = Date.commercial(Date.today.year, Date.today.cweek, 1)
@@ -106,9 +108,10 @@ class TimesheetsController < ApplicationController
     @ruby_start_date = start_date.strftime("%Y/%m/%d")
     @ruby_end_date = end_date.strftime("%Y/%m/%d")
 
+    session[:return_url] = back_uri
+
     #for timesheet_finder timesheet_ary -- warns when overwritting an existing record
     @timesheets_json = Timesheet.where(user_id: @user.id).select('id, start_date, user_id').to_json
-
   end
 
   def edit
@@ -116,17 +119,8 @@ class TimesheetsController < ApplicationController
     @user = User.find(params[:user_id])
     @timesheet = Timesheet.find(params[:id])
 
-    start_date = @timesheet.start_date
-    end_date = @timesheet.end_date
-
-    @human_start_date = start_date.strftime("%m/%d/%Y")
-    @human_end_date = end_date.strftime("%m/%d/%Y")
-
-    @ruby_start_date = start_date.strftime("%Y/%m/%d")
-    @ruby_end_date = end_date.strftime("%Y/%m/%d")
-
-    @hours_approved = @timesheet.hours_approved.present?
     @hours_reviewed = @timesheet.hours_reviewed.present?
+    @hours_approved = @timesheet.hours_approved.present?
     @timeoff_hours_reviewed = @timesheet.timeoff_reviewed.present?
     @timeoff_hours_approved = @timesheet.timeoff_approved.present?
 
@@ -136,11 +130,23 @@ class TimesheetsController < ApplicationController
 
     @hours_ttl = @timesheet.timesheet_hours.sum(:hours).to_f
     @category_ttl = @timesheet.timesheet_categories.sum(:hours).to_f
+
+    @grant_ttl = @timesheet.timesheet_grants.sum(:hours).to_f
+
     if @user.standard_hours == 0
       @standard_hours = 40
     else
       @standard_hours = @user.standard_hours.to_f
     end
+
+    start_date = @timesheet.start_date
+    end_date = @timesheet.end_date
+
+    @human_start_date = start_date.strftime("%m/%d/%Y")
+    @human_end_date = end_date.strftime("%m/%d/%Y")
+
+    @ruby_start_date = start_date.strftime("%Y/%m/%d")
+    @ruby_end_date = end_date.strftime("%Y/%m/%d")
 
     session[:return_url] = back_uri
 
@@ -197,7 +203,8 @@ class TimesheetsController < ApplicationController
       params.require(:timesheet).permit(
         :start_date, :end_date, :user_id, :hours_approved, :hours_reviewed, :timeoff_approved, :timeoff_reviewed,
         :timesheet_hours_attributes =>      [:id, :timesheet_id, :day_num, :hours, :timeoff_hours],
-        :timesheet_categories_attributes => [:id, :timesheet_id, :hours, :category_id]
+        :timesheet_categories_attributes => [:id, :timesheet_id, :hours, :category_id],
+        :timesheet_grants_attributes =>     [:id, :timesheet_id, :hours, :grant_id ]
       )
     end
 

@@ -51,3 +51,7 @@ jQuery ->
   $('.progressbar-categories').bind 'click keyup', (event) ->
     calculateTotalVal('.progressbar-categories', '#categories_bar_ttl')
     updateProgressBar('#categories_progressbar')
+
+  $('.progressbar-grants').bind 'click keyup', (event) ->
+    calculateTotalVal('.progressbar-grants', '#grants_bar_ttl')
+    updateProgressBar('#grants_progressbar')

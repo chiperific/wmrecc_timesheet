@@ -9,8 +9,10 @@
         </span>
       </span>
       <span class="col-xs-5">
-        <% if @percent = tg_form.object.grant.usergrants.where(user_id: @user.id).first.percent %>
+        <% if tg_form.object.hours == nil && @percent = tg_form.object.grant.usergrants.where(user_id: @user.id).first.percent %>
           <% @calc_grant_hr = @standard_hours * (@percent / 100) %>
+        <% else %>
+          <% @calc_grant_hr = tg_form.object.hours %>
         <% end %>
         <%= tg_form.number_field :hours, { value: @calc_grant_hr, class: "form-control width-limiter progressbar-grants", step: 'any', min: 0 } %>
       </span>

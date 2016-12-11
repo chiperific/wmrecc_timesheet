@@ -53,11 +53,6 @@ Rails.application.configure do
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # config.logger = Logger.new(STDOUT)
-  # config.logger.level - Logger.const_get(
-  #   ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'INFO'
-  # )
-
-  config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger.const_get('INFO')
-  config.log_level    = :info
+  # config.logger.level = Logger.const_get('INFO')
+  # config.log_level    = :info
 end

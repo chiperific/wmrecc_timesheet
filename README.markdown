@@ -8,7 +8,6 @@
 
 To Do:
 * Grant time tracking:
-1. Add VISIBLE grants to user profiles (not saving)
 2. Add VISIBLE grants to timesheets
 2.1 Handle progress bar for grant hours? At least warning message when grant hours > hours worked
 3. Add VISIBLE grants to payroll

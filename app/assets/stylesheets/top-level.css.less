@@ -448,9 +448,20 @@ ul {
 }
 
 // jQuery UI dialog box handling
+//
+// Fix jquery-ui-rails gem issues?
+.ui-dialog, .ui-dialog-content {
+  overflow: visible !important;
+  z-index: 2 !important;
+}
+
+.ui-dialog .ui-dialog-title {
+  float: none !important;
+}
+
 // configure page pay_period_dialog
 .ui-dialog-titlebar-close {
-  visibility: hidden;
+  display: none;
 }
 
 .ui-dialog-titlebar {

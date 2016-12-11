@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery-ui/widgets/dialog
 //= require twitter/bootstrap
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker/core
