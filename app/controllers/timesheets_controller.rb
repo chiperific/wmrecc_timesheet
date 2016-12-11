@@ -244,7 +244,7 @@ class TimesheetsController < ApplicationController
     def weekday_ary
       timesheet_hours = Array.new
 
-      Weekday.all.order(:day_num).each do |wd|
+      Weekday.all.where(active: true).order(:day_num).each do |wd|
         timesheet_hour = @timesheet.timesheet_hours.find_or_initialize_by(day_num: wd.day_num)
         timesheet_hours << timesheet_hour
       end

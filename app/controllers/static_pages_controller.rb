@@ -175,9 +175,7 @@ class StaticPagesController < ApplicationController
   private
     def app_default_params
       params.require(:app_default).permit( :name,
-        :weekdays_attributes => [
-          :id, :name, :abbr, :day_num, :app_default_id
-        ],
+        :weekdays_attributes => [:id, :name, :abbr, :day_num, :app_default_id, :active],
         :start_months_attributes => [:id, :month],
         :it_emails_attributes => [:id, :email],
         :timeoff_accruals_attributes => [:id, :accrual_type],

@@ -80,7 +80,7 @@
     </fieldset>
 
     <fieldset class="col-xs-12 col-sm-6" id="grants_fieldset">
-      <legend class="subtle">Grants:</legend>
+      <legend class="subtle">Accounts:</legend>
       <%= render 'timesheet_visual', bar_id: "grants_progressbar", ttl_field: "grants_bar_ttl", ttl: @grant_ttl %>
       <span class="span-no-padding-both center">
         <span class="col-xs-7">
@@ -97,7 +97,8 @@
       </span>
       <%= render 'timesheet_grants_form', t_form: t_form %>
     </fieldset>
-
+  </div>
+  <div class="row">
     <fieldset class="col-xs-12 col-sm-6" id="categories_fieldset">
       <legend class="subtle">Categories:</legend>
       <%= render 'timesheet_visual', bar_id: "categories_progressbar", ttl_field: "categories_bar_ttl", ttl: @category_ttl %>
@@ -116,10 +117,8 @@
       </span>
       <%= render 'timesheet_categories_form', t_form: t_form %>
     </fieldset>
-
-
-
   </div>
+
   <% if current_user.can_approve_this?(@user) %>
     <div class="row buffered-row">
       <hr />
