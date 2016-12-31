@@ -7,7 +7,7 @@
     <%= h_f.text_field :name, { class: "form-control"} %>
   </span>
   <span class="holiday-type col-xs-1 top-padded center min-padding-both">
-    <%= h_f.check_box :floating %>
+    <%= h_f.check_box :floating, { class: "holiday-float"} %>
   </span>
   <span class="col-xs-3 top-padded min-padding-both center">
     <%= if !h_f.object.new_record? then h_f.object.occurence(Date.today.year).strftime("%m/%d/%y") else "new holiday" end %>

@@ -11,12 +11,12 @@ Weekday.create!([
 ])
 
 Category.create!([
-  { name: "Admin", department_id: 1, active: true},
-  { name: "Vol Svcs", department_id: 1, active: true},
-  { name: "Tutoring", department_id: 1, active: true},
-  { name: "Peer Support", department_id: 1, active: true},
-  { name: "Parent Engagement", department_id: 1, active: true},
-  { name: "School Engagement", department_id: 1, active: true}
+  { id: 1, name: "Admin", department_id: 1, active: true},
+  { id: 2, name: "Vol Svcs", department_id: 1, active: true},
+  { id: 3, name: "Tutoring", department_id: 1, active: true},
+  { id: 4, name: "Peer Support", department_id: 1, active: true},
+  { id: 5, name: "Parent Engagement", department_id: 1, active: true},
+  { id: 6, name: "School Engagement", department_id: 1, active: true}
 ])
 
 Department.create!([

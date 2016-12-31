@@ -38,7 +38,7 @@ jQuery ->
   )
 
   # holiday: if details are visible when checkbox is changed, switch visible div
-  $(document).on "click", 'input[type="checkbox"]', ( ->
+  $(document).on "click", '.holiday-float', ( ->
     parent = $(this).parent('span.holiday-type')
     fixed = $(parent).siblings('div.holiday-sub-li-fixed')
     float = $(parent).siblings('div.holiday-sub-li-float')
