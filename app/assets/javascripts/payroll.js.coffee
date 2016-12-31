@@ -43,7 +43,7 @@ jQuery ->
     }]
 
   $('#grants_dialog_q').click ->
-    $('#categories_dialog').dialog("open")
+    $('#grants_dialog').dialog("open")
     event.preventDefault
     false
 
