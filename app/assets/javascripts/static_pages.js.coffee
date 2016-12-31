@@ -77,20 +77,22 @@ jQuery ->
 
   # holiday: add new
   $('.add_holiday').click ->
+    $('.holiday-li-empty').hide()
     fields = $(this).data('fields')
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    last_li = $('#holiday_list_body li[style!="display: none;"]').last()
+    last_li = $('#holiday_list_body li').last()
     last_li.after($(this).data('fields').replace(regexp, time))
     event.preventDefault()
     false
 
   # grant: add new
   $('.add_grant').click ->
+    $('.grant-li-empty').hide()
     fields = $(this).data('fields')
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    last_li = $('#grant_list_body li[style!="display: none;"]').last()
+    last_li = $('#grant_list_body li').last()
     last_li.after($(this).data('fields').replace(regexp, time))
     event.preventDefault()
     false

@@ -114,9 +114,15 @@
           </li>
         </ul>
         <ul id="holiday_list_body">
-          <%= f.fields_for :holidays, @holidays do |h_f| %>
-            <%= render 'shared/error_messages', object: h_f.object %>
-            <%= render 'holidays_form', h_f: h_f %>
+          <% if @holidays.any? %>
+            <%= f.fields_for :holidays, @holidays do |h_f| %>
+              <%= render 'shared/error_messages', object: h_f.object %>
+              <%= render 'holidays_form', h_f: h_f %>
+            <% end %>
+          <% else %>
+            <li class="row form-controller boxed holiday-li holiday-li-empty">
+              <span class="col-xs-12">No Holidays to show</span>
+            </li>
           <% end %>
         </ul>
       </div>
@@ -139,13 +145,19 @@
           </li>
         </ul>
         <ul id="grant_list_body">
-          <%= f.fields_for :grants, @grants do |g_f| %>
-            <%= render 'shared/error_messages', object: g_f.object %>
-            <%= render 'grants_config_form', g_f: g_f %>
+          <% if @grants.any? %>
+            <%= f.fields_for :grants, @grants do |g_f| %>
+              <%= render 'shared/error_messages', object: g_f.object %>
+              <%= render 'grants_config_form', g_f: g_f %>
+            <% end %>
+          <% else %>
+            <li class="row form-controller boxed grant-li grant-li-empty">
+              <span class="col-xs-12">No Grants to show</span>
+            </li>
           <% end %>
         </ul>
       </div>
-      <div class="row pull-right" id="add_holiday_div" >
+      <div class="row pull-right" id="add_grant_div" >
         <%= link_to_add_grant(f) %>
       </div>
     </div>
