@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161210002312) do
+ActiveRecord::Schema.define(version: 20161209023413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,9 +38,10 @@ ActiveRecord::Schema.define(version: 20161210002312) do
   create_table "grants", force: :cascade do |t|
     t.string   "name"
     t.boolean  "active",         default: true
+    t.integer  "app_default_id", default: 1
+    t.integer  "integer",        default: 1
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer  "app_default_id", default: 1
   end
 
   create_table "holidays", force: :cascade do |t|
@@ -125,9 +126,9 @@ ActiveRecord::Schema.define(version: 20161210002312) do
     t.integer  "user_id"
     t.integer  "grant_id"
     t.boolean  "active",     default: false
+    t.decimal  "percent",    default: "0.0"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.decimal  "percent",    default: "0.0"
     t.index ["grant_id"], name: "index_usergrants_on_grant_id", using: :btree
     t.index ["user_id"], name: "index_usergrants_on_user_id", using: :btree
   end

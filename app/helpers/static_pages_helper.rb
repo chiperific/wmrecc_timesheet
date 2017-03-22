@@ -1,5 +1,7 @@
 module StaticPagesHelper
 
+
+
   ############## sign_in methods
   def sign_in(user)
     remember_token = User.new_remember_token
@@ -110,7 +112,7 @@ module StaticPagesHelper
         end
       end
     end
-    results
+    results.uniq!
   end
 
 

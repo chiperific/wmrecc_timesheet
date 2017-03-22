@@ -80,7 +80,6 @@ class StaticPagesController < ApplicationController
     @title = "Export"
     @departments_lkup = departments_lkup
     @cats = Category.all
-    @ts_cats
     @users_active = User.where(active: true)
     @users_inactive = User.where(active: false)
 
