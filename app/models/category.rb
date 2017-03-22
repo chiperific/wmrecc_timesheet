@@ -23,13 +23,13 @@ class Category < ActiveRecord::Base
   def payroll_staff_count(payroll_start, payroll_end)
     relevant_ts_cats = self.payroll_relevant_cats(payroll_start, payroll_end)
 
-    staff_ct = 0
+    ary = []
     relevant_ts_cats.each do |c|
       if c.hours.to_f > 0
-        staff_ct += 1
+        ary << c.timesheet.user.id
       end
     end
-    staff_ct
+    ary.uniq.count
   end
 
   def payroll_total(start_date, end_date)
