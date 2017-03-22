@@ -27,13 +27,13 @@ class Grant < ApplicationRecord
   def payroll_staff_count(payroll_start, payroll_end)
     relevant_ts_grants = self.payroll_relevant_grants(payroll_start, payroll_end)
 
-    staff_ct = 0
+    ary = []
     relevant_ts_grants.each do |g|
       if g.hours.to_f > 0
-        staff_ct += 1
+        ary << g.timesheet.user.id
       end
     end
-    staff_ct
+    ary.uniq.count
   end
 
   def payroll_total(start_date, end_date)

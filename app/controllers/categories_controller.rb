@@ -63,8 +63,8 @@ class CategoriesController < ApplicationController
         # hours = number_with_precision(c.hours.round(2), precision: 2)
         # rate = number_to_currency(c.timesheet.user.payroll_hourly_rate(payroll_start))
         # subttl = number_to_currency(c.hours.to_f * c.timesheet.user.payroll_hourly_rate(payroll_start).to_f)
-        raw_ary << { user_id: c.timesheet.user.id, staff: c.timesheet.user.full_name,  hours: c.hours.to_f, rate: c.timesheet.user.payroll_hourly_rate(payroll_start).to_f, subttl: c.hours.to_f * c.timesheet.user.payroll_hourly_rate(payroll_start).to_f }
         # ary << { staff: c.timesheet.user.full_name,  hours: hours, rate: rate, subttl: subttl }
+        raw_ary << { user_id: c.timesheet.user.id, staff: c.timesheet.user.full_name,  hours: c.hours.to_f, rate: c.timesheet.user.payroll_hourly_rate(payroll_start).to_f, subttl: c.hours.to_f * c.timesheet.user.payroll_hourly_rate(payroll_start).to_f }
       end
     end
 
