@@ -14,7 +14,7 @@ calculateTotal = (input, ttl_field) ->
     $(ttl_field).html(sum)
 
 # handle the 4 date fields on the _timesheet_form partial
-dateSetter = -> 
+dateSetter = ->
   startDateString = $("#form_start_date").val()
   startDate = new Date(startDateString)
   endDate = new Date(startDate)
@@ -100,7 +100,7 @@ overwrite_processor = ->
   if (typeof ary != 'undefined')
     parsed = jQuery.parseJSON(ary)
     timesheet_date_filter timesheet for timesheet, i in parsed
-  
+
 
 jQuery ->
   dateSetter()
@@ -198,7 +198,7 @@ jQuery ->
 
   calculateTotal('.hours-field', '#ttl-hours')
   calculateTotal('.timeoff-hours-field', '#ttl-timeoff-hours')
-  
+
   $('.hours-field').bind 'click keyup', (event) ->
     calculateTotal('.hours-field', '#ttl-hours')
 
@@ -207,25 +207,25 @@ jQuery ->
 
   # timesheet tables in admin, single and supervisor views
   $('#timesheet-admin-table').dataTable
-    order: [],
+    order: [[1, 'desc']],
     columnDefs: [
       targets: -1, sortable: false, searchable: false
     ]
 
   $('#timesheet-over-table').dataTable
-    order: [],
+    order: [[1, 'desc']],
     columnDefs: [
       targets: -1, sortable: false, searchable: false
     ]
 
   $('#timesheet-single-table').dataTable
-    order: []
+    order: [[1, 'desc']]
     columnDefs: [
       targets: -1, sortable: false, searchable: false
     ]
 
   $('#timesheet-archive-table').dataTable
-    order: []
+    order: [[1, 'desc']]
     columnDefs: [
       targets: -1, sortable: false, searchable: false
     ]
